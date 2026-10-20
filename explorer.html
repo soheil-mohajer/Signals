@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fourier Series Explorer — Complex Exponential</title>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+:root{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#172334;background:#f5f7fb}*{box-sizing:border-box}body{margin:0}.wrap{max-width:1160px;margin:auto;padding:34px 23px 60px}h1{font-size:29px;letter-spacing:-.8px;margin:0 0 8px}p.sub{color:#64748b;margin:0 0 25px}.layout{display:grid;grid-template-columns:310px 1fr;gap:20px;align-items:start}.panel{background:#fff;border:1px solid #e3e8f0;border-radius:14px;padding:21px;box-shadow:0 3px 14px #162a4310}.panel h2{font-size:16px;margin:0 0 18px}.field{margin:0 0 15px}.field label{display:block;font-size:13px;font-weight:650;margin:0 0 7px}.field input{width:100%;border:1px solid #cdd6e4;border-radius:8px;padding:11px 10px;font:15px ui-monospace,SFMono-Regular,Consolas,monospace}.hint{font-size:12px;color:#718096;line-height:1.5;margin:5px 0 0}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.slider{width:100%;accent-color:#2563eb}.nvalue{color:#2563eb;font-size:21px;font-weight:750}.presets{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}.presets button,.action{border:1px solid #cdd6e4;background:white;border-radius:8px;padding:7px 10px;cursor:pointer;font-weight:600;color:#334155}.presets button:hover{background:#eff6ff}.presets button.active{background:#dbeafe;border-color:#2563eb;color:#1d4ed8}.custom-fields[hidden],.manual-fields[hidden]{display:none}.coef-table-wrap{max-height:330px;overflow:auto;border:1px solid #dbe3ed;border-radius:8px}.coef-table{width:100%;border-collapse:collapse;font-size:13px}.coef-table th{position:sticky;top:0;background:#edf3fc;color:#334155;text-align:left;padding:9px 8px}.coef-table td{border-top:1px solid #eef1f6;padding:5px}.coef-table td:first-child{font-family:ui-monospace,monospace;text-align:center;width:46px}.coef-table input{width:100%;min-width:65px;padding:8px 5px;border:1px solid #cbd5e1;border-radius:5px;font:13px ui-monospace,monospace}.manual-fields .field input{max-width:130px}.preset-caption{font-size:13px;color:#64748b;line-height:1.5;margin:0 0 16px}.action{background:#2563eb;border-color:#2563eb;color:white;padding:10px 14px}.action:hover{background:#1d4ed8}.topline{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}.plot{width:100%;min-height:310px;display:block}.plot.small{min-height:285px}.legend{display:flex;gap:14px;flex-wrap:wrap;margin:5px 0 10px;font-size:13px;color:#475569}.legend span:before{content:"";display:inline-block;width:16px;height:3px;background:var(--color);vertical-align:middle;margin-right:6px}.error{display:none;color:#b91c1c;background:#fff1f2;border-radius:8px;font-size:13px;padding:10px;margin-top:10px}.syntax{font-size:12px;color:#64748b;line-height:1.6;margin-top:16px}code{background:#f1f5f9;padding:2px 4px;border-radius:4px}.divider{border:0;border-top:1px solid #e7edf4;margin:20px 0}.plothead{font-weight:750;color:#172334;font-size:16px}.footer{font-size:12px;color:#788599;margin-top:12px}@media(max-width:790px){.layout{grid-template-columns:1fr}.wrap{padding:22px 12px}.panel{padding:17px}.plot{min-height:260px}}
+</style>
+<style>
+.stem-wrap{display:grid;gap:12px;margin:13px 0 16px}.stem-card{background:#f8fafc;border:1px solid #dbe3ed;border-radius:9px;padding:10px}.stem-title{font-size:13px;font-weight:700;margin:0 0 4px}.stem-svg{width:100%;height:170px;display:block;touch-action:none;user-select:none;cursor:crosshair}.stem-tip{font-size:12px;color:#64748b;line-height:1.45}.truth-toggle{display:inline-flex;gap:6px;align-items:center;font-size:13px;color:#475569;cursor:pointer}.truth-toggle input{accent-color:#13836f}.legend .true-line:before{height:0;border-top:3px dashed #10977f;background:none}.stem-readout{font-size:12px;font-family:ui-monospace,monospace;color:#334155;min-height:18px;margin-top:4px}
+</style>
+<style>.site-nav{box-sizing:border-box;display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:12px max(20px,calc((100vw - 1160px)/2));background:#13283f;color:white;font:14px Inter,system-ui,sans-serif}.site-nav a{color:#dbeafe!important;text-decoration:none!important;margin-right:17px}.site-nav a:hover{text-decoration:underline!important}.site-nav .site-brand{font-weight:750;color:white!important;font-size:16px}.site-nav div{display:flex;flex-wrap:wrap;gap:0}</style></head>
+<body><nav class="site-nav" aria-label="Site navigation"><a class="site-brand" href="index.html">∿ Fourier Learning Lab</a><div><a href="index.html">Home</a><a href="explorer.html">Series Explorer</a><a href="sound-lab.html">Sound Lab</a></div></nav><div class="wrap"><h1>Fourier Series Explorer</h1><p class="sub">Explore how the partial sum changes as you add more harmonics.</p>
+<div class="layout"><section class="panel"><h2>Define the Fourier series</h2>
+<div class="presets"><button type="button" data-preset="saw">Sawtooth</button><button type="button" data-preset="square">Square wave</button><button type="button" data-preset="tri">Triangle wave</button><button type="button" data-preset="custom">Custom</button><button type="button" data-preset="manual">Manual coefficients</button></div>
+<p class="hint" style="margin:0 0 12px">Complex exponential Fourier series:</p>
+<div style="font-size:19px;line-height:2;margin-bottom:18px;overflow-x:auto" id="equation">\[\widetilde{x}_N(t)=\sum_{k=-N}^{N}a_k e^{j\frac{2\pi}{T}kt}\]</div>
+<p class="preset-caption" id="presetCaption">Sawtooth wave: choose Custom to enter your own Fourier coefficients.</p>
+<div id="customFields" class="custom-fields" hidden>
+<div class="field"><label for="a0">DC coefficient \(a_0\)</label><input id="a0" value="0"></div>
+<div class="field"><label for="akreal">Real part of \(a_k\), for \(k\ne 0\)</label><input id="akreal" value="0" placeholder="e.g. 1/k^2"></div>
+<div class="field"><label for="akimag">Imaginary part of \(a_k\), for \(k\ne 0\)</label><input id="akimag" value="(-1)^k/k" placeholder="e.g. (-1)^k/k"></div>
+<p class="hint" style="margin:-5px 0 16px">Use formulas in <code>k</code> for positive and negative integer indices. For a real-valued signal, choose coefficients with \(a_{-k}=a_k^*\).</p>
+</div>
+<div id="manualFields" class="manual-fields" hidden>
+<div class="field"><label for="manualK">Number of coefficients (odd)</label><input id="manualK" type="number" value="11" min="1" max="201" step="2"><p class="hint">For an odd number M, enter all M coefficients from \(a_{-(M-1)/2}\) to \(a_{(M-1)/2}\).</p></div>
+<p class="stem-tip">Drag a stem up or down to change that coefficient. The Fourier reconstruction updates immediately. You can also type precise values in the table.</p>
+<div class="field" style="margin:12px 0 5px"><label for="stemRange">Stem plot vertical range (±)</label><input id="stemRange" type="number" value="1" min="0.01" max="1000" step="0.25" style="max-width:110px"></div>
+<div class="stem-wrap"><div class="stem-card"><div class="stem-title">Real coefficients: Re(aₖ)</div><svg class="stem-svg" id="realStems" viewBox="0 0 320 170" aria-label="Drag real Fourier coefficient stems"></svg><div class="stem-readout" id="realReadout">Drag any blue dot or vertical bar.</div></div>
+<div class="stem-card"><div class="stem-title">Imaginary coefficients: Im(aₖ)</div><svg class="stem-svg" id="imagStems" viewBox="0 0 320 170" aria-label="Drag imaginary Fourier coefficient stems"></svg><div class="stem-readout" id="imagReadout">Drag any orange dot or vertical bar.</div></div></div>
+<div class="coef-table-wrap"><table class="coef-table"><thead><tr><th>k</th><th>Re(\(a_k\))</th><th>Im(\(a_k\))</th></tr></thead><tbody id="coefficientRows"></tbody></table></div>
+<p class="hint">Blank entries count as zero. Change K to add or hide rows; existing entries are preserved.</p>
+</div>
+<div class="field"><label for="period">Period T</label><input id="period" value="2*pi"></div>
+<div class="field"><label for="domain">Plot range (number of periods)</label><input id="domain" type="number" min="1" max="8" step="1" value="2"></div>
+<hr class="divider"><div class="row"><label for="nslider"><strong>Partial-sum order N</strong></label><span class="nvalue" id="nnum">5</span></div><input class="slider" type="range" id="nslider" min="0" max="100" value="5"><div class="row" style="margin-top:4px"><span class="hint">0</span><span class="hint" id="nmaxlabel">100</span></div>
+<div style="margin-top:21px"><button class="action" type="button" id="plotBtn">Update plots</button></div>
+<div id="error" class="error" role="alert"></div><div class="syntax"><strong>Expression tips</strong><br>Use <code>k</code> (positive or negative), <code>pi</code>, <code>sin()</code>, <code>cos()</code>, <code>abs()</code>, <code>sqrt()</code>, and <code>^</code> for powers. For example, <code>-2/(pi*k)*sin(pi*k/2)^2</code> for the imaginary part of square-wave coefficients. The graphs support complex-valued sums. For real-valued signals, use conjugate-symmetric coefficients <code>a(-k) = conjugate(a(k))</code>. Example: for a(k) = -j/(k^2+2), enter 0 for the real part and <code>-1/(k^2+2)</code> for the imaginary part.</div>
+</section>
+<section class="panel"><div class="topline"><div class="plothead">Partial sum \(\widetilde{x}_N(t)\)</div><div id="nlabel" class="hint">N = 5</div></div><div class="legend"><span style="--color:#2563eb">Real part</span><span style="--color:#e07a30">Imaginary part</span><span class="true-line" id="truthLegend" hidden>Exact signal (N → ∞)</span></div><label class="truth-toggle" id="truthToggleWrap" style="margin:0 0 5px"><input type="checkbox" id="showTruth" checked> Show exact waveform for presets</label><svg class="plot" id="mainPlot" role="img" aria-label="Fourier partial sum graph" viewBox="0 0 750 330" preserveAspectRatio="xMidYMid meet"></svg>
+<hr class="divider"><div class="topline"><div class="plothead">Compare partial sums</div><label class="hint" for="compareComponent">Component: <select id="compareComponent" style="padding:6px;border:1px solid #cbd5e1;border-radius:6px"><option value="auto">Auto</option><option value="real">Real</option><option value="imag">Imaginary</option></select></label><label class="hint" for="compare">N values (comma-separated): <input style="width:137px;padding:6px;border:1px solid #cbd5e1;border-radius:6px" id="compare" value="1, 3, 10, 30"></label></div><div id="legend" class="legend"></div><svg class="plot small" id="comparePlot" role="img" aria-label="Overlaid Fourier partial sums" viewBox="0 0 750 310" preserveAspectRatio="xMidYMid meet"></svg><div class="footer">Tip: Try increasing N for a square wave and examine the overshoot near each jump (Gibbs phenomenon).</div></section></div></div>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const colors=['#2563eb','#e07a30','#12a78a','#8b5cf6','#e11d48','#64748b'];
+const presets={saw:['0','0','(-1)^k/k','2*pi'],square:['0','0','-2/(pi*k)*sin(pi*k/2)^2','2*pi'],tri:['0','0','-4/(pi^2*k^2)*sin(pi*k/2)','2*pi']};
+let activePreset='saw';
+const manualCoeffs=new Map();
+let customValues=['0','0','(-1)^k/k','2*pi'];
+const presetCaptions={saw:'Sawtooth wave: choose Custom to enter your own Fourier coefficients.',square:'Square wave: choose Custom to enter your own Fourier coefficients.',tri:'Triangle wave: choose Custom to enter your own Fourier coefficients.',custom:'Enter the real and imaginary parts of aₖ as functions of the integer index k.',manual:'Enter individual complex Fourier coefficients in the table below.'};
+function manualLimit(){const m=Number($('manualK').value);if(!Number.isInteger(m)||m<1||m>201||m%2!==1)throw Error('Choose an odd number of coefficients between 1 and 201.');return (m-1)/2;}
+function updateManualRows(){
+ const K=manualLimit(), tbody=$('coefficientRows');tbody.innerHTML='';
+ for(let k=-K;k<=K;k++){
+  const tr=document.createElement('tr'), vals=manualCoeffs.get(k)||['0','0'];
+  const td=document.createElement('td');td.textContent=k;tr.appendChild(td);
+  for(let c=0;c<2;c++){
+   const cell=document.createElement('td'),input=document.createElement('input');
+   input.type='text';input.value=vals[c];input.dataset.k=String(k);input.dataset.part=String(c);input.setAttribute('aria-label',`${c?'Imaginary':'Real'} part of a_${k}`);
+   input.addEventListener('input',()=>{const current=manualCoeffs.get(k)||['0','0'];current[c]=input.value;manualCoeffs.set(k,current);});
+   input.addEventListener('change',draw);
+   cell.appendChild(input);tr.appendChild(cell);
+  }tbody.appendChild(tr);
+ }
+}
+function applyOrderLimit(){
+ const limit=activePreset==='manual'?manualLimit():100;
+ $('nslider').max=limit;$('nmaxlabel').textContent=limit;
+ if(+$('nslider').value>limit)$('nslider').value=limit;
+}
+function selectPreset(name){
+  if(activePreset==='custom')customValues=['a0','akreal','akimag','period'].map(id=>$(id).value);
+  activePreset=name;
+  const vals=name==='custom'||name==='manual'?customValues:presets[name];
+  ['a0','akreal','akimag','period'].forEach((id,i)=>$(id).value=vals[i]);
+  $('customFields').hidden=name!=='custom';
+  $('manualFields').hidden=name!=='manual';
+  if(name==='manual')updateManualRows();
+ $('truthToggleWrap').hidden=!['saw','square','tri'].includes(name);
+ $('truthLegend').hidden=!['saw','square','tri'].includes(name)||!$('showTruth').checked;
+  applyOrderLimit();
+  $('presetCaption').textContent=presetCaptions[name];
+  document.querySelectorAll('[data-preset]').forEach(b=>{const on=b.dataset.preset===name;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on));});
+  draw();
+}
+function compile(expr){let s=String(expr).trim().toLowerCase().replace(/π/g,'pi').replace(/\^/g,'**');
+if(!s||/[^0-9a-z_+\-*/().,\s]/.test(s))throw Error('Invalid expression: '+expr);
+const words=s.match(/[a-z_]+/g)||[];const allowed=new Set(['k','pi','e','sin','cos','tan','asin','acos','atan','abs','sqrt','exp','log','floor','ceil','round','pow','min','max']);
+for(const w of words)if(!allowed.has(w))throw Error('Unknown term: '+w);
+const js=s.replace(/\b(pi|e|sin|cos|tan|asin|acos|atan|abs|sqrt|exp|log|floor|ceil|round|pow|min|max)\b/g,x=>['pi','e'].includes(x)?'Math.'+x.toUpperCase():'Math.'+x);
+const fn=new Function('k','return ('+js+');');return k=>{const v=fn(k);if(!Number.isFinite(v))throw Error('Coefficient is not finite at k = '+k);return v;};}
+// Exact, 2π-periodic signals corresponding to the preset Fourier coefficients.
+// At jumps, display the Fourier convergence midpoint and break paths across jumps.
+function exactPreset(name,theta){
+ const wrapped=((theta+Math.PI)%(2*Math.PI)+2*Math.PI)%(2*Math.PI)-Math.PI;
+ if(name==='saw')return wrapped;
+ if(name==='square')return wrapped>0?1:-1;
+ if(name==='tri')return wrapped>=0?(wrapped<=Math.PI/2?2*wrapped/Math.PI:2-2*wrapped/Math.PI):
+   (wrapped>=-Math.PI/2?2*wrapped/Math.PI:-2-2*wrapped/Math.PI);
+ return null;
+}
+function exactSamples(name,cycles,len){
+ const ys=[];
+ for(let i=0;i<len;i++){
+  const theta=2*Math.PI*cycles*(i/(len-1)-.5);
+  ys.push(exactPreset(name,theta));
+ }
+ return ys;
+}
+function fmt(n){return Math.abs(n)<1e-10?'0':(Math.abs(n)>=100||Math.abs(n)<.01)?n.toExponential(1):Number(n.toFixed(2)).toString();}
+function plot(svg,curves,T,cycles){const vb=svg.viewBox.baseVal,W=vb.width,H=vb.height,m={l:52,r:18,t:20,b:37},w=W-m.l-m.r,h=H-m.t-m.b;
+const left=-cycles*T/2,right=cycles*T/2;let lo=Infinity,hi=-Infinity;for(const c of curves)for(const v of c.ys){if(v!==null&&Number.isFinite(v)){lo=Math.min(lo,v);hi=Math.max(hi,v)}};if(!Number.isFinite(lo)||!Number.isFinite(hi))throw Error('Could not calculate the plot.');const pad=Math.max((hi-lo)*.12,.12);lo-=pad;hi+=pad;
+const x=t=>m.l+(t-left)/(right-left)*w,y=v=>m.t+(hi-v)/(hi-lo)*h;let out='';const line=(x1,y1,x2,y2,color,width=1,dash='')=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color}" stroke-width="${width}" ${dash?'stroke-dasharray="'+dash+'"':''}/>`;
+for(let k=0;k<=4;k++){let val=lo+(hi-lo)*k/4,yp=y(val);out+=line(m.l,yp,W-m.r,yp,'#e7edf4');out+=`<text x="${m.l-9}" y="${yp+4}" font-size="12" text-anchor="end" fill="#64748b">${fmt(val)}</text>`}
+for(let k=0;k<=8;k++){const t=left+(right-left)*k/8,xp=x(t);out+=line(xp,m.t,xp,H-m.b,'#f0f3f7');out+=`<text x="${xp}" y="${H-12}" font-size="12" text-anchor="middle" fill="#64748b">${fmt(t/T)}T</text>`}
+if(left<=0&&right>=0)out+=line(x(0),m.t,x(0),H-m.b,'#94a3b8',1.4);if(lo<=0&&hi>=0)out+=line(m.l,y(0),W-m.r,y(0),'#94a3b8',1.4);
+for(const c of curves){let d='',penUp=true;
+ for(let i=0;i<c.ys.length;i++){
+  const v=c.ys[i];
+  if(v===null||!Number.isFinite(v)){penUp=true;continue}
+  if(c.isExact&&i>0){const before=c.ys[i-1];if(before!==null&&Math.abs(v-before)>(c.jumpThreshold||Infinity)){penUp=true}}
+  d+=(penUp?'M':'L')+x(left+(right-left)*i/(c.ys.length-1)).toFixed(2)+' '+y(v).toFixed(2)+' ';penUp=false;
+ }
+ out+=`<path d="${d}" fill="none" stroke="${c.color}" stroke-width="${c.isExact?2.6:2.3}" ${c.isExact?'stroke-dasharray="8 5"':''} stroke-linejoin="round" stroke-linecap="round"/>`;
+}
+out+=`<text x="${W-9}" y="${H-10}" font-size="12" fill="#64748b" text-anchor="end">t / T</text>`;svg.innerHTML=out;}
+// Coefficient stem charts. Capture the pointer on the SVG itself to avoid losing drag
+// when the stems are redrawn on every pointer movement.
+const stemGeometry={W:320,H:170,left:30,right:10,top:13,bottom:30};
+let stemDrag=null;
+function coefficient(k,part){
+ const v=manualCoeffs.get(k)||['0','0'];
+ try{return compile(v[part]||'0')(k)}catch{return 0}
+}
+function stemScale(){const r=Number($('stemRange').value);return Number.isFinite(r)&&r>0?r:1}
+function renderStems(){
+ if(activePreset!=='manual')return;
+ const K=manualLimit(),range=stemScale(),g=stemGeometry;
+ const width=g.W-g.left-g.right,height=g.H-g.top-g.bottom;
+ const y=v=>g.top+(range-v)/(2*range)*height;
+ for(const part of [0,1]){
+  const svg=$(part?'imagStems':'realStems'),color=part?'#e07a30':'#2563eb';
+  let out=`<line x1="${g.left}" x2="${g.W-g.right}" y1="${y(0)}" y2="${y(0)}" stroke="#64748b" stroke-width="1.3"/>`;
+  for(const val of [-range,0,range])out+=`<text x="${g.left-4}" y="${y(val)+4}" fill="#64748b" font-size="10" text-anchor="end">${fmt(val)}</text>`;
+  const count=2*K+1,step=width/count;
+  for(let k=-K;k<=K;k++){
+   const cx=g.left+(k+K+.5)*step,raw=coefficient(k,part),v=Math.max(-range,Math.min(range,raw)),cy=y(v);
+   // Invisible vertical hit region also allows a zero-valued coefficient to be dragged.
+   out+=`<rect data-k="${k}" data-part="${part}" x="${cx-Math.max(5,step*.43)}" y="${g.top}" width="${Math.max(10,step*.86)}" height="${height}" fill="transparent" style="cursor:ns-resize"/>`;
+   out+=`<line x1="${cx}" x2="${cx}" y1="${y(0)}" y2="${cy}" stroke="${color}" stroke-width="${Math.min(7,Math.max(2,step*.26))}" pointer-events="none"/>`;
+   out+=`<circle cx="${cx}" cy="${cy}" r="${Math.min(6,Math.max(3,step*.22))}" fill="${color}" stroke="white" stroke-width="1" pointer-events="none"/>`;
+   if(count<=25||k%Math.ceil(count/20)===0)out+=`<text x="${cx}" y="${g.H-10}" fill="#64748b" font-size="${count>21?8:10}" text-anchor="middle">${k}</text>`;
+  }
+  out+=`<text x="${g.W-5}" y="${g.H-10}" font-size="10" fill="#64748b" text-anchor="end">k</text>`;
+  svg.innerHTML=out;
+ }
+}
+function pointerStemValue(event){
+ const svg=event.currentTarget,rect=svg.getBoundingClientRect(),g=stemGeometry;
+ const ypos=(event.clientY-rect.top)/rect.height*g.H;
+ const range=stemScale(),fraction=(ypos-g.top)/(g.H-g.top-g.bottom);
+ return Math.round(Math.max(-range,Math.min(range,range*(1-2*fraction)))*1000)/1000;
+}
+function setStemValue(k,part,value){
+ const prev=manualCoeffs.get(k)||['0','0'];prev[part]=String(value);manualCoeffs.set(k,prev);
+ const cell=Array.from($('coefficientRows').querySelectorAll('input')).find(el=>el.dataset.k===String(k)&&el.dataset.part===String(part));
+ if(cell)cell.value=String(value);
+ $(part?'imagReadout':'realReadout').textContent=`k = ${k}, ${part?'Im':'Re'}(aₖ) = ${fmt(value)}`;
+ draw();
+}
+function attachStemEvents(svg,part){
+ svg.addEventListener('pointerdown',event=>{
+  if(activePreset!=='manual')return;
+  const node=event.target.closest('[data-k]');if(!node)return;
+  const k=Number(node.dataset.k);
+  stemDrag={pointerId:event.pointerId,k,part};
+  svg.setPointerCapture(event.pointerId);
+  setStemValue(k,part,pointerStemValue(event));event.preventDefault();
+ });
+ svg.addEventListener('pointermove',event=>{
+  if(!stemDrag||stemDrag.pointerId!==event.pointerId||stemDrag.part!==part)return;
+  setStemValue(stemDrag.k,part,pointerStemValue(event));event.preventDefault();
+ });
+ const stop=event=>{if(stemDrag&&stemDrag.pointerId===event.pointerId&&stemDrag.part===part)stemDrag=null};
+ svg.addEventListener('pointerup',stop);svg.addEventListener('pointercancel',stop);svg.addEventListener('lostpointercapture',stop);
+}
+attachStemEvents($('realStems'),0);attachStemEvents($('imagStems'),1);
+function draw(){try{
+const manual=activePreset==='manual';
+const f0=manual?null:compile($('a0').value),fr=manual?null:compile($('akreal').value),fi=manual?null:compile($('akimag').value),T=compile($('period').value)(1);
+if(T<=0)throw Error('Period must be positive.');
+const limit=manual?manualLimit():100;
+const N=+$('nslider').value,cycles=Math.max(1,Math.min(8,Number($('domain').value)||2));
+const Ns=$('compare').value.split(',').map(s=>Number(s.trim())).filter(Number.isFinite).map(n=>Math.max(0,Math.min(limit,Math.floor(n)))).slice(0,6);
+if(!Ns.length)throw Error('Enter at least one comparison N value.');
+const max=Math.max(N,...Ns),r=[],im=[];
+for(let k=-max;k<=max;k++){if(k===0)continue;if(manual){const v=manualCoeffs.get(k)||['0','0'];r[k]=compile(v[0]||'0')(k);im[k]=compile(v[1]||'0')(k)}else{r[k]=fr(k);im[k]=fi(k)}}
+const zero=manual?(manualCoeffs.get(0)||['0','0']):null;
+const a0r=manual?compile(zero[0]||'0')(0):f0(0),a0i=manual?compile(zero[1]||'0')(0):0;
+const len=701,byN=new Map([...new Set([N,...Ns])].map(n=>[n,{real:[],imag:[]}]));
+for(let i=0;i<len;i++){
+const theta=2*Math.PI*cycles*(i/(len-1)-.5);let re=a0r,iv=a0i;
+if(byN.has(0)){byN.get(0).real.push(re);byN.get(0).imag.push(iv)}
+for(let n=1;n<=max;n++){
+for(const k of [-n,n]){const ang=k*theta;re+=r[k]*Math.cos(ang)-im[k]*Math.sin(ang);iv+=r[k]*Math.sin(ang)+im[k]*Math.cos(ang)}
+if(byN.has(n)){byN.get(n).real.push(re);byN.get(n).imag.push(iv)}
+}}
+const showExact=['saw','square','tri'].includes(activePreset)&&$('showTruth').checked;
+const mainCurves=[{ys:byN.get(N).real,color:colors[0]},{ys:byN.get(N).imag,color:colors[1]}];
+if(showExact)mainCurves.push({ys:exactSamples(activePreset,cycles,len),color:'#10977f',isExact:true,jumpThreshold:activePreset==='saw'?Math.PI:activePreset==='square'?1:Infinity});
+plot($('mainPlot'),mainCurves,T,cycles);
+$('truthLegend').hidden=!showExact;
+if(manual)renderStems();
+let component=$('compareComponent').value;
+if(component==='auto'){
+ const sums=[0,0];for(const n of Ns)for(const v of byN.get(n).real)sums[0]+=v*v;
+ for(const n of Ns)for(const v of byN.get(n).imag)sums[1]+=v*v;
+ component=sums[1]>sums[0]*1.000001?'imag':'real';
+}
+plot($('comparePlot'),Ns.map((n,i)=>({ys:byN.get(n)[component],color:colors[i%colors.length]})),T,cycles);
+$('legend').innerHTML=`<span style="font-weight:600">${component==='imag'?'Imaginary':'Real'} part:</span> `+Ns.map((n,i)=>`<span style="--color:${colors[i%colors.length]}">N = ${n}</span>`).join('');
+$('nlabel').textContent='N = '+N;$('nnum').textContent=N;$('error').style.display='none';
+}catch(e){$('error').textContent=e.message;$('error').style.display='block';}}
+$('showTruth').addEventListener('change',draw);$('stemRange').addEventListener('input',renderStems);$('nslider').addEventListener('input',draw);$('plotBtn').addEventListener('click',draw);$('compareComponent').addEventListener('change',draw);$('manualK').addEventListener('change',()=>{try{updateManualRows();applyOrderLimit();draw()}catch(e){$('error').textContent=e.message;$('error').style.display='block'}});for(const id of ['a0','akreal','akimag','period','domain','compare'])$(id).addEventListener('change',draw);document.querySelectorAll('[data-preset]').forEach(btn=>btn.addEventListener('click',()=>selectPreset(btn.dataset.preset)));selectPreset('saw');
+</script></body></html>
