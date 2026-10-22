@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Filter Lab · EE3015</title>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#1b2939;background:#f4f7fb}*{box-sizing:border-box}body{margin:0}header{background:#13283f;color:white;padding:29px max(20px,calc((100vw - 1100px)/2)) 24px}header h1{font-size:clamp(25px,3.2vw,36px);letter-spacing:-.8px;margin:4px 0 8px}header p{color:#c5d4e3;margin:0;font-size:15px}.kicker{font-size:12px;color:#80d3ff;letter-spacing:2px;font-weight:800}main{max-width:1100px;margin:0 auto;padding:24px 20px 50px}button{font:inherit;cursor:pointer}.panel{background:#fff;border:1px solid #e0e8f0;border-radius:16px;box-shadow:0 4px 18px #223c5710;padding:24px;margin-bottom:18px}h2{font-size:23px;letter-spacing:-.4px;margin:0 0 8px}h3{font-size:16px;margin:0 0 14px}.subtitle{color:#52677c;font-size:14px;line-height:1.6;margin:0 0 20px}.equation{text-align:center;font-size:clamp(15px,2vw,19px);background:#f2f7fc;border-radius:10px;padding:14px 8px;margin-bottom:20px;overflow-x:auto}.examples{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:9px;margin-bottom:20px}.example{text-align:left;border:1px solid #d4e0eb;background:#fff;border-radius:11px;padding:11px 13px;color:#37516c}.example b{display:block;font-size:14px;color:#1b2939;margin-bottom:3px}.example span{font-size:12px;color:#6a7c8c;line-height:1.4}.example:hover{background:#f5faff}.example.active{border-color:#1467a8;background:#e7f3ff}.example.active b{color:#085e99}.sectionlabel{font-size:12px;font-weight:800;letter-spacing:1.5px;color:#6a7c8c;margin:0 0 9px}.layout{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}.control{margin-bottom:15px}.control label{display:flex;justify-content:space-between;gap:10px;color:#344a60;font-weight:650;font-size:14px;margin-bottom:7px}.value{font-variant-numeric:tabular-nums;color:#09649f}input[type=range]{width:100%;accent-color:#1678b5}.small{font-size:12px;color:#6a7c8c;line-height:1.5}.pillrow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}.pill{padding:8px 12px;border:1px solid #cddceb;background:#fff;border-radius:8px;color:#365069;font-size:14px}.pill.selected{background:#e7f3ff;border-color:#1474af;color:#085e99;font-weight:750}.pill:disabled{opacity:.45;cursor:not-allowed}.sigbox{border:1px solid #e0e7ef;border-left:4px solid var(--c);border-radius:11px;padding:15px 16px 4px;min-width:0}.sigbox h3{color:var(--c);margin-bottom:10px}.schematic{width:100%;height:auto;display:block;background:#fbfdff;border:1px solid #e6edf5;border-radius:9px;margin-bottom:12px}.info{background:#f8fafc;border:1px solid #dbe3ed;border-radius:9px;padding:10px 13px;margin:2px 0 15px;font-size:13px;color:#334155;line-height:1.6}.info .tf{font-size:15px;overflow-x:auto;margin-top:4px}.vizbox{border:1px solid #e0e7ef;border-radius:11px;padding:13px;background:white;min-width:0;margin-top:14px}.vizbox h3{margin-bottom:4px}.vizbox .small{margin-bottom:8px}canvas{display:block;width:100%;height:230px}canvas.short{height:200px}.legend{font-size:12px;color:#597085;margin:7px 0 0;display:flex;gap:14px;flex-wrap:wrap}.dot{display:inline-block;width:9px;height:9px;background:var(--c);border-radius:9px;margin-right:4px}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:14px}.tablewrap{overflow-x:auto;margin-top:10px}table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}th{background:#edf3fc;color:#334155;text-align:right;padding:7px 9px;font-weight:700}td{border-top:1px solid #eef1f6;padding:6px 9px;text-align:right;color:#334155}th:first-child,td:first-child{text-align:center}.note{background:#f5f9fc;border-left:3px solid #3998c8;padding:9px 12px;font-size:13px;color:#516a7b;line-height:1.5;margin-top:8px}.question{background:#fff9e9;border:1px solid #f4e3ba;border-radius:12px;padding:17px 19px;margin-top:14px}.question strong{font-size:14px;color:#795311}.question p{margin:7px 0 11px;font-size:14px;line-height:1.55}.question .load{border:1px solid #e3c98a;background:#fff;border-radius:7px;padding:4px 9px;font-size:12px;color:#795311;margin-left:6px}details{font-size:14px;color:#4b5f71}details summary{color:#0e689c;font-weight:700;cursor:pointer}details p{line-height:1.6;margin-bottom:0}footer{text-align:center;color:#6a7d8b;font-size:12px;margin-top:25px}.hidden{display:none!important}@media(max-width:820px){.layout,.twocol{grid-template-columns:1fr}.panel{padding:17px}main{padding:18px 12px 40px}canvas{height:200px}}
+</style>
+<style>.site-nav{box-sizing:border-box;display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:12px max(20px,calc((100vw - 1160px)/2));background:#13283f;color:white;font:14px Inter,system-ui,sans-serif}.site-nav a{color:#dbeafe!important;text-decoration:none!important;margin-right:17px}.site-nav a:hover{text-decoration:underline!important}.site-nav .site-brand{font-weight:750;color:white!important;font-size:16px}.site-nav div{display:flex;flex-wrap:wrap;gap:0}</style></head>
+<body><nav class="site-nav" aria-label="Site navigation"><a class="site-brand" href="index.html">∿ Fourier Learning Lab</a><div><a href="index.html">Home</a><a href="explorer.html">Series Explorer</a><a href="sound-lab.html">Sound Lab</a><a href="convolution.html">Convolution</a><a href="filtering.html" aria-current="page">Filter Lab</a></div></nav>
+<header><div class="kicker">EE3015 · SIGNALS &amp; SYSTEMS</div><h1>Filter Lab: RLC Circuits</h1><p>Feed a signal into a circuit. See which harmonics survive, and how the output changes shape.</p></header>
+<main>
+<section class="panel">
+<h2>Filtering with RLC circuits</h2>
+<p class="subtitle">Every circuit below is an LTI system with frequency response \(H(j\omega)\). A periodic input with Fourier series coefficients \(a_k\) produces a periodic output whose coefficients are simply scaled by the frequency response at each harmonic.</p>
+<div class="equation">\( x(t)=\displaystyle\sum_k a_k e^{jk\omega_0 t} \;\longrightarrow\; \boxed{H(j\omega)} \;\longrightarrow\; y(t)=\displaystyle\sum_k \underbrace{H(jk\omega_0)\,a_k}_{b_k}\, e^{jk\omega_0 t} \)</div>
+<div class="sectionlabel">TRY AN EXAMPLE</div>
+<div class="examples" id="examples"></div>
+<div class="layout">
+<div class="sigbox" style="--c:#13836f"><h3>Circuit</h3><div class="pillrow" id="cpills"></div><svg class="schematic" id="schematic" viewBox="0 0 440 196" role="img" aria-label="Circuit schematic"></svg>
+<div class="control" id="Rwrap"><label for="Rs"><span>Resistance R</span><span class="value" id="Rv"></span></label><input type="range" id="Rs" min="0" max="1000"></div>
+<div class="control" id="Lwrap"><label for="Ls"><span>Inductance L</span><span class="value" id="Lv"></span></label><input type="range" id="Ls" min="0" max="1000"></div>
+<div class="control" id="Cwrap"><label for="Cs"><span>Capacitance C</span><span class="value" id="Cv"></span></label><input type="range" id="Cs" min="0" max="1000"></div>
+<div class="info"><div id="cinfo"></div><div class="tf" id="htex"></div></div></div>
+<div class="sigbox" style="--c:#2563eb"><h3>Input signal x(t)</h3><div class="pillrow" id="ipills"></div>
+<div class="control" id="fwrap"><label for="fs"><span>Fundamental frequency f₀</span><span class="value" id="fv"></span></label><input type="range" id="fs" min="0" max="1000"></div>
+<div class="control" id="pwrap"><label for="ps"><span>Periods shown</span><span class="value" id="pv"></span></label><input type="range" id="ps" min="1" max="20" step="1"></div>
+<div class="sectionlabel" style="margin-top:4px">WHAT TO SHOW</div><div class="pillrow" id="mpills"><button class="pill" data-mode="steady">Steady state</button><button class="pill" data-mode="transient">Switched on at t = 0</button></div>
+<div class="small" id="mdesc"></div>
+<div class="note" id="ratio"></div></div>
+</div>
+<div class="vizbox"><h3>Time domain: input and output</h3><div class="small" id="tsub"></div><canvas id="ct" aria-label="Input and output waveforms"></canvas><div class="legend"><span><span class="dot" style="--c:#2563eb"></span>input x(t)</span><span><span class="dot" style="--c:#008b75"></span>output y(t)</span></div></div>
+<div class="twocol">
+<div class="vizbox"><h3>Frequency response |H(f)|</h3><div class="small">Log frequency axis. Dots mark the harmonics k·f₀ present in the input.</div><canvas id="ch" class="short" aria-label="Magnitude of frequency response"></canvas><div class="legend"><span><span class="dot" style="--c:#d97706"></span>|H(f)|</span><span><span class="dot" style="--c:#2563eb"></span>input harmonics</span></div></div>
+<div class="vizbox" id="specbox"><h3>Line spectra: |a<sub>k</sub>| in, |b<sub>k</sub>| out</h3><div class="small">Showing k ≥ 0. For real signals |a<sub>−k</sub>| = |a<sub>k</sub>|.</div><canvas id="cs" class="short" aria-label="Input and output Fourier coefficient magnitudes"></canvas><div class="legend"><span><span class="dot" style="--c:#2563eb"></span>|a<sub>k</sub>| input</span><span><span class="dot" style="--c:#008b75"></span>|b<sub>k</sub>| = |H(jkω₀)|·|a<sub>k</sub>| output</span></div></div>
+<div class="vizbox hidden" id="stepbox"><h3>Why no line spectrum?</h3><p class="small" style="font-size:14px;line-height:1.6">A unit step is not periodic, so it has no Fourier series. Its frequency content is spread continuously over all frequencies (that is the Fourier transform, coming later in the course). The time-domain plot shows the <b>step response</b>: the integral of the impulse response \(h(t)\).</p></div>
+</div>
+<div class="vizbox" id="tablebox"><h3>Harmonic by harmonic</h3><div class="small">The first few nonzero harmonics of the input and what the circuit does to each one.</div><div class="tablewrap"><table><thead><tr><th>k</th><th>frequency</th><th>|a<sub>k</sub>|</th><th>|H(jkω₀)|</th><th>∠H(jkω₀)</th><th>|b<sub>k</sub>|</th></tr></thead><tbody id="tbody"></tbody></table></div></div>
+<div id="questions"></div>
+</section>
+<footer>Standalone interactive teaching demo · Outputs are computed by exact discretization of the circuit's state equations (no Gibbs ripple); the steady state is the periodic solution of those equations.</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const COL={x:'#2563eb',y:'#008b75',H:'#d97706',mark:'#dc2626'};
+const TAU=2*Math.PI;
+const fmt=(v,d=3)=>{if(!isFinite(v))return '—';if(Math.abs(v)<5e-13)return '0';const r=+v.toPrecision(d);return (Object.is(r,-0)?0:r).toString()};
+function si(v,unit){for(const [s,p] of [[1e6,'M'],[1e3,'k'],[1,''],[1e-3,'m'],[1e-6,'µ'],[1e-9,'n'],[1e-12,'p']])if(Math.abs(v)>=s*.9995)return fmt(v/s)+' '+p+unit;return fmt(v)+' '+unit}
+
+// ---------- circuits: H(s) = (n0 s^2 + n1 s + n2)/(d0 s^2 + d1 s + d2) ----------
+const CIRCUITS={
+ rclp:{name:'RC low-pass',series:['R'],shunt:['C'],tex:'H(j\\omega)=\\dfrac{1}{1+j\\omega RC}',tf:({R,C})=>({n:[0,0,1],d:[0,R*C,1]}),fc:({R,C})=>1/(TAU*R*C),fcTex:'f_c=\\tfrac{1}{2\\pi RC}'},
+ rchp:{name:'RC high-pass',series:['C'],shunt:['R'],tex:'H(j\\omega)=\\dfrac{j\\omega RC}{1+j\\omega RC}',tf:({R,C})=>({n:[0,R*C,0],d:[0,R*C,1]}),fc:({R,C})=>1/(TAU*R*C),fcTex:'f_c=\\tfrac{1}{2\\pi RC}'},
+ rllp:{name:'RL low-pass',series:['L'],shunt:['R'],tex:'H(j\\omega)=\\dfrac{R}{R+j\\omega L}',tf:({R,L})=>({n:[0,0,R],d:[0,L,R]}),fc:({R,L})=>R/(TAU*L),fcTex:'f_c=\\tfrac{R}{2\\pi L}'},
+ rlcbp:{name:'RLC band-pass',series:['L','C'],shunt:['R'],tex:'H(j\\omega)=\\dfrac{j\\omega RC}{1-\\omega^2LC+j\\omega RC}',tf:({R,L,C})=>({n:[0,R*C,0],d:[L*C,R*C,1]})},
+ rlclp:{name:'RLC low-pass',series:['R','L'],shunt:['C'],tex:'H(j\\omega)=\\dfrac{1}{1-\\omega^2LC+j\\omega RC}',tf:({R,L,C})=>({n:[0,0,1],d:[L*C,R*C,1]})},
+ rlcbs:{name:'RLC band-stop',series:['R'],shunt:['L','C'],tex:'H(j\\omega)=\\dfrac{1-\\omega^2LC}{1-\\omega^2LC+j\\omega RC}',tf:({R,L,C})=>({n:[L*C,0,1],d:[L*C,R*C,1]})}
+};
+const uses=c=>[...c.series,...c.shunt];
+const INPUTS={
+ sine:{name:'Sine',f:p=>Math.sin(TAU*p)},
+ square:{name:'Square',f:p=>p<.5?1:-1},
+ tri:{name:'Triangle',f:p=>p<.5?4*p-1:3-4*p},
+ saw:{name:'Sawtooth',f:p=>2*p-1},
+ pulse:{name:'Pulse train',f:p=>p<.2?1:0},
+ ripple:{name:'Sine + ripple',f:p=>Math.sin(TAU*p)+.3*Math.sin(TAU*20*p)},
+ step:{name:'Unit step',step:true}
+};
+const RANGE={R:[1,1e5],L:[1e-4,1],C:[1e-8,1e-3],f:[1,2e4]};
+const UNIT={R:'Ω',L:'H',C:'F'};
+const S={circuit:'rclp',R:1e3,L:10e-3,C:1e-6,input:'square',f0:100,periods:3,mode:'steady',example:null};
+
+const EXAMPLES=[
+ {id:'smooth',title:'Smooth a noisy sine',desc:'RC low-pass removes fast ripple',set:{circuit:'rclp',R:1e3,C:4.7e-6,input:'ripple',f0:20,periods:3,mode:'steady'}},
+ {id:'integ',title:'Low-pass as integrator',desc:'Square wave far above f_c',set:{circuit:'rclp',R:1e3,C:1e-6,input:'square',f0:2000,periods:3,mode:'steady'}},
+ {id:'diff',title:'High-pass as differentiator',desc:'Square wave far below f_c',set:{circuit:'rchp',R:1e3,C:1e-6,input:'square',f0:10,periods:3,mode:'steady'}},
+ {id:'third',title:'Pick out the 3rd harmonic',desc:'Band-pass tuned to 3f₀',set:{circuit:'rlcbp',R:5,L:10e-3,C:1/((TAU*1500)**2*10e-3),input:'square',f0:500,periods:3,mode:'steady'}},
+ {id:'notch',title:'Notch out the fundamental',desc:'Band-stop tuned to f₀',set:{circuit:'rlcbs',R:5,L:10e-3,C:1/((TAU*500)**2*10e-3),input:'square',f0:500,periods:3,mode:'steady'}},
+ {id:'ring',title:'Ringing step response',desc:'Underdamped RLC, Q = 5',set:{circuit:'rlclp',R:20,L:10e-3,C:1e-6,input:'step',mode:'transient'}},
+ {id:'crit',title:'Critically damped',desc:'Same RLC with R = 2√(L/C)',set:{circuit:'rlclp',R:200,L:10e-3,C:1e-6,input:'step',mode:'transient'}},
+ {id:'startup',title:'Start-up transient',desc:'Sine switched on at t = 0',set:{circuit:'rlclp',R:20,L:10e-3,C:1e-6,input:'sine',f0:500,periods:8,mode:'transient'}}
+];
+
+// ---------- small linear algebra ----------
+const eye=n=>[...Array(n)].map((_,i)=>[...Array(n)].map((_,j)=>+(i===j)));
+function mm(A,B){return A.map(r=>B[0].map((_,j)=>r.reduce((s,v,l)=>s+v*B[l][j],0)))}
+const mv=(A,x)=>A.map(r=>r.reduce((s,v,j)=>s+v*x[j],0));
+function expm(M){const n=M.length,nm=Math.max(...M.map(r=>r.reduce((a,v)=>a+Math.abs(v),0))),s=Math.max(0,Math.ceil(Math.log2(nm||1))+1);
+ const A=M.map(r=>r.map(v=>v/2**s));let E=eye(n),T=eye(n);
+ for(let k=1;k<=18;k++){T=mm(T,A).map(r=>r.map(v=>v/k));E=E.map((r,i)=>r.map((v,j)=>v+T[i][j]))}
+ for(let i=0;i<s;i++)E=mm(E,E);return E}
+
+// state-space realization (balanced so that entries stay O(ω))
+function realize(){const {n,d}=CIRCUITS[S.circuit].tf(S);
+ if(d[0]===0){const a0=d[2]/d[1],b1=n[1]/d[1],b0=n[2]/d[1];return {A:[[-a0]],B:[a0],C:[(b0-b1*a0)/a0],D:b1,n,d}}
+ const a1=d[1]/d[0],a0=d[2]/d[0],b2=n[0]/d[0],b1=n[1]/d[0],b0=n[2]/d[0],w=Math.sqrt(a0);
+ return {A:[[0,w],[-w,-a1]],B:[0,1],C:[(b0-b2*a0)/w,b1-b2*a1],D:b2,n,d}}
+function discretize(sys,dt){const k=sys.A.length,M=[...Array(k+1)].map(()=>Array(k+1).fill(0));
+ for(let i=0;i<k;i++){for(let j=0;j<k;j++)M[i][j]=sys.A[i][j]*dt;M[i][k]=sys.B[i]*dt}
+ const E=expm(M);return {Ad:E.slice(0,k).map(r=>r.slice(0,k)),Bd:E.slice(0,k).map(r=>r[k])}}
+function Hjw(w){const {n,d}=CIRCUITS[S.circuit].tf(S),nr=n[2]-n[0]*w*w,ni=n[1]*w,dr=d[2]-d[0]*w*w,di=d[1]*w,q=dr*dr+di*di;return [(nr*dr+ni*di)/q,(ni*dr-nr*di)/q]}
+function charInfo(){const c=CIRCUITS[S.circuit];if(c.fc)return {order:1,f:c.fc(S)};const f=1/(TAU*Math.sqrt(S.L*S.C)),Q=Math.sqrt(S.L/S.C)/S.R;return {order:2,f,Q,zeta:1/(2*Q)}}
+function slowestTau(d){if(d[0]===0)return d[1]/d[2];const disc=d[1]*d[1]-4*d[0]*d[2];if(disc<0)return 2*d[0]/d[1];return 1/Math.abs((-d[1]+Math.sqrt(disc))/(2*d[0]))}
+
+// ---------- simulation ----------
+const NPER=1000;
+function compute(){const sys=realize(),inp=INPUTS[S.input],k=sys.A.length;
+ let dt,steps,x=Array(k).fill(0),u,W;
+ if(inp.step){W=8*slowestTau(sys.d);steps=4000;dt=W/steps;u=t=>t>=0?1:0}
+ else{const T=1/S.f0;dt=T/NPER;steps=NPER*S.periods;W=T*S.periods;u=t=>t<0?0:inp.f(((t/T)%1+1)%1)}
+ const {Ad,Bd}=discretize(sys,dt);
+ if(!inp.step&&S.mode==='steady'){ // periodic steady state: x0 = Φ x0 + r
+  let r=Array(k).fill(0),Phi=eye(k);for(let i=0;i<NPER;i++){r=mv(Ad,r).map((v,j)=>v+Bd[j]*u((i+.5)*dt));Phi=mm(Ad,Phi)}
+  const M=eye(k).map((row,i)=>row.map((v,j)=>v-Phi[i][j]));
+  x=k===1?[r[0]/M[0][0]]:(()=>{const det=M[0][0]*M[1][1]-M[0][1]*M[1][0];return [(M[1][1]*r[0]-M[0][1]*r[1])/det,(M[0][0]*r[1]-M[1][0]*r[0])/det]})()}
+ const ts=[],us=[],ys=[];
+ if(S.mode==='transient'||inp.step){const pre=Math.round(steps*.05);for(let i=-pre;i<0;i++){ts.push(i*dt);us.push(0);ys.push(0)}}
+ for(let i=0;i<=steps;i++){const t=i*dt,ut=u(t);ts.push(t);us.push(ut);ys.push(sys.C.reduce((s,c,j)=>s+c*x[j],0)+sys.D*ut);x=mv(Ad,x).map((v,j)=>v+Bd[j]*u(t+dt/2))}
+ return {ts,us,ys,W}}
+function coeffs(K){const f=INPUTS[S.input].f,M=2048,xs=[...Array(M)].map((_,m)=>f(m/M));
+ return [...Array(K+1)].map((_,k)=>{let re=0,im=0;for(let m=0;m<M;m++){const a=TAU*k*m/M;re+=xs[m]*Math.cos(a);im-=xs[m]*Math.sin(a)}return [re/M,im/M]})}
+
+// ---------- canvas helpers ----------
+function niceStep(r){const p=10**Math.floor(Math.log10(r)),m=r/p;return (m<1.5?1:m<3?2:m<7?5:10)*p}
+function frame(cv,xr,yr,xlab,{logx=false,xfmt=fmt}={}){
+ const r=cv.getBoundingClientRect(),dpr=window.devicePixelRatio||1;cv.width=Math.round(r.width*dpr);cv.height=Math.round(r.height*dpr);
+ const g=cv.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);const w=r.width,h=r.height,L=46,R=14,T=12,B=32;
+ const lx=v=>logx?Math.log10(v):v,X=x=>L+(lx(x)-lx(xr[0]))/(lx(xr[1])-lx(xr[0]))*(w-L-R),Y=y=>T+(yr[1]-y)/(yr[1]-yr[0])*(h-T-B);
+ g.font='11px Inter,system-ui,sans-serif';g.lineWidth=1;g.fillStyle='#6a7c8c';
+ const vline=(x,c)=>{g.strokeStyle=c;g.beginPath();g.moveTo(X(x),T);g.lineTo(X(x),h-B);g.stroke()};
+ if(logx){for(let e=Math.floor(Math.log10(xr[0]));e<=Math.ceil(Math.log10(xr[1]));e++)for(let m=1;m<10;m++){const v=m*10**e;if(v<xr[0]*.999||v>xr[1]*1.001)continue;vline(v,m===1?'#e3e9f1':'#f3f6fa');if(m===1){g.textAlign='center';g.fillText(xfmt(v),X(v),h-B+15)}}}
+ else{const xs=niceStep((xr[1]-xr[0])/8);for(let x=Math.ceil(xr[0]/xs)*xs;x<=xr[1]+1e-9*xs;x+=xs){vline(x,'#eef2f7');g.textAlign='center';g.fillText(xfmt(x),X(x),h-B+15)}}
+ const ys=niceStep((yr[1]-yr[0])/4);for(let y=Math.ceil(yr[0]/ys)*ys;y<=yr[1]+1e-9;y+=ys){g.strokeStyle='#eef2f7';g.beginPath();g.moveTo(L,Y(y));g.lineTo(w-R,Y(y));g.stroke();g.textAlign='right';g.fillText(fmt(y),L-6,Y(y)+4)}
+ g.strokeStyle='#9aabbd';g.beginPath();g.moveTo(L,Y(0));g.lineTo(w-R,Y(0));if(!logx&&xr[0]<0&&xr[1]>0){g.moveTo(X(0),T);g.lineTo(X(0),h-B)}g.stroke();
+ g.textAlign='right';g.font='italic 12px Georgia,serif';g.fillStyle='#475569';g.fillText(xlab,w-R,h-3);
+ g.save();g.beginPath();g.rect(L,T-2,w-L-R,h-T-B+4);g.clip();
+ return {g,X,Y,T,B,h}}
+// draws long sampled curves by keeping first/min/max/last per pixel column, so narrow spikes survive
+function curve(F,xs,ys,color,wd=2.3){const g=F.g;g.save();g.strokeStyle=color;g.lineWidth=wd;g.lineJoin='round';g.beginPath();
+ let col=null,f,mn,mx,l,first=true;const flush=()=>{if(col===null)return;first?g.moveTo(col,F.Y(f)):g.lineTo(col,F.Y(f));first=false;g.lineTo(col,F.Y(mn));g.lineTo(col,F.Y(mx));g.lineTo(col,F.Y(l))};
+ xs.forEach((x,i)=>{const px=Math.round(F.X(x)*2)/2,v=ys[i];if(px!==col){flush();col=px;f=mn=mx=l=v}else{mn=Math.min(mn,v);mx=Math.max(mx,v);l=v}});flush();g.stroke();g.restore()}
+function stems(F,ks,vs,color,{off=0,r=3.8,hollow=false}={}){const g=F.g;ks.forEach((k,i)=>{const v=vs[i];if(Math.abs(v)<1e-9)return;const x=F.X(k+off),y=F.Y(v);g.strokeStyle=color;g.lineWidth=2;g.beginPath();g.moveTo(x,F.Y(0));g.lineTo(x,y);g.stroke();g.beginPath();g.arc(x,y,r,0,TAU);if(hollow){g.fillStyle='#fff';g.fill();g.stroke()}else{g.fillStyle=color;g.fill()}})}
+function pad(lo,hi){const M=Math.max(Math.abs(lo),Math.abs(hi))||1;return [lo<-1e-9?lo-.12*M:-.08*M,hi>1e-9?hi+.12*M:.08*M]}
+
+// ---------- schematic ----------
+function glyph(type,cx,cy,vert,color){const rot=vert?` transform="rotate(90 ${cx} ${cy})"`:'';let d;
+ if(type==='R'){d=`M${cx-28} ${cy}H${cx-21}`;for(let i=0;i<6;i++)d+=`L${cx-17.5+7*i} ${cy+(i%2?8:-8)}`;d+=`L${cx+21} ${cy}H${cx+28}`}
+ else if(type==='C')d=`M${cx-28} ${cy}H${cx-5}M${cx-5} ${cy-13}V${cy+13}M${cx+5} ${cy-13}V${cy+13}M${cx+5} ${cy}H${cx+28}`;
+ else d=`M${cx-28} ${cy}H${cx-20}`+'a5 5 0 0 1 10 0'.repeat(4)+`H${cx+28}`;
+ return `<g${rot}><rect x="${cx-28}" y="${cy-15}" width="56" height="30" fill="#fbfdff"/><path d="${d}" fill="none" stroke="${color}" stroke-width="2.4" stroke-linejoin="round"/></g>`}
+const valText=p=>`${p} = ${si(S[p],UNIT[p])}`;
+function drawSchematic(){const c=CIRCUITS[S.circuit],ink='#334155',out='#13836f',top=40,bot=160,sx=330;
+ let s=`<g fill="none" stroke="${ink}" stroke-width="2"><path d="M40 84V${top}H400M40 116V${bot}H400M${sx} ${top}V${bot}"/></g>`;
+ s+=`<circle cx="40" cy="100" r="16" fill="#fff" stroke="${ink}" stroke-width="2"/><path d="M30 100q5-9 10 0t10 0" fill="none" stroke="#2563eb" stroke-width="2"/>`;
+ s+=`<text x="64" y="104" font-size="14" fill="#2563eb" font-style="italic" font-family="Georgia,serif">x(t)</text>`;
+ const sxs=c.series.length===1?[185]:[130,245];c.series.forEach((p,i)=>{s+=glyph(p,sxs[i],top,false,ink)+`<text x="${sxs[i]}" y="${top-19}" text-anchor="middle" font-size="12" fill="${ink}">${valText(p)}</text>`});
+ const sys=c.shunt.length===1?[100]:[72,128];c.shunt.forEach((p,i)=>{s+=glyph(p,sx,sys[i],true,out)+`<text x="${sx-20}" y="${sys[i]+4}" text-anchor="end" font-size="12" fill="${out}">${valText(p)}</text>`});
+ s+=`<circle cx="400" cy="${top}" r="4" fill="#fff" stroke="${ink}" stroke-width="2"/><circle cx="400" cy="${bot}" r="4" fill="#fff" stroke="${ink}" stroke-width="2"/>`;
+ s+=`<text x="400" y="${top+22}" text-anchor="middle" font-size="15" fill="${out}">+</text><text x="400" y="${bot-10}" text-anchor="middle" font-size="15" fill="${out}">−</text><text x="404" y="104" text-anchor="middle" font-size="14" fill="${out}" font-style="italic" font-family="Georgia,serif">y(t)</text>`;
+ s+=`<text x="220" y="188" text-anchor="middle" font-size="11" fill="#6a7c8c">output y(t) is the voltage across the green element${c.shunt.length>1?'s':''}</text>`;
+ $('schematic').innerHTML=s}
+
+// ---------- rendering ----------
+const logToSlider=(v,[a,b])=>Math.round(1000*Math.log(v/a)/Math.log(b/a)),sliderToLog=(s,[a,b])=>a*(b/a)**(s/1000);
+function typeset(el){if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetClear&&MathJax.typesetClear([el]);MathJax.typesetPromise([el]).catch(()=>{})}}
+function renderControls(){const c=CIRCUITS[S.circuit],inp=INPUTS[S.input];
+ $('cpills').innerHTML=Object.entries(CIRCUITS).map(([k,v])=>`<button class="pill${k===S.circuit?' selected':''}" data-c="${k}">${v.name}</button>`).join('');
+ $('ipills').innerHTML=Object.entries(INPUTS).map(([k,v])=>`<button class="pill${k===S.input?' selected':''}" data-i="${k}">${v.name}</button>`).join('');
+ ['R','L','C'].forEach(p=>{$(p+'wrap').classList.toggle('hidden',!uses(c).includes(p));$(p+'s').value=logToSlider(S[p],RANGE[p]);$(p+'v').textContent=si(S[p],UNIT[p])});
+ $('fs').value=logToSlider(S.f0,RANGE.f);$('fv').textContent=si(S.f0,'Hz');$('ps').value=S.periods;$('pv').textContent=S.periods;
+ $('fwrap').classList.toggle('hidden',!!inp.step);$('pwrap').classList.toggle('hidden',!!inp.step);
+ document.querySelectorAll('#mpills .pill').forEach(b=>{b.classList.toggle('selected',b.dataset.mode===(inp.step?'transient':S.mode));b.disabled=!!inp.step&&b.dataset.mode==='steady'});
+ $('mdesc').textContent=inp.step?'A step is not periodic, so only the response from rest is shown.':S.mode==='steady'?'The long-run periodic output: exactly what the Fourier series formula predicts.':'The circuit starts at rest and the input is switched on at t = 0, so you see the transient settle into the steady state.';
+ document.querySelectorAll('.example').forEach(b=>b.classList.toggle('active',b.dataset.ex===S.example));
+ drawSchematic();
+ const ci=charInfo();
+ $('cinfo').innerHTML=ci.order===1?`First-order ${c.name.split(' ')[1]} filter · cutoff \\(${c.fcTex}\\) = <b>${si(ci.f,'Hz')}</b>`:
+  `Second-order series RLC · resonance \\(f_0=\\tfrac{1}{2\\pi\\sqrt{LC}}\\) = <b>${si(ci.f,'Hz')}</b> · \\(Q=\\tfrac{1}{R}\\sqrt{L/C}\\) = <b>${fmt(ci.Q)}</b> · damping ζ = ${fmt(ci.zeta)} (${ci.zeta<.999?'underdamped':ci.zeta<=1.001?'critically damped':'overdamped'})`;
+ $('htex').innerHTML=`\\(${c.tex}\\)`;typeset($('cinfo'));typeset($('htex'));
+ $('ratio').innerHTML=inp.step?`Slowest time constant of the circuit sets the window: 8τ = ${si(8*slowestTau(c.tf(S).d),'s')}.`:`f₀ / ${ci.order===1?'f<sub>c</sub>':'f<sub>resonance</sub>'} = <b>${fmt(S.f0/ci.f)}</b>. ${S.f0<ci.f/5?'The fundamental is well below the circuit\'s characteristic frequency.':S.f0>ci.f*5?'The fundamental is well above the circuit\'s characteristic frequency.':'The fundamental is near the circuit\'s characteristic frequency.'}`;
+}
+function draw(){const inp=INPUTS[S.input],ci=charInfo(),R=compute();
+ // time domain
+ const sc=R.W<2e-3?[1e6,'µs']:R.W<2?[1e3,'ms']:[1,'s'],tt=R.ts.map(t=>t*sc[0]);
+ const lo=Math.min(...R.us,...R.ys),hi=Math.max(...R.us,...R.ys);
+ let F=frame($('ct'),[tt[0],tt.at(-1)],pad(lo,hi),`t (${sc[1]})`);curve(F,tt,R.us,COL.x,2);curve(F,tt,R.ys,COL.y,2.6);
+ $('tsub').textContent=inp.step?'Unit step applied at t = 0 to a circuit at rest.':S.mode==='steady'?`Steady state, ${S.periods} period${S.periods>1?'s':''} of the input (T = ${si(1/S.f0,'s')}).`:`Input switched on at t = 0; the circuit starts with no stored energy.`;
+ // |H(f)|
+ const K=S.input==='ripple'?22:15,a=inp.step?null:coeffs(K),amax=a?Math.max(...a.map(([r,i])=>Math.hypot(r,i))):0;
+ const sig=a?a.map(([r,i],k)=>[k,Math.hypot(r,i)]).filter(([k,m])=>k>0&&m>1e-3*amax):[];
+ const fl=Math.min(ci.f,inp.step?ci.f:S.f0)/6,fh=Math.max(ci.f,inp.step?ci.f:S.f0*Math.max(1,...sig.map(s=>s[0])))*6;
+ const xr=[10**Math.floor(Math.log10(fl)),10**Math.ceil(Math.log10(fh))],fs=[...Array(500)].map((_,i)=>xr[0]*(xr[1]/xr[0])**(i/499)),Hm=fs.map(f=>Math.hypot(...Hjw(TAU*f)));
+ F=frame($('ch'),xr,[0,Math.max(1,...Hm)*1.12],'f',{logx:true,xfmt:v=>si(v,'Hz').replace(' ','\u2009')});
+ const g=F.g;g.save();g.setLineDash([4,4]);g.strokeStyle='#94a3b8';g.beginPath();g.moveTo(F.X(ci.f),F.T);g.lineTo(F.X(ci.f),F.h-F.B);g.stroke();g.restore();
+ g.fillStyle='#64748b';g.font='11px Inter,system-ui,sans-serif';g.textAlign='left';g.fillText(ci.order===1?'f_c':'f₀ (resonance)',F.X(ci.f)+4,F.T+10);
+ curve(F,fs,Hm,COL.H,2.6);
+ sig.forEach(([k])=>{const f=k*S.f0;if(f<xr[0]||f>xr[1])return;const m=Math.hypot(...Hjw(TAU*f));g.fillStyle=COL.x;g.beginPath();g.arc(F.X(f),F.Y(m),4,0,TAU);g.fill()});
+ // spectra + table
+ $('specbox').classList.toggle('hidden',!!inp.step);$('stepbox').classList.toggle('hidden',!inp.step);$('tablebox').classList.toggle('hidden',!!inp.step);
+ if(inp.step)return;
+ const ks=a.map((_,k)=>k),am=a.map(([r,i])=>Math.hypot(r,i)),H=ks.map(k=>Hjw(TAU*k*S.f0)),bm=am.map((m,k)=>m*Math.hypot(...H[k]));
+ F=frame($('cs'),[-.7,K+.7],[0,Math.max(...am,...bm)*1.15||1],'k',{xfmt:v=>Number.isInteger(v)?v:''});
+ stems(F,ks,am,COL.x,{off:-.16,hollow:true});stems(F,ks,bm,COL.y,{off:.16});
+ const rows=ks.filter(k=>am[k]>1e-3*amax).slice(0,7);
+ $('tbody').innerHTML=rows.map(k=>{const Hk=H[k],mag=Math.hypot(...Hk),ph=Math.atan2(Hk[1],Hk[0])*180/Math.PI;return `<tr><td>${k}</td><td>${si(k*S.f0,'Hz')}</td><td>${fmt(am[k])}</td><td>${fmt(mag)}</td><td>${fmt(ph,3)}°</td><td>${fmt(bm[k])}</td></tr>`}).join('');
+}
+function update(){renderControls();draw()}
+
+// ---------- questions ----------
+const QUESTIONS=[
+ ['integ','The input is a 2 kHz square wave and the cutoff is only 159 Hz. Predict the shape and the peak value of the output.','A small triangle wave. Far above cutoff, \\(H(j\\omega)\\approx \\frac{1}{j\\omega RC}\\): the circuit acts as an integrator, and integrating a square wave gives a triangle. Over each half period the output ramps by \\(\\frac{T/2}{RC}=\\frac{0.25\\text{ ms}}{1\\text{ ms}}=0.25\\), so it swings between about −0.125 and +0.125. In the table, every harmonic is multiplied by about \\(\\frac{1}{k\\omega_0RC}\\) and shifted by about −90°. That makes \\(|b_k|\\) fall like \\(1/k^2\\), exactly like a triangle wave.'],
+ ['diff','Now a 10 Hz square wave goes into a high-pass filter with cutoff 159 Hz. What does the output look like, and how quickly does it decay after each edge?','Sharp spikes at every edge. Far below cutoff, \\(H(j\\omega)\\approx j\\omega RC\\): the circuit acts as a differentiator, and the derivative of a square wave is a train of impulses. Each jump of size 2 passes straight through the capacitor, so the output jumps by 2. It then decays as \\(e^{-t/RC}\\) with \\(RC = 1\\) ms, which is very short compared with the 50 ms half period.'],
+ ['third','The band-pass filter is tuned to 1.5 kHz and the input is a 500 Hz square wave. Predict the output frequency and amplitude.','A nearly pure 1.5 kHz sinusoid. A square wave has only odd harmonics, with \\(|a_k|=\\frac{2}{\\pi k}\\). The filter passes \\(k=3\\) with \\(|H|\\approx 1\\) and strongly attenuates every other harmonic (Q ≈ 19). The output amplitude is \\(2|a_3|=\\frac{4}{3\\pi}\\approx 0.42\\). This is how a tuned circuit picks one harmonic out of a periodic signal.'],
+ ['ring','The underdamped RLC low-pass receives a unit step. Estimate the overshoot and the ringing frequency. Which value of R removes the overshoot?','Q = 5 gives ζ = 0.1, so the overshoot is \\(e^{-\\pi\\zeta/\\sqrt{1-\\zeta^2}}\\approx 73\\%\\) (peak ≈ 1.73). The ringing is at about \\(f_0\\sqrt{1-\\zeta^2}\\approx 1.58\\) kHz, and it decays with time constant \\(2L/R = 1\\) ms. Choosing \\(R = 2\\sqrt{L/C} = 200\\ \\Omega\\) makes it critically damped (ζ = 1): the fastest response with no overshoot. Load “Critically damped” to check.'],
+ ['smooth','The RC low-pass smooths a 20 Hz sine that carries 400 Hz ripple. What happens to the ripple and to the sine? What is the trade-off if you increase C?','The cutoff is about 34 Hz. The ripple at 400 Hz is multiplied by |H| ≈ 0.08, so it nearly disappears. The 20 Hz sine keeps 86% of its amplitude but is delayed (phase ≈ −30°). Increasing C removes more ripple, but it also attenuates and delays the signal you want more strongly. Every simple low-pass filter faces this trade-off.']
+];
+function renderQuestions(){$('questions').innerHTML=QUESTIONS.map(([ex,q,a],i)=>{const E=EXAMPLES.find(e=>e.id===ex);return `<div class="question"><strong>Predict first · Question ${i+1}</strong><button class="load" data-ex="${ex}">Load “${E.title}”</button><p>${q}</p><details><summary>Show answer</summary><p>${a}</p></details></div>`}).join('')}
+
+// ---------- events ----------
+$('examples').innerHTML=EXAMPLES.map(e=>`<button class="example" data-ex="${e.id}"><b>${e.title}</b><span>${e.desc}</span></button>`).join('');
+function loadExample(id){const E=EXAMPLES.find(e=>e.id===id);Object.assign(S,E.set,{example:id});update()}
+document.addEventListener('click',e=>{const ex=e.target.closest('[data-ex]');if(ex){loadExample(ex.dataset.ex);if(ex.classList.contains('load'))$('examples').scrollIntoView({behavior:'smooth',block:'start'});return}
+ const c=e.target.closest('[data-c]');if(c){S.circuit=c.dataset.c;S.example=null;return update()}
+ const i=e.target.closest('[data-i]');if(i){S.input=i.dataset.i;S.example=null;return update()}
+ const m=e.target.closest('[data-mode]');if(m&&!m.disabled){S.mode=m.dataset.mode;S.example=null;update()}});
+['R','L','C'].forEach(p=>$(p+'s').addEventListener('input',e=>{S[p]=sliderToLog(+e.target.value,RANGE[p]);S.example=null;update()}));
+$('fs').addEventListener('input',e=>{S.f0=sliderToLog(+e.target.value,RANGE.f);S.example=null;update()});
+$('ps').addEventListener('input',e=>{S.periods=+e.target.value;S.example=null;update()});
+let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(draw,80)});
+renderQuestions();loadExample('integ');
+</script>
+</body>
+</html>
