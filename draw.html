@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draw a Signal · EE3015</title>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#1b2939;background:#f4f7fb}*{box-sizing:border-box}body{margin:0}header{background:#13283f;color:white;padding:29px max(20px,calc((100vw - 1100px)/2)) 24px}header h1{font-size:clamp(25px,3.2vw,36px);letter-spacing:-.8px;margin:4px 0 8px}header p{color:#c5d4e3;margin:0;font-size:15px}.kicker{font-size:12px;color:#80d3ff;letter-spacing:2px;font-weight:800}main{max-width:1100px;margin:0 auto;padding:24px 20px 50px}.tabs{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:18px}button{font:inherit;cursor:pointer}.tab{border:1px solid #d4e0eb;background:#fff;padding:13px 18px;border-radius:11px;color:#37516c;font-weight:700}.tab.active{color:#fff;background:#1467a8;border-color:#1467a8}.panel{background:#fff;border:1px solid #e0e8f0;border-radius:16px;box-shadow:0 4px 18px #223c5710;padding:24px;margin-bottom:18px}h2{font-size:23px;letter-spacing:-.4px;margin:0 0 8px}h3{font-size:16px;margin:0 0 14px}.subtitle{color:#52677c;font-size:14px;line-height:1.6;margin:0 0 20px}.equation{text-align:center;font-size:clamp(15px,2vw,19px);background:#f2f7fc;border-radius:10px;padding:14px 8px;margin-bottom:20px;overflow-x:auto}.layout{display:grid;grid-template-columns:1fr 1fr;gap:16px}.control{margin-bottom:15px}.control label{display:flex;justify-content:space-between;gap:10px;color:#344a60;font-weight:650;font-size:14px;margin-bottom:7px}.value{font-variant-numeric:tabular-nums;color:#09649f}input[type=range]{width:100%;accent-color:#1678b5}.small{font-size:12px;color:#6a7c8c;line-height:1.5}.sectionlabel{font-size:12px;font-weight:800;letter-spacing:1.5px;color:#6a7c8c;margin:0 0 8px}.pillrow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}.pill{padding:8px 12px;border:1px solid #cddceb;background:#fff;border-radius:8px;color:#365069;font-size:14px}.pill:hover{background:#f5faff}.pill.selected{background:#e7f3ff;border-color:#1474af;color:#085e99;font-weight:750}.tool{padding:7px 11px;border:1px solid #b7d6e8;background:#f5fbff;border-radius:8px;color:#1a5276;font-size:13px}.tool:hover{background:#e3f1fb}.sigbox{border:1px solid #e0e7ef;border-left:4px solid var(--c);border-radius:11px;padding:15px 16px 4px;min-width:0}.sigbox h3{color:var(--c);margin-bottom:10px}.numfield{display:flex;align-items:center;gap:8px;margin-bottom:6px}.numfield input{width:120px;border:1px solid #cdd6e4;border-radius:8px;padding:9px 10px;font:15px ui-monospace,SFMono-Regular,Consolas,monospace}.numfield span{font-size:14px;color:#344a60}.err{color:#b91c1c;font-size:12px;min-height:16px}.vizbox{border:1px solid #e0e7ef;border-radius:11px;padding:13px;background:white;min-width:0;margin-top:14px}.vizbox h3{margin-bottom:4px}.vizbox .small{margin-bottom:8px}.drawbox{border:2px dashed #9cc7e6;background:#fbfdff}canvas{display:block;width:100%;height:210px}#cDraw{height:270px;cursor:crosshair;touch-action:none}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:14px}.legend{font-size:12px;color:#597085;margin:7px 0 0;display:flex;gap:14px;flex-wrap:wrap}.dot{display:inline-block;width:9px;height:9px;background:var(--c);border-radius:9px;margin-right:4px}.readout{display:flex;gap:8px 22px;flex-wrap:wrap;align-items:baseline;background:#f8fafc;border:1px solid #dbe3ed;border-radius:9px;padding:10px 13px;margin-top:8px;font-size:13px;color:#334155}.readout b{color:#1e3a5f;font-variant-numeric:tabular-nums}.meter{flex-basis:100%;height:8px;background:#e6edf5;border-radius:6px;overflow:hidden}.meter div{height:100%;background:#13836f;width:0}.tablewrap{overflow-x:auto;max-height:330px;margin-top:10px}table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}th{position:sticky;top:0;background:#edf3fc;color:#334155;text-align:right;padding:7px 9px;font-weight:700}td{border-top:1px solid #eef1f6;padding:6px 9px;text-align:right;color:#334155}th:first-child,td:first-child{text-align:center}td.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px}tr.dropped td{color:#a0aec0}.question{background:#fff9e9;border:1px solid #f4e3ba;border-radius:12px;padding:17px 19px;margin-top:14px}.question strong{font-size:14px;color:#795311}.question p{margin:7px 0 11px;font-size:14px;line-height:1.55}details{font-size:14px;color:#4b5f71}details summary{color:#0e689c;font-weight:700;cursor:pointer}details p{line-height:1.6;margin-bottom:0}.hint{background:#f5f9fc;border-left:3px solid #3998c8;padding:9px 12px;font-size:12px;color:#516a7b;line-height:1.45;margin-top:10px}footer{text-align:center;color:#6a7d8b;font-size:12px;margin-top:25px}.hidden{display:none!important}@media(max-width:760px){.layout,.twocol{grid-template-columns:1fr}.panel{padding:17px}main{padding:18px 12px 40px}canvas{height:190px}#cDraw{height:240px}}
+</style>
+<style>.site-nav{box-sizing:border-box;display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:12px max(20px,calc((100vw - 1160px)/2));background:#13283f;color:white;font:14px Inter,system-ui,sans-serif}.site-nav a{color:#dbeafe!important;text-decoration:none!important;margin-right:17px}.site-nav a:hover{text-decoration:underline!important}.site-nav .site-brand{font-weight:750;color:white!important;font-size:16px}.site-nav div{display:flex;flex-wrap:wrap;gap:0}</style></head>
+<body><nav class="site-nav" aria-label="Site navigation"><a class="site-brand" href="index.html">∿ Fourier Learning Lab</a><div><a href="index.html">Home</a><a href="explorer.html">Series Explorer</a><a href="sound-lab.html">Sound Lab</a><a href="convolution.html">Convolution</a><a href="filtering.html">Filter Lab</a><a href="draw.html" aria-current="page">Draw a Signal</a></div></nav>
+<header><div class="kicker">EE3015 · SIGNALS &amp; SYSTEMS</div><h1>Draw a Signal</h1><p>Sketch one period of any signal. Get its Fourier series instantly, and rebuild it one harmonic at a time.</p></header>
+<main>
+<nav class="tabs" aria-label="Signal type"><button class="tab active" data-mode="ct">1 · Continuous time</button><button class="tab" data-mode="dt">2 · Discrete time</button></nav>
+<section class="panel">
+<h2 id="title"></h2>
+<p class="subtitle" id="subtitle"></p>
+<div class="equation" id="eq-ct">\( a_k=\dfrac{1}{T}\displaystyle\int_{0}^{T} x(t)\,e^{-jk\omega_0 t}\,dt, \qquad x_N(t)=\displaystyle\sum_{k=-N}^{N} a_k\,e^{jk\omega_0 t}, \qquad \omega_0=\dfrac{2\pi}{T} \)</div>
+<div class="equation hidden" id="eq-dt">\( a_k=\dfrac{1}{N}\displaystyle\sum_{n=0}^{N-1} x[n]\,e^{-jk\omega_0 n}, \qquad x[n]=\displaystyle\sum_{k=\langle N\rangle} a_k\,e^{jk\omega_0 n}, \qquad \omega_0=\dfrac{2\pi}{N} \)</div>
+<div class="layout">
+<div class="sigbox" style="--c:#2563eb"><h3>Signal</h3>
+<div class="sectionlabel">START FROM</div><div class="pillrow" id="presets"></div>
+<div class="sectionlabel">TRANSFORM THE DRAWING</div><div class="pillrow" id="tools"></div>
+</div>
+<div class="sigbox" style="--c:#13836f"><h3>Period and harmonics</h3>
+<div id="ctPeriod"><div class="sectionlabel">PERIOD T</div><div class="numfield"><input id="Tin" type="number" min="0.000001" step="any" value="2"><span>seconds</span></div><div class="err" id="Terr"></div></div>
+<div id="dtPeriod" class="control hidden"><label for="Nin"><span>Period N (samples)</span><span class="value" id="Nval"></span></label><input type="range" id="Nin" min="2" max="32" step="1"></div>
+<div class="control"><label for="Kin"><span id="Klabel">Harmonics kept</span><span class="value" id="Kval"></span></label><input type="range" id="Kin" min="0" step="1"></div>
+<div class="small" id="Kdesc"></div>
+</div>
+</div>
+<div class="vizbox drawbox"><h3 id="drawTitle"></h3><div class="small" id="drawSub"></div><canvas id="cDraw" aria-label="Drawing area for one period"></canvas><div class="legend" id="legDraw"></div></div>
+<div class="vizbox"><h3 id="recTitle"></h3><div class="small" id="recSub"></div><canvas id="cRec" aria-label="Reconstruction over three periods"></canvas><div class="legend" id="legRec"></div><div class="readout" id="readout"></div></div>
+<div class="twocol">
+<div class="vizbox"><h3>Magnitude |a<sub>k</sub>|</h3><div class="small" id="magSub"></div><canvas id="cMag" aria-label="Magnitude of Fourier series coefficients"></canvas></div>
+<div class="vizbox"><h3>Phase ∠a<sub>k</sub> (in units of π)</h3><div class="small" id="phSub"></div><canvas id="cPh" aria-label="Phase of Fourier series coefficients"></canvas></div>
+</div>
+<div class="vizbox"><h3>Coefficient table</h3><div class="small" id="tabSub"></div><div class="tablewrap"><table><thead><tr><th>k</th><th id="thf">frequency</th><th>a<sub>k</sub></th><th>|a<sub>k</sub>|</th><th>∠a<sub>k</sub></th></tr></thead><tbody id="tbody"></tbody></table></div></div>
+<div id="questions"></div>
+<div class="hint">Tip: the shift, flip and reverse buttons act on the drawing, so you can see each Fourier series property directly: a time shift changes only the phases, a sign flip adds π to every phase, and time reversal turns \(a_k\) into \(a_{-k}\).</div>
+</section>
+<footer>Standalone interactive teaching demo · Continuous-time coefficients are computed from 512 samples of the drawing per period (accurate for |k| ≤ 50).</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const COL={x:'#2563eb',y:'#008b75',drop:'#cbd5e1',faint:'#dbe3ed',mark:'#dc2626'};
+const TAU=2*Math.PI;
+const fmt=(v,d=3)=>{if(!isFinite(v))return '—';if(Math.abs(v)<5e-4)return '0';const r=+v.toPrecision(d);return (Object.is(r,-0)?0:r).toString()};
+function si(v,unit){for(const [s,p] of [[1e6,'M'],[1e3,'k'],[1,''],[1e-3,'m'],[1e-6,'µ'],[1e-9,'n']])if(Math.abs(v)>=s*.9995)return fmt(v/s)+' '+p+unit;return fmt(v)+' '+unit}
+const phfmt=v=>{const r=fmt(v);return r==='0'?'0':r==='1'?'π':r==='-1'?'−π':r+'π'};
+const cfmt=([re,im])=>{const r=fmt(re),i=fmt(Math.abs(im));if(i==='0')return r;if(r==='0')return (im<0?'−':'')+i+'j';return `${r} ${im<0?'−':'+'} ${i}j`};
+
+// ---------- state ----------
+const M=512,KMAX=50,YR=2;
+const ctShapes={
+ square:{name:'Square',f:p=>p<.5?1:-1},
+ tri:{name:'Triangle',f:p=>p<.5?4*p-1:3-4*p},
+ saw:{name:'Sawtooth',f:p=>2*p-1},
+ pulse:{name:'Pulse 25%',f:p=>p<.25?1:0},
+ halfsine:{name:'Half-wave sine',f:p=>p<.5?Math.sin(TAU*p):0},
+ blank:{name:'Blank',f:()=>0}
+};
+const dtShapes={
+ impulse:{name:'Impulse',f:(n,N)=>+(n===0)},
+ pulse:{name:'Pulse',f:(n,N)=>+(n<Math.max(1,Math.round(N/4))||n>N-Math.max(1,Math.round(N/4)))},
+ ramp:{name:'Ramp',f:(n,N)=>n/N},
+ cosine:{name:'Cosine',f:(n,N)=>Math.cos(TAU*n/N)},
+ square:{name:'Square',f:(n,N)=>n<N/2?1:-1},
+ random:{name:'Random',f:()=>Math.round((Math.random()*2-1)*20)/20},
+ blank:{name:'Blank',f:()=>0}
+};
+const S={mode:'ct',
+ ct:{T:2,K:5,x:new Float64Array(M),shape:'square'},
+ dt:{N:8,K:4,x:[],shape:'pulse'}};
+function loadShape(id){if(S.mode==='ct'){const f=ctShapes[id].f;S.ct.x=Float64Array.from({length:M},(_,m)=>f((m+.5)/M))}else{const d=S.dt;d.x=[...Array(d.N)].map((_,n)=>dtShapes[id].f(n,d.N))}S[S.mode].shape=id}
+
+// ---------- Fourier series ----------
+// each drawn sample m is constant on [m/M,(m+1)/M), so integrate it exactly
+const clean=([re,im])=>{const s=1e-9*Math.max(1,Math.hypot(re,im));return [Math.abs(re)<s?0:re,Math.abs(im)<s?0:im]};
+function ctCoeffs(){const x=S.ct.x,a=[];for(let k=0;k<=KMAX;k++){let re=0,im=0;for(let m=0;m<M;m++){const t=TAU*k*(m+.5)/M;re+=x[m]*Math.cos(t);im-=x[m]*Math.sin(t)}const sinc=k?Math.sin(Math.PI*k/M)/(Math.PI*k/M):1;a.push(clean([re/M*sinc,im/M*sinc]))}return a}
+const ctA=(a,k)=>k>=0?a[k]:[a[-k][0],-a[-k][1]];
+function ctPartial(a,K,p){let s=a[0][0];for(let k=1;k<=K;k++){const t=TAU*k*p;s+=2*(a[k][0]*Math.cos(t)-a[k][1]*Math.sin(t))}return s}
+function dtCoeffs(){const {x,N}=S.dt;return [...Array(N)].map((_,k)=>{let re=0,im=0;x.forEach((v,n)=>{const t=TAU*k*n/N;re+=v*Math.cos(t);im-=v*Math.sin(t)});return clean([re/N,im/N])})}
+// DT harmonics are kept symmetrically: k ≡ c (mod N) with c in (−N/2, N/2]
+const centered=(k,N)=>{let c=((k%N)+N)%N;if(c>N/2)c-=N;return c};
+const dtKept=(k,N,K)=>Math.abs(centered(k,N))<=K;
+function dtPartial(a,K,n){const N=S.dt.N;let s=0;for(let k=0;k<N;k++){if(!dtKept(k,N,K))continue;const t=TAU*k*n/N;s+=a[k][0]*Math.cos(t)-a[k][1]*Math.sin(t)}return s}
+
+// ---------- canvas helpers ----------
+function niceStep(r){const p=10**Math.floor(Math.log10(r)),m=r/p;return (m<1.5?1:m<3?2:m<7?5:10)*p}
+function frame(cv,xr,yr,xlab,{xfmt=fmt,xstep=null,ystep=null}={}){
+ const r=cv.getBoundingClientRect(),dpr=window.devicePixelRatio||1;cv.width=Math.round(r.width*dpr);cv.height=Math.round(r.height*dpr);
+ const g=cv.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);const w=r.width,h=r.height,L=44,R=14,T=12,B=32;
+ const X=x=>L+(x-xr[0])/(xr[1]-xr[0])*(w-L-R),Y=y=>T+(yr[1]-y)/(yr[1]-yr[0])*(h-T-B);
+ const iX=px=>xr[0]+(px-L)/(w-L-R)*(xr[1]-xr[0]),iY=py=>yr[1]-(py-T)/(h-T-B)*(yr[1]-yr[0]);
+ g.font='11px Inter,system-ui,sans-serif';g.lineWidth=1;g.fillStyle='#6a7c8c';
+ const xs=xstep||niceStep((xr[1]-xr[0])/10),ys=ystep||niceStep((yr[1]-yr[0])/4);
+ for(let x=Math.ceil(xr[0]/xs-1e-9)*xs;x<=xr[1]+1e-9;x+=xs){g.strokeStyle='#eef2f7';g.beginPath();g.moveTo(X(x),T);g.lineTo(X(x),h-B);g.stroke();g.textAlign='center';g.fillText(xfmt(x),X(x),h-B+15)}
+ for(let y=Math.ceil(yr[0]/ys-1e-9)*ys;y<=yr[1]+1e-9;y+=ys){g.strokeStyle='#eef2f7';g.beginPath();g.moveTo(L,Y(y));g.lineTo(w-R,Y(y));g.stroke();g.textAlign='right';g.fillText(fmt(y),L-6,Y(y)+4)}
+ g.strokeStyle='#9aabbd';g.beginPath();g.moveTo(L,Y(0));g.lineTo(w-R,Y(0));if(xr[0]<0&&xr[1]>0){g.moveTo(X(0),T);g.lineTo(X(0),h-B)}g.stroke();
+ g.textAlign='right';g.font='italic 12px Georgia,serif';g.fillStyle='#475569';g.fillText(xlab,w-R,h-3);
+ g.save();g.beginPath();g.rect(L,T-2,w-L-R,h-T-B+4);g.clip();
+ return {g,X,Y,iX,iY,T,B,h}}
+function line(F,xs,ys,color,wd=2.4,dash=[]){const g=F.g;g.save();g.strokeStyle=color;g.lineWidth=wd;g.setLineDash(dash);g.lineJoin='round';g.beginPath();xs.forEach((x,i)=>{const px=F.X(x),py=F.Y(ys[i]);i?g.lineTo(px,py):g.moveTo(px,py)});g.stroke();g.restore()}
+// stems(F, positions, values, color or (i)=>color, opts)
+function stems(F,ks,vs,color,{off=0,r=3.8,hollow=false,wd=2,zero=false}={}){const g=F.g;ks.forEach((k,i)=>{const v=vs[i];if(!zero&&Math.abs(v)<1e-9)return;const c=typeof color==='function'?color(i):color;const x=F.X(k+off),y=F.Y(v);g.strokeStyle=c;if(wd>0){g.lineWidth=wd;g.beginPath();g.moveTo(x,F.Y(0));g.lineTo(x,y);g.stroke()}g.beginPath();g.arc(x,y,r,0,TAU);if(hollow){g.fillStyle='#fff';g.fill();g.lineWidth=2;g.stroke()}else{g.fillStyle=c;g.fill()}})}
+function pad(lo,hi,min=1){const M=Math.max(Math.abs(lo),Math.abs(hi),min);return [Math.min(lo,0)<-1e-9?Math.min(lo,0)-.12*M:-.1*M,hi>1e-9?hi+.12*M:.1*M]}
+function tunit(T){return T<2e-3?[1e6,'µs']:T<2?[1e3,'ms']:[1,'s']}
+
+// ---------- text ----------
+const TEXT={
+ ct:{title:'Continuous-time Fourier series',sub:'Draw one period of x(t) in the dashed box: click and drag to sketch. The period T only sets the time scale, so it changes the frequencies kω₀ but not the coefficients a_k.',
+  drawTitle:'Draw one period: 0 ≤ t < T',drawSub:'Click and drag to draw. Drawing over a region replaces it. The teal dashed curve is the current partial sum x_N(t).',
+  recTitle:'Partial sum x_N(t) over three periods',recSub:'The drawn signal repeats with period T. Increase N to add harmonics.',
+  K:'Harmonics kept N',leg:[['x(t) (drawn)',COL.x],['x_N(t), harmonics |k| ≤ N',COL.y]],
+  qs:[
+   ['Start from Square. Which coefficients are exactly zero? Why?','Every even-k coefficient (except possibly k = 0) is zero. A square wave has half-wave symmetry, x(t + T/2) = −x(t), and that forces a_k = 0 for all even k. The odd ones fall off like 1/k: |a_k| = 2/(πk).'],
+   ['Press “Shift right by T/8” a few times. What happens to |a_k|, and what happens to ∠a_k?','|a_k| does not change at all. A shift by t₀ multiplies every coefficient by e^{−jkω₀t₀}, so the phase changes by −kω₀t₀, which is linear in k. For t₀ = T/8 that is −kπ/4.'],
+   ['Draw a signal with a sudden jump and then a smooth one, such as Triangle. Compare how fast |a_k| decays, and what happens near the jump as N grows.','With a jump, |a_k| decays like 1/k, and the partial sums overshoot near the jump by about 9% no matter how large N is (the Gibbs phenomenon). A continuous signal with corners, like the triangle, decays like 1/k², and its partial sums converge quickly and uniformly.'],
+   ['Change T from 2 s to 0.002 s. Which plots change?','Only the time axis and the frequency column of the table: ω₀ = 2π/T grows by a factor of 1000. The coefficients a_k depend only on the shape over one period, not on how long the period is.']]},
+ dt:{title:'Discrete-time Fourier series',sub:'Set the period N, then drag the stems up or down to set x[0], …, x[N−1]. A discrete-time periodic signal has exactly N distinct Fourier coefficients.',
+  drawTitle:'Set one period: n = 0, …, N − 1',drawSub:'Click or drag on the plot to set sample values (snapped to 0.05). Hollow teal circles show the reconstruction from the harmonics kept.',
+  recTitle:'Reconstruction over three periods',recSub:'Blue: x[n]. Teal circles: the sum using only the harmonics kept. With all N kept, the match is exact.',
+  K:'Harmonics kept |k| ≤',leg:[['x[n] (drawn)',COL.x],['reconstruction from kept harmonics',COL.y]],
+  qs:[
+   ['Start from Impulse. What are the coefficients? Now press “Shift right by 1”.','a_k = 1/N for every k: a flat spectrum. After the shift, x[n] = δ[n − 1], the magnitudes stay 1/N, and the phase becomes −2πk/N, which is linear in k.'],
+   ['Why does the magnitude plot repeat every N values of k?','Because e^{j2π(k+N)n/N} = e^{j2πkn/N} for every integer n. Harmonic k + N is the same sequence as harmonic k, so a_{k+N} = a_k. Only N coefficients are distinct; the faded stems are copies.'],
+   ['Keep all harmonics. Is the reconstruction exact? Compare with the continuous-time tab.','Yes, exactly, for any sequence you draw: the DT synthesis sum is finite, so there are no convergence issues and no Gibbs overshoot. In continuous time you need infinitely many harmonics, and partial sums overshoot at jumps.'],
+   ['Start from Pulse and make it wider using the stems. What happens to the shape of |a_k|?','A wider pulse makes the magnitude spectrum narrower: its main lobe shrinks around k = 0. The coefficients follow a periodic sinc shape, sin(πk(2N₁+1)/N)/(N sin(πk/N)). Time width and frequency width trade off against each other.']]}
+};
+
+// ---------- rendering ----------
+function renderControls(){const mode=S.mode,T=TEXT[mode],st=S[mode],shapes=mode==='ct'?ctShapes:dtShapes;
+ $('title').textContent=T.title;$('subtitle').textContent=T.sub;$('drawTitle').textContent=T.drawTitle;$('drawSub').textContent=T.drawSub;$('recTitle').textContent=T.recTitle;$('recSub').textContent=T.recSub;$('Klabel').textContent=T.K;
+ $('eq-ct').classList.toggle('hidden',mode!=='ct');$('eq-dt').classList.toggle('hidden',mode!=='dt');$('ctPeriod').classList.toggle('hidden',mode!=='ct');$('dtPeriod').classList.toggle('hidden',mode!=='dt');
+ $('presets').innerHTML=Object.entries(shapes).map(([k,v])=>`<button class="pill${st.shape===k?' selected':''}" data-shape="${k}">${v.name}</button>`).join('');
+ const tools=mode==='ct'?[['shift','Shift right by T/8'],['flip','Flip sign'],['reverse','Time-reverse'],['smooth','Smooth']]:[['shift','Shift right by 1'],['flip','Flip sign'],['reverse','Time-reverse']];
+ $('tools').innerHTML=tools.map(([k,v])=>`<button class="tool" data-tool="${k}">${v}</button>`).join('');
+ const Kin=$('Kin');if(mode==='ct'){Kin.max=KMAX;$('Tin').value=st.T}else{Kin.max=Math.floor(st.N/2);st.K=Math.min(st.K,Kin.max);$('Nin').value=st.N;$('Nval').textContent=st.N}
+ Kin.value=st.K;
+ $('legDraw').innerHTML=$('legRec').innerHTML=T.leg.map(([n,c])=>`<span><span class="dot" style="--c:${c}"></span>${n}</span>`).join('');
+ $('questions').innerHTML=T.qs.map(([q,a],i)=>`<div class="question"><strong>Predict first · Question ${i+1}</strong><p>${q}</p><details><summary>Show answer</summary><p>${a}</p></details></div>`).join('');
+ $('thf').textContent=mode==='ct'?'frequency kω₀':'frequency kω₀ (rad/sample)';
+}
+function draw(){S.mode==='ct'?drawCT():drawDT()}
+function powerBar(frac,label){return `<span>${label}: <b>${fmt(100*frac,4)}%</b></span><div class="meter"><div style="width:${Math.min(100,100*frac)}%"></div></div>`}
+
+function drawCT(){const c=S.ct,a=ctCoeffs(),K=c.K,[sc,un]=tunit(c.T),tl=v=>fmt(v*c.T*sc);
+ $('Kval').textContent=K;$('Kdesc').textContent=K===0?'Only the average value a₀ is kept.':`Keeping a₀ and the harmonics k = ±1, …, ±${K} (${2*K+1} terms).`;
+ const ps=[...Array(M)].map((_,m)=>(m+.5)/M),xs=Array.from(c.x),fine=[...Array(801)].map((_,i)=>i/800),xN=fine.map(p=>ctPartial(a,K,p));
+ let F=frame($('cDraw'),[0,1],[-YR,YR],`t (${un})`,{xfmt:tl,xstep:.125,ystep:.5});
+ line(F,[0,...ps,1],[xs[0],...xs,xs[M-1]],COL.x,2.8);line(F,fine,xN,COL.y,2,[6,4]);DRAW.F=F;
+ // three periods
+ const p3=[...Array(1501)].map((_,i)=>3*i/1500),x3=p3.map(p=>c.x[Math.min(M-1,Math.floor((p%1)*M))]),r3=p3.map(p=>ctPartial(a,K,p%1));
+ const lo=Math.min(...x3,...r3),hi=Math.max(...x3,...r3);
+ F=frame($('cRec'),[0,3],pad(lo,hi),`t (${un})`,{xfmt:tl,xstep:.25});line(F,p3,x3,COL.x,1.8);line(F,p3,r3,COL.y,2.6);
+ // spectra
+ const span=Math.max(10,Math.min(KMAX,K+5)),ks=[];for(let k=-span;k<=span;k++)ks.push(k);
+ const A=ks.map(k=>ctA(a,k)),mag=A.map(([r,i])=>Math.hypot(r,i)),mmax=Math.max(...mag)||1,col=i=>Math.abs(ks[i])<=K?COL.y:COL.drop;
+ F=frame($('cMag'),[-span-.8,span+.8],[0,mmax*1.15],'k',{xstep:span>20?10:5});stems(F,ks,mag,col);
+ const ph=A.map(([r,i],j)=>mag[j]>1e-3*mmax?Math.atan2(i,r)/Math.PI:0);
+ F=frame($('cPh'),[-span-.8,span+.8],[-1.15,1.15],'k',{xstep:span>20?10:5,ystep:.5});stems(F,ks,ph,col);
+ $('magSub').textContent=`Teal: kept in x_N (|k| ≤ ${K}). Gray: dropped. Real signal, so |a₋ₖ| = |aₖ|.`;$('phSub').textContent='Phase is shown only where |a_k| is not negligible. Real signal, so ∠a₋ₖ = −∠aₖ.';
+ // readout
+ const P=xs.reduce((s,v)=>s+v*v,0)/M,PK=a[0][0]**2+2*a.slice(1,K+1).reduce((s,[r,i])=>s+r*r+i*i,0);
+ $('readout').innerHTML=`<span>T = <b>${si(c.T,'s')}</b></span><span>f₀ = 1/T = <b>${1/c.T<1?fmt(1/c.T)+' Hz':si(1/c.T,'Hz')}</b></span><span>ω₀ = 2π/T = <b>${fmt(TAU/c.T,4)} rad/s</b></span><span>a₀ (average) = <b>${fmt(a[0][0])}</b></span>`+(P>1e-9?powerBar(PK/P,`Power captured by |k| ≤ ${K} (Parseval)`):'<span>Draw something to see its power.</span>');
+ $('tabSub').textContent='k ≥ 0 shown; for a real signal a₋ₖ is the complex conjugate of aₖ. Gray rows are not included in x_N(t).';
+ $('tbody').innerHTML=[...Array(Math.min(KMAX,Math.max(12,K+3))+1)].map((_,k)=>{const [r,i]=a[k],m=Math.hypot(r,i);return `<tr class="${k<=K?'':'dropped'}"><td>${k}</td><td>${fmt(k*TAU/c.T,4)} rad/s</td><td class="mono">${cfmt(a[k])}</td><td>${fmt(m)}</td><td>${m>1e-3*mmax?phfmt(Math.atan2(i,r)/Math.PI):'—'}</td></tr>`}).join('');
+}
+function drawDT(){const d=S.dt,N=d.N,K=d.K,a=dtCoeffs(),ns=[...Array(N)].map((_,n)=>n);
+ const full=K>=Math.floor(N/2);$('Kval').textContent=K;$('Kdesc').textContent=full?`All ${N} harmonics kept: the reconstruction is exact.`:`Keeping k = 0, ±1, …, ±${K} (${2*K+1} of ${N} harmonics).`;
+ const rec=ns.map(n=>dtPartial(a,K,n));
+ let F=frame($('cDraw'),[-.7,N-.3],[-YR,YR],'n',{xstep:N>16?4:N>8?2:1,ystep:.5});stems(F,ns,d.x,COL.x,{zero:true,r:5});stems(F,ns,rec,COL.y,{hollow:true,r:7,wd:0});DRAW.F=F;
+ const n3=[];for(let n=-N;n<2*N;n++)n3.push(n);const x3=n3.map(n=>d.x[((n%N)+N)%N]),r3=n3.map(n=>rec[((n%N)+N)%N]);
+ const lo=Math.min(...x3,...r3),hi=Math.max(...x3,...r3);
+ F=frame($('cRec'),[-N-.7,2*N-.3],pad(lo,hi),'n',{xstep:N>8?N/2:N>4?2:1});stems(F,n3,x3,i=>n3[i]>=0&&n3[i]<N?COL.x:'#93b4ee');stems(F,n3,r3,COL.y,{hollow:true,r:6,wd:0});
+ const ks=[];for(let k=-N;k<2*N;k++)ks.push(k);const A=ks.map(k=>a[((k%N)+N)%N]),mag=A.map(([r,i])=>Math.hypot(r,i)),mmax=Math.max(...mag)||1;
+ const col=i=>{const k=ks[i],base=k>=0&&k<N;return dtKept(k,N,K)?(base?COL.y:'#9fd3c7'):(base?'#94a3b8':COL.faint)};
+ F=frame($('cMag'),[-N-.7,2*N-.3],[0,mmax*1.15],'k',{xstep:N>8?N/2:N>4?2:1});stems(F,ks,mag,col,{r:3.4});
+ const ph=A.map(([r,i],j)=>mag[j]>1e-6&&mag[j]>1e-3*mmax?Math.atan2(i,r)/Math.PI:0);
+ F=frame($('cPh'),[-N-.7,2*N-.3],[-1.15,1.15],'k',{xstep:N>8?N/2:N>4?2:1,ystep:.5});stems(F,ks,ph,col,{r:3.4});
+ $('magSub').textContent=`Shown for k = −N, …, 2N − 1. Since a_{k+N} = a_k, only k = 0, …, ${N-1} (darker) are distinct. Teal: kept.`;$('phSub').textContent='Phase is shown only where |a_k| is not negligible.';
+ const P=d.x.reduce((s,v)=>s+v*v,0)/N,PK=a.reduce((s,[r,i],k)=>s+(dtKept(k,N,K)?r*r+i*i:0),0);
+ $('readout').innerHTML=`<span>N = <b>${N}</b></span><span>ω₀ = 2π/N = <b>${fmt(TAU/N,4)} rad/sample</b></span><span>a₀ (average) = <b>${fmt(a[0][0])}</b></span>`+(P>1e-12?powerBar(PK/P,'Power captured by kept harmonics (Parseval)'):'<span>Set some nonzero samples to see the power.</span>');
+ $('tabSub').textContent=`All ${N} distinct coefficients, k = 0, …, ${N-1}. Gray rows are dropped from the reconstruction.`;
+ $('tbody').innerHTML=a.map(([r,i],k)=>{const m=Math.hypot(r,i);return `<tr class="${dtKept(k,N,K)?'':'dropped'}"><td>${k}</td><td>${fmt(k*TAU/N,4)}</td><td class="mono">${cfmt([r,i])}</td><td>${fmt(m)}</td><td>${m>1e-6&&m>1e-3*mmax?phfmt(Math.atan2(i,r)/Math.PI):'—'}</td></tr>`}).join('');
+}
+let pending=false;function schedule(){if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;draw()})}
+function renderAll(){renderControls();draw()}
+
+// ---------- drawing interaction ----------
+const DRAW={F:null,down:false,last:null};
+const clampY=v=>Math.max(-YR,Math.min(YR,v));
+function pointerPos(e){const r=$('cDraw').getBoundingClientRect();return [DRAW.F.iX(e.clientX-r.left),clampY(DRAW.F.iY(e.clientY-r.top))]}
+function paint(e){const [px,v]=pointerPos(e);
+ if(S.mode==='ct'){const x=S.ct.x,m=Math.max(0,Math.min(M-1,Math.floor(px*M)));
+  if(DRAW.last){const [m0,v0]=DRAW.last,s=Math.sign(m-m0)||1;for(let j=m0;j!==m+s;j+=s)x[j]=m===m0?v:v0+(v-v0)*(j-m0)/(m-m0)}else x[m]=v;
+  DRAW.last=[m,v]}
+ else{const d=S.dt,n=Math.max(0,Math.min(d.N-1,Math.round(px))),q=Math.round(v*20)/20;
+  if(DRAW.last){const [n0,v0]=DRAW.last,s=Math.sign(n-n0)||1;for(let j=n0;j!==n+s;j+=s)d.x[j]=n===n0?q:Math.round((v0+(q-v0)*(j-n0)/(n-n0))*20)/20}else d.x[n]=q;
+  DRAW.last=[n,q]}
+ if(S[S.mode].shape){S[S.mode].shape=null;document.querySelectorAll('[data-shape]').forEach(b=>b.classList.remove('selected'))}
+ schedule()}
+const cd=$('cDraw');
+cd.addEventListener('pointerdown',e=>{DRAW.down=true;DRAW.last=null;try{cd.setPointerCapture(e.pointerId)}catch(_){}paint(e)});
+cd.addEventListener('pointermove',e=>{if(DRAW.down)paint(e)});
+['pointerup','pointercancel'].forEach(t=>cd.addEventListener(t,()=>{DRAW.down=false;DRAW.last=null}));
+
+// ---------- controls ----------
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{S.mode=b.dataset.mode;document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t===b));renderAll()}));
+$('presets').addEventListener('click',e=>{const b=e.target.closest('[data-shape]');if(!b)return;loadShape(b.dataset.shape);renderAll()});
+$('tools').addEventListener('click',e=>{const b=e.target.closest('[data-tool]');if(!b)return;const t=b.dataset.tool;
+ if(S.mode==='ct'){const x=S.ct.x,old=Float64Array.from(x);
+  if(t==='shift')for(let m=0;m<M;m++)x[(m+M/8)%M]=old[m];
+  if(t==='flip')for(let m=0;m<M;m++)x[m]=-old[m];
+  if(t==='reverse')for(let m=0;m<M;m++)x[m]=old[M-1-m];
+  if(t==='smooth')for(let m=0;m<M;m++){let s=0;for(let j=-6;j<=6;j++)s+=old[(m+j+M)%M];x[m]=s/13}}
+ else{const d=S.dt,N=d.N,old=d.x.slice();
+  if(t==='shift')old.forEach((v,n)=>d.x[(n+1)%N]=v);
+  if(t==='flip')d.x=old.map(v=>v?-v:0);
+  if(t==='reverse')d.x=old.map((_,n)=>old[(N-n)%N])}
+ S[S.mode].shape=null;renderAll()});
+$('Kin').addEventListener('input',e=>{S[S.mode].K=+e.target.value;schedule()});
+$('Tin').addEventListener('input',e=>{const v=+e.target.value;if(!(v>0)||!isFinite(v)){$('Terr').textContent='Enter a positive number of seconds.';return}$('Terr').textContent='';S.ct.T=v;schedule()});
+$('Nin').addEventListener('input',e=>{const d=S.dt,N=+e.target.value;d.x=d.shape?[...Array(N)].map((_,n)=>dtShapes[d.shape].f(n,N)):[...Array(N)].map((_,n)=>d.x[n]??0);d.N=N;renderAll()});
+let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(draw,80)});
+loadShape('square');S.mode='dt';loadShape('pulse');S.mode='ct';renderAll();
+</script>
+</body>
+</html>
