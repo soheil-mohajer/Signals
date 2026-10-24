@@ -118,8 +118,8 @@ const dtPresets={
  cos:{name:'Cosine',f:(n,N)=>Math.cos(TAU*n/N)},
  custom:{name:'Custom',custom:true}};
 const EX={
- ct:['x(t-T/4)','x(-t)','x(t)+x(-t)','x(t)^2','x(2*t)','x(t/2)','exp(j*2*pi*3*t/T)*x(t)','x(t)*cos(2*pi*t/T)','conj(x(t))','x(t)-x(t-T/2)'],
- dt:['x[n-3]','x[-n]','x[n]+x[-n]','x[n]^2','(-1)^n*x[n]','x[n]-x[n-1]','exp(j*2*pi*n/N)*x[n]','x[n/2]','x[2*n]','conj(x[n])']};
+ ct:['x(t-T/4)','x(-t)','x(t)+x(-t)','x(t)^2','x(2*t)','x(t/2)','exp(j*2*pi*3*t/T)*x(t)','x(t)*cos(2*pi*t/T)','conj(x(t))','x(t)-x(t-T/2)','x(t)+x(t+T/2)'],
+ dt:['x[n-3]','x[-n]','x[n]+x[-n]','x[n]^2','(-1)^n*x[n]','x[n]-x[n-1]','exp(j*2*pi*n/N)*x[n]','x[n/2]','x[2*n]','conj(x[n])','x[n]+x[n+N/2]']};
 const S={mode:'ct',
  ct:{preset:'square',T:2,xexpr:'abs(t)',y:'x(t-T/4)'},
  dt:{preset:'pulse',N:8,xexpr:'1, 2, 3, 0, 0, 0, 0, 0',y:'x[n-3]'}};
@@ -144,18 +144,29 @@ function ctCoeffs(samples,kmax){const L=samples.length,out=new Map();for(let k=-
 function dtCoeffs(vals){const L=vals.length,out=new Map();for(let k=-Math.floor((L-1)/2);k<=Math.floor(L/2);k++){let re=0,im=0;vals.forEach(([a,b],n)=>{const t=-TAU*k*n/L,c=Math.cos(t),s=Math.sin(t);re+=a*c-b*s;im+=a*s+b*c});out.set(k,[re/L,im/L])}return out}
 function cleanMap(mp){let mx=0;for(const v of mp.values())mx=Math.max(mx,Math.hypot(...v));const tol=1e-9*Math.max(mx,1e-300);for(const [k,v] of mp)mp.set(k,[Math.abs(v[0])<tol?0:v[0],Math.abs(v[1])<tol?0:v[1]]);return mx}
 
+const gcd=(a,b)=>b?gcd(b,a%b):a;
+// "N/2", "3T/4", "2N", ... for a period equal to num/den times the base period
+function fracStr(num,den,sym){const g=gcd(num,den);num/=g;den/=g;return (num===1?'':num)+sym+(den===1?'':'/'+den)}
+const close=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1])<=1e-7*(1+Math.hypot(...a));
+
+// y's fundamental period is searched among (p/q)·(base period), p,q ≤ 8 in CT and among integers ≤ 8N in DT
 function compute(){const st=S[S.mode],dt=S.mode==='dt',xf=buildX();
  const yf=parse(st.y,{vars:dt?['n','N']:['t','T'],allowX:true,dt});
- if(dt){const N=st.N,ev=n=>yf({n,N,x:a=>xf(a)});
-  let m=0;for(let c=1;c<=MAXM&&!m;c++){let ok=true;for(let n=0;n<c*N&&ok;n++){const a=ev(n),b=ev(n+c*N);if(Math.hypot(a[0]-b[0],a[1]-b[1])>1e-7*(1+Math.hypot(...a)))ok=false}if(ok)m=c}
-  if(!m)throw Error(`y[n] does not repeat with period N, 2N, …, ${MAXM}N, so it has no Fourier series with these periods.`);
-  const xv=[...Array(N)].map((_,n)=>xf(n)),yv=[...Array(m*N)].map((_,n)=>ev(n));
-  const a=dtCoeffs(xv),b=dtCoeffs(yv);return {dt,m,period:N,a,b,amax:cleanMap(a),bmax:cleanMap(b),xs:xf,ys:ev}}
+ if(dt){const N=st.N,ev=n=>yf({n,N,x:a=>xf(a)}),L=2*MAXM*N,arr=[...Array(L)].map((_,n)=>ev(n));
+  const constant=arr.every(v=>close(v,arr[0]));let P=constant?N:0;
+  for(let p=1;p<=MAXM*N&&!P;p++){let ok=true;for(let n=0;n+p<L&&ok;n++)if(!close(arr[n],arr[n+p]))ok=false;if(ok)P=p}
+  if(!P)throw Error(`y[n] does not repeat with any period up to ${MAXM}N, so it has no Fourier series here.`);
+  const xv=[...Array(N)].map((_,n)=>xf(n)),a=dtCoeffs(xv),b=dtCoeffs(arr.slice(0,P));
+  return {dt,P,base:N,ff:N/P,constant,label:fracStr(P,N,'N'),a,b,amax:cleanMap(a),bmax:cleanMap(b),xs:xf,ys:ev}}
  const T=st.T,ev=t=>yf({t,T,x:a=>xf(a[0])});
- let m=0;for(let c=1;c<=MAXM&&!m;c++){let ok=true;for(let r=0;r<61&&ok;r++){const t=(r+.371)*c*T/61,a=ev(t),b=ev(t+c*T);if(Math.hypot(a[0]-b[0],a[1]-b[1])>1e-7*(1+Math.hypot(...a)))ok=false}if(ok)m=c}
- if(!m)throw Error(`y(t) does not repeat with period T, 2T, …, ${MAXM}T, so it has no Fourier series with these periods.`);
- const xsamp=[...Array(M)].map((_,i)=>xf((i+.5)*T/M)),ysamp=[...Array(m*M)].map((_,i)=>ev((i+.5)*T/M));
- const a=ctCoeffs(xsamp,KCT),b=ctCoeffs(ysamp,KCT*m);return {dt,m,period:T,a,b,amax:cleanMap(a),bmax:cleanMap(b),xs:t=>xf(t),ys:ev}}
+ const pts=[...Array(97)].map((_,i)=>(i+.371)*MAXM*T/97),vals=pts.map(ev);
+ const constant=vals.every(v=>close(v,vals[0]));let r=constant?[1,1]:null;
+ if(!r){const cands=[];for(let p=1;p<=MAXM;p++)for(let q=1;q<=MAXM;q++)if(gcd(p,q)===1)cands.push([p,q]);cands.sort((u,v)=>u[0]/u[1]-v[0]/v[1]);
+  for(const [p,q] of cands){const P=p*T/q;if(pts.every((t,i)=>close(vals[i],ev(t+P)))){r=[p,q];break}}}
+ if(!r)throw Error(`y(t) does not repeat with any period (p/q)·T for p, q ≤ ${MAXM}, so it has no Fourier series here.`);
+ const P=r[0]*T/r[1],xsamp=[...Array(M)].map((_,i)=>xf((i+.5)*T/M)),ysamp=[...Array(M)].map((_,i)=>ev((i+.5)*P/M));
+ const a=ctCoeffs(xsamp,KCT),b=ctCoeffs(ysamp,Math.max(1,Math.floor(KCT*P/T+1e-9)));
+ return {dt,P,base:T,ff:T/P,constant,label:fracStr(r[0],r[1],'T'),a,b,amax:cleanMap(a),bmax:cleanMap(b),xs:t=>xf(t),ys:ev}}
 
 // ---------- canvas helpers ----------
 function niceStep(r){const p=10**Math.floor(Math.log10(r)),q=r/p;return (q<1.5?1:q<3?2:q<7?5:10)*p}
@@ -182,8 +193,8 @@ const TEXT={
   qs:[
    ['x(t-T/4)','Choose Square and apply y(t) = x(t − T/4). Predict |b_k| and ∠b_k before you look.','|b_k| = |a_k| for every k: shifting does not change how much of each harmonic there is. Only the phase changes: b_k = a_k e^{−jkω₀T/4} = a_k e^{−jkπ/2}. The ratio column shows 1 ∠ −kπ/2 (wrapped into (−π, π]).'],
    ['x(t)+x(-t)','With Square, apply y(t) = x(t) + x(−t). Why is every b_k zero? Then switch the input to “sin + 2nd harmonic”.','x(t) + x(−t) = 2·Ev{x(t)}, with b_k = a_k + a_{−k}. The square wave here is odd, so its even part is zero. For “sin + 2nd harmonic”, only the cosine (even) part survives: b_{±2} = 2·(0.25) = 0.5, and the sine coefficients cancel.'],
-   ['x(t)^2','Choose Cosine and apply y(t) = x(t)^2. Which harmonics appear? Now try Square.','Multiplication in time is convolution of the coefficients: b_k = Σ_l a_l a_{k−l}. For cos(ω₀t): cos² = ½ + ½cos(2ω₀t), so b₀ = 0.5 and b_{±2} = 0.25, with no fundamental. For the ±1 square wave, x² = 1, so only b₀ = 1 survives.'],
-   ['x(2*t)','Apply y(t) = x(2t), then y(t) = x(t/2). What happens to the coefficients and to the frequencies?','x(2t) has period T/2. Measured with period T, only the even harmonics are nonzero: b_{2k} = a_k, so every harmonic moves to twice its frequency. x(t/2) has period 2T, so the page uses ω₀/2: the coefficients are the same numbers a_k, but they now sit at frequencies kω₀/2 (half-integers on the axis).'],
+   ['x(t)^2','Choose Cosine and apply y(t) = x(t)^2. Which harmonics appear? Now try Square.','Multiplication in time is convolution of the coefficients. For cos(ω₀t): cos² = ½ + ½cos(2ω₀t), so y has fundamental period T/2, with b₀ = 0.5 and 0.25 at frequencies ±2ω₀; there is nothing at ω₀. For the ±1 square wave, x² = 1 is constant, so only b₀ = 1 survives.'],
+   ['x(2*t)','Apply y(t) = x(2t), then y(t) = x(t/2). What happens to the coefficients and to the frequencies?','x(2t) has fundamental period T/2, so the page uses its own fundamental frequency 2ω₀: the coefficients are the same numbers, b_k = a_k, but harmonic k now sits at frequency 2kω₀ (the spectrum stretches out). x(t/2) has period 2T: again b_k = a_k, but now at frequencies kω₀/2 (the spectrum is compressed). Time scaling changes the frequencies, not the coefficient values.'],
    ['exp(j*2*pi*3*t/T)*x(t)','Apply y(t) = e^{j3ω₀t} x(t). How are b_k and a_k related? Is y(t) real?','Frequency shift: b_k = a_{k−3}, so the whole spectrum slides 3 harmonics to the right. y(t) is complex, and its coefficients are no longer conjugate symmetric (|b_{−k}| ≠ |b_k|).']]},
  dt:{title:'Discrete-time Fourier series properties',sub:'Choose x[n], then write y[n] in terms of x. The N coefficients b_k of y are computed exactly, so you can check every property yourself.',
   x:'Input signal x[n]',xexpr:'Custom x[n]: formula, or list of N values',xhint:'A formula in <code>n</code> and <code>N</code> such as <code>(n&lt;3)</code>, or a list of exactly N values x[0], …, x[N−1] such as <code>1, 2, 3, 0, 0, 0, 0, 0</code>.',period:'Period N (2 to 32)',lhs:'y[n] =',
@@ -192,6 +203,7 @@ const TEXT={
    ['x[n-3]','With Pulse and N = 8, apply y[n] = x[n − 3]. Predict |b_k| and the ratio b_k / a_k.','|b_k| = |a_k|, and b_k / a_k = e^{−jk(2π/8)·3} = e^{−j3πk/4}: a phase that is linear in k. Shifting never changes magnitudes.'],
    ['(-1)^n*x[n]','Apply y[n] = (−1)ⁿ x[n] with N = 8. Where does each coefficient go?','(−1)ⁿ = e^{jπn} = e^{j(N/2)ω₀n}, so b_k = a_{k−N/2} = a_{k−4}: the spectrum is shifted by π. Low frequencies become high frequencies, and vice versa.'],
    ['x[n]-x[n-1]','Apply the first difference y[n] = x[n] − x[n − 1]. What is b₀, and what happens to high frequencies?','b_k = (1 − e^{−jkω₀}) a_k. At k = 0 the factor is 0, so b₀ = 0 (the average is removed). The factor’s magnitude 2|sin(kω₀/2)| is largest near k = N/2, so the difference emphasizes high frequencies, like a derivative.'],
+   ['x[n]+x[n+N/2]','Choose Ramp with N = 8 and apply y[n] = x[n] + x[n + N/2]. What is the fundamental period of y, and how are b_k and a_k related?','y[n + N/2] = x[n + N/2] + x[n + N] = y[n], so y has fundamental period N/2 = 4. Using ω₀ = 2π/N, the coefficients of y are a_k(1 + e^{jkπ}) = a_k(1 + (−1)^k), which vanish for odd k. With y’s own period N/2, b_k = 2a_{2k}: harmonic k of y is harmonic 2k of x.'],
    ['x[n/2]','Apply y[n] = x[n/2] (insert a zero between samples). What is the new period, and how do b_k and a_k compare?','y has period 2N, so the page uses 2N coefficients. They are b_k = ½ a_k, where a_k is extended periodically with period N, so the spectrum appears twice in one period of b_k (at half the frequency spacing).']]}
 };
 let lastGood=null;
@@ -207,35 +219,35 @@ function renderControls(){const st=S[S.mode],T=TEXT[S.mode],pres=S.mode==='ct'?c
 }
 function showError(msg){const e=$('err');e.textContent=msg;e.style.display=msg?'block':'none'}
 function update(){let R;try{R=compute();showError('');lastGood=R}catch(e){showError(e.message);const st=$('status');st.classList.add('warn');st.textContent=lastGood?'Fix the error above to update. The plots below still show the last valid result.':'Fix the error above to see the plots.';return}draw(R)}
-function draw(R){if(!R)return;const dt=R.dt,m=R.m,P=R.period,u=dt?'N':'T',v=dt?'n':'t';
+function draw(R){if(!R)return;const dt=R.dt,P=R.P,B=R.base,ff=R.ff,u=dt?'N':'T',v=dt?'n':'t',same=Math.abs(P-B)<1e-12;
  // status line
- const st=$('status');st.classList.toggle('warn',m>1);
- st.innerHTML=m===1?`y repeats with the same period ${u} = ${fmt(P)}, so b<sub>k</sub> uses the same ω₀ = 2π/${u} as a<sub>k</sub>.`:`y does <b>not</b> repeat every ${u}; its period is ${m}${u}. Its coefficients b<sub>k</sub> use ω₀/${m}, so they sit at frequencies k/${m} on the axes below.`;
+ const st=$('status');st.classList.toggle('warn',!same&&!R.constant);
+ st.innerHTML=R.constant?`y is constant, so only b<sub>0</sub> can be nonzero.`:same?`The fundamental period of y is ${u} = ${fmt(B)}, the same as x, so b<sub>k</sub> uses the same ω₀ = 2π/${u} as a<sub>k</sub>.`:`The fundamental period of y is <b>${R.label}</b> = ${fmt(P)}, not ${u}. Its coefficients b<sub>k</sub> are computed with y’s own period, so harmonic k of y sits at frequency ${fmt(ff,4)}·k·ω₀ on the axes below.`;
  // time plot over two periods of y
- const span=m*P;let xs=[],xr=[],yrv=[],yiv=[];
+ const span=Math.max(P,B);let xs=[],xr=[],yrv=[],yiv=[];
  if(dt){for(let n=-span;n<span;n++){xs.push(n);xr.push(R.xs(n)[0]);const y=R.ys(n);yrv.push(y[0]);yiv.push(y[1])}}
  else{for(let i=0;i<=1200;i++){const t=-span+2*span*i/1200;xs.push(t);xr.push(R.xs(t)[0]);const y=R.ys(t);yrv.push(y[0]);yiv.push(y[1])}}
  const hasIm=yiv.some(q=>Math.abs(q)>1e-9),all=[...xr,...yrv,...(hasIm?yiv:[])],F=frame($('cTime'),dt?[-span-.7,span-.3]:[-span,span],pad(Math.min(...all),Math.max(...all)),dt?'n':'t',{xstep:dt?(span>16?Math.ceil(span/8):span>8?2:1):null});
  if(dt){stems(F,xs,xr,COL.x,{off:-.15,hollow:true,r:3});stems(F,xs,yrv,COL.y,{off:.1});if(hasIm)stems(F,xs,yiv,COL.yi,{off:.32})}
  else{line(F,xs,xr,COL.x,1.8,[6,4]);line(F,xs,yrv,COL.y,2.6);if(hasIm)line(F,xs,yiv,COL.yi,2.2)}
  $('timeTitle').textContent=dt?'Time domain: x[n] and y[n]':'Time domain: x(t) and y(t)';
- $('timeSub').textContent=`Two periods of y, from ${v} = −${m>1?m:''}${u} to ${m>1?m:''}${u}.`;
+ $('timeSub').textContent=`From ${v} = −${fmt(span)} to ${fmt(span)}: at least two periods of both x and y.`;
  $('legTime').innerHTML=`<span><span class="dot ${dt?'hollow':''}" style="--c:${COL.x}"></span>x${dt?'[n]':'(t)'}</span><span><span class="dot" style="--c:${COL.y}"></span>${hasIm?'Re ':''}y${dt?'[n]':'(t)'}</span>`+(hasIm?`<span><span class="dot" style="--c:${COL.yi}"></span>Im y${dt?'[n]':'(t)'}</span>`:'');
  // spectra on a common frequency axis (units of ω₀ = 2π/T or 2π/N)
- const kx=[...R.a.keys()],kb=[...R.b.keys()],fx=kx,fb=kb.map(k=>k/m);
- const lim=dt?P/2+.6:KCT+.6,xrng=[-lim,lim],off=.13/m;
+ const kx=[...R.a.keys()],kb=[...R.b.keys()],fx=kx,fb=kb.map(k=>k*ff);
+ const lim=dt?B/2+.6:KCT+.6,xrng=[-lim,lim],off=.13*Math.min(1,ff);
  const am=kx.map(k=>Math.hypot(...R.a.get(k))),bm=kb.map(k=>Math.hypot(...R.b.get(k))),mx=Math.max(...am,...bm,1e-9);
- const xstep=dt?(P>16?4:P>8?2:1):2;
+ const xstep=dt?(B>16?4:B>8?2:1):2;
  let G=frame($('cMag'),xrng,[0,mx*1.15],'frequency / ω₀',{xstep});stems(G,fx,am,COL.x,{off:-off,hollow:true,r:3});stems(G,fb,bm,COL.y,{off});
  const ph=(mp,ks,mag)=>ks.map((k,i)=>mag[i]>1e-4*mx?Math.atan2(mp.get(k)[1],mp.get(k)[0])/Math.PI:null);
  G=frame($('cPh'),xrng,[-1.18,1.18],'frequency / ω₀',{xstep,ystep:.5});stems(G,fx,ph(R.a,kx,am),COL.x,{off:-off,hollow:true,r:3});stems(G,fb,ph(R.b,kb,bm),COL.y,{off});
- $('magSub').textContent=dt?`One period of k is shown. ω₀ = 2π/${P}.`:`Harmonics up to |k| = ${KCT} of x. ω₀ = 2π/T = ${fmt(TAU/P,4)} rad/s.`;
+ $('magSub').textContent=dt?`One period of frequency is shown, in units of ω₀ = 2π/${B}.`:`Frequencies up to ${KCT}ω₀, with ω₀ = 2π/T = ${fmt(TAU/B,4)} rad/s.`;
  // table (rows by frequency of y's harmonics)
- const rows=[];kb.forEach(k=>{const f=k/m,aa=Number.isInteger(f)&&R.a.has(f)?R.a.get(f):(Number.isInteger(f)?[0,0]:null),bb=R.b.get(k);
+ const rows=[];kb.forEach(k=>{const f0=k*ff,fr=Math.round(f0),isInt=Math.abs(f0-fr)<1e-9,f=isInt?fr:f0,aa=isInt?(R.a.get(fr)||(dt?R.a.get(((fr+Math.floor((B-1)/2))%B+B)%B-Math.floor((B-1)/2)):[0,0])):null,bb=R.b.get(k);
   const big=Math.hypot(...bb)>1e-6*mx||(aa&&Math.hypot(...aa)>1e-6*mx);if(big&&(dt||Math.abs(f)<=8))rows.push([k,f,aa,bb])});
- $('thk').textContent=m>1?'k (frequency k/'+m+')':'k';$('thr').classList.toggle('hidden',m>1);
- $('tbody').innerHTML=rows.slice(0,60).map(([k,f,aa,bb])=>{const ratio=m===1&&aa&&Math.hypot(...aa)>1e-6*mx?pfmt(cdiv(bb,aa)):'—';return `<tr><td>${m>1?`${k} (${fmt(f)})`:k}</td><td>${aa?cfmt(aa):'—'}</td><td>${cfmt(bb)}</td>${m>1?'':`<td>${ratio}</td>`}</tr>`}).join('')||'<tr><td colspan="4">All coefficients are zero.</td></tr>';
- $('tabSub').textContent=m===1?'Rows with a nonzero a_k or b_k. The ratio b_k / a_k is shown in polar form; it reveals properties such as time shifts (a pure phase factor).':`y has period ${m}${u}, so b_k is indexed with ω₀/${m}. The a_k column is shown where k/${m} is an integer harmonic of x.`;
+ $('thk').textContent=same?'k':'k of y (frequency / ω₀)';
+ $('tbody').innerHTML=rows.slice(0,60).map(([k,f,aa,bb])=>{const ratio=aa&&Math.hypot(...aa)>1e-6*mx?pfmt(cdiv(bb,aa)):'—';return `<tr><td>${same?k:`${k} (${fmt(f,4)})`}</td><td>${aa?cfmt(aa):'—'}</td><td>${cfmt(bb)}</td><td>${ratio}</td></tr>`}).join('')||'<tr><td colspan="4">All coefficients are zero.</td></tr>';
+ $('tabSub').textContent=same?'Rows with a nonzero a_k or b_k. The ratio b_k / a_k is shown in polar form; it reveals properties such as time shifts (a pure phase factor).':`y has fundamental period ${R.label}, so its harmonic k is at frequency ${fmt(ff,4)}·k·ω₀. Each row compares b_k with the coefficient a of x at the same frequency (— if x has no harmonic there).`;
 }
 
 // ---------- events ----------
