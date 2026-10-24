@@ -50,7 +50,7 @@
 <p class="preset-caption" id="dCaption"></p>
 <div id="dCustomX" class="custom-fields" hidden>
 <div class="field"><label for="dxexpr">One period of \(x[n]\), for \(n=0,\dots,N-1\)</label><input id="dxexpr" value="cos(2*pi*n/N) + 0.5*(-1)^n"></div>
-<p class="hint" style="margin:-5px 0 16px">Use <code>n</code> and <code>N</code>. The N coefficients are computed exactly from these samples.</p>
+<p class="hint" style="margin:-5px 0 16px">Enter either a formula in <code>n</code> and <code>N</code>, such as <code>(n==0)</code>, or a comma-separated list of exactly N values \(x[0],\dots,x[N-1]\), such as <code>1, 0, 0, 0, 0</code> for \(N=5\). The N coefficients are computed exactly from these samples.</p>
 </div>
 <div id="dCustomA" class="custom-fields" hidden>
 <div class="field"><label for="dareal">Real part of \(a_k\)</label><input id="dareal" value="1/(1+k^2)"></div>
@@ -307,13 +307,23 @@ function ctWave(name,theta){const w=((theta+Math.PI)%(2*Math.PI)+2*Math.PI)%(2*M
  if(name==='square')return at(w,0)||at(Math.abs(w),Math.PI)?0:w>0?1:-1;
  return w>=0?(w<=Math.PI/2?2*w/Math.PI:2-2*w/Math.PI):(w>=-Math.PI/2?2*w/Math.PI:-2-2*w/Math.PI)}
 
+// split at commas outside parentheses, so "1, 0, max(n,2)" has three parts
+function topSplit(s){const parts=[];let depth=0,cur='';for(const ch of String(s)){if(ch==='(')depth++;if(ch===')')depth--;if(ch===','&&depth===0){parts.push(cur);cur=''}else cur+=ch}parts.push(cur);return parts}
+function noList(expr,what){if(topSplit(expr).length>1)throw Error(`${what}: enter a single formula in k (a comma-separated list is not allowed here).`)}
 // returns {a: Map k→[re,im] for k in <N>, x: exact samples [[re,im]] for n = 0..N−1}
 function model(N){const a=new Map();let x=null;
  if(['square','saw','tri','customx'].includes(preset)){
-  const f=preset==='customx'?compile($('dxexpr').value,['n','N']):null;
-  x=[...Array(N)].map((_,n)=>[f?f(n,N):ctWave(preset,2*Math.PI*n/N),0]);
+  const parts=preset==='customx'?topSplit($('dxexpr').value):[];
+  if(parts.length>1){ // a list of the N samples x[0], ..., x[N-1]
+   if(parts.length!==N)throw Error(`You entered ${parts.length} values, but the period is N = ${N}. Enter exactly N values x[0], …, x[N−1], or change N.`);
+   x=parts.map((p,n)=>[compile(p,['n','N'])(n,N),0]);
+  }else{
+   const f=preset==='customx'?compile($('dxexpr').value,['n','N']):null;
+   x=[...Array(N)].map((_,n)=>[f?f(n,N):ctWave(preset,2*Math.PI*n/N),0]);
+  }
   for(let k=kLo(N);k<=kHi(N);k++){let re=0,im=0;x.forEach(([v],n)=>{const t=2*Math.PI*k*n/N;re+=v*Math.cos(t);im-=v*Math.sin(t)});a.set(k,[clean(re/N),clean(im/N)])}
  }else{
+  if(preset==='customa'){noList($('dareal').value,'Real part of aₖ');noList($('daimag').value,'Imaginary part of aₖ')}
   const fr=preset==='customa'?compile($('dareal').value,['k','N']):null,fi=preset==='customa'?compile($('daimag').value,['k','N']):null;
   for(let k=kLo(N);k<=kHi(N);k++){if(fr)a.set(k,[fr(k,N),fi(k,N)]);else{const v=manual.get(k)||['0','0'];a.set(k,[compile(v[0]||'0',['k','N'])(k,N),compile(v[1]||'0',['k','N'])(k,N)])}}
  }
