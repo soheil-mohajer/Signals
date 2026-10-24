@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FS Properties · EE3015</title>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#1b2939;background:#f4f7fb}*{box-sizing:border-box}body{margin:0}header{background:#13283f;color:white;padding:29px max(20px,calc((100vw - 1100px)/2)) 24px}header h1{font-size:clamp(25px,3.2vw,36px);letter-spacing:-.8px;margin:4px 0 8px}header p{color:#c5d4e3;margin:0;font-size:15px}.kicker{font-size:12px;color:#80d3ff;letter-spacing:2px;font-weight:800}main{max-width:1100px;margin:0 auto;padding:24px 20px 50px}.tabs{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:18px}button{font:inherit;cursor:pointer}.tab{border:1px solid #d4e0eb;background:#fff;padding:13px 18px;border-radius:11px;color:#37516c;font-weight:700}.tab.active{color:#fff;background:#1467a8;border-color:#1467a8}.panel{background:#fff;border:1px solid #e0e8f0;border-radius:16px;box-shadow:0 4px 18px #223c5710;padding:24px;margin-bottom:18px}h2{font-size:23px;letter-spacing:-.4px;margin:0 0 8px}h3{font-size:16px;margin:0 0 12px}.subtitle{color:#52677c;font-size:14px;line-height:1.6;margin:0 0 20px}.equation{text-align:center;font-size:clamp(15px,2vw,19px);background:#f2f7fc;border-radius:10px;padding:14px 8px;margin-bottom:20px;overflow-x:auto}.layout{display:grid;grid-template-columns:1fr 1fr;gap:16px}.sectionlabel{font-size:12px;font-weight:800;letter-spacing:1.5px;color:#6a7c8c;margin:4px 0 8px}.pillrow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}.pill{padding:8px 12px;border:1px solid #cddceb;background:#fff;border-radius:8px;color:#365069;font-size:14px}.pill:hover{background:#f5faff}.pill.selected{background:#e7f3ff;border-color:#1474af;color:#085e99;font-weight:750}.chip{padding:5px 9px;border:1px solid #b7d6e8;background:#f5fbff;border-radius:7px;color:#1a5276;font:12.5px ui-monospace,SFMono-Regular,Consolas,monospace}.chip:hover{background:#e3f1fb}.sigbox{border:1px solid #e0e7ef;border-left:4px solid var(--c);border-radius:11px;padding:15px 16px 8px;min-width:0}.sigbox h3{color:var(--c)}.field{margin-bottom:12px}.field label{display:block;font-size:13px;font-weight:650;color:#344a60;margin-bottom:6px}.field input{width:100%;border:1px solid #cdd6e4;border-radius:8px;padding:10px;font:15px ui-monospace,SFMono-Regular,Consolas,monospace}.field input.short{max-width:130px}.ybox{display:flex;gap:8px;align-items:stretch}.ybox .lhs{display:flex;align-items:center;font:600 17px Georgia,serif;font-style:italic;color:#13836f;white-space:nowrap}.ybox input{flex:1;min-width:0;border:2px solid #9fd3c7;border-radius:9px;padding:11px;font:16px ui-monospace,SFMono-Regular,Consolas,monospace}.ybox input:focus{outline:none;border-color:#13836f}.apply{border:0;color:white;background:#13836f;font-weight:750;border-radius:9px;padding:0 16px}.apply:hover{background:#0f6b5a}.hint{font-size:12px;color:#6a7c8c;line-height:1.5;margin:6px 0 10px}code{background:#f1f5f9;padding:1px 4px;border-radius:4px;font-size:12px}.error{display:none;color:#b91c1c;background:#fff1f2;border-radius:8px;font-size:13px;padding:9px 11px;margin:4px 0 10px}.status{background:#f0faf7;border:1px solid #c6e9df;border-radius:9px;padding:9px 12px;font-size:13px;color:#24564b;line-height:1.5;margin-bottom:8px}.status.warn{background:#fff9e9;border-color:#f4e3ba;color:#795311}.vizbox{border:1px solid #e0e7ef;border-radius:11px;padding:13px;background:white;min-width:0;margin-top:14px}.vizbox h3{margin-bottom:4px}.vizbox .small{font-size:12px;color:#6a7c8c;line-height:1.5;margin-bottom:8px}canvas{display:block;width:100%;height:220px}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:14px}.legend{font-size:12px;color:#597085;margin:7px 0 0;display:flex;gap:14px;flex-wrap:wrap}.dot{display:inline-block;width:9px;height:9px;background:var(--c);border-radius:9px;margin-right:4px}.dot.hollow{background:#fff;border:2px solid var(--c);width:10px;height:10px}.tablewrap{overflow-x:auto;max-height:360px;margin-top:8px}table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}th{position:sticky;top:0;background:#edf3fc;color:#334155;text-align:right;padding:7px 9px;font-weight:700}td{border-top:1px solid #eef1f6;padding:6px 9px;text-align:right;color:#334155;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px}th:first-child,td:first-child{text-align:center}.question{background:#fff9e9;border:1px solid #f4e3ba;border-radius:12px;padding:17px 19px;margin-top:14px}.question strong{font-size:14px;color:#795311}.question p{margin:7px 0 11px;font-size:14px;line-height:1.55}.question .load{border:1px solid #e3c98a;background:#fff;border-radius:7px;padding:4px 9px;font-size:12px;color:#795311;margin-left:6px}details{font-size:14px;color:#4b5f71}details summary{color:#0e689c;font-weight:700;cursor:pointer}details p{line-height:1.6;margin-bottom:0}footer{text-align:center;color:#6a7d8b;font-size:12px;margin-top:25px}.hidden{display:none!important}@media(max-width:780px){.layout,.twocol{grid-template-columns:1fr}.panel{padding:17px}main{padding:18px 12px 40px}canvas{height:200px}}
+</style>
+<style>.site-nav{box-sizing:border-box;display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:12px max(20px,calc((100vw - 1160px)/2));background:#13283f;color:white;font:14px Inter,system-ui,sans-serif}.site-nav a{color:#dbeafe!important;text-decoration:none!important;margin-right:17px}.site-nav a:hover{text-decoration:underline!important}.site-nav .site-brand{font-weight:750;color:white!important;font-size:16px}.site-nav div{display:flex;flex-wrap:wrap;gap:0}</style></head>
+<body><nav class="site-nav" aria-label="Site navigation"><a class="site-brand" href="index.html">∿ Fourier Learning Lab</a><div><a href="index.html">Home</a><a href="explorer.html">Series Explorer</a><a href="sound-lab.html">Sound Lab</a><a href="convolution.html">Convolution</a><a href="filtering.html">Filter Lab</a><a href="draw.html">Draw a Signal</a><a href="properties.html" aria-current="page">FS Properties</a></div></nav>
+<header><div class="kicker">EE3015 · SIGNALS &amp; SYSTEMS</div><h1>Fourier Series Properties</h1><p>Pick a signal, write any transformation of it, and see exactly how the Fourier series coefficients change.</p></header>
+<main>
+<nav class="tabs" aria-label="Signal type"><button class="tab active" data-mode="ct">1 · Continuous time</button><button class="tab" data-mode="dt">2 · Discrete time</button></nav>
+<section class="panel">
+<h2 id="title"></h2>
+<p class="subtitle" id="subtitle"></p>
+<div class="equation" id="eq-ct">\( x(t)=\displaystyle\sum_{k} a_k\, e^{jk\omega_0 t} \quad\xrightarrow{\ \text{your transformation}\ }\quad y(t)=\displaystyle\sum_{k} b_k\, e^{jk\omega_0 t},\qquad \omega_0=\dfrac{2\pi}{T} \)</div>
+<div class="equation hidden" id="eq-dt">\( x[n]=\displaystyle\sum_{k=\langle N\rangle} a_k\, e^{jk\omega_0 n} \quad\xrightarrow{\ \text{your transformation}\ }\quad y[n]=\displaystyle\sum_{k=\langle N\rangle} b_k\, e^{jk\omega_0 n},\qquad \omega_0=\dfrac{2\pi}{N} \)</div>
+<div class="layout">
+<div class="sigbox" style="--c:#2563eb"><h3 id="xhead">Input signal x(t)</h3>
+<div class="pillrow" id="presets"></div>
+<div class="field hidden" id="customWrap"><label for="xexpr" id="xexprLabel"></label><input id="xexpr"><div class="hint" id="xexprHint"></div></div>
+<div class="field"><label for="period" id="periodLabel"></label><input id="period" class="short" type="number"></div>
+</div>
+<div class="sigbox" style="--c:#13836f"><h3>Transformation: write y in terms of x</h3>
+<div class="ybox"><span class="lhs" id="ylhs">y(t) =</span><input id="yexpr" spellcheck="false" autocomplete="off" aria-label="Transformation"><button class="apply" id="apply">Apply</button></div>
+<div class="hint" id="yhint"></div>
+<div class="error" id="err" role="alert"></div>
+<div class="sectionlabel">TRY ONE</div><div class="pillrow" id="examples"></div>
+</div>
+</div>
+<div class="status" id="status"></div>
+<div class="vizbox"><h3 id="timeTitle"></h3><div class="small" id="timeSub"></div><canvas id="cTime" aria-label="x and y in time"></canvas><div class="legend" id="legTime"></div></div>
+<div class="twocol">
+<div class="vizbox"><h3>Magnitude: |a<sub>k</sub>| and |b<sub>k</sub>|</h3><div class="small" id="magSub"></div><canvas id="cMag" aria-label="Coefficient magnitudes"></canvas><div class="legend"><span><span class="dot hollow" style="--c:#2563eb"></span>|a<sub>k</sub>| of x</span><span><span class="dot" style="--c:#008b75"></span>|b<sub>k</sub>| of y</span></div></div>
+<div class="vizbox"><h3>Phase: ∠a<sub>k</sub> and ∠b<sub>k</sub> (units of π)</h3><div class="small">Shown only where the coefficient is not negligible.</div><canvas id="cPh" aria-label="Coefficient phases"></canvas><div class="legend"><span><span class="dot hollow" style="--c:#2563eb"></span>∠a<sub>k</sub></span><span><span class="dot" style="--c:#008b75"></span>∠b<sub>k</sub></span></div></div>
+</div>
+<div class="vizbox"><h3>Coefficient table</h3><div class="small" id="tabSub"></div><div class="tablewrap"><table><thead><tr><th id="thk">k</th><th>a<sub>k</sub> (of x)</th><th>b<sub>k</sub> (of y)</th><th id="thr">b<sub>k</sub> / a<sub>k</sub></th></tr></thead><tbody id="tbody"></tbody></table></div></div>
+<div id="questions"></div>
+</section>
+<footer>Standalone interactive teaching demo · Continuous-time coefficients are computed numerically from 1024 samples per period; discrete-time coefficients are exact.</footer>
+</main>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const TAU=2*Math.PI,COL={x:'#2563eb',y:'#008b75',yi:'#e07a30'};
+const fmt=(v,d=3)=>{if(!isFinite(v))return '—';if(Math.abs(v)<5e-4)return '0';const r=+v.toPrecision(d);return (Object.is(r,-0)?0:r).toString()};
+const phfmt=v=>{const r=fmt(v);return r==='0'?'0':r==='1'?'π':r==='-1'?'−π':r.replace('-','−')+'π'};
+const cfmt=([re,im])=>{const r=fmt(re),i=fmt(Math.abs(im));if(i==='0')return r.replace('-','−');if(r==='0')return (im<0?'−':'')+(i==='1'?'':i)+'j';return `${r.replace('-','−')} ${im<0?'−':'+'} ${i}j`};
+const pfmt=([re,im])=>{const m=Math.hypot(re,im);return m<5e-4?'0':`${fmt(m)} ∠ ${phfmt(Math.atan2(im,re)/Math.PI)}`};
+
+// ---------- complex arithmetic ----------
+const C=(re,im=0)=>[re,im];
+const cadd=(a,b)=>[a[0]+b[0],a[1]+b[1]],csub=(a,b)=>[a[0]-b[0],a[1]-b[1]],cneg=a=>[-a[0],-a[1]];
+const cmul=(a,b)=>[a[0]*b[0]-a[1]*b[1],a[0]*b[1]+a[1]*b[0]];
+const cdiv=(a,b)=>{const q=b[0]*b[0]+b[1]*b[1];if(q===0)throw Error('Division by zero');return [(a[0]*b[0]+a[1]*b[1])/q,(a[1]*b[0]-a[0]*b[1])/q]};
+const cexp=a=>{const m=Math.exp(a[0]);return [m*Math.cos(a[1]),m*Math.sin(a[1])]};
+const clog=a=>{if(a[0]===0&&a[1]===0)throw Error('log(0) is undefined');return [Math.log(Math.hypot(a[0],a[1])),Math.atan2(a[1],a[0])]};
+function cpow(a,b){if(Math.abs(b[1])<1e-15&&Number.isInteger(b[0])&&Math.abs(b[0])<=256){let r=[1,0];for(let i=0;i<Math.abs(b[0]);i++)r=cmul(r,a);return b[0]<0?cdiv([1,0],r):r}
+ if(a[0]===0&&a[1]===0)return [0,0];return cexp(cmul(b,clog(a)))}
+const re1=f=>a=>[f(a[0]),0];
+const FUNCS={
+ sin:a=>[Math.sin(a[0])*Math.cosh(a[1]),Math.cos(a[0])*Math.sinh(a[1])],
+ cos:a=>[Math.cos(a[0])*Math.cosh(a[1]),-Math.sin(a[0])*Math.sinh(a[1])],
+ tan:a=>cdiv(FUNCS.sin(a),FUNCS.cos(a)),exp:cexp,log:clog,sqrt:a=>cpow(a,[.5,0]),
+ abs:a=>[Math.hypot(a[0],a[1]),0],conj:a=>[a[0],-a[1]],real:a=>[a[0],0],imag:a=>[a[1],0],re:a=>[a[0],0],im:a=>[a[1],0],angle:a=>[Math.atan2(a[1],a[0]),0],
+ floor:re1(Math.floor),ceil:re1(Math.ceil),round:re1(Math.round),sign:re1(Math.sign),u:re1(v=>v>=0?1:0),
+ min:(a,b)=>[Math.min(a[0],b[0]),0],max:(a,b)=>[Math.max(a[0],b[0]),0],mod:(a,b)=>[((a[0]%b[0])+b[0])%b[0],0]};
+const CONST={pi:[Math.PI,0],e:[Math.E,0],j:[0,1]};
+
+// ---------- expression parser (no eval): returns env => complex ----------
+function tokenize(s){const toks=[],re=/\s*(?:(\d+\.?\d*(?:[eE][+-]?\d+)?|\.\d+(?:[eE][+-]?\d+)?)|([A-Za-z_][A-Za-z_0-9]*)|(==|!=|<=|>=|\*\*|[-+*/^()\[\],<>%]))/y;let m;
+ while(re.lastIndex<s.length){const at=re.lastIndex;m=re.exec(s);if(!m){if(/^\s*$/.test(s.slice(at)))break;throw Error(`Unexpected character "${s.slice(at).trim()[0]}"`)}
+  if(m[1]!==undefined)toks.push({type:'num',v:m[1],n:parseFloat(m[1])});else if(m[2]!==undefined)toks.push({type:'id',v:m[2]});else toks.push({type:'op',v:m[3]==='**'?'^':m[3]})}
+ return toks}
+function parse(src,{vars,allowX,dt}){const toks=tokenize(String(src));if(!toks.length)throw Error('The expression is empty');let p=0;
+ const peek=()=>toks[p],next=()=>toks[p++],isOp=(t,...v)=>t&&t.type==='op'&&v.includes(t.v);
+ const expect=v=>{const t=next();if(!t||t.v!==v)throw Error(`Expected "${v}"${t?` but found "${t.v}"`:' at the end'}`)};
+ const expr=()=>{const a=add();const t=peek();if(isOp(t,'==','!=','<','>','<=','>=')){next();const b=add(),op=t.v;return env=>{const x=a(env)[0],y=b(env)[0],eq=Math.abs(x-y)<1e-9;return [(op==='=='?eq:op==='!='?!eq:op==='<'?x<y&&!eq:op==='>'?x>y&&!eq:op==='<='?x<y||eq:x>y||eq)?1:0,0]}}return a};
+ function add(){let a=mul();for(;;){const t=peek();if(!isOp(t,'+','-'))return a;next();const b=mul(),A=a;a=t.v==='+'?env=>cadd(A(env),b(env)):env=>csub(A(env),b(env))}}
+ function mul(){let a=unary();for(;;){const t=peek();
+  if(isOp(t,'*','/','%')){next();const b=unary(),A=a;a=t.v==='*'?env=>cmul(A(env),b(env)):t.v==='/'?env=>cdiv(A(env),b(env)):env=>FUNCS.mod(A(env),b(env))}
+  else if(t&&(t.type==='num'||t.type==='id'||isOp(t,'('))){const b=unary(),A=a;a=env=>cmul(A(env),b(env))} // implicit product, e.g. 2t or 3x(t)
+  else return a}}
+ function unary(){const t=peek();if(isOp(t,'-','+')){next();const a=unary();return t.v==='-'?env=>cneg(a(env)):a}return power()}
+ function power(){const b=primary();if(isOp(peek(),'^')){next();const e=unary();return env=>cpow(b(env),e(env))}return b}
+ function primary(){const t=next();if(!t)throw Error('The expression ended unexpectedly');
+  if(t.type==='num'){const v=[t.n,0];return ()=>v}
+  if(isOp(t,'(')){const a=expr();expect(')');return a}
+  if(t.type==='id'){const id=t.v,nx=peek();
+   if(id==='x'){if(!allowX)throw Error('x cannot appear in its own definition');
+    if(!isOp(nx,'(','['))throw Error(dt?'Write x with an index, for example x[n-3]':'Write x with an argument, for example x(t-1)');
+    const open=next().v,a=expr();expect(open==='('?')':']');return env=>env.x(a(env))}
+   if(FUNCS[id]){if(!isOp(nx,'('))throw Error(`${id} is a function: write ${id}(...)`);next();const args=[expr()];while(isOp(peek(),',')){next();args.push(expr())}expect(')');
+    const f=FUNCS[id];if(args.length!==f.length)throw Error(`${id}() takes ${f.length} argument${f.length>1?'s':''}`);return env=>f(...args.map(g=>g(env)))}
+   if(CONST[id]){const v=CONST[id];return ()=>v}
+   if(vars.includes(id))return env=>[env[id],0];
+   throw Error(`Unknown name "${id}". You can use ${vars.join(', ')}, pi, e, j${allowX?(dt?', x[...]':', x(...)'):''} and functions like cos, exp, conj, abs.`)}
+  throw Error(`Unexpected "${t.v}"`)}
+ const f=expr();if(p<toks.length)throw Error(`Unexpected "${toks[p].v}"`);return f}
+function topSplit(s){const parts=[];let d=0,cur='';for(const ch of String(s)){if(ch==='('||ch==='[')d++;if(ch===')'||ch===']')d--;if(ch===','&&d===0){parts.push(cur);cur=''}else cur+=ch}parts.push(cur);return parts}
+
+// ---------- signals ----------
+const ctPresets={
+ square:{name:'Square',f:p=>p<.5?1:-1},
+ pulse:{name:'Pulse (even)',f:p=>p<.25||p>=.75?1:0},
+ saw:{name:'Sawtooth',f:p=>p<.5?2*p:2*p-2},
+ tri:{name:'Triangle (even)',f:p=>1-4*Math.abs(p<.5?p:p-1)},
+ cos:{name:'Cosine',f:p=>Math.cos(TAU*p)},
+ mix:{name:'sin + 2nd harmonic',f:p=>Math.sin(TAU*p)+.5*Math.cos(2*TAU*p)},
+ custom:{name:'Custom',custom:true}};
+const dtPresets={
+ pulse:{name:'Pulse (even)',f:(n,N)=>n===0||n===1||n===N-1?1:0},
+ impulse:{name:'Impulse',f:n=>n===0?1:0},
+ ramp:{name:'Ramp',f:n=>n},
+ square:{name:'Square',f:(n,N)=>n<N/2?1:-1},
+ cos:{name:'Cosine',f:(n,N)=>Math.cos(TAU*n/N)},
+ custom:{name:'Custom',custom:true}};
+const EX={
+ ct:['x(t-T/4)','x(-t)','x(t)+x(-t)','x(t)^2','x(2*t)','x(t/2)','exp(j*2*pi*3*t/T)*x(t)','x(t)*cos(2*pi*t/T)','conj(x(t))','x(t)-x(t-T/2)'],
+ dt:['x[n-3]','x[-n]','x[n]+x[-n]','x[n]^2','(-1)^n*x[n]','x[n]-x[n-1]','exp(j*2*pi*n/N)*x[n]','x[n/2]','x[2*n]','conj(x[n])']};
+const S={mode:'ct',
+ ct:{preset:'square',T:2,xexpr:'abs(t)',y:'x(t-T/4)'},
+ dt:{preset:'pulse',N:8,xexpr:'1, 2, 3, 0, 0, 0, 0, 0',y:'x[n-3]'}};
+const M=1024,KCT=12,MAXM=8;
+
+// x as a function of one real argument (period T or N), from preset or custom input
+function buildX(){const st=S[S.mode];
+ if(S.mode==='ct'){const T=st.T,pr=ctPresets[st.preset];
+  if(!pr.custom)return a=>[pr.f(((a/T)%1+1)%1),0];
+  const f=parse(st.xexpr,{vars:["t","T"],allowX:false});
+  return a=>{const tm=((a%T)+T)%T;return f({t:tm,T})}}
+ const N=st.N,pr=dtPresets[st.preset];let vals;
+ if(!pr.custom)vals=[...Array(N)].map((_,n)=>[pr.f(n,N),0]);
+ else{const parts=topSplit(st.xexpr);
+  if(parts.length>1){if(parts.length!==N)throw Error(`x[n]: you entered ${parts.length} values, but N = ${N}. Enter exactly N values x[0], …, x[N−1], or change N.`);vals=parts.map((q,n)=>parse(q,{vars:['n','N'],allowX:false,dt:true})({n,N}))}
+  else{const f=parse(st.xexpr,{vars:['n','N'],allowX:false,dt:true});vals=[...Array(N)].map((_,n)=>f({n,N}))}}
+ // non-integer index gives 0: this is the usual definition of time expansion, x[n/2]
+ return a=>{const v=a[0]??a,r=Math.round(v);return Math.abs(v-r)>1e-9?[0,0]:vals[((r%N)+N)%N]}}
+
+// coefficients of a signal sampled on one period of length L (CT: midpoint samples)
+function ctCoeffs(samples,kmax){const L=samples.length,out=new Map();for(let k=-kmax;k<=kmax;k++){let re=0,im=0;for(let i=0;i<L;i++){const t=-TAU*k*(i+.5)/L,c=Math.cos(t),s=Math.sin(t),[a,b]=samples[i];re+=a*c-b*s;im+=a*s+b*c}out.set(k,[re/L,im/L])}return out}
+function dtCoeffs(vals){const L=vals.length,out=new Map();for(let k=-Math.floor((L-1)/2);k<=Math.floor(L/2);k++){let re=0,im=0;vals.forEach(([a,b],n)=>{const t=-TAU*k*n/L,c=Math.cos(t),s=Math.sin(t);re+=a*c-b*s;im+=a*s+b*c});out.set(k,[re/L,im/L])}return out}
+function cleanMap(mp){let mx=0;for(const v of mp.values())mx=Math.max(mx,Math.hypot(...v));const tol=1e-9*Math.max(mx,1e-300);for(const [k,v] of mp)mp.set(k,[Math.abs(v[0])<tol?0:v[0],Math.abs(v[1])<tol?0:v[1]]);return mx}
+
+function compute(){const st=S[S.mode],dt=S.mode==='dt',xf=buildX();
+ const yf=parse(st.y,{vars:dt?['n','N']:['t','T'],allowX:true,dt});
+ if(dt){const N=st.N,ev=n=>yf({n,N,x:a=>xf(a)});
+  let m=0;for(let c=1;c<=MAXM&&!m;c++){let ok=true;for(let n=0;n<c*N&&ok;n++){const a=ev(n),b=ev(n+c*N);if(Math.hypot(a[0]-b[0],a[1]-b[1])>1e-7*(1+Math.hypot(...a)))ok=false}if(ok)m=c}
+  if(!m)throw Error(`y[n] does not repeat with period N, 2N, …, ${MAXM}N, so it has no Fourier series with these periods.`);
+  const xv=[...Array(N)].map((_,n)=>xf(n)),yv=[...Array(m*N)].map((_,n)=>ev(n));
+  const a=dtCoeffs(xv),b=dtCoeffs(yv);return {dt,m,period:N,a,b,amax:cleanMap(a),bmax:cleanMap(b),xs:xf,ys:ev}}
+ const T=st.T,ev=t=>yf({t,T,x:a=>xf(a[0])});
+ let m=0;for(let c=1;c<=MAXM&&!m;c++){let ok=true;for(let r=0;r<61&&ok;r++){const t=(r+.371)*c*T/61,a=ev(t),b=ev(t+c*T);if(Math.hypot(a[0]-b[0],a[1]-b[1])>1e-7*(1+Math.hypot(...a)))ok=false}if(ok)m=c}
+ if(!m)throw Error(`y(t) does not repeat with period T, 2T, …, ${MAXM}T, so it has no Fourier series with these periods.`);
+ const xsamp=[...Array(M)].map((_,i)=>xf((i+.5)*T/M)),ysamp=[...Array(m*M)].map((_,i)=>ev((i+.5)*T/M));
+ const a=ctCoeffs(xsamp,KCT),b=ctCoeffs(ysamp,KCT*m);return {dt,m,period:T,a,b,amax:cleanMap(a),bmax:cleanMap(b),xs:t=>xf(t),ys:ev}}
+
+// ---------- canvas helpers ----------
+function niceStep(r){const p=10**Math.floor(Math.log10(r)),q=r/p;return (q<1.5?1:q<3?2:q<7?5:10)*p}
+function frame(cv,xr,yr,xlab,{xfmt=fmt,xstep=null,ystep=null}={}){
+ const r=cv.getBoundingClientRect(),dpr=window.devicePixelRatio||1;cv.width=Math.round(r.width*dpr);cv.height=Math.round(r.height*dpr);
+ const g=cv.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);const w=r.width,h=r.height,L=46,R=14,T=12,B=32;
+ const X=x=>L+(x-xr[0])/(xr[1]-xr[0])*(w-L-R),Y=y=>T+(yr[1]-y)/(yr[1]-yr[0])*(h-T-B);
+ g.font='11px Inter,system-ui,sans-serif';g.lineWidth=1;g.fillStyle='#6a7c8c';
+ const xs=xstep||niceStep((xr[1]-xr[0])/10),ys=ystep||niceStep((yr[1]-yr[0])/4);
+ for(let x=Math.ceil(xr[0]/xs-1e-9)*xs;x<=xr[1]+1e-9;x+=xs){g.strokeStyle='#eef2f7';g.beginPath();g.moveTo(X(x),T);g.lineTo(X(x),h-B);g.stroke();g.textAlign='center';g.fillText(xfmt(x),X(x),h-B+15)}
+ for(let y=Math.ceil(yr[0]/ys-1e-9)*ys;y<=yr[1]+1e-9;y+=ys){g.strokeStyle='#eef2f7';g.beginPath();g.moveTo(L,Y(y));g.lineTo(w-R,Y(y));g.stroke();g.textAlign='right';g.fillText(fmt(y),L-6,Y(y)+4)}
+ g.strokeStyle='#9aabbd';g.beginPath();g.moveTo(L,Y(0));g.lineTo(w-R,Y(0));if(xr[0]<0&&xr[1]>0){g.moveTo(X(0),T);g.lineTo(X(0),h-B)}g.stroke();
+ g.textAlign='right';g.font='italic 12px Georgia,serif';g.fillStyle='#475569';g.fillText(xlab,w-R,h-3);
+ g.save();g.beginPath();g.rect(L,T-2,w-L-R,h-T-B+4);g.clip();return {g,X,Y}}
+function line(F,xs,ys,color,wd=2.3,dash=[]){const g=F.g;g.save();g.strokeStyle=color;g.lineWidth=wd;g.setLineDash(dash);g.lineJoin='round';g.beginPath();xs.forEach((x,i)=>{const px=F.X(x),py=F.Y(ys[i]);i?g.lineTo(px,py):g.moveTo(px,py)});g.stroke();g.restore()}
+function stems(F,xs,vs,color,{off=0,hollow=false,r=3.6}={}){const g=F.g;xs.forEach((k,i)=>{const v=vs[i];if(v===null||!isFinite(v))return;const x=F.X(k+off),y=F.Y(v);g.strokeStyle=color;g.lineWidth=hollow?1.4:2;g.beginPath();g.moveTo(x,F.Y(0));g.lineTo(x,y);g.stroke();g.beginPath();g.arc(x,y,hollow?r+.8:r,0,TAU);if(hollow){g.fillStyle='#fff';g.fill();g.lineWidth=2;g.stroke()}else{g.fillStyle=color;g.fill()}})}
+function pad(lo,hi){const M=Math.max(Math.abs(lo),Math.abs(hi),1e-3);return [lo<-1e-9?lo-.15*M:-.12*M,hi>1e-9?hi+.15*M:.12*M]}
+
+// ---------- rendering ----------
+const TEXT={
+ ct:{title:'Continuous-time Fourier series properties',sub:'Choose x(t), then write y(t) in terms of x. The coefficients b_k of y are computed directly from y, so you can check every property yourself.',
+  x:'Input signal x(t)',xexpr:'Custom x(t) for one period, 0 ≤ t < T',xhint:'Formula in <code>t</code> and <code>T</code>, e.g. <code>abs(t)</code> or <code>(t&lt;T/3)</code>. It is repeated with period T.',period:'Period T',lhs:'y(t) =',
+  yhint:'Use <code>x(…)</code>, <code>t</code>, <code>T</code>, <code>pi</code>, <code>j</code>, and functions such as <code>cos</code>, <code>exp</code>, <code>conj</code>, <code>abs</code>, <code>u</code> (unit step). Powers with <code>^</code>. Press Enter or Apply.',
+  qs:[
+   ['x(t-T/4)','Choose Square and apply y(t) = x(t − T/4). Predict |b_k| and ∠b_k before you look.','|b_k| = |a_k| for every k: shifting does not change how much of each harmonic there is. Only the phase changes: b_k = a_k e^{−jkω₀T/4} = a_k e^{−jkπ/2}. The ratio column shows 1 ∠ −kπ/2 (wrapped into (−π, π]).'],
+   ['x(t)+x(-t)','With Square, apply y(t) = x(t) + x(−t). Why is every b_k zero? Then switch the input to “sin + 2nd harmonic”.','x(t) + x(−t) = 2·Ev{x(t)}, with b_k = a_k + a_{−k}. The square wave here is odd, so its even part is zero. For “sin + 2nd harmonic”, only the cosine (even) part survives: b_{±2} = 2·(0.25) = 0.5, and the sine coefficients cancel.'],
+   ['x(t)^2','Choose Cosine and apply y(t) = x(t)^2. Which harmonics appear? Now try Square.','Multiplication in time is convolution of the coefficients: b_k = Σ_l a_l a_{k−l}. For cos(ω₀t): cos² = ½ + ½cos(2ω₀t), so b₀ = 0.5 and b_{±2} = 0.25, with no fundamental. For the ±1 square wave, x² = 1, so only b₀ = 1 survives.'],
+   ['x(2*t)','Apply y(t) = x(2t), then y(t) = x(t/2). What happens to the coefficients and to the frequencies?','x(2t) has period T/2. Measured with period T, only the even harmonics are nonzero: b_{2k} = a_k, so every harmonic moves to twice its frequency. x(t/2) has period 2T, so the page uses ω₀/2: the coefficients are the same numbers a_k, but they now sit at frequencies kω₀/2 (half-integers on the axis).'],
+   ['exp(j*2*pi*3*t/T)*x(t)','Apply y(t) = e^{j3ω₀t} x(t). How are b_k and a_k related? Is y(t) real?','Frequency shift: b_k = a_{k−3}, so the whole spectrum slides 3 harmonics to the right. y(t) is complex, and its coefficients are no longer conjugate symmetric (|b_{−k}| ≠ |b_k|).']]},
+ dt:{title:'Discrete-time Fourier series properties',sub:'Choose x[n], then write y[n] in terms of x. The N coefficients b_k of y are computed exactly, so you can check every property yourself.',
+  x:'Input signal x[n]',xexpr:'Custom x[n]: formula, or list of N values',xhint:'A formula in <code>n</code> and <code>N</code> such as <code>(n&lt;3)</code>, or a list of exactly N values x[0], …, x[N−1] such as <code>1, 2, 3, 0, 0, 0, 0, 0</code>.',period:'Period N (2 to 32)',lhs:'y[n] =',
+  yhint:'Use <code>x[…]</code>, <code>n</code>, <code>N</code>, <code>pi</code>, <code>j</code>, and functions such as <code>cos</code>, <code>exp</code>, <code>conj</code>. Powers with <code>^</code>, e.g. <code>(-1)^n</code>. A non-integer index gives 0, so <code>x[n/2]</code> is time expansion. Press Enter or Apply.',
+  qs:[
+   ['x[n-3]','With Pulse and N = 8, apply y[n] = x[n − 3]. Predict |b_k| and the ratio b_k / a_k.','|b_k| = |a_k|, and b_k / a_k = e^{−jk(2π/8)·3} = e^{−j3πk/4}: a phase that is linear in k. Shifting never changes magnitudes.'],
+   ['(-1)^n*x[n]','Apply y[n] = (−1)ⁿ x[n] with N = 8. Where does each coefficient go?','(−1)ⁿ = e^{jπn} = e^{j(N/2)ω₀n}, so b_k = a_{k−N/2} = a_{k−4}: the spectrum is shifted by π. Low frequencies become high frequencies, and vice versa.'],
+   ['x[n]-x[n-1]','Apply the first difference y[n] = x[n] − x[n − 1]. What is b₀, and what happens to high frequencies?','b_k = (1 − e^{−jkω₀}) a_k. At k = 0 the factor is 0, so b₀ = 0 (the average is removed). The factor’s magnitude 2|sin(kω₀/2)| is largest near k = N/2, so the difference emphasizes high frequencies, like a derivative.'],
+   ['x[n/2]','Apply y[n] = x[n/2] (insert a zero between samples). What is the new period, and how do b_k and a_k compare?','y has period 2N, so the page uses 2N coefficients. They are b_k = ½ a_k, where a_k is extended periodically with period N, so the spectrum appears twice in one period of b_k (at half the frequency spacing).']]}
+};
+let lastGood=null;
+function renderControls(){const st=S[S.mode],T=TEXT[S.mode],pres=S.mode==='ct'?ctPresets:dtPresets;
+ $('title').textContent=T.title;$('subtitle').textContent=T.sub;$('xhead').textContent=T.x;$('xexprLabel').textContent=T.xexpr;$('xexprHint').innerHTML=T.xhint;$('periodLabel').textContent=T.period;$('ylhs').textContent=T.lhs;$('yhint').innerHTML=T.yhint;
+ $('eq-ct').classList.toggle('hidden',S.mode!=='ct');$('eq-dt').classList.toggle('hidden',S.mode!=='dt');
+ $('presets').innerHTML=Object.entries(pres).map(([k,v])=>`<button class="pill${st.preset===k?' selected':''}" data-preset="${k}">${v.name}</button>`).join('');
+ $('customWrap').classList.toggle('hidden',!pres[st.preset].custom);$('xexpr').value=st.xexpr;
+ const P=$('period');if(S.mode==='ct'){P.step='any';P.min='0.000001';P.removeAttribute('max');P.value=st.T}else{P.step=1;P.min=2;P.max=32;P.value=st.N}
+ $('yexpr').value=st.y;
+ $('examples').innerHTML=EX[S.mode].map(e=>`<button class="chip" data-ex="${e.replace(/"/g,'&quot;')}">${e}</button>`).join('');
+ $('questions').innerHTML=T.qs.map(([ex,q,a],i)=>`<div class="question"><strong>Predict first · Question ${i+1}</strong><button class="load" data-ex="${ex}">Load y = ${ex}</button><p>${q}</p><details><summary>Show answer</summary><p>${a}</p></details></div>`).join('');
+}
+function showError(msg){const e=$('err');e.textContent=msg;e.style.display=msg?'block':'none'}
+function update(){let R;try{R=compute();showError('');lastGood=R}catch(e){showError(e.message);const st=$('status');st.classList.add('warn');st.textContent=lastGood?'Fix the error above to update. The plots below still show the last valid result.':'Fix the error above to see the plots.';return}draw(R)}
+function draw(R){if(!R)return;const dt=R.dt,m=R.m,P=R.period,u=dt?'N':'T',v=dt?'n':'t';
+ // status line
+ const st=$('status');st.classList.toggle('warn',m>1);
+ st.innerHTML=m===1?`y repeats with the same period ${u} = ${fmt(P)}, so b<sub>k</sub> uses the same ω₀ = 2π/${u} as a<sub>k</sub>.`:`y does <b>not</b> repeat every ${u}; its period is ${m}${u}. Its coefficients b<sub>k</sub> use ω₀/${m}, so they sit at frequencies k/${m} on the axes below.`;
+ // time plot over two periods of y
+ const span=m*P;let xs=[],xr=[],yrv=[],yiv=[];
+ if(dt){for(let n=-span;n<span;n++){xs.push(n);xr.push(R.xs(n)[0]);const y=R.ys(n);yrv.push(y[0]);yiv.push(y[1])}}
+ else{for(let i=0;i<=1200;i++){const t=-span+2*span*i/1200;xs.push(t);xr.push(R.xs(t)[0]);const y=R.ys(t);yrv.push(y[0]);yiv.push(y[1])}}
+ const hasIm=yiv.some(q=>Math.abs(q)>1e-9),all=[...xr,...yrv,...(hasIm?yiv:[])],F=frame($('cTime'),dt?[-span-.7,span-.3]:[-span,span],pad(Math.min(...all),Math.max(...all)),dt?'n':'t',{xstep:dt?(span>16?Math.ceil(span/8):span>8?2:1):null});
+ if(dt){stems(F,xs,xr,COL.x,{off:-.15,hollow:true,r:3});stems(F,xs,yrv,COL.y,{off:.1});if(hasIm)stems(F,xs,yiv,COL.yi,{off:.32})}
+ else{line(F,xs,xr,COL.x,1.8,[6,4]);line(F,xs,yrv,COL.y,2.6);if(hasIm)line(F,xs,yiv,COL.yi,2.2)}
+ $('timeTitle').textContent=dt?'Time domain: x[n] and y[n]':'Time domain: x(t) and y(t)';
+ $('timeSub').textContent=`Two periods of y, from ${v} = −${m>1?m:''}${u} to ${m>1?m:''}${u}.`;
+ $('legTime').innerHTML=`<span><span class="dot ${dt?'hollow':''}" style="--c:${COL.x}"></span>x${dt?'[n]':'(t)'}</span><span><span class="dot" style="--c:${COL.y}"></span>${hasIm?'Re ':''}y${dt?'[n]':'(t)'}</span>`+(hasIm?`<span><span class="dot" style="--c:${COL.yi}"></span>Im y${dt?'[n]':'(t)'}</span>`:'');
+ // spectra on a common frequency axis (units of ω₀ = 2π/T or 2π/N)
+ const kx=[...R.a.keys()],kb=[...R.b.keys()],fx=kx,fb=kb.map(k=>k/m);
+ const lim=dt?P/2+.6:KCT+.6,xrng=[-lim,lim],off=.13/m;
+ const am=kx.map(k=>Math.hypot(...R.a.get(k))),bm=kb.map(k=>Math.hypot(...R.b.get(k))),mx=Math.max(...am,...bm,1e-9);
+ const xstep=dt?(P>16?4:P>8?2:1):2;
+ let G=frame($('cMag'),xrng,[0,mx*1.15],'frequency / ω₀',{xstep});stems(G,fx,am,COL.x,{off:-off,hollow:true,r:3});stems(G,fb,bm,COL.y,{off});
+ const ph=(mp,ks,mag)=>ks.map((k,i)=>mag[i]>1e-4*mx?Math.atan2(mp.get(k)[1],mp.get(k)[0])/Math.PI:null);
+ G=frame($('cPh'),xrng,[-1.18,1.18],'frequency / ω₀',{xstep,ystep:.5});stems(G,fx,ph(R.a,kx,am),COL.x,{off:-off,hollow:true,r:3});stems(G,fb,ph(R.b,kb,bm),COL.y,{off});
+ $('magSub').textContent=dt?`One period of k is shown. ω₀ = 2π/${P}.`:`Harmonics up to |k| = ${KCT} of x. ω₀ = 2π/T = ${fmt(TAU/P,4)} rad/s.`;
+ // table (rows by frequency of y's harmonics)
+ const rows=[];kb.forEach(k=>{const f=k/m,aa=Number.isInteger(f)&&R.a.has(f)?R.a.get(f):(Number.isInteger(f)?[0,0]:null),bb=R.b.get(k);
+  const big=Math.hypot(...bb)>1e-6*mx||(aa&&Math.hypot(...aa)>1e-6*mx);if(big&&(dt||Math.abs(f)<=8))rows.push([k,f,aa,bb])});
+ $('thk').textContent=m>1?'k (frequency k/'+m+')':'k';$('thr').classList.toggle('hidden',m>1);
+ $('tbody').innerHTML=rows.slice(0,60).map(([k,f,aa,bb])=>{const ratio=m===1&&aa&&Math.hypot(...aa)>1e-6*mx?pfmt(cdiv(bb,aa)):'—';return `<tr><td>${m>1?`${k} (${fmt(f)})`:k}</td><td>${aa?cfmt(aa):'—'}</td><td>${cfmt(bb)}</td>${m>1?'':`<td>${ratio}</td>`}</tr>`}).join('')||'<tr><td colspan="4">All coefficients are zero.</td></tr>';
+ $('tabSub').textContent=m===1?'Rows with a nonzero a_k or b_k. The ratio b_k / a_k is shown in polar form; it reveals properties such as time shifts (a pure phase factor).':`y has period ${m}${u}, so b_k is indexed with ω₀/${m}. The a_k column is shown where k/${m} is an integer harmonic of x.`;
+}
+
+// ---------- events ----------
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{S.mode=b.dataset.mode;document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t===b));renderControls();update();history.replaceState(null,'',S.mode==='dt'?'#discrete':location.pathname+location.search)}));
+$('presets').addEventListener('click',e=>{const b=e.target.closest('[data-preset]');if(!b)return;S[S.mode].preset=b.dataset.preset;renderControls();update()});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-ex]');if(!b)return;S[S.mode].y=b.dataset.ex;$('yexpr').value=b.dataset.ex;update();if(b.classList.contains('load'))$('yexpr').scrollIntoView({behavior:'smooth',block:'center'})});
+const applyY=()=>{S[S.mode].y=$('yexpr').value;update()};
+$('apply').addEventListener('click',applyY);$('yexpr').addEventListener('keydown',e=>{if(e.key==='Enter')applyY()});
+$('xexpr').addEventListener('change',()=>{S[S.mode].xexpr=$('xexpr').value;update()});$('xexpr').addEventListener('keydown',e=>{if(e.key==='Enter'){S[S.mode].xexpr=$('xexpr').value;update()}});
+const periodChanged=()=>{const v=Number($('period').value);if(S.mode==='ct'){if(!(v>0)){showError('Period T must be a positive number.');return}S.ct.T=v}else{if(!Number.isInteger(v)||v<2||v>32){showError('Period N must be an integer from 2 to 32.');return}S.dt.N=v}update()};
+$('period').addEventListener('input',periodChanged);$('period').addEventListener('change',periodChanged);
+let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>draw(lastGood),80)});
+if(location.hash==='#discrete'){S.mode='dt';document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.mode==='dt'))}
+renderControls();update();
+</script>
+</body>
+</html>
