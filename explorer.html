@@ -10,8 +10,10 @@
 <style>
 .stem-wrap{display:grid;gap:12px;margin:13px 0 16px}.stem-card{background:#f8fafc;border:1px solid #dbe3ed;border-radius:9px;padding:10px}.stem-title{font-size:13px;font-weight:700;margin:0 0 4px}.stem-svg{width:100%;height:170px;display:block;touch-action:none;user-select:none;cursor:crosshair}.stem-tip{font-size:12px;color:#64748b;line-height:1.45}.truth-toggle{display:inline-flex;gap:6px;align-items:center;font-size:13px;color:#475569;cursor:pointer}.truth-toggle input{accent-color:#13836f}.legend .true-line:before{height:0;border-top:3px dashed #10977f;background:none}.stem-readout{font-size:12px;font-family:ui-monospace,monospace;color:#334155;min-height:18px;margin-top:4px}
 </style>
-<style>.site-nav{box-sizing:border-box;display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:12px max(20px,calc((100vw - 1160px)/2));background:#13283f;color:white;font:14px Inter,system-ui,sans-serif}.site-nav a{color:#dbeafe!important;text-decoration:none!important;margin-right:17px}.site-nav a:hover{text-decoration:underline!important}.site-nav .site-brand{font-weight:750;color:white!important;font-size:16px}.site-nav div{display:flex;flex-wrap:wrap;gap:0}</style></head>
-<body><nav class="site-nav" aria-label="Site navigation"><a class="site-brand" href="index.html">∿ Fourier Learning Lab</a><div><a href="index.html">Home</a><a href="explorer.html">Series Explorer</a><a href="sound-lab.html">Sound Lab</a><a href="convolution.html">Convolution</a><a href="filtering.html">Filter Lab</a><a href="draw.html">Draw a Signal</a></div></nav><div class="wrap"><h1>Fourier Series Explorer</h1><p class="sub">Explore how the partial sum changes as you add more harmonics.</p>
+<style>.site-nav{box-sizing:border-box;display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:12px max(20px,calc((100vw - 1160px)/2));background:#13283f;color:white;font:14px Inter,system-ui,sans-serif}.site-nav a{color:#dbeafe!important;text-decoration:none!important;margin-right:17px}.site-nav a:hover{text-decoration:underline!important}.site-nav .site-brand{font-weight:750;color:white!important;font-size:16px}.site-nav div{display:flex;flex-wrap:wrap;gap:0}</style><style>.modetabs{display:flex;flex-wrap:wrap;gap:9px;margin:0 0 18px}.mtab{border:1px solid #d4e0eb;background:#fff;padding:12px 18px;border-radius:11px;color:#37516c;font-weight:700;cursor:pointer;font:inherit;font-weight:700}.mtab:hover{background:#f5faff}.mtab.active{color:#fff;background:#1467a8;border-color:#1467a8}.legend .exact-dot:before{width:10px;height:10px;border-radius:10px;background:none;border:2px solid #10977f}[hidden]{display:none!important}</style></head>
+<body><nav class="site-nav" aria-label="Site navigation"><a class="site-brand" href="index.html">∿ Fourier Learning Lab</a><div><a href="index.html">Home</a><a href="explorer.html">Series Explorer</a><a href="sound-lab.html">Sound Lab</a><a href="convolution.html">Convolution</a><a href="filtering.html">Filter Lab</a><a href="draw.html">Draw a Signal</a></div></nav><div class="wrap"><h1>Fourier Series Explorer</h1><p class="sub" id="pageSub">Explore how the partial sum changes as you add more harmonics.</p>
+<div class="modetabs" role="tablist" aria-label="Signal type"><button type="button" class="mtab active" role="tab" aria-selected="true" data-view="ct">1 · Continuous time</button><button type="button" class="mtab" role="tab" aria-selected="false" data-view="dt">2 · Discrete time</button></div>
+<div id="ctView">
 <div class="layout"><section class="panel"><h2>Define the Fourier series</h2>
 <div class="presets"><button type="button" data-preset="saw">Sawtooth</button><button type="button" data-preset="square">Square wave</button><button type="button" data-preset="tri">Triangle wave</button><button type="button" data-preset="custom">Custom</button><button type="button" data-preset="manual">Manual coefficients</button></div>
 <p class="hint" style="margin:0 0 12px">Complex exponential Fourier series:</p>
@@ -40,6 +42,40 @@
 </section>
 <section class="panel"><div class="topline"><div class="plothead">Partial sum \(\widetilde{x}_N(t)\)</div><div id="nlabel" class="hint">N = 5</div></div><div class="legend"><span style="--color:#2563eb">Real part</span><span style="--color:#e07a30">Imaginary part</span><span class="true-line" id="truthLegend" hidden>Exact signal (N → ∞)</span></div><label class="truth-toggle" id="truthToggleWrap" style="margin:0 0 5px"><input type="checkbox" id="showTruth" checked> Show exact waveform for presets</label><svg class="plot" id="mainPlot" role="img" aria-label="Fourier partial sum graph" viewBox="0 0 750 330" preserveAspectRatio="xMidYMid meet"></svg>
 <hr class="divider"><div class="topline"><div class="plothead">Compare partial sums</div><label class="hint" for="compareComponent">Component: <select id="compareComponent" style="padding:6px;border:1px solid #cbd5e1;border-radius:6px"><option value="auto">Auto</option><option value="real">Real</option><option value="imag">Imaginary</option></select></label><label class="hint" for="compare">N values (comma-separated): <input style="width:137px;padding:6px;border:1px solid #cbd5e1;border-radius:6px" id="compare" value="1, 3, 10, 30"></label></div><div id="legend" class="legend"></div><svg class="plot small" id="comparePlot" role="img" aria-label="Overlaid Fourier partial sums" viewBox="0 0 750 310" preserveAspectRatio="xMidYMid meet"></svg><div class="footer">Tip: Try increasing N for a square wave and examine the overshoot near each jump (Gibbs phenomenon).</div></section></div></div>
+<div id="dtView" hidden>
+<div class="layout"><section class="panel"><h2>Define the discrete-time Fourier series</h2>
+<div class="presets"><button type="button" data-dpreset="square">Square wave</button><button type="button" data-dpreset="saw">Sawtooth</button><button type="button" data-dpreset="tri">Triangle wave</button><button type="button" data-dpreset="customx">Custom x[n]</button><button type="button" data-dpreset="customa">Custom aₖ</button><button type="button" data-dpreset="manual">Manual coefficients</button></div>
+<p class="hint" style="margin:0 0 12px">Discrete-time Fourier series (only N harmonics are distinct):</p>
+<div style="font-size:18px;line-height:2;margin-bottom:18px;overflow-x:auto">\[\widetilde{x}_M[n]=\sum_{\substack{k\in\langle N\rangle\\ |k|\le M}}a_k e^{j\frac{2\pi}{N}kn}\]\[a_k=\frac{1}{N}\sum_{n=\langle N\rangle}x[n]\,e^{-j\frac{2\pi}{N}kn}\]</div>
+<p class="preset-caption" id="dCaption"></p>
+<div id="dCustomX" class="custom-fields" hidden>
+<div class="field"><label for="dxexpr">One period of \(x[n]\), for \(n=0,\dots,N-1\)</label><input id="dxexpr" value="cos(2*pi*n/N) + 0.5*(-1)^n"></div>
+<p class="hint" style="margin:-5px 0 16px">Use <code>n</code> and <code>N</code>. The N coefficients are computed exactly from these samples.</p>
+</div>
+<div id="dCustomA" class="custom-fields" hidden>
+<div class="field"><label for="dareal">Real part of \(a_k\)</label><input id="dareal" value="1/(1+k^2)"></div>
+<div class="field"><label for="daimag">Imaginary part of \(a_k\)</label><input id="daimag" value="0"></div>
+<p class="hint" style="margin:-5px 0 16px">Use <code>k</code> and <code>N</code>. The formulas are evaluated for the N indices \(k=-\lfloor\frac{N-1}{2}\rfloor,\dots,\lfloor\frac{N}{2}\rfloor\); every other k repeats with period N, since \(a_{k+N}=a_k\).</p>
+</div>
+<div id="dManual" class="manual-fields" hidden>
+<p class="stem-tip">Drag a stem up or down to change that coefficient. There is one stem for each of the N distinct coefficients. You can also type precise values in the table.</p>
+<div class="field" style="margin:12px 0 5px"><label for="dStemRange">Stem plot vertical range (±)</label><input id="dStemRange" type="number" value="1" min="0.01" max="1000" step="0.25" style="max-width:110px"></div>
+<div class="stem-wrap"><div class="stem-card"><div class="stem-title">Real coefficients: Re(aₖ)</div><svg class="stem-svg" id="dRealStems" viewBox="0 0 320 170" aria-label="Drag real DTFS coefficient stems"></svg><div class="stem-readout" id="dRealReadout">Drag any blue dot or vertical bar.</div></div>
+<div class="stem-card"><div class="stem-title">Imaginary coefficients: Im(aₖ)</div><svg class="stem-svg" id="dImagStems" viewBox="0 0 320 170" aria-label="Drag imaginary DTFS coefficient stems"></svg><div class="stem-readout" id="dImagReadout">Drag any orange dot or vertical bar.</div></div></div>
+<div class="coef-table-wrap"><table class="coef-table"><thead><tr><th>k</th><th>Re(\(a_k\))</th><th>Im(\(a_k\))</th></tr></thead><tbody id="dCoefRows"></tbody></table></div>
+<p class="hint">Blank entries count as zero. Changing N keeps the entries whose index is still in range.</p>
+</div>
+<div class="field"><label for="dPeriod">Period N (integer, 2 to 64)</label><input id="dPeriod" type="number" min="2" max="64" step="1" value="16"></div>
+<div class="field"><label for="dDomain">Plot range (number of periods)</label><input id="dDomain" type="number" min="1" max="8" step="1" value="2"></div>
+<hr class="divider"><div class="row"><label for="dSlider"><strong>Partial-sum order M</strong></label><span class="nvalue" id="dMnum">2</span></div><input class="slider" type="range" id="dSlider" min="0" max="8" value="2"><div class="row" style="margin-top:4px"><span class="hint">0</span><span class="hint" id="dMmax">8 (all N harmonics)</span></div>
+<div style="margin-top:21px"><button class="action" type="button" id="dPlotBtn">Update plots</button></div>
+<div id="dError" class="error" role="alert"></div><div class="syntax"><strong>Expression tips</strong><br>Use <code>n</code>, <code>k</code>, <code>N</code>, <code>pi</code>, <code>sin()</code>, <code>cos()</code>, <code>abs()</code>, <code>sqrt()</code>, <code>floor()</code>, <code>%</code> and <code>^</code>. Example signals: <code>(n&lt;4)</code> is a pulse of length 4, and <code>n/N</code> is a ramp. For a real-valued signal, use conjugate-symmetric coefficients, \(a_{-k}=a_k^*\).</div>
+</section>
+<section class="panel"><div class="topline"><div class="plothead">Partial sum \(\widetilde{x}_M[n]\)</div><div id="dMlabel" class="hint">M = 2</div></div><div class="legend"><span style="--color:#2563eb">Real part</span><span style="--color:#e07a30" id="dImagLegend">Imaginary part</span><span class="exact-dot" id="dExactLegend">Exact x[n] (all N harmonics)</span></div><label class="truth-toggle" style="margin:0 0 5px"><input type="checkbox" id="dShowExact" checked> Show exact samples</label><svg class="plot" id="dMainPlot" role="img" aria-label="Discrete-time Fourier partial sum" viewBox="0 0 750 330" preserveAspectRatio="xMidYMid meet"></svg>
+<hr class="divider"><div class="topline"><div class="plothead">Coefficients \(a_k\) (periodic in k)</div><div class="hint">Shaded: one period, \(k\in\langle N\rangle\). Faded: dropped from \(\widetilde{x}_M\) or repeated copies.</div></div><div class="legend"><span style="--color:#2563eb">Re(aₖ)</span><span style="--color:#e07a30">Im(aₖ)</span></div><svg class="plot small" id="dCoefPlot" role="img" aria-label="DTFS coefficients over three periods of k" viewBox="0 0 750 290" preserveAspectRatio="xMidYMid meet"></svg>
+<hr class="divider"><div class="topline"><div class="plothead">Compare partial sums</div><label class="hint" for="dCompareComponent">Component: <select id="dCompareComponent" style="padding:6px;border:1px solid #cbd5e1;border-radius:6px"><option value="auto">Auto</option><option value="real">Real</option><option value="imag">Imaginary</option></select></label><label class="hint" for="dCompare">M values (comma-separated): <input style="width:137px;padding:6px;border:1px solid #cbd5e1;border-radius:6px" id="dCompare" value="0, 1, 3, 8"></label></div><div id="dLegend" class="legend"></div><svg class="plot small" id="dComparePlot" role="img" aria-label="Overlaid discrete-time partial sums" viewBox="0 0 750 310" preserveAspectRatio="xMidYMid meet"></svg><div class="footer">Tip: Set M to its maximum. The match is exact for every n, with no Gibbs overshoot: a discrete-time periodic signal needs only N harmonics.</div></section></div>
+</div>
+</div>
 <script>
 'use strict';
 const $=id=>document.getElementById(id);
@@ -223,4 +259,157 @@ $('legend').innerHTML=`<span style="font-weight:600">${component==='imag'?'Imagi
 $('nlabel').textContent='N = '+N;$('nnum').textContent=N;$('error').style.display='none';
 }catch(e){$('error').textContent=e.message;$('error').style.display='block';}}
 $('showTruth').addEventListener('change',draw);$('stemRange').addEventListener('input',renderStems);$('nslider').addEventListener('input',draw);$('plotBtn').addEventListener('click',draw);$('compareComponent').addEventListener('change',draw);$('manualK').addEventListener('change',()=>{try{updateManualRows();applyOrderLimit();draw()}catch(e){$('error').textContent=e.message;$('error').style.display='block'}});for(const id of ['a0','akreal','akimag','period','domain','compare'])$(id).addEventListener('change',draw);document.querySelectorAll('[data-preset]').forEach(btn=>btn.addEventListener('click',()=>selectPreset(btn.dataset.preset)));selectPreset('saw');
-</script></body></html>
+</script>
+<script>
+// ---------- Continuous / discrete view tabs ----------
+(()=>{
+const $=id=>document.getElementById(id);
+const subs={ct:'Explore how the partial sum changes as you add more harmonics.',dt:'Discrete time: only N harmonics are distinct, and adding all of them rebuilds the signal exactly.'};
+function setView(v){$('ctView').hidden=v!=='ct';$('dtView').hidden=v!=='dt';$('pageSub').textContent=subs[v];
+ document.querySelectorAll('[data-view]').forEach(b=>{const on=b.dataset.view===v;b.classList.toggle('active',on);b.setAttribute('aria-selected',String(on))});
+ history.replaceState(null,'',v==='dt'?'#discrete':location.pathname+location.search)}
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+if(location.hash==='#discrete')setView('dt');
+})();
+
+// ---------- Discrete-time Fourier series explorer ----------
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+const C={re:'#2563eb',im:'#e07a30',ex:'#10977f',reFade:'#c3d4f8',imFade:'#f5d2b8'};
+const colors=['#2563eb','#e07a30','#12a78a','#8b5cf6','#e11d48','#64748b'];
+const captions={
+ square:'Square wave: N samples per period of the continuous-time square wave. Samples that land exactly on a jump get the midpoint value 0.',
+ saw:'Sawtooth: N samples per period of the continuous-time sawtooth, x[n] = 2πn/N for |n| < N/2.',
+ tri:'Triangle wave: N samples per period of the continuous-time triangle wave.',
+ customx:'Type one period of x[n]. The N coefficients are computed exactly from these samples.',
+ customa:'Type aₖ as a function of k (and N). Only N coefficients are distinct.',
+ manual:'Drag stems or type values for the N distinct coefficients.'};
+let preset='square';
+const manual=new Map();
+
+function compile(expr,vars){let s=String(expr).trim().replace(/π/g,'pi').replace(/\^/g,'**');
+ if(!s||/[^0-9a-zA-Z_+\-*/%().,<>=!&|\s]/.test(s))throw Error('Invalid expression: '+expr);
+ const allowed=new Set([...vars,'pi','e','sin','cos','tan','asin','acos','atan','abs','sqrt','exp','log','floor','ceil','round','pow','min','max','sign']);
+ for(const w of s.match(/[A-Za-z_]+/g)||[])if(!allowed.has(w))throw Error('Unknown term: '+w);
+ const js=s.replace(/\b(pi|e|sin|cos|tan|asin|acos|atan|abs|sqrt|exp|log|floor|ceil|round|pow|min|max|sign)\b/g,x=>['pi','e'].includes(x)?'Math.'+x.toUpperCase():'Math.'+x);
+ const fn=new Function(...vars,'return +('+js+');');
+ return (...args)=>{const v=fn(...args);if(!Number.isFinite(v))throw Error(`Value is not finite at ${vars[0]} = ${args[0]}`);return v}}
+const fmt=n=>Math.abs(n)<1e-10?'0':(Math.abs(n)>=100||Math.abs(n)<.01)?n.toExponential(1):Number(n.toFixed(2)).toString();
+const clean=v=>Math.abs(v)<1e-12?0:v;
+
+function getN(){const N=Number($('dPeriod').value);if(!Number.isInteger(N)||N<2||N>64)throw Error('Period N must be an integer from 2 to 64.');return N}
+const kLo=N=>-Math.floor((N-1)/2),kHi=N=>Math.floor(N/2);
+const kIndex=(k,N)=>{let c=((k%N)+N)%N;if(c>kHi(N))c-=N;return c};
+// samples of the same 2π-periodic waveforms used in the continuous-time presets
+function ctWave(name,theta){const w=((theta+Math.PI)%(2*Math.PI)+2*Math.PI)%(2*Math.PI)-Math.PI,at=(a,b)=>Math.abs(a-b)<1e-9;
+ if(name==='saw')return at(Math.abs(w),Math.PI)?0:w;
+ if(name==='square')return at(w,0)||at(Math.abs(w),Math.PI)?0:w>0?1:-1;
+ return w>=0?(w<=Math.PI/2?2*w/Math.PI:2-2*w/Math.PI):(w>=-Math.PI/2?2*w/Math.PI:-2-2*w/Math.PI)}
+
+// returns {a: Map k→[re,im] for k in <N>, x: exact samples [[re,im]] for n = 0..N−1}
+function model(N){const a=new Map();let x=null;
+ if(['square','saw','tri','customx'].includes(preset)){
+  const f=preset==='customx'?compile($('dxexpr').value,['n','N']):null;
+  x=[...Array(N)].map((_,n)=>[f?f(n,N):ctWave(preset,2*Math.PI*n/N),0]);
+  for(let k=kLo(N);k<=kHi(N);k++){let re=0,im=0;x.forEach(([v],n)=>{const t=2*Math.PI*k*n/N;re+=v*Math.cos(t);im-=v*Math.sin(t)});a.set(k,[clean(re/N),clean(im/N)])}
+ }else{
+  const fr=preset==='customa'?compile($('dareal').value,['k','N']):null,fi=preset==='customa'?compile($('daimag').value,['k','N']):null;
+  for(let k=kLo(N);k<=kHi(N);k++){if(fr)a.set(k,[fr(k,N),fi(k,N)]);else{const v=manual.get(k)||['0','0'];a.set(k,[compile(v[0]||'0',['k','N'])(k,N),compile(v[1]||'0',['k','N'])(k,N)])}}
+ }
+ if(!x)x=[...Array(N)].map((_,n)=>synth(a,N,n,Infinity));
+ return {a,x}}
+function synth(a,N,n,M){let re=0,im=0;for(const [k,[ar,ai]] of a){if(Math.abs(k)>M)continue;const t=2*Math.PI*k*n/N,c=Math.cos(t),s=Math.sin(t);re+=ar*c-ai*s;im+=ar*s+ai*c}return [clean(re),clean(im)]}
+
+// SVG stem plot in the same visual style as the continuous-time plots
+function stemPlot(svg,series,n0,n1,xlabel,{shade=null}={}){const vb=svg.viewBox.baseVal,W=vb.width,H=vb.height,m={l:52,r:18,t:20,b:37},w=W-m.l-m.r,h=H-m.t-m.b;
+ let lo=0,hi=0;for(const s of series)for(const v of s.ys)if(Number.isFinite(v)){lo=Math.min(lo,v);hi=Math.max(hi,v)}
+ const pad=Math.max((hi-lo)*.12,.12);lo-=pad;hi+=pad;
+ const left=n0-.8,right=n1+.8,x=v=>m.l+(v-left)/(right-left)*w,y=v=>m.t+(hi-v)/(hi-lo)*h;
+ const line=(x1,y1,x2,y2,color,width=1,extra='')=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color}" stroke-width="${width}" ${extra}/>`;
+ let out='';
+ if(shade)out+=`<rect x="${x(shade[0]-.5)}" y="${m.t}" width="${x(shade[1]+.5)-x(shade[0]-.5)}" height="${h}" fill="#eef5ff"/>`;
+ for(let i=0;i<=4;i++){const val=lo+(hi-lo)*i/4,yp=y(val);out+=line(m.l,yp,W-m.r,yp,'#e7edf4')+`<text x="${m.l-9}" y="${yp+4}" font-size="12" text-anchor="end" fill="#64748b">${fmt(val)}</text>`}
+ const span=n1-n0,step=[1,2,4,5,8,10,16,20,32,50].find(s=>span/s<=16)||64;
+ for(let n=Math.ceil(n0/step)*step;n<=n1;n+=step){const xp=x(n);out+=line(xp,m.t,xp,H-m.b,'#f0f3f7')+`<text x="${xp}" y="${H-12}" font-size="12" text-anchor="middle" fill="#64748b">${n}</text>`}
+ if(n0<=0&&n1>=0)out+=line(x(0),m.t,x(0),H-m.b,'#94a3b8',1.4);out+=line(m.l,y(0),W-m.r,y(0),'#94a3b8',1.4);
+ const r=Math.max(2.4,Math.min(5,w/(span+1)*.2));
+ for(const s of series){const off=s.off||0;
+  if(s.connect){const d=s.ns.map((n,i)=>(i?'L':'M')+x(n+off).toFixed(2)+' '+y(s.ys[i]).toFixed(2)).join(' ');out+=`<path d="${d}" fill="none" stroke="${s.color}" stroke-width="1.3" stroke-opacity=".55"/>`}
+  s.ns.forEach((n,i)=>{const v=s.ys[i];if(!Number.isFinite(v))return;const c=typeof s.color==='function'?s.color(i):s.color,cx=x(n+off),cy=y(v);
+   if(!s.noStem)out+=line(cx,y(0),cx,cy,c,Math.min(3,Math.max(1.4,r*.55)));
+   out+=s.hollow?`<circle cx="${cx}" cy="${cy}" r="${r+2.2}" fill="none" stroke="${c}" stroke-width="2"/>`:`<circle cx="${cx}" cy="${cy}" r="${s.r||r}" fill="${c}"/>`})}
+ out+=`<text x="${W-9}" y="${H-10}" font-size="12" fill="#64748b" text-anchor="end">${xlabel}</text>`;svg.innerHTML=out}
+
+// ---------- manual coefficient stems (same interaction as the continuous-time version) ----------
+const G={W:320,H:170,left:30,right:10,top:13,bottom:30};let drag=null;
+const coef=(k,part,N)=>{const v=manual.get(k)||['0','0'];try{return compile(v[part]||'0',['k','N'])(k,N)}catch{return 0}};
+const stemRange=()=>{const r=Number($('dStemRange').value);return Number.isFinite(r)&&r>0?r:1};
+function updateRows(){let N;try{N=getN()}catch{return}const tb=$('dCoefRows');tb.innerHTML='';
+ for(let k=kLo(N);k<=kHi(N);k++){const tr=document.createElement('tr'),vals=manual.get(k)||['0','0'];tr.innerHTML=`<td>${k}</td>`;
+  for(let c=0;c<2;c++){const td=document.createElement('td'),inp=document.createElement('input');inp.type='text';inp.value=vals[c];inp.dataset.k=k;inp.dataset.part=c;inp.setAttribute('aria-label',`${c?'Imaginary':'Real'} part of a_${k}`);
+   inp.addEventListener('input',()=>{const cur=manual.get(k)||['0','0'];cur[c]=inp.value;manual.set(k,cur)});inp.addEventListener('change',draw);td.appendChild(inp);tr.appendChild(td)}
+  tb.appendChild(tr)}}
+function renderStems(){if(preset!=='manual')return;let N;try{N=getN()}catch{return}const range=stemRange(),width=G.W-G.left-G.right,height=G.H-G.top-G.bottom,y=v=>G.top+(range-v)/(2*range)*height;
+ for(const part of [0,1]){const svg=$(part?'dImagStems':'dRealStems'),color=part?C.im:C.re;
+  let out=`<line x1="${G.left}" x2="${G.W-G.right}" y1="${y(0)}" y2="${y(0)}" stroke="#64748b" stroke-width="1.3"/>`;
+  for(const v of [-range,0,range])out+=`<text x="${G.left-4}" y="${y(v)+4}" fill="#64748b" font-size="10" text-anchor="end">${fmt(v)}</text>`;
+  const step=width/N;
+  for(let k=kLo(N);k<=kHi(N);k++){const cx=G.left+(k-kLo(N)+.5)*step,v=Math.max(-range,Math.min(range,coef(k,part,N))),cy=y(v);
+   out+=`<rect data-k="${k}" x="${cx-Math.max(5,step*.43)}" y="${G.top}" width="${Math.max(10,step*.86)}" height="${height}" fill="transparent" style="cursor:ns-resize"/>`;
+   out+=`<line x1="${cx}" x2="${cx}" y1="${y(0)}" y2="${cy}" stroke="${color}" stroke-width="${Math.min(7,Math.max(2,step*.26))}" pointer-events="none"/><circle cx="${cx}" cy="${cy}" r="${Math.min(6,Math.max(3,step*.22))}" fill="${color}" stroke="white" stroke-width="1" pointer-events="none"/>`;
+   if(N<=25||k%Math.ceil(N/20)===0)out+=`<text x="${cx}" y="${G.H-10}" fill="#64748b" font-size="${N>21?8:10}" text-anchor="middle">${k}</text>`}
+  out+=`<text x="${G.W-5}" y="${G.H-10}" font-size="10" fill="#64748b" text-anchor="end">k</text>`;svg.innerHTML=out}}
+function stemValue(e){const r=e.currentTarget.getBoundingClientRect(),yp=(e.clientY-r.top)/r.height*G.H,range=stemRange(),f=(yp-G.top)/(G.H-G.top-G.bottom);return Math.round(Math.max(-range,Math.min(range,range*(1-2*f)))*1000)/1000}
+function setStem(k,part,v){const p=manual.get(k)||['0','0'];p[part]=String(v);manual.set(k,p);
+ const cell=[...$('dCoefRows').querySelectorAll('input')].find(el=>el.dataset.k===String(k)&&el.dataset.part===String(part));if(cell)cell.value=String(v);
+ $(part?'dImagReadout':'dRealReadout').textContent=`k = ${k}, ${part?'Im':'Re'}(aₖ) = ${fmt(v)}`;draw()}
+for(const [id,part] of [['dRealStems',0],['dImagStems',1]]){const svg=$(id);
+ svg.addEventListener('pointerdown',e=>{if(preset!=='manual')return;const node=e.target.closest('[data-k]');if(!node)return;drag={id:e.pointerId,k:+node.dataset.k,part};try{svg.setPointerCapture(e.pointerId)}catch{}setStem(drag.k,part,stemValue(e));e.preventDefault()});
+ svg.addEventListener('pointermove',e=>{if(!drag||drag.id!==e.pointerId||drag.part!==part)return;setStem(drag.k,part,stemValue(e));e.preventDefault()});
+ const stop=e=>{if(drag&&drag.id===e.pointerId)drag=null};['pointerup','pointercancel','lostpointercapture'].forEach(t=>svg.addEventListener(t,stop))}
+
+// ---------- main drawing ----------
+function syncSlider(N){const mx=kHi(N),s=$('dSlider');s.max=mx;if(+s.value>mx)s.value=mx;$('dMmax').textContent=`${mx} (all N harmonics)`}
+function draw(){try{
+ const N=getN(),M=+$('dSlider').value,P=Math.max(1,Math.min(8,Math.floor(Number($('dDomain').value))||2)),{a,x}=model(N);
+ const n0=-Math.floor(P*N/2),n1=n0+P*N-1,ns=[];for(let n=n0;n<=n1;n++)ns.push(n);
+ const per=n=>((n%N)+N)%N,part=M>=kHi(N)?null:ns.map(n=>synth(a,N,per(n),M)),full=ns.map(n=>x[per(n)]),xm=part||full;
+ const hasIm=xm.some(v=>Math.abs(v[1])>1e-9)||full.some(v=>Math.abs(v[1])>1e-9),showEx=$('dShowExact').checked,off=hasIm?.16:0;
+ const series=[{ns,ys:xm.map(v=>v[0]),color:C.re,off:-off}];
+ if(hasIm)series.push({ns,ys:xm.map(v=>v[1]),color:C.im,off});
+ if(showEx){series.push({ns,ys:full.map(v=>v[0]),color:C.ex,off:-off,hollow:true,noStem:true});if(hasIm)series.push({ns,ys:full.map(v=>v[1]),color:C.ex,off,hollow:true,noStem:true})}
+ stemPlot($('dMainPlot'),series,n0,n1,'n');
+ $('dImagLegend').hidden=!hasIm;$('dExactLegend').hidden=!showEx;
+ // coefficients over three periods of k
+ const ks=[];for(let k=kLo(N)-N;k<=kHi(N)+N;k++)ks.push(k);
+ const A=ks.map(k=>a.get(kIndex(k,N))),kept=i=>{const k=ks[i];return k>=kLo(N)&&k<=kHi(N)&&Math.abs(k)<=M};
+ const hasRe=A.some(v=>Math.abs(v[0])>1e-12),hasImA=A.some(v=>Math.abs(v[1])>1e-12),both=hasRe&&hasImA,cs=[];
+ if(hasRe||!hasImA)cs.push({ns:ks,ys:A.map(v=>v[0]),color:i=>kept(i)?C.re:C.reFade,off:both?-.17:0});
+ if(hasImA)cs.push({ns:ks,ys:A.map(v=>v[1]),color:i=>kept(i)?C.im:C.imFade,off:both?.17:0});
+ stemPlot($('dCoefPlot'),cs,ks[0],ks.at(-1),'k',{shade:[kLo(N),kHi(N)]});
+ // comparison
+ const Ms=$('dCompare').value.split(',').map(s=>Number(s.trim())).filter(Number.isFinite).map(m=>Math.max(0,Math.min(kHi(N),Math.floor(m)))).slice(0,6);
+ if(!Ms.length)throw Error('Enter at least one comparison M value.');
+ const byM=Ms.map(m=>ns.map(n=>synth(a,N,per(n),m)));
+ let comp=$('dCompareComponent').value;if(comp==='auto'){const e=[0,1].map(p=>byM.reduce((s,arr)=>s+arr.reduce((t,v)=>t+v[p]*v[p],0),0));comp=e[1]>e[0]*1.000001?'imag':'real'}
+ const pi=comp==='imag'?1:0;
+ stemPlot($('dComparePlot'),byM.map((arr,i)=>({ns,ys:arr.map(v=>v[pi]),color:colors[i%colors.length],connect:true,noStem:true,r:3.4})),n0,n1,'n');
+ $('dLegend').innerHTML=`<span style="font-weight:600">${pi?'Imaginary':'Real'} part:</span> `+Ms.map((m,i)=>`<span style="--color:${colors[i%colors.length]}">M = ${m}${m===kHi(N)?' (all)':''}</span>`).join('');
+ if(preset==='manual')renderStems();
+ $('dMlabel').textContent=`M = ${M}`+(M===kHi(N)?' (all N harmonics: exact)':'');$('dMnum').textContent=M;$('dError').style.display='none';
+}catch(e){$('dError').textContent=e.message;$('dError').style.display='block'}}
+function select(name){preset=name;$('dCustomX').hidden=name!=='customx';$('dCustomA').hidden=name!=='customa';$('dManual').hidden=name!=='manual';
+ if(name==='manual'){updateRows();renderStems()}
+ $('dCaption').textContent=captions[name];
+ document.querySelectorAll('[data-dpreset]').forEach(b=>{const on=b.dataset.dpreset===name;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on))});draw()}
+document.querySelectorAll('[data-dpreset]').forEach(b=>b.addEventListener('click',()=>select(b.dataset.dpreset)));
+$('dPeriod').addEventListener('change',()=>{try{const N=getN();syncSlider(N);if(preset==='manual')updateRows()}catch{}draw()});
+$('dSlider').addEventListener('input',draw);$('dPlotBtn').addEventListener('click',draw);$('dShowExact').addEventListener('change',draw);$('dStemRange').addEventListener('input',renderStems);$('dCompareComponent').addEventListener('change',draw);
+for(const id of ['dxexpr','dareal','daimag','dDomain','dCompare'])$(id).addEventListener('change',draw);
+// manual mode starts from a DT square wave so the stems are not all zero
+(()=>{const N=16;for(let k=kLo(N);k<=kHi(N);k++){let re=0,im=0;for(let n=0;n<N;n++){const v=ctWave('square',2*Math.PI*n/N),t=2*Math.PI*k*n/N;re+=v*Math.cos(t);im-=v*Math.sin(t)}manual.set(k,[String(Math.round(clean(re/N)*1000)/1000),String(Math.round(clean(im/N)*1000)/1000)])}})();
+syncSlider(16);select('square');
+})();
+</script>
+</body></html>
