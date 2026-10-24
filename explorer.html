@@ -372,7 +372,8 @@ for(const [id,part] of [['dRealStems',0],['dImagStems',1]]){const svg=$(id);
 // ---------- main drawing ----------
 function syncSlider(N){const mx=kHi(N),s=$('dSlider');s.max=mx;if(+s.value>mx)s.value=mx;$('dMmax').textContent=`${mx} (all N harmonics)`}
 function draw(){try{
- const N=getN(),M=+$('dSlider').value,P=Math.max(1,Math.min(8,Math.floor(Number($('dDomain').value))||2)),{a,x}=model(N);
+ const N=getN();syncSlider(N);
+ const M=+$('dSlider').value,P=Math.max(1,Math.min(8,Math.floor(Number($('dDomain').value))||2)),{a,x}=model(N);
  const n0=-Math.floor(P*N/2),n1=n0+P*N-1,ns=[];for(let n=n0;n<=n1;n++)ns.push(n);
  const per=n=>((n%N)+N)%N,part=M>=kHi(N)?null:ns.map(n=>synth(a,N,per(n),M)),full=ns.map(n=>x[per(n)]),xm=part||full;
  const hasIm=xm.some(v=>Math.abs(v[1])>1e-9)||full.some(v=>Math.abs(v[1])>1e-9),showEx=$('dShowExact').checked,off=hasIm?.16:0;
@@ -404,7 +405,10 @@ function select(name){preset=name;$('dCustomX').hidden=name!=='customx';$('dCust
  $('dCaption').textContent=captions[name];
  document.querySelectorAll('[data-dpreset]').forEach(b=>{const on=b.dataset.dpreset===name;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on))});draw()}
 document.querySelectorAll('[data-dpreset]').forEach(b=>b.addEventListener('click',()=>select(b.dataset.dpreset)));
-$('dPeriod').addEventListener('change',()=>{try{const N=getN();syncSlider(N);if(preset==='manual')updateRows()}catch{}draw()});
+// redraw while typing too: Safari does not fire 'change' when a button is clicked after typing
+const periodChanged=()=>{try{getN();if(preset==='manual')updateRows()}catch{}draw()};
+$('dPeriod').addEventListener('change',periodChanged);$('dPeriod').addEventListener('input',()=>{try{getN();periodChanged()}catch{}});
+$('dPlotBtn').addEventListener('click',()=>{if(preset==='manual')updateRows()});
 $('dSlider').addEventListener('input',draw);$('dPlotBtn').addEventListener('click',draw);$('dShowExact').addEventListener('change',draw);$('dStemRange').addEventListener('input',renderStems);$('dCompareComponent').addEventListener('change',draw);
 for(const id of ['dxexpr','dareal','daimag','dDomain','dCompare'])$(id).addEventListener('change',draw);
 // manual mode starts from a DT square wave so the stems are not all zero
