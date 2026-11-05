@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DTFT Explorer · EE3015</title>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#1b2939;background:#f4f7fb}*{box-sizing:border-box}body{margin:0}header{background:#13283f;color:white;padding:29px max(20px,calc((100vw - 1100px)/2)) 24px}header h1{font-size:clamp(25px,3.2vw,36px);letter-spacing:-.8px;margin:4px 0 8px}header p{color:#c5d4e3;margin:0;font-size:15px}.kicker{font-size:12px;color:#80d3ff;letter-spacing:2px;font-weight:800}main{max-width:1100px;margin:0 auto;padding:24px 20px 50px}button{font:inherit;cursor:pointer}.panel{background:#fff;border:1px solid #e0e8f0;border-radius:16px;box-shadow:0 4px 18px #223c5710;padding:24px;margin-bottom:18px}h2{font-size:23px;letter-spacing:-.4px;margin:0 0 8px}h3{font-size:16px;margin:0 0 12px}.subtitle{color:#52677c;font-size:14px;line-height:1.6;margin:0 0 20px}.equation{text-align:center;font-size:clamp(15px,2vw,19px);background:#f2f7fc;border-radius:10px;padding:14px 8px;margin-bottom:12px;overflow-x:auto}.layout{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}.sectionlabel{font-size:12px;font-weight:800;letter-spacing:1.5px;color:#6a7c8c;margin:4px 0 8px}.pillrow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}.pill{padding:8px 12px;border:1px solid #cddceb;background:#fff;border-radius:8px;color:#365069;font-size:14px}.pill:hover{background:#f5faff}.pill.selected{background:#e7f3ff;border-color:#1474af;color:#085e99;font-weight:750}.chip{padding:5px 9px;border:1px solid #b7d6e8;background:#f5fbff;border-radius:7px;color:#1a5276;font:12.5px ui-monospace,SFMono-Regular,Consolas,monospace}.chip:hover{background:#e3f1fb}.chip.selected{background:#dff3ee;border-color:#13836f;color:#0f6b5a}.sigbox{border:1px solid #e0e7ef;border-left:4px solid var(--c);border-radius:11px;padding:15px 16px 8px;min-width:0}.sigbox h3{color:var(--c)}.field{margin-bottom:12px}.field label{display:block;font-size:13px;font-weight:650;color:#344a60;margin-bottom:6px}.field input{width:100%;border:1px solid #cdd6e4;border-radius:8px;padding:10px;font:15px ui-monospace,SFMono-Regular,Consolas,monospace}.field input[type=range]{border:0;padding:0;accent-color:#1467a8}.value{float:right;font-variant-numeric:tabular-nums;color:#09649f}.ybox{display:flex;gap:8px;align-items:stretch}.ybox .lhs{display:flex;align-items:center;font:600 17px Georgia,serif;font-style:italic;color:#13836f;white-space:nowrap}.ybox input{flex:1;min-width:0;border:2px solid #9fd3c7;border-radius:9px;padding:11px;font:16px ui-monospace,SFMono-Regular,Consolas,monospace}.ybox input:focus{outline:none;border-color:#13836f}.apply{border:0;color:white;background:#13836f;font-weight:750;border-radius:9px;padding:0 16px}.apply:hover{background:#0f6b5a}.apply.blue{background:#1467a8}.apply.blue:hover{background:#0f5487}.hint{font-size:12px;color:#6a7c8c;line-height:1.5;margin:6px 0 10px}.prop{font-size:13.5px;color:#24564b;background:#f0faf7;border:1px solid #c6e9df;border-radius:9px;padding:9px 12px;margin:2px 0 12px;line-height:1.6}.error{display:none;color:#b91c1c;background:#fff1f2;border-radius:8px;font-size:13px;padding:9px 11px;margin:4px 0 10px}.status{background:#f4f8fd;border:1px solid #dbe6f2;border-radius:9px;padding:9px 12px;font-size:13px;color:#29445f;line-height:1.7;margin-top:14px;font-variant-numeric:tabular-nums}.status .warn{color:#795311}.toolbar{display:flex;gap:6px 18px;flex-wrap:wrap;align-items:center;margin-top:14px}.toolbar .pillrow{margin:0}.toolbar .sectionlabel{margin:0}.vizbox{border:1px solid #e0e7ef;border-radius:11px;padding:13px;background:white;min-width:0;margin-top:14px}.vizbox h3{margin-bottom:4px}.vizbox .small{font-size:12px;color:#6a7c8c;line-height:1.5;margin-bottom:8px}canvas{display:block;width:100%;height:220px}.spec canvas{cursor:crosshair}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:14px}.legend{font-size:12px;color:#597085;margin:7px 0 0;display:flex;gap:14px;flex-wrap:wrap}.dot{display:inline-block;width:9px;height:9px;background:var(--c);border-radius:9px;margin-right:4px}.dot.hollow{background:#fff;border:2px solid var(--c);width:10px;height:10px}.dash{display:inline-block;width:18px;height:0;border-top:2px dashed var(--c);vertical-align:middle;margin-right:4px}.solid{display:inline-block;width:18px;height:0;border-top:3px solid var(--c);vertical-align:middle;margin-right:4px}.readout{font-size:12.5px;color:#36506a;background:#f7f9fc;border-radius:8px;padding:8px 11px;margin-top:10px;min-height:34px;font-variant-numeric:tabular-nums}.question{background:#fff9e9;border:1px solid #f4e3ba;border-radius:12px;padding:17px 19px;margin-top:14px}.question strong{font-size:14px;color:#795311}.question p{margin:7px 0 11px;font-size:14px;line-height:1.55}.question .load{border:1px solid #e3c98a;background:#fff;border-radius:7px;padding:4px 9px;font-size:12px;color:#795311;margin-left:6px}details{font-size:14px;color:#4b5f71}details summary{color:#0e689c;font-weight:700;cursor:pointer}details p{line-height:1.6;margin-bottom:0}footer{text-align:center;color:#6a7d8b;font-size:12px;margin-top:25px}.hidden{display:none!important}@media(max-width:780px){.layout,.twocol{grid-template-columns:1fr}.panel{padding:17px}main{padding:18px 12px 40px}canvas{height:200px}}
+</style>
+<style>.site-nav{box-sizing:border-box;display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:12px max(20px,calc((100vw - 1160px)/2));background:#13283f;color:white;font:14px Inter,system-ui,sans-serif}.site-nav a{color:#dbeafe!important;text-decoration:none!important;margin-right:17px}.site-nav a:hover{text-decoration:underline!important}.site-nav .site-brand{font-weight:750;color:white!important;font-size:16px}.site-nav div{display:flex;flex-wrap:wrap;gap:0}</style></head>
+<body><nav class="site-nav" aria-label="Site navigation"><a class="site-brand" href="index.html">∿ Fourier Learning Lab</a><div><a href="index.html">Home</a><a href="explorer.html">Series Explorer</a><a href="sound-lab.html">Sound Lab</a><a href="convolution.html">Convolution</a><a href="filtering.html">Filter Lab</a><a href="draw.html">Draw a Signal</a><a href="properties.html">FS Properties</a><a href="dtft.html" aria-current="page">DTFT</a></div></nav>
+<header><div class="kicker">EE3015 · SIGNALS &amp; SYSTEMS</div><h1>Discrete-Time Fourier Transform</h1><p>Pick a sequence, apply an operation, and see how its 2π-periodic spectrum changes.</p></header>
+<main>
+<section class="panel">
+<h2>DTFT Explorer</h2>
+<p class="subtitle">The DTFT describes a sequence x[n] as a continuum of complex exponentials e<sup>jωn</sup>. Because n is an integer, the spectrum X(e<sup>jω</sup>) always repeats every 2π: low frequencies sit near ω = 0 and the highest frequency is ω = π.</p>
+<div class="equation">\( X(e^{j\omega})=\displaystyle\sum_{n=-\infty}^{\infty} x[n]\,e^{-j\omega n}, \qquad x[n]=\dfrac{1}{2\pi}\displaystyle\int_{2\pi} X(e^{j\omega})\,e^{j\omega n}\,d\omega \)</div>
+<div class="equation" id="closed"></div>
+<div class="layout">
+<div class="sigbox" style="--c:#2563eb"><h3>Input sequence x[n]</h3>
+<div class="pillrow" id="presets"></div>
+<div class="field" id="paramWrap"><label for="param"><span id="paramLabel"></span><span class="value" id="paramVal"></span></label><input id="param" type="range"></div>
+<div class="field hidden" id="customWrap"><label for="xexpr">x[n] =</label><div class="ybox"><input id="xexpr" spellcheck="false" autocomplete="off"><button class="apply blue" id="applyx">Apply</button></div><div class="hint">Use n, u[n], delta[n], pi, j and functions such as cos, sin, exp, abs. Example: <code>0.8^n u[n] cos(pi n/4)</code>. The sequence is evaluated for −40 ≤ n ≤ 40.</div></div>
+<div class="error" id="errx" role="alert"></div>
+</div>
+<div class="sigbox" style="--c:#13836f"><h3>Operation: write y[n] in terms of x</h3>
+<div class="ybox"><span class="lhs">y[n] =</span><input id="yexpr" spellcheck="false" autocomplete="off" aria-label="Operation"><button class="apply" id="apply">Apply</button></div>
+<div class="hint">For example <code>x[n-3]</code>, <code>x[-n]</code>, <code>(-1)^n x[n]</code>, <code>x[n/2]</code> (x at a non-integer index is 0).</div>
+<div class="error" id="erry" role="alert"></div>
+<div class="prop" id="prop"></div>
+<div class="sectionlabel">TRY ONE</div><div class="pillrow" id="examples"></div>
+</div>
+</div>
+<div class="vizbox"><h3>Time domain</h3><div class="small" id="timeSub"></div><canvas id="cTime" aria-label="x[n] and y[n]"></canvas><div class="legend" id="legTime"></div></div>
+<div class="toolbar"><span class="sectionlabel">FREQUENCY RANGE</span><div class="pillrow" id="rangePills"><button class="pill" data-range="1">−π ≤ ω ≤ π</button><button class="pill" data-range="3">−3π ≤ ω ≤ 3π</button></div><span class="sectionlabel">VIEW</span><div class="pillrow" id="viewPills"><button class="pill" data-view="mp">Magnitude &amp; phase</button><button class="pill" data-view="ri">Real &amp; imaginary</button></div></div>
+<div class="twocol spec">
+<div class="vizbox"><h3 id="t1"></h3><div class="small" id="s1"></div><canvas id="cA" aria-label="Spectrum plot 1"></canvas><div class="legend" id="legA"></div></div>
+<div class="vizbox"><h3 id="t2"></h3><div class="small" id="s2"></div><canvas id="cB" aria-label="Spectrum plot 2"></canvas><div class="legend" id="legB"></div></div>
+</div>
+<div class="readout" id="readout"></div>
+<div class="status" id="stats"></div>
+<div id="questions"></div>
+</section>
+<footer>Standalone interactive teaching demo · x[n] is evaluated for −40 ≤ n ≤ 40 and y[n] for −120 ≤ n ≤ 120; both spectra are computed exactly from these samples.</footer>
+</main>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const TAU=2*Math.PI,COL={x:'#2563eb',y:'#008b75',yi:'#e07a30'};
+const fmt=(v,d=3)=>{if(!isFinite(v))return '—';if(Math.abs(v)<5e-4)return '0';const r=+v.toPrecision(d);return (Object.is(r,-0)?0:r).toString()};
+const phfmt=v=>{const r=fmt(v);return r==='0'?'0':r==='1'?'π':r==='-1'?'−π':r.replace('-','−')+'π'};
+const cfmt=([re,im])=>{const r=fmt(re),i=fmt(Math.abs(im));if(i==='0')return r.replace('-','−');if(r==='0')return (im<0?'−':'')+(i==='1'?'':i)+'j';return `${r.replace('-','−')} ${im<0?'−':'+'} ${i}j`};
+const pfmt=([re,im])=>{const m=Math.hypot(re,im);return m<5e-4?'0':`${fmt(m)} ∠ ${phfmt(Math.atan2(im,re)/Math.PI)}`};
+
+// ---------- complex arithmetic ----------
+const C=(re,im=0)=>[re,im];
+const cadd=(a,b)=>[a[0]+b[0],a[1]+b[1]],csub=(a,b)=>[a[0]-b[0],a[1]-b[1]],cneg=a=>[-a[0],-a[1]];
+const cmul=(a,b)=>[a[0]*b[0]-a[1]*b[1],a[0]*b[1]+a[1]*b[0]];
+const cdiv=(a,b)=>{const q=b[0]*b[0]+b[1]*b[1];if(q===0)throw Error('Division by zero');return [(a[0]*b[0]+a[1]*b[1])/q,(a[1]*b[0]-a[0]*b[1])/q]};
+const cexp=a=>{const m=Math.exp(a[0]);return [m*Math.cos(a[1]),m*Math.sin(a[1])]};
+const clog=a=>{if(a[0]===0&&a[1]===0)throw Error('log(0) is undefined');return [Math.log(Math.hypot(a[0],a[1])),Math.atan2(a[1],a[0])]};
+function cpow(a,b){if(Math.abs(b[1])<1e-15&&Number.isInteger(b[0])&&Math.abs(b[0])<=256){let r=[1,0];for(let i=0;i<Math.abs(b[0]);i++)r=cmul(r,a);return b[0]<0?cdiv([1,0],r):r}
+ if(a[0]===0&&a[1]===0)return [0,0];return cexp(cmul(b,clog(a)))}
+const re1=f=>a=>[f(a[0]),0];
+const FUNCS={
+ sin:a=>[Math.sin(a[0])*Math.cosh(a[1]),Math.cos(a[0])*Math.sinh(a[1])],
+ cos:a=>[Math.cos(a[0])*Math.cosh(a[1]),-Math.sin(a[0])*Math.sinh(a[1])],
+ tan:a=>cdiv(FUNCS.sin(a),FUNCS.cos(a)),exp:cexp,log:clog,sqrt:a=>cpow(a,[.5,0]),
+ abs:a=>[Math.hypot(a[0],a[1]),0],conj:a=>[a[0],-a[1]],real:a=>[a[0],0],imag:a=>[a[1],0],re:a=>[a[0],0],im:a=>[a[1],0],angle:a=>[Math.atan2(a[1],a[0]),0],
+ floor:re1(Math.floor),ceil:re1(Math.ceil),round:re1(Math.round),sign:re1(Math.sign),u:re1(v=>v>=0?1:0),delta:re1(v=>Math.abs(v)<1e-9?1:0),
+ min:(a,b)=>[Math.min(a[0],b[0]),0],max:(a,b)=>[Math.max(a[0],b[0]),0],mod:(a,b)=>[((a[0]%b[0])+b[0])%b[0],0]};
+const CONST={pi:[Math.PI,0],e:[Math.E,0],j:[0,1]};
+
+// ---------- expression parser (no eval): returns env => complex ----------
+function tokenize(s){const toks=[],re=/\s*(?:(\d+\.?\d*(?:[eE][+-]?\d+)?|\.\d+(?:[eE][+-]?\d+)?)|([A-Za-z_][A-Za-z_0-9]*)|(==|!=|<=|>=|\*\*|[-+*/^()\[\],<>%]))/y;let m;
+ while(re.lastIndex<s.length){const at=re.lastIndex;m=re.exec(s);if(!m){if(/^\s*$/.test(s.slice(at)))break;throw Error(`Unexpected character "${s.slice(at).trim()[0]}"`)}
+  if(m[1]!==undefined)toks.push({type:'num',v:m[1],n:parseFloat(m[1])});else if(m[2]!==undefined)toks.push({type:'id',v:m[2]});else toks.push({type:'op',v:m[3]==='**'?'^':m[3]})}
+ return toks}
+function parse(src,{vars,allowX,dt}){const toks=tokenize(String(src));if(!toks.length)throw Error('The expression is empty');let p=0;
+ const peek=()=>toks[p],next=()=>toks[p++],isOp=(t,...v)=>t&&t.type==='op'&&v.includes(t.v);
+ const expect=v=>{const t=next();if(!t||t.v!==v)throw Error(`Expected "${v}"${t?` but found "${t.v}"`:' at the end'}`)};
+ const expr=()=>{const a=add();const t=peek();if(isOp(t,'==','!=','<','>','<=','>=')){next();const b=add(),op=t.v;return env=>{const x=a(env)[0],y=b(env)[0],eq=Math.abs(x-y)<1e-9;return [(op==='=='?eq:op==='!='?!eq:op==='<'?x<y&&!eq:op==='>'?x>y&&!eq:op==='<='?x<y||eq:x>y||eq)?1:0,0]}}return a};
+ function add(){let a=mul();for(;;){const t=peek();if(!isOp(t,'+','-'))return a;next();const b=mul(),A=a;a=t.v==='+'?env=>cadd(A(env),b(env)):env=>csub(A(env),b(env))}}
+ function mul(){let a=unary();for(;;){const t=peek();
+  if(isOp(t,'*','/','%')){next();const b=unary(),A=a;a=t.v==='*'?env=>cmul(A(env),b(env)):t.v==='/'?env=>cdiv(A(env),b(env)):env=>FUNCS.mod(A(env),b(env))}
+  else if(t&&(t.type==='num'||t.type==='id'||isOp(t,'('))){const b=unary(),A=a;a=env=>cmul(A(env),b(env))} // implicit product, e.g. 2t or 3x(t)
+  else return a}}
+ function unary(){const t=peek();if(isOp(t,'-','+')){next();const a=unary();return t.v==='-'?env=>cneg(a(env)):a}return power()}
+ function power(){const b=primary();if(isOp(peek(),'^')){next();const e=unary();return env=>cpow(b(env),e(env))}return b}
+ function primary(){const t=next();if(!t)throw Error('The expression ended unexpectedly');
+  if(t.type==='num'){const v=[t.n,0];return ()=>v}
+  if(isOp(t,'(')){const a=expr();expect(')');return a}
+  if(t.type==='id'){const id=t.v,nx=peek();
+   if(id==='x'){if(!allowX)throw Error('x cannot appear in its own definition');
+    if(!isOp(nx,'(','['))throw Error(dt?'Write x with an index, for example x[n-3]':'Write x with an argument, for example x(t-1)');
+    const open=next().v,a=expr();expect(open==='('?')':']');return env=>env.x(a(env))}
+   if(FUNCS[id]){if(!isOp(nx,'(','['))throw Error(`${id} is a function: write ${id}(...)`);const fo=next().v;const args=[expr()];while(isOp(peek(),',')){next();args.push(expr())}expect(fo==='('?')':']');
+    const f=FUNCS[id];if(args.length!==f.length)throw Error(`${id}() takes ${f.length} argument${f.length>1?'s':''}`);return env=>f(...args.map(g=>g(env)))}
+   if(CONST[id]){const v=CONST[id];return ()=>v}
+   if(vars.includes(id))return env=>[env[id],0];
+   throw Error(`Unknown name "${id}". You can use ${vars.join(', ')}, pi, e, j${allowX?(dt?', x[...]':', x(...)'):''} and functions like cos, exp, conj, abs.`)}
+  throw Error(`Unexpected "${t.v}"`)}
+ const f=expr();if(p<toks.length)throw Error(`Unexpected "${toks[p].v}"`);return f}
+
+// ---------- sequences ----------
+const NX=40,NY=120;
+const r2=v=>+v.toFixed(2);
+const presets={
+ impulse:{name:'Impulse',f:()=>n=>n===0?1:0,
+  tex:()=>String.raw`x[n]=\delta[n]\quad\Longrightarrow\quad X(e^{j\omega})=1`},
+ pulse:{name:'Pulse',param:{label:'Half-width N₁',min:0,max:10,step:1,v:2,show:v=>v},f:N=>n=>Math.abs(n)<=N?1:0,
+  tex:N=>String.raw`x[n]=\begin{cases}1,&|n|\le ${N}\\0,&|n|>${N}\end{cases}\quad\Longrightarrow\quad X(e^{j\omega})=\dfrac{\sin(${N+.5}\,\omega)}{\sin(\omega/2)}`},
+ exp:{name:'aⁿu[n]',param:{label:'a',min:-.9,max:.9,step:.05,v:.8,show:v=>r2(v)},f:a=>n=>n>=0?a**n:0,
+  tex:a=>String.raw`x[n]=(${r2(a)})^n\,u[n]\quad\Longrightarrow\quad X(e^{j\omega})=\dfrac{1}{1-(${r2(a)})\,e^{-j\omega}}`},
+ twosided:{name:'a<sup>|n|</sup>',param:{label:'a',min:.1,max:.9,step:.05,v:.6,show:v=>r2(v)},f:a=>n=>a**Math.abs(n),
+  tex:a=>String.raw`x[n]=(${r2(a)})^{|n|}\quad\Longrightarrow\quad X(e^{j\omega})=\dfrac{1-a^2}{1-2a\cos\omega+a^2}=\dfrac{${r2(1-a*a)}}{${r2(1+a*a)}-${r2(2*a)}\cos\omega}`},
+ sinc:{name:'Ideal lowpass',param:{label:'Cutoff W',min:.05,max:.95,step:.05,v:.25,show:v=>r2(v)+'π'},f:W=>n=>n===0?W:Math.sin(W*Math.PI*n)/(Math.PI*n),
+  tex:W=>String.raw`x[n]=\dfrac{\sin(${r2(W)}\pi n)}{\pi n}\quad\Longrightarrow\quad X(e^{j\omega})=\begin{cases}1,&|\omega|<${r2(W)}\pi\\0,&${r2(W)}\pi<|\omega|\le\pi\end{cases}\quad\text{(ideal; truncated here to }|n|\le 40)`},
+ cosine:{name:'Windowed cosine',param:{label:'Frequency ω₀',min:0,max:1,step:.05,v:.25,show:v=>r2(v)+'π'},f:w=>n=>Math.abs(n)<=20?Math.cos(w*Math.PI*n):0,
+  tex:w=>String.raw`x[n]=\cos(${r2(w)}\pi n),\ |n|\le 20\quad\Longrightarrow\quad X(e^{j\omega})=\tfrac12 W(e^{j(\omega-${r2(w)}\pi)})+\tfrac12 W(e^{j(\omega+${r2(w)}\pi)}),\ \ W(e^{j\omega})=\dfrac{\sin(20.5\,\omega)}{\sin(\omega/2)}`},
+ custom:{name:'Custom',custom:true,
+  tex:()=>String.raw`X(e^{j\omega})=\displaystyle\sum_{n=-40}^{40} x[n]\,e^{-j\omega n}\quad\text{(computed from your samples)}`}};
+const EX=[
+ ['x[n]',String.raw`Y(e^{j\omega})=X(e^{j\omega})`,'No operation: y = x.'],
+ ['x[n-3]',String.raw`Y(e^{j\omega})=e^{-j3\omega}X(e^{j\omega})`,'Time shift: the magnitude is unchanged and the phase gains the straight line −3ω.'],
+ ['x[-n]',String.raw`Y(e^{j\omega})=X(e^{-j\omega})`,'Time reversal: the spectrum is mirrored about ω = 0.'],
+ ['(-1)^n x[n]',String.raw`Y(e^{j\omega})=X(e^{j(\omega-\pi)})`,'(−1)ⁿ = e^{jπn}: the spectrum shifts by π, so low and high frequencies swap.'],
+ ['e^(j pi n/2) x[n]',String.raw`Y(e^{j\omega})=X(e^{j(\omega-\pi/2)})`,'Modulation by e^{jπn/2}: the spectrum shifts right by π/2.'],
+ ['x[n]-x[n-1]',String.raw`Y(e^{j\omega})=(1-e^{-j\omega})\,X(e^{j\omega})`,'First difference: multiplies by a factor that is 0 at ω = 0 and 2 at ω = π.'],
+ ['n x[n]',String.raw`Y(e^{j\omega})=j\,\dfrac{dX(e^{j\omega})}{d\omega}`,'Multiplication by n is differentiation in frequency.'],
+ ['x[n/2]',String.raw`Y(e^{j\omega})=X(e^{j2\omega})`,'Upsampling (a zero between samples): the spectrum is compressed by 2, and an image appears around ω = ±π.'],
+ ['x[2n]',String.raw`Y(e^{j\omega})=\tfrac12\big[X(e^{j\omega/2})+X(e^{j(\omega-2\pi)/2})\big]`,'Downsampling (keep every other sample): the spectrum stretches by 2, and shifted copies may overlap (aliasing).'],
+ ['x[n]+x[-n]',String.raw`Y(e^{j\omega})=X(e^{j\omega})+X(e^{-j\omega})`,'For real x this equals 2 Re X(e^{jω}), so the transform of an even real sequence is real.']];
+const QS=[
+ [{preset:'pulse',v:2,y:'x[n]',range:3},'Switch to the range −3π ≤ ω ≤ 3π. Why does every DTFT repeat every 2π? What is the highest frequency a discrete-time sequence can have?','Because n is an integer, e^{−j(ω+2π)n} = e^{−jωn}, so X(e^{j(ω+2π)}) = X(e^{jω}). The frequencies ω and ω + 2π give exactly the same sequence, so one period, −π < ω ≤ π, describes everything. Low frequencies are near ω = 0 (and ±2π, …); the fastest possible oscillation is ω = π, i.e. (−1)ⁿ.'],
+ [{preset:'pulse',v:2,y:'x[n]',range:1},'x[n] is 1 for |n| ≤ 2 (five samples). Predict X(e^{j0}) and the first zero of X(e^{jω}). Then increase N₁: what happens to the main lobe?','X(e^{j0}) = Σ x[n] = 5. The closed form sin(5ω/2)/sin(ω/2) vanishes when 5ω/2 = kπ, so the first zero is at ω = 2π/5 = 0.4π. For general N₁ the first zero is at 2π/(2N₁+1): a longer pulse has a narrower spectrum. X is real because x[n] is real and even.'],
+ [{preset:'pulse',v:2,y:'x[n-3]',range:1},'Delay the pulse by 3 samples. Predict |Y(e^{jω})| and ∠Y(e^{jω}) before you look.','Y(e^{jω}) = e^{−j3ω} X(e^{jω}). The magnitude is unchanged; the phase gains −3ω, a straight line of slope −3 that wraps every time it reaches −π. Where X is negative an extra π appears.'],
+ [{preset:'exp',v:.8,y:'(-1)^n x[n]',range:1},'x[n] = 0.8ⁿu[n] is a lowpass sequence. What does multiplying by (−1)ⁿ do to its spectrum? Compare with the preset a = −0.8.','(−1)ⁿ = e^{jπn}, so Y(e^{jω}) = X(e^{j(ω−π)}): the peak at ω = 0 moves to ω = ±π and the sequence becomes highpass. In fact y[n] = (−0.8)ⁿu[n], so Y(e^{jω}) = 1/(1 + 0.8e^{−jω}). The values X(e^{j0}) = 1/(1 − 0.8) = 5 and X(e^{jπ}) = 1/1.8 ≈ 0.56 trade places.'],
+ [{preset:'sinc',v:.25,y:'x[n/2]',range:1},'x[n] is an ideal lowpass sequence with cutoff 0.25π. Predict the spectrum after inserting a zero between samples, y[n] = x[n/2].','Only even n survive: Y(e^{jω}) = Σₘ x[m] e^{−jω2m} = X(e^{j2ω}). The passband shrinks to |ω| < 0.125π, and because X(e^{j2ω}) repeats every π, an image of the passband appears around ω = ±π. The small ripples near the band edges come from truncating x[n] to |n| ≤ 40 (Gibbs phenomenon).'],
+ [{preset:'sinc',v:.75,y:'x[2n]',range:1},'Now the cutoff is 0.75π and we keep every other sample, y[n] = x[2n]. Predict Y(e^{jω}). Does aliasing occur?','Y(e^{jω}) = ½[X(e^{jω/2}) + X(e^{j(ω−2π)/2})]. The stretched band would reach 1.5π > π, so the two terms overlap: Y = ½ for |ω| < 0.5π and Y = 1 for 0.5π < |ω| ≤ π. That is aliasing. Try a cutoff of 0.5π or less and the overlap disappears.']];
+
+const state={preset:'pulse',pv:{},custom:'0.8^n u[n] cos(pi n/4)',yexpr:'x[n-3]',range:1,view:'mp',hover:null,x:null,y:null,ws:[],X:[],Y:[]};
+for(const k in presets)if(presets[k].param)state.pv[k]=presets[k].param.v;
+
+const sup=t=>t.replace(/\^\{([^}]*)\}/g,'<sup>$1</sup>');
+let mjQ=Promise.resolve();
+function setTex(el,html){el.innerHTML=html;if(window.MathJax&&MathJax.typesetPromise)mjQ=mjQ.then(()=>MathJax.typesetPromise([el])).catch(()=>{})}
+function showErr(id,msg){const e=$(id);e.textContent=msg||'';e.style.display=msg?'block':'none'}
+
+function buildX(){const P=presets[state.preset];let f;
+ if(P.custom){const g=parse(state.custom,{vars:['n'],allowX:false,dt:true});f=n=>g({n})}else{const h=P.f(state.pv[state.preset]);f=n=>[h(n),0]}
+ const x=new Map();for(let n=-NX;n<=NX;n++){const v=f(n);if(!isFinite(v[0])||!isFinite(v[1]))throw Error(`x[${n}] is not a finite number`);if(Math.abs(v[0])>1e-12||Math.abs(v[1])>1e-12)x.set(n,v)}return x}
+function buildY(x){const g=parse(state.yexpr,{vars:['n'],allowX:true,dt:true});
+ const xf=k=>{if(Math.abs(k[1])>1e-9)throw Error('The index of x must be real');const r=Math.round(k[0]);return Math.abs(k[0]-r)>1e-9?[0,0]:(x.get(r)||[0,0])};
+ const y=new Map();for(let n=-NY;n<=NY;n++){const v=g({n,x:xf});if(!isFinite(v[0])||!isFinite(v[1]))throw Error(`y[${n}] is not a finite number`);if(Math.abs(v[0])>1e-12||Math.abs(v[1])>1e-12)y.set(n,v)}return y}
+function dtftAt(seq,w){let re=0,im=0;for(const [n,[a,b]] of seq){const c=Math.cos(w*n),s=Math.sin(w*n);re+=a*c+b*s;im+=b*c-a*s}return [re,im]}
+const energy=seq=>{let e=0;for(const [,v] of seq)e+=v[0]*v[0]+v[1]*v[1];return e};
+// (1/2π)∫|X|² dω over one period; the uniform-grid average is exact for these finite sequences.
+function parseval(seq){const K=1024;let s=0;for(let k=0;k<K;k++){const v=dtftAt(seq,-Math.PI+TAU*k/K);s+=v[0]*v[0]+v[1]*v[1]}return s/K}
+const tailMax=(seq,N)=>Math.max(...[...seq].filter(([n])=>Math.abs(n)>=N-2).map(([,v])=>Math.hypot(v[0],v[1])),0);
+const seqMax=seq=>Math.max(...[...seq].map(([,v])=>Math.hypot(v[0],v[1])),0);
+
+function compute(){
+ try{state.x=buildX();showErr('errx')}catch(e){showErr('errx',e.message);return false}
+ try{state.y=buildY(state.x);showErr('erry')}catch(e){showErr('erry',e.message);return false}
+ const M=1201,R=state.range;state.ws=Array.from({length:M},(_,i)=>-R*Math.PI+2*R*Math.PI*i/(M-1));
+ state.X=state.ws.map(w=>dtftAt(state.x,w));state.Y=state.ws.map(w=>dtftAt(state.y,w));return true}
+
+// ---------- plotting ----------
+function prep(id){const c=$(id),r=c.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);c.width=Math.round(r.width*d);c.height=Math.round(r.height*d);const p=c.getContext('2d');p.setTransform(d,0,0,d,0,0);p.clearRect(0,0,r.width,r.height);return{p,w:r.width,h:r.height}}
+function niceTicks(lo,hi,k=4){const span=hi-lo||1,raw=span/k,mag=10**Math.floor(Math.log10(raw)),st=[1,2,2.5,5,10].map(s=>s*mag).find(s=>s>=raw*.999);const out=[];for(let v=Math.ceil(lo/st-1e-9)*st;v<=hi+1e-9;v+=st)out.push([v,fmt(Math.abs(v)<1e-12?0:v,3).replace('-','−')]);return out}
+function frame(p,w,h,o){const pad={l:46,r:12,t:12,b:28};const X=v=>pad.l+(v-o.xmin)/(o.xmax-o.xmin)*(w-pad.l-pad.r),Y=v=>h-pad.b-(v-o.ymin)/(o.ymax-o.ymin)*(h-pad.t-pad.b);
+ if(o.shade){p.fillStyle='#f3f6fa';p.fillRect(pad.l,pad.t,X(-Math.PI)-pad.l,h-pad.t-pad.b);p.fillRect(X(Math.PI),pad.t,w-pad.r-X(Math.PI),h-pad.t-pad.b)}
+ p.lineWidth=1;p.font='11px system-ui';
+ for(const [v,l] of o.yticks){p.strokeStyle=Math.abs(v)<1e-12?'#aebeca':'#e4ebf1';p.beginPath();p.moveTo(pad.l,Y(v));p.lineTo(w-pad.r,Y(v));p.stroke();p.fillStyle='#607687';p.textAlign='right';p.fillText(l,pad.l-5,Y(v)+4)}
+ for(const [v,l] of o.xticks){p.strokeStyle=Math.abs(v)<1e-12?'#c9d5df':'#eef2f6';p.beginPath();p.moveTo(X(v),pad.t);p.lineTo(X(v),h-pad.b);p.stroke();p.fillStyle='#607687';p.textAlign='center';p.fillText(l,X(v),h-pad.b+16)}
+ return{X,Y,pad}}
+function curve(p,X,Y,ws,vals,{color,width=2,dash=[],jump=0}){p.save();p.strokeStyle=color;p.lineWidth=width;p.setLineDash(dash);p.beginPath();let pen=false,prev=0;
+ for(let i=0;i<ws.length;i++){const v=vals[i];if(v===null){pen=false;continue}if(pen&&jump&&Math.abs(v-prev)>jump)pen=false;const px=X(ws[i]),py=Y(v);if(pen)p.lineTo(px,py);else p.moveTo(px,py);pen=true;prev=v}p.stroke();p.restore()}
+function piLabel(k){if(k===0)return '0';const s=k<0?'−':'',a=Math.abs(k);return s+(a===1?'':a===.5?'':a)+'π'+(a===.5?'/2':'')}
+function omegaTicks(){const R=state.range,st=R===1?.5:1,out=[];for(let k=-R;k<=R+1e-9;k+=st)out.push([k*Math.PI,piLabel(k)]);return out}
+
+function plotTime(){const{p,w,h}=prep('cTime');const xs=state.x,ys=state.y,big=Math.max(seqMax(xs),seqMax(ys),1e-12);
+ const sig=[...xs,...ys].filter(([,v])=>Math.hypot(v[0],v[1])>1e-3*big).map(([n])=>n);
+ let lo=Math.min(-10,...sig)-2,hi=Math.max(10,...sig)+2;lo=Math.max(lo,-60);hi=Math.min(hi,60);
+ const cplxY=[...ys.values()].some(v=>Math.abs(v[1])>1e-9*big),cplxX=[...xs.values()].some(v=>Math.abs(v[1])>1e-9*big);
+ let vmin=0,vmax=0;for(const s of [xs,ys])for(const [n,v] of s)if(n>=lo&&n<=hi){vmin=Math.min(vmin,v[0],v[1]);vmax=Math.max(vmax,v[0],v[1])}
+ const padv=.12*((vmax-vmin)||1);vmin-=vmin<0?padv:0;vmax+=padv;
+ const span=hi-lo,st=span<=26?2:span<=60?5:10,xt=[];for(let n=Math.ceil(lo/st)*st;n<=hi;n+=st)xt.push([n,n<0?'−'+(-n):''+n]);
+ const{X,Y}=frame(p,w,h,{xmin:lo-.6,xmax:hi+.6,ymin:vmin,ymax:vmax,xticks:xt,yticks:niceTicks(vmin,vmax)});
+ const off=cplxY?[-.22,0,.22]:[-.13,.13];
+ const stem=(n,v,color,hollow,o)=>{const x=X(n+o),y0=Y(0),y=Y(v);p.strokeStyle=color;p.lineWidth=1.6;p.beginPath();p.moveTo(x,y0);p.lineTo(x,y);p.stroke();p.beginPath();p.arc(x,y,3.3,0,TAU);if(hollow){p.fillStyle='#fff';p.fill();p.lineWidth=1.8;p.stroke()}else{p.fillStyle=color;p.fill()}};
+ for(let n=lo;n<=hi;n++){const xv=xs.get(n),yv=ys.get(n);if(xv)stem(n,xv[0],COL.x,true,off[0]);if(yv){stem(n,yv[0],COL.y,false,off[1]);if(cplxY&&Math.abs(yv[1])>1e-12)stem(n,yv[1],COL.yi,false,off[2])}}
+ $('legTime').innerHTML=`<span><span class="dot hollow" style="--c:${COL.x}"></span>x[n]${cplxX?' (real part)':''}</span><span><span class="dot" style="--c:${COL.y}"></span>${cplxY?'Re y[n]':'y[n]'}</span>`+(cplxY?`<span><span class="dot" style="--c:${COL.yi}"></span>Im y[n]</span>`:'');
+ $('timeSub').textContent=`Showing ${String(lo).replace('-','−')} ≤ n ≤ ${hi}`+(cplxY?' · y[n] is complex, so its real and imaginary parts are drawn separately.':'.')}
+
+function cleanPhase(Z){const m=Math.max(...Z.map(z=>Math.hypot(z[0],z[1])),1e-300);return Z.map(z=>{const a=Math.hypot(z[0],z[1]);if(a<2e-2*m)return null;const im=Math.abs(z[1])<1e-9*m?0:z[1],re=Math.abs(z[0])<1e-9*m?0:z[0];return Math.atan2(im,re)/Math.PI})}
+function plotSpec(){const ws=state.ws,R=state.range,xt=omegaTicks(),shade=R>1,mp=state.view==='mp';
+ const panels=mp?[
+  {id:'cA',vals:[state.X.map(z=>Math.hypot(...z)),state.Y.map(z=>Math.hypot(...z))],pos:true,title:'Magnitude |X(e<sup>jω</sup>)| and |Y(e<sup>jω</sup>)|',sub:'Even in ω whenever the sequence is real.',l:['|X|','|Y|']},
+  {id:'cB',vals:[cleanPhase(state.X),cleanPhase(state.Y)],phase:true,title:'Phase ∠X and ∠Y (units of π)',sub:'Drawn only where the magnitude is at least 2% of its peak.',l:['∠X','∠Y']}]:[
+  {id:'cA',vals:[state.X.map(z=>z[0]),state.Y.map(z=>z[0])],title:'Real part Re X and Re Y',sub:'Even in ω whenever the sequence is real.',l:['Re X','Re Y']},
+  {id:'cB',vals:[state.X.map(z=>z[1]),state.Y.map(z=>z[1])],title:'Imaginary part Im X and Im Y',sub:'Odd in ω whenever the sequence is real; zero for real even sequences.',l:['Im X','Im Y']}];
+ panels.forEach((P,k)=>{const{p,w,h}=prep(P.id);let ymin,ymax,yt;
+  if(P.phase){ymin=-1.15;ymax=1.15;yt=[-1,-.5,0,.5,1].map(v=>[v,piLabel(v)])}
+  else{const all=P.vals.flat().filter(v=>v!==null),m=Math.max(...all.map(Math.abs),1e-9);ymin=P.pos?0:-1.1*m;ymax=1.1*m;yt=niceTicks(ymin,ymax)}
+  const{X,Y,pad}=frame(p,w,h,{xmin:ws[0],xmax:ws[ws.length-1],ymin,ymax,xticks:xt,yticks:yt,shade});
+  curve(p,X,Y,ws,P.vals[1],{color:COL.y,width:2.6,jump:P.phase?.9:0});
+  curve(p,X,Y,ws,P.vals[0],{color:COL.x,width:1.7,dash:[6,4],jump:P.phase?.9:0});
+  if(state.hover!==null){p.save();p.strokeStyle='#64748b';p.setLineDash([3,3]);p.lineWidth=1;p.beginPath();p.moveTo(X(state.hover),pad.t);p.lineTo(X(state.hover),h-pad.b);p.stroke();p.restore()}
+  $(k?'t2':'t1').innerHTML=P.title;$(k?'s2':'s1').textContent=P.sub+(shade?' Shaded: outside the principal period −π ≤ ω ≤ π.':'');
+  $(k?'legB':'legA').innerHTML=`<span><span class="dash" style="--c:${COL.x}"></span>${P.l[0]} (of x)</span><span><span class="solid" style="--c:${COL.y}"></span>${P.l[1]} (of y)</span>`});}
+
+function readout(){if(state.hover===null){$('readout').innerHTML='Hover over (or tap) a spectrum plot to read X(e<sup>jω</sup>) and Y(e<sup>jω</sup>) at that frequency.';return}
+ const w=state.hover,a=dtftAt(state.x,w),b=dtftAt(state.y,w);
+ $('readout').innerHTML=`ω = ${phfmt(w/Math.PI)} &nbsp;·&nbsp; <span style="color:${COL.x}">X(e<sup>jω</sup>) = ${cfmt(a)} = ${pfmt(a)}</span> &nbsp;·&nbsp; <span style="color:${COL.y}">Y(e<sup>jω</sup>) = ${cfmt(b)} = ${pfmt(b)}</span>`}
+
+function stats(){const line=(s,nm,N,lab)=>{const z0=dtftAt(s,0),zp=dtftAt(s,Math.PI);return `<b style="color:${nm==='x'?COL.x:COL.y}">${nm}[n]:</b> ${lab}(e<sup>j0</sup>) = Σ ${nm}[n] = ${cfmt(z0)} &nbsp;·&nbsp; ${lab}(e<sup>jπ</sup>) = Σ (−1)<sup>n</sup>${nm}[n] = ${cfmt(zp)} &nbsp;·&nbsp; energy Σ|${nm}[n]|² = ${fmt(energy(s),4)} = (1/2π)∫|${lab}|²dω = ${fmt(parseval(s),4)}`};
+ let html=line(state.x,'x',NX,'X')+'<br>'+line(state.y,'y',NY,'Y');
+ const bx=seqMax(state.x),by=seqMax(state.y);
+ if(tailMax(state.x,NX)>1e-3*bx&&state.preset!=='sinc')html+=`<br><span class="warn">⚠ x[n] has not died out by n = ±${NX}; the spectrum is that of the truncated sequence.</span>`;
+ if(tailMax(state.y,NY)>1e-3*by)html+=`<br><span class="warn">⚠ y[n] has not died out by n = ±${NY}; the spectrum is that of the truncated sequence.</span>`;
+ $('stats').innerHTML=html}
+
+// ---------- UI ----------
+function syncControls(){
+ document.querySelectorAll('#presets .pill').forEach(b=>b.classList.toggle('selected',b.dataset.p===state.preset));
+ const P=presets[state.preset];$('paramWrap').classList.toggle('hidden',!P.param);$('customWrap').classList.toggle('hidden',!P.custom);
+ if(P.param){const q=P.param,el=$('param');el.min=q.min;el.max=q.max;el.step=q.step;el.value=state.pv[state.preset];$('paramLabel').textContent=q.label;$('paramVal').textContent=q.show(state.pv[state.preset])}
+ $('xexpr').value=state.custom;$('yexpr').value=state.yexpr;
+ document.querySelectorAll('[data-range]').forEach(b=>b.classList.toggle('selected',+b.dataset.range===state.range));
+ document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('selected',b.dataset.view===state.view));
+ const key=state.yexpr.replace(/\s+/g,''),hit=EX.find(e=>e[0].replace(/\s+/g,'')===key);
+ document.querySelectorAll('#examples .chip').forEach(b=>b.classList.toggle('selected',b.dataset.ex.replace(/\s+/g,'')===key));
+ setTex($('prop'),hit?`<b>Property:</b> \\(${hit[1]}\\)<br>${sup(hit[2])}`:'<b>Your operation:</b> Y(e<sup>jω</sup>) is computed directly from the samples of y[n]. Can you find a formula for it in terms of X(e<sup>jω</sup>)?');
+ setTex($('closed'),`\\(${P.tex(state.pv[state.preset])}\\)`)}
+function render(){syncControls();if(!compute())return;plotTime();plotSpec();readout();stats()}
+
+$('presets').innerHTML=Object.entries(presets).map(([k,P])=>`<button class="pill" data-p="${k}">${P.name}</button>`).join('');
+$('examples').innerHTML=EX.map(([e])=>`<button class="chip" data-ex="${e}">${e}</button>`).join('');
+$('questions').innerHTML=QS.map(([L,q,a],i)=>`<div class="question"><strong>Predict first · Question ${i+1}</strong><button class="load" data-q="${i}">Load this setup</button><p>${sup(q)}</p><details><summary>Show answer</summary><p>${sup(a)}</p></details></div>`).join('');
+document.querySelectorAll('#presets .pill').forEach(b=>b.addEventListener('click',()=>{state.preset=b.dataset.p;render()}));
+$('param').addEventListener('input',e=>{state.pv[state.preset]=+e.target.value;render()});
+$('applyx').addEventListener('click',()=>{state.custom=$('xexpr').value;render()});$('xexpr').addEventListener('keydown',e=>{if(e.key==='Enter'){state.custom=e.target.value;render()}});
+$('apply').addEventListener('click',()=>{state.yexpr=$('yexpr').value;render()});$('yexpr').addEventListener('keydown',e=>{if(e.key==='Enter'){state.yexpr=e.target.value;render()}});
+document.querySelectorAll('#examples .chip').forEach(b=>b.addEventListener('click',()=>{state.yexpr=b.dataset.ex;render()}));
+document.querySelectorAll('[data-range]').forEach(b=>b.addEventListener('click',()=>{state.range=+b.dataset.range;state.hover=null;render()}));
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{state.view=b.dataset.view;plotSpec();syncControls()}));
+document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>{const L=QS[+b.dataset.q][0];state.preset=L.preset;state.pv[L.preset]=L.v;state.yexpr=L.y;state.range=L.range;state.hover=null;render();$('cTime').scrollIntoView({behavior:'smooth',block:'center'})}));
+['cA','cB'].forEach(id=>{const c=$(id),move=e=>{const r=c.getBoundingClientRect(),pt=e.touches?e.touches[0]:e,frac=(pt.clientX-r.left-46)/(r.width-58);if(frac<0||frac>1)return;const R=state.range;state.hover=(-R+2*R*frac)*Math.PI;plotSpec();readout()};
+ c.addEventListener('mousemove',move);c.addEventListener('touchstart',move,{passive:true});c.addEventListener('mouseleave',()=>{state.hover=null;plotSpec();readout()})});
+window.addEventListener('resize',()=>{if(state.x){plotTime();plotSpec()}});
+render();
+</script>
+</body></html>
