@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CTFT Explorer · EE3015</title>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#1b2939;background:#f4f7fb}*{box-sizing:border-box}body{margin:0}header{background:#13283f;color:white;padding:29px max(20px,calc((100vw - 1100px)/2)) 24px}header h1{font-size:clamp(25px,3.2vw,36px);letter-spacing:-.8px;margin:4px 0 8px}header p{color:#c5d4e3;margin:0;font-size:15px}.kicker{font-size:12px;color:#80d3ff;letter-spacing:2px;font-weight:800}main{max-width:1100px;margin:0 auto;padding:24px 20px 50px}button{font:inherit;cursor:pointer}.panel{background:#fff;border:1px solid #e0e8f0;border-radius:16px;box-shadow:0 4px 18px #223c5710;padding:24px;margin-bottom:18px}h2{font-size:23px;letter-spacing:-.4px;margin:0 0 8px}h3{font-size:16px;margin:0 0 12px}.subtitle{color:#52677c;font-size:14px;line-height:1.6;margin:0 0 20px}.equation{text-align:center;font-size:clamp(15px,2vw,19px);background:#f2f7fc;border-radius:10px;padding:14px 8px;margin-bottom:12px;overflow-x:auto}.layout{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}.sectionlabel{font-size:12px;font-weight:800;letter-spacing:1.5px;color:#6a7c8c;margin:4px 0 8px}.pillrow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}.pill{padding:8px 12px;border:1px solid #cddceb;background:#fff;border-radius:8px;color:#365069;font-size:14px}.pill:hover{background:#f5faff}.pill.selected{background:#e7f3ff;border-color:#1474af;color:#085e99;font-weight:750}.chip{padding:5px 9px;border:1px solid #b7d6e8;background:#f5fbff;border-radius:7px;color:#1a5276;font:12.5px ui-monospace,SFMono-Regular,Consolas,monospace}.chip:hover{background:#e3f1fb}.chip.selected{background:#dff3ee;border-color:#13836f;color:#0f6b5a}.sigbox{border:1px solid #e0e7ef;border-left:4px solid var(--c);border-radius:11px;padding:15px 16px 8px;min-width:0}.sigbox h3{color:var(--c)}.field{margin-bottom:12px}.field label{display:block;font-size:13px;font-weight:650;color:#344a60;margin-bottom:6px}.field input{width:100%;border:1px solid #cdd6e4;border-radius:8px;padding:10px;font:15px ui-monospace,SFMono-Regular,Consolas,monospace}.field input[type=range]{border:0;padding:0;accent-color:#1467a8}.value{float:right;font-variant-numeric:tabular-nums;color:#09649f}.ybox{display:flex;gap:8px;align-items:stretch}.ybox .lhs{display:flex;align-items:center;font:600 17px Georgia,serif;font-style:italic;color:#13836f;white-space:nowrap}.ybox input{flex:1;min-width:0;border:2px solid #9fd3c7;border-radius:9px;padding:11px;font:16px ui-monospace,SFMono-Regular,Consolas,monospace}.ybox input:focus{outline:none;border-color:#13836f}.apply{border:0;color:white;background:#13836f;font-weight:750;border-radius:9px;padding:0 16px}.apply:hover{background:#0f6b5a}.apply.blue{background:#1467a8}.apply.blue:hover{background:#0f5487}.hint{font-size:12px;color:#6a7c8c;line-height:1.5;margin:6px 0 10px}.prop{font-size:13.5px;color:#24564b;background:#f0faf7;border:1px solid #c6e9df;border-radius:9px;padding:9px 12px;margin:2px 0 12px;line-height:1.6}.error{display:none;color:#b91c1c;background:#fff1f2;border-radius:8px;font-size:13px;padding:9px 11px;margin:4px 0 10px}.status{background:#f4f8fd;border:1px solid #dbe6f2;border-radius:9px;padding:9px 12px;font-size:13px;color:#29445f;line-height:1.7;margin-top:14px;font-variant-numeric:tabular-nums}.status .warn{color:#795311}.toolbar{display:flex;gap:6px 18px;flex-wrap:wrap;align-items:center;margin-top:14px}.toolbar .pillrow{margin:0}.toolbar .sectionlabel{margin:0}.vizbox{border:1px solid #e0e7ef;border-radius:11px;padding:13px;background:white;min-width:0;margin-top:14px}.vizbox h3{margin-bottom:4px}.vizbox .small{font-size:12px;color:#6a7c8c;line-height:1.5;margin-bottom:8px}canvas{display:block;width:100%;height:220px}.spec canvas{cursor:crosshair}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:14px}.legend{font-size:12px;color:#597085;margin:7px 0 0;display:flex;gap:14px;flex-wrap:wrap}.dot{display:inline-block;width:9px;height:9px;background:var(--c);border-radius:9px;margin-right:4px}.dot.hollow{background:#fff;border:2px solid var(--c);width:10px;height:10px}.dash{display:inline-block;width:18px;height:0;border-top:2px dashed var(--c);vertical-align:middle;margin-right:4px}.solid{display:inline-block;width:18px;height:0;border-top:3px solid var(--c);vertical-align:middle;margin-right:4px}.readout{font-size:12.5px;color:#36506a;background:#f7f9fc;border-radius:8px;padding:8px 11px;margin-top:10px;min-height:34px;font-variant-numeric:tabular-nums}.question{background:#fff9e9;border:1px solid #f4e3ba;border-radius:12px;padding:17px 19px;margin-top:14px}.question strong{font-size:14px;color:#795311}.question p{margin:7px 0 11px;font-size:14px;line-height:1.55}.question .load{border:1px solid #e3c98a;background:#fff;border-radius:7px;padding:4px 9px;font-size:12px;color:#795311;margin-left:6px}details{font-size:14px;color:#4b5f71}details summary{color:#0e689c;font-weight:700;cursor:pointer}details p{line-height:1.6;margin-bottom:0}footer{text-align:center;color:#6a7d8b;font-size:12px;margin-top:25px}.hidden{display:none!important}@media(max-width:780px){.layout,.twocol{grid-template-columns:1fr}.panel{padding:17px}main{padding:18px 12px 40px}canvas{height:200px}}
+</style>
+<style>.site-nav{box-sizing:border-box;display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:12px max(20px,calc((100vw - 1160px)/2));background:#13283f;color:white;font:14px Inter,system-ui,sans-serif}.site-nav a{color:#dbeafe!important;text-decoration:none!important;margin-right:17px}.site-nav a:hover{text-decoration:underline!important}.site-nav .site-brand{font-weight:750;color:white!important;font-size:16px}.site-nav div{display:flex;flex-wrap:wrap;gap:0}</style></head>
+<body><nav class="site-nav" aria-label="Site navigation"><a class="site-brand" href="index.html">∿ Fourier Learning Lab</a><div><a href="index.html">Home</a><a href="explorer.html">Series Explorer</a><a href="sound-lab.html">Sound Lab</a><a href="convolution.html">Convolution</a><a href="filtering.html">Filter Lab</a><a href="draw.html">Draw a Signal</a><a href="properties.html">FS Properties</a><a href="ctft.html" aria-current="page">CTFT</a><a href="dtft.html">DTFT</a></div></nav>
+<header><div class="kicker">EE3015 · SIGNALS &amp; SYSTEMS</div><h1>Continuous-Time Fourier Transform</h1><p>Pick a signal, transform it in time, and see how its spectrum X(ω) responds, with no integrals to grind through.</p></header>
+<main>
+<section class="panel">
+<h2>CTFT Explorer</h2>
+<p class="subtitle">The CTFT describes an aperiodic signal x(t) as a continuum of complex exponentials e<sup>jωt</sup>. A few basic pairs plus the properties (shift, reversal, scaling, modulation, symmetry) give the transform of many other signals without integrating. Try predicting each spectrum before you look.</p>
+<div class="equation">\( X(\omega)=\displaystyle\int_{-\infty}^{\infty} x(t)\,e^{-j\omega t}\,dt, \qquad x(t)=\dfrac{1}{2\pi}\displaystyle\int_{-\infty}^{\infty} X(\omega)\,e^{j\omega t}\,d\omega \)</div>
+<div class="equation" id="closed"></div>
+<div class="layout">
+<div class="sigbox" style="--c:#2563eb"><h3>Input signal x(t)</h3>
+<div class="pillrow" id="presets"></div>
+<div class="field" id="paramWrap"><label for="param"><span id="paramLabel"></span><span class="value" id="paramVal"></span></label><input id="param" type="range"></div>
+<div class="field hidden" id="customWrap"><label for="xexpr">x(t) =</label><div class="ybox"><input id="xexpr" spellcheck="false" autocomplete="off"><button class="apply blue" id="applyx">Apply</button></div><div class="hint">Use t, u(t), rect(t) (1 for |t| &lt; ½), tri(t) (1 − |t| for |t| &lt; 1), pi, j and functions such as cos, sin, exp, abs. Example: <code>t e^(-t^2)</code>. The signal is evaluated for −30 ≤ t ≤ 30.</div></div>
+<div class="error" id="errx" role="alert"></div>
+</div>
+<div class="sigbox" style="--c:#13836f"><h3>Operation: write y(t) in terms of x</h3>
+<div class="ybox"><span class="lhs">y(t) =</span><input id="yexpr" spellcheck="false" autocomplete="off" aria-label="Operation"><button class="apply" id="apply">Apply</button></div>
+<div class="hint">For example <code>x(t-2)</code>, <code>x(-t)</code>, <code>x(2t)</code>, <code>cos(5t) x(t)</code>, or any combination such as <code>x(t-1) + x(t+1)</code>.</div>
+<div class="error" id="erry" role="alert"></div>
+<div class="prop" id="prop"></div>
+<div class="sectionlabel">TRY ONE</div><div class="pillrow" id="examples"></div>
+</div>
+</div>
+<div class="vizbox"><h3>Time domain</h3><div class="small" id="timeSub"></div><canvas id="cTime" aria-label="x(t) and y(t)"></canvas><div class="legend" id="legTime"></div></div>
+<div class="toolbar"><span class="sectionlabel">FREQUENCY RANGE</span><div class="pillrow" id="rangePills"><button class="pill" data-range="10">|ω| ≤ 10</button><button class="pill" data-range="20">|ω| ≤ 20</button><button class="pill" data-range="40">|ω| ≤ 40</button></div><span class="sectionlabel">VIEW</span><div class="pillrow" id="viewPills"><button class="pill" data-view="mp">Magnitude &amp; phase</button><button class="pill" data-view="ri">Real &amp; imaginary</button></div></div>
+<div class="twocol spec">
+<div class="vizbox"><h3 id="t1"></h3><div class="small" id="s1"></div><canvas id="cA" aria-label="Spectrum plot 1"></canvas><div class="legend" id="legA"></div></div>
+<div class="vizbox"><h3 id="t2"></h3><div class="small" id="s2"></div><canvas id="cB" aria-label="Spectrum plot 2"></canvas><div class="legend" id="legB"></div></div>
+</div>
+<div class="readout" id="readout"></div>
+<div class="status" id="stats"></div>
+<div id="questions"></div>
+</section>
+<footer>Standalone interactive teaching demo · x(t) is evaluated for −30 ≤ t ≤ 30 and y(t) for −60 ≤ t ≤ 60 at steps of 0.01; X(ω) and Y(ω) are computed numerically from these samples (ω in rad/s).</footer>
+</main>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const TAU=2*Math.PI,COL={x:'#2563eb',y:'#008b75',yi:'#e07a30'};
+const fmt=(v,d=3)=>{if(!isFinite(v))return '—';if(Math.abs(v)<5e-4)return '0';const r=+v.toPrecision(d);return (Object.is(r,-0)?0:r).toString()};
+const phfmt=v=>{const r=fmt(v);return r==='0'?'0':r==='1'?'π':r==='-1'?'−π':r.replace('-','−')+'π'};
+const cfmt=([re,im])=>{const r=fmt(re),i=fmt(Math.abs(im));if(i==='0')return r.replace('-','−');if(r==='0')return (im<0?'−':'')+(i==='1'?'':i)+'j';return `${r.replace('-','−')} ${im<0?'−':'+'} ${i}j`};
+const pfmt=([re,im])=>{const m=Math.hypot(re,im);return m<5e-4?'0':`${fmt(m)} ∠ ${phfmt(Math.atan2(im,re)/Math.PI)}`};
+
+// ---------- complex arithmetic ----------
+const C=(re,im=0)=>[re,im];
+const cadd=(a,b)=>[a[0]+b[0],a[1]+b[1]],csub=(a,b)=>[a[0]-b[0],a[1]-b[1]],cneg=a=>[-a[0],-a[1]];
+const cmul=(a,b)=>[a[0]*b[0]-a[1]*b[1],a[0]*b[1]+a[1]*b[0]];
+const cdiv=(a,b)=>{const q=b[0]*b[0]+b[1]*b[1];if(q===0)throw Error('Division by zero');return [(a[0]*b[0]+a[1]*b[1])/q,(a[1]*b[0]-a[0]*b[1])/q]};
+const cexp=a=>{const m=Math.exp(a[0]);return [m*Math.cos(a[1]),m*Math.sin(a[1])]};
+const clog=a=>{if(a[0]===0&&a[1]===0)throw Error('log(0) is undefined');return [Math.log(Math.hypot(a[0],a[1])),Math.atan2(a[1],a[0])]};
+function cpow(a,b){if(Math.abs(b[1])<1e-15&&Number.isInteger(b[0])&&Math.abs(b[0])<=256){let r=[1,0];for(let i=0;i<Math.abs(b[0]);i++)r=cmul(r,a);return b[0]<0?cdiv([1,0],r):r}
+ if(a[0]===0&&a[1]===0)return [0,0];return cexp(cmul(b,clog(a)))}
+const re1=f=>a=>[f(a[0]),0];
+const FUNCS={
+ sin:a=>[Math.sin(a[0])*Math.cosh(a[1]),Math.cos(a[0])*Math.sinh(a[1])],
+ cos:a=>[Math.cos(a[0])*Math.cosh(a[1]),-Math.sin(a[0])*Math.sinh(a[1])],
+ tan:a=>cdiv(FUNCS.sin(a),FUNCS.cos(a)),exp:cexp,log:clog,sqrt:a=>cpow(a,[.5,0]),
+ abs:a=>[Math.hypot(a[0],a[1]),0],conj:a=>[a[0],-a[1]],real:a=>[a[0],0],imag:a=>[a[1],0],re:a=>[a[0],0],im:a=>[a[1],0],angle:a=>[Math.atan2(a[1],a[0]),0],
+ floor:re1(Math.floor),ceil:re1(Math.ceil),round:re1(Math.round),sign:re1(Math.sign),u:re1(v=>v>=0?1:0),delta:re1(v=>Math.abs(v)<1e-9?1:0),
+ min:(a,b)=>[Math.min(a[0],b[0]),0],max:(a,b)=>[Math.max(a[0],b[0]),0],mod:(a,b)=>[((a[0]%b[0])+b[0])%b[0],0]};
+const CONST={pi:[Math.PI,0],e:[Math.E,0],j:[0,1]};
+
+// ---------- expression parser (no eval): returns env => complex ----------
+function tokenize(s){const toks=[],re=/\s*(?:(\d+\.?\d*(?:[eE][+-]?\d+)?|\.\d+(?:[eE][+-]?\d+)?)|([A-Za-z_][A-Za-z_0-9]*)|(==|!=|<=|>=|\*\*|[-+*/^()\[\],<>%]))/y;let m;
+ while(re.lastIndex<s.length){const at=re.lastIndex;m=re.exec(s);if(!m){if(/^\s*$/.test(s.slice(at)))break;throw Error(`Unexpected character "${s.slice(at).trim()[0]}"`)}
+  if(m[1]!==undefined)toks.push({type:'num',v:m[1],n:parseFloat(m[1])});else if(m[2]!==undefined)toks.push({type:'id',v:m[2]});else toks.push({type:'op',v:m[3]==='**'?'^':m[3]})}
+ return toks}
+function parse(src,{vars,allowX,dt}){const toks=tokenize(String(src));if(!toks.length)throw Error('The expression is empty');let p=0;
+ const peek=()=>toks[p],next=()=>toks[p++],isOp=(t,...v)=>t&&t.type==='op'&&v.includes(t.v);
+ const expect=v=>{const t=next();if(!t||t.v!==v)throw Error(`Expected "${v}"${t?` but found "${t.v}"`:' at the end'}`)};
+ const expr=()=>{const a=add();const t=peek();if(isOp(t,'==','!=','<','>','<=','>=')){next();const b=add(),op=t.v;return env=>{const x=a(env)[0],y=b(env)[0],eq=Math.abs(x-y)<1e-9;return [(op==='=='?eq:op==='!='?!eq:op==='<'?x<y&&!eq:op==='>'?x>y&&!eq:op==='<='?x<y||eq:x>y||eq)?1:0,0]}}return a};
+ function add(){let a=mul();for(;;){const t=peek();if(!isOp(t,'+','-'))return a;next();const b=mul(),A=a;a=t.v==='+'?env=>cadd(A(env),b(env)):env=>csub(A(env),b(env))}}
+ function mul(){let a=unary();for(;;){const t=peek();
+  if(isOp(t,'*','/','%')){next();const b=unary(),A=a;a=t.v==='*'?env=>cmul(A(env),b(env)):t.v==='/'?env=>cdiv(A(env),b(env)):env=>FUNCS.mod(A(env),b(env))}
+  else if(t&&(t.type==='num'||t.type==='id'||isOp(t,'('))){const b=unary(),A=a;a=env=>cmul(A(env),b(env))} // implicit product, e.g. 2t or 3x(t)
+  else return a}}
+ function unary(){const t=peek();if(isOp(t,'-','+')){next();const a=unary();return t.v==='-'?env=>cneg(a(env)):a}return power()}
+ function power(){const b=primary();if(isOp(peek(),'^')){next();const e=unary();return env=>cpow(b(env),e(env))}return b}
+ function primary(){const t=next();if(!t)throw Error('The expression ended unexpectedly');
+  if(t.type==='num'){const v=[t.n,0];return ()=>v}
+  if(isOp(t,'(')){const a=expr();expect(')');return a}
+  if(t.type==='id'){const id=t.v,nx=peek();
+   if(id==='x'){if(!allowX)throw Error('x cannot appear in its own definition');
+    if(!isOp(nx,'(','['))throw Error(dt?'Write x with an index, for example x[n-3]':'Write x with an argument, for example x(t-1)');
+    const open=next().v,a=expr();expect(open==='('?')':']');return env=>env.x(a(env))}
+   if(FUNCS[id]){if(!isOp(nx,'(','['))throw Error(`${id} is a function: write ${id}(...)`);const fo=next().v;const args=[expr()];while(isOp(peek(),',')){next();args.push(expr())}expect(fo==='('?')':']');
+    const f=FUNCS[id];if(args.length!==f.length)throw Error(`${id}() takes ${f.length} argument${f.length>1?'s':''}`);return env=>f(...args.map(g=>g(env)))}
+   if(CONST[id]){const v=CONST[id];return ()=>v}
+   if(vars.includes(id))return env=>[env[id],0];
+   throw Error(`Unknown name "${id}". You can use ${vars.join(', ')}, pi, e, j${allowX?(dt?', x[...]':', x(...)'):''} and functions like cos, exp, conj, abs.`)}
+  throw Error(`Unexpected "${t.v}"`)}
+ const f=expr();if(p<toks.length)throw Error(`Unexpected "${toks[p].v}"`);return f}
+
+// ---------- signals ----------
+const DT=.01,TX=30,TY=60;
+const r2=v=>+v.toFixed(2);
+const cw=(c,v='\\omega')=>c===1?v:`${c}\\,${v}`; // drop a coefficient of 1 in the closed forms
+const presets={
+ rect:{name:'Pulse Π(t/T)',param:{label:'Width T',min:.5,max:6,step:.5,v:2,show:v=>r2(v)},f:T=>t=>Math.abs(t)<T/2?1:0,
+  tex:T=>String.raw`x(t)=\Pi\!\left(\dfrac{t}{${r2(T)}}\right)\quad\Longrightarrow\quad X(\omega)=\dfrac{2\sin(${cw(r2(T/2))})}{\omega}`},
+ exp:{name:'e<sup>−at</sup>u(t)',param:{label:'a',min:.5,max:4,step:.25,v:1,show:v=>r2(v)},f:a=>t=>t>=0?Math.exp(-a*t):0,
+  tex:a=>String.raw`x(t)=e^{-${cw(r2(a),'t')}}\,u(t)\quad\Longrightarrow\quad X(\omega)=\dfrac{1}{${r2(a)}+j\omega}`},
+ twosided:{name:'e<sup>−a|t|</sup>',param:{label:'a',min:.5,max:4,step:.25,v:1,show:v=>r2(v)},f:a=>t=>Math.exp(-a*Math.abs(t)),
+  tex:a=>String.raw`x(t)=e^{-${cw(r2(a),'|t|')}}\quad\Longrightarrow\quad X(\omega)=\dfrac{2a}{a^2+\omega^2}=\dfrac{${r2(2*a)}}{${r2(a*a)}+\omega^2}`},
+ tri:{name:'Triangle',param:{label:'Half-width T',min:.5,max:4,step:.5,v:1,show:v=>r2(v)},f:T=>t=>Math.max(0,1-Math.abs(t)/T),
+  tex:T=>String.raw`x(t)=\max\!\left(0,\,1-\dfrac{|t|}{${r2(T)}}\right)\quad\Longrightarrow\quad X(\omega)=${T===1?'':r2(T)}\left[\dfrac{\sin(${cw(r2(T/2))})}{${cw(r2(T/2))}}\right]^2`},
+ gauss:{name:'Gaussian',param:{label:'a',min:.25,max:4,step:.25,v:1,show:v=>r2(v)},f:a=>t=>Math.exp(-a*t*t),
+  tex:a=>String.raw`x(t)=e^{-${cw(r2(a),'t^2')}}\quad\Longrightarrow\quad X(\omega)=\sqrt{\dfrac{\pi}{a}}\,e^{-\omega^2/(4a)}=${r2(Math.sqrt(Math.PI/a))}\,e^{-\omega^2/${r2(4*a)}}`},
+ sinc:{name:'Ideal lowpass',param:{label:'Cutoff W',min:1,max:10,step:.5,v:3,show:v=>r2(v)+' rad/s'},f:W=>t=>Math.abs(t)<1e-12?W/Math.PI:Math.sin(W*t)/(Math.PI*t),
+  tex:W=>String.raw`x(t)=\dfrac{\sin(${cw(r2(W),'t')})}{\pi t}\quad\Longrightarrow\quad X(\omega)=\begin{cases}1,&|\omega|<${r2(W)}\\0,&|\omega|>${r2(W)}\end{cases}\quad\text{(truncated here to }|t|\le 30)`},
+ mod:{name:'Modulated pulse',param:{label:'Frequency ω₀',min:0,max:15,step:.5,v:5,show:v=>r2(v)+' rad/s'},f:w=>t=>Math.abs(t)<2?Math.cos(w*t):0,
+  tex:w=>String.raw`x(t)=\cos(${r2(w)}t)\,\Pi\!\left(\dfrac{t}{4}\right)\quad\Longrightarrow\quad X(\omega)=\dfrac{\sin 2(\omega-${r2(w)})}{\omega-${r2(w)}}+\dfrac{\sin 2(\omega+${r2(w)})}{\omega+${r2(w)}}`},
+ custom:{name:'Custom',custom:true,
+  tex:()=>String.raw`X(\omega)=\displaystyle\int_{-30}^{30} x(t)\,e^{-j\omega t}\,dt\quad\text{(computed from your signal)}`}};
+const EX=[
+ ['x(t)',String.raw`Y(\omega)=X(\omega)`,'No operation: y = x.'],
+ ['x(t-2)',String.raw`Y(\omega)=e^{-j2\omega}X(\omega)`,'Time shift: the magnitude is unchanged and the phase gains the straight line −2ω.'],
+ ['x(-t)',String.raw`Y(\omega)=X(-\omega)`,'Time reversal mirrors the spectrum about ω = 0; for real x this is X^{*}(ω).'],
+ ['x(2-t)',String.raw`Y(\omega)=e^{-j2\omega}X(-\omega)`,'y(t) = x(−(t−2)): reverse, then delay by 2.'],
+ ['x(2t)',String.raw`Y(\omega)=\tfrac12 X(\omega/2)`,'Compressing in time stretches the spectrum by 2 and halves its height.'],
+ ['x(t/2)',String.raw`Y(\omega)=2X(2\omega)`,'Stretching in time compresses the spectrum by 2 and doubles its height.'],
+ ['e^(j 3t) x(t)',String.raw`Y(\omega)=X(\omega-3)`,'Modulation by e^{j3t} shifts the spectrum right by 3 rad/s.'],
+ ['cos(5t) x(t)',String.raw`Y(\omega)=\tfrac12 X(\omega-5)+\tfrac12 X(\omega+5)`,'Multiplying by a cosine makes two half-height copies of X at ω = ±5 (amplitude modulation).'],
+ ['x(t)+x(-t)',String.raw`Y(\omega)=X(\omega)+X(-\omega)`,'For real x this is 2 Re X(ω): a real even signal has a real, even transform.'],
+ ['x(t)-x(-t)',String.raw`Y(\omega)=X(\omega)-X(-\omega)`,'For real x this is 2j Im X(ω): a real odd signal has a purely imaginary, odd transform.'],
+ ['t x(t)',String.raw`Y(\omega)=j\,\dfrac{dX(\omega)}{d\omega}`,'Multiplication by t is differentiation in frequency.']];
+const QS=[
+ [{preset:'rect',v:2,y:'x(t)',range:20,view:'mp'},'x(t) = Π(t/2) is a pulse of width 2. Predict X(0) and the first positive zero of X(ω). Then make the pulse wider: what happens to the main lobe?','X(0) = ∫x(t)dt = area = 2. From X(ω) = 2 sin(ω)/ω the first zero is at ω = π ≈ 3.14 rad/s. In general the zeros of a width-T pulse are at ω = 2πk/T, so a wider pulse has a narrower spectrum: time width and bandwidth trade off.'],
+ [{preset:'exp',v:1,y:'x(t-2)',range:10,view:'mp'},'Delay x(t) = e^{−t}u(t) by 2. Predict |Y(ω)| and ∠Y(ω) before you look.','Y(ω) = e^{−j2ω}/(1 + jω). The magnitude 1/√(1 + ω²) is unchanged; the phase becomes −tan^{−1}(ω) − 2ω, so it falls steadily and wraps every time it passes −π.'],
+ [{preset:'rect',v:2,y:'x(2t)',range:20,view:'mp'},'Compress the width-2 pulse in time: y(t) = x(2t). Predict Y(0) and the first zero of Y(ω).','y(t) = Π(t) has width 1, so Y(0) = 1 (half of X(0)) and the first zero moves out to ω = 2π. This is Y(ω) = ½X(ω/2): squeezing a signal in time spreads its spectrum.'],
+ [{preset:'exp',v:1,y:'x(t)+x(-t)',range:10,view:'ri'},'With x(t) = e^{−t}u(t), the sum y(t) = x(t) + x(−t) = e^{−|t|}. Without integrating, explain why Y(ω) is real and find Y(0). Then try x(t) − x(−t).','y is real and even, so Y is real and even: Y(ω) = X(ω) + X(−ω) = 1/(1 + jω) + 1/(1 − jω) = 2/(1 + ω²), and Y(0) = 2. For x(t) − x(−t) (real and odd) the transform is X(ω) − X(−ω) = −2jω/(1 + ω²), purely imaginary.'],
+ [{preset:'rect',v:4,y:'cos(5t) x(t)',range:20,view:'mp'},'Multiply a pulse of width 4 by cos(5t). Where are the peaks of |Y(ω)|, and how tall are they?','cos(5t) = ½(e^{j5t} + e^{−j5t}), so Y(ω) = ½X(ω − 5) + ½X(ω + 5). X(0) = 4, so |Y| has peaks of height about 2 at ω = ±5. This is amplitude modulation: hear it in the Sound Lab.'],
+ [{preset:'sinc',v:3,y:'x(t)',range:10,view:'mp'},'x(t) = sin(3t)/(πt). Predict X(ω). How is this pair related to the pulse Π(t/T)?','X(ω) = 1 for |ω| < 3 and 0 for |ω| > 3: an ideal lowpass spectrum. It is the dual of the pulse pair: a rectangle in time gives a sinc-shaped spectrum, and a sinc in time gives a rectangle in frequency. The small ripples at ω = ±3 come from truncating x(t) to |t| ≤ 30 (Gibbs phenomenon).']];
+
+const state={preset:'rect',pv:{},custom:'t e^(-t^2)',yexpr:'x(t-2)',range:20,view:'mp',hover:null,xs:null,ys:null,ws:[],X:[],Y:[]};
+for(const k in presets)if(presets[k].param)state.pv[k]=presets[k].param.v;
+FUNCS.rect=re1(v=>Math.abs(v)<.5?1:Math.abs(v)===.5?.5:0);FUNCS.tri=re1(v=>Math.max(0,1-Math.abs(v)));
+
+const sup=t=>t.replace(/\^\{([^}]*)\}/g,'<sup>$1</sup>');
+let mjQ=Promise.resolve();
+function setTex(el,html){el.innerHTML=html;if(window.MathJax&&MathJax.typesetPromise)mjQ=mjQ.then(()=>MathJax.typesetPromise([el])).catch(()=>{})}
+function showErr(id,msg){const e=$(id);e.textContent=msg||'';e.style.display=msg?'block':'none'}
+
+// Samples on the midpoint grid t_k = −T + (k + ½)·DT, so jumps at multiples of DT are integrated exactly.
+function sample(f,T,name){const N=Math.round(2*T/DT),re=new Float64Array(N),im=new Float64Array(N);let lo=N,hi=-1,big=0;
+ for(let k=0;k<N;k++){const t=-T+(k+.5)*DT,v=f(t);if(!isFinite(v[0])||!isFinite(v[1]))throw Error(`${name}(${r2(t)}) is not a finite number`);re[k]=v[0];im[k]=v[1];const a=Math.hypot(v[0],v[1]);if(a>1e-12){if(k<lo)lo=k;hi=k}if(a>big)big=a}
+ return{T,N,re,im,lo,hi,big,t:k=>-T+(k+.5)*DT}}
+function xFunction(){const P=presets[state.preset];if(P.custom){const g=parse(state.custom,{vars:['t'],allowX:false,dt:false});return t=>g({t})}const h=P.f(state.pv[state.preset]);return t=>[h(t),0]}
+function compute(){let xf;
+ try{xf=xFunction();state.xs=sample(t=>Math.abs(t)<=TX?xf(t):[0,0],TX,'x');showErr('errx')}catch(e){showErr('errx',e.message);return false}
+ try{const g=parse(state.yexpr,{vars:['t'],allowX:true,dt:false});const xa=a=>{if(Math.abs(a[1])>1e-9)throw Error('The argument of x must be real');return Math.abs(a[0])<=TX?xf(a[0]):[0,0]};state.ys=sample(t=>g({t,x:xa}),TY,'y');showErr('erry')}catch(e){showErr('erry',e.message);return false}
+ const M=801,R=state.range;state.ws=Array.from({length:M},(_,i)=>-R+2*R*i/(M-1));state.X=ctftGrid(state.xs,state.ws);state.Y=ctftGrid(state.ys,state.ws);return true}
+// Σ s(t_k) e^{−jωt_k} DT, with the exponential advanced by a rotation e^{−jωDT} per sample.
+function ctftGrid(S,ws){return ws.map(w=>{if(S.hi<0)return [0,0];let zr=Math.cos(w*S.t(S.lo)),zi=-Math.sin(w*S.t(S.lo)),re=0,im=0;const rr=Math.cos(w*DT),ri=-Math.sin(w*DT);
+ for(let k=S.lo;k<=S.hi;k++){const a=S.re[k],b=S.im[k];re+=a*zr-b*zi;im+=a*zi+b*zr;const nr=zr*rr-zi*ri;zi=zr*ri+zi*rr;zr=nr}return [re*DT,im*DT]})}
+function ctftAt(S,w){let re=0,im=0;for(let k=S.lo;k<=S.hi;k++){const t=S.t(k),c=Math.cos(w*t),s=Math.sin(w*t);re+=S.re[k]*c+S.im[k]*s;im+=S.im[k]*c-S.re[k]*s}return [re*DT,im*DT]}
+function energy(S){let e=0;for(let k=S.lo;k<=S.hi;k++)e+=S.re[k]*S.re[k]+S.im[k]*S.im[k];return e*DT}
+function tail(S){let m=0;const n=Math.round(1/DT);for(let k=0;k<n;k++)for(const q of [k,S.N-1-k])m=Math.max(m,Math.hypot(S.re[q],S.im[q]));return m}
+
+// ---------- plotting ----------
+function prep(id){const c=$(id),r=c.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);c.width=Math.round(r.width*d);c.height=Math.round(r.height*d);const p=c.getContext('2d');p.setTransform(d,0,0,d,0,0);p.clearRect(0,0,r.width,r.height);return{p,w:r.width,h:r.height}}
+function niceTicks(lo,hi,k=4){const span=hi-lo||1,raw=span/k,mag=10**Math.floor(Math.log10(raw)),st=[1,2,2.5,5,10].map(s=>s*mag).find(s=>s>=raw*.999);const out=[];for(let v=Math.ceil(lo/st-1e-9)*st;v<=hi+1e-9;v+=st)out.push([v,fmt(Math.abs(v)<1e-12?0:v,3).replace('-','−')]);return out}
+function frame(p,w,h,o){const pad={l:46,r:12,t:12,b:28};const X=v=>pad.l+(v-o.xmin)/(o.xmax-o.xmin)*(w-pad.l-pad.r),Y=v=>h-pad.b-(v-o.ymin)/(o.ymax-o.ymin)*(h-pad.t-pad.b);
+ p.lineWidth=1;p.font='11px system-ui';
+ for(const [v,l] of o.yticks){p.strokeStyle=Math.abs(v)<1e-12?'#aebeca':'#e4ebf1';p.beginPath();p.moveTo(pad.l,Y(v));p.lineTo(w-pad.r,Y(v));p.stroke();p.fillStyle='#607687';p.textAlign='right';p.fillText(l,pad.l-5,Y(v)+4)}
+ for(const [v,l] of o.xticks){p.strokeStyle=Math.abs(v)<1e-12?'#c9d5df':'#eef2f6';p.beginPath();p.moveTo(X(v),pad.t);p.lineTo(X(v),h-pad.b);p.stroke();p.fillStyle='#607687';p.textAlign='center';p.fillText(l,X(v),h-pad.b+16)}
+ return{X,Y,pad}}
+function curve(p,X,Y,ws,vals,{color,width=2,dash=[],jump=0}){p.save();p.strokeStyle=color;p.lineWidth=width;p.setLineDash(dash);p.beginPath();let pen=false,prev=0;
+ for(let i=0;i<ws.length;i++){const v=vals[i];if(v===null){pen=false;continue}if(pen&&jump&&Math.abs(v-prev)>jump)pen=false;const px=X(ws[i]),py=Y(v);if(pen)p.lineTo(px,py);else p.moveTo(px,py);pen=true;prev=v}p.stroke();p.restore()}
+function piLabel(k){if(k===0)return '0';const s=k<0?'−':'',a=Math.abs(k);return s+(a===1?'':a===.5?'':a)+'π'+(a===.5?'/2':'')}
+
+function plotTime(){const{p,w,h}=prep('cTime');const xs=state.xs,ys=state.ys,big=Math.max(xs.big,ys.big,1e-12);
+ const ext=S=>{let a=Infinity,b=-Infinity;for(let k=S.lo;k<=S.hi;k++)if(Math.hypot(S.re[k],S.im[k])>1e-3*big){const t=S.t(k);if(t<a)a=t;if(t>b)b=t}return[a,b]};
+ const [a1,b1]=ext(xs),[a2,b2]=ext(ys);let lo=Math.min(a1,a2,-3),hi=Math.max(b1,b2,3);const padT=.08*(hi-lo);lo=Math.max(lo-padT,-TY);hi=Math.min(hi+padT,TY);
+ const cplxY=ys.hi>=0&&[...ys.im].some(v=>Math.abs(v)>1e-9*big),cplxX=xs.hi>=0&&[...xs.im].some(v=>Math.abs(v)>1e-9*big);
+ let vmin=0,vmax=0;for(const S of [xs,ys])for(let k=S.lo;k<=S.hi;k++){const t=S.t(k);if(t<lo||t>hi)continue;vmin=Math.min(vmin,S.re[k],S.im[k]);vmax=Math.max(vmax,S.re[k],S.im[k])}
+ const padv=.12*((vmax-vmin)||1);vmin-=vmin<0?padv:0;vmax+=padv;
+ const{X,Y}=frame(p,w,h,{xmin:lo,xmax:hi,ymin:vmin,ymax:vmax,xticks:niceTicks(lo,hi,8),yticks:niceTicks(vmin,vmax)});
+ const series=(S,arr)=>{const k0=Math.max(0,Math.floor((lo+S.T)/DT)),k1=Math.min(S.N-1,Math.ceil((hi+S.T)/DT)),ts=[],vs=[];for(let k=k0;k<=k1;k++){ts.push(S.t(k));vs.push(arr[k])}return[ts,vs]};
+ let [ts,vs]=series(ys,ys.re);curve(p,X,Y,ts,vs,{color:COL.y,width:2.6});
+ if(cplxY){[ts,vs]=series(ys,ys.im);curve(p,X,Y,ts,vs,{color:COL.yi,width:2.2})}
+ [ts,vs]=series(xs,xs.re);curve(p,X,Y,ts,vs,{color:COL.x,width:1.7,dash:[6,4]});
+ $('legTime').innerHTML=`<span><span class="dash" style="--c:${COL.x}"></span>x(t)${cplxX?' (real part)':''}</span><span><span class="solid" style="--c:${COL.y}"></span>${cplxY?'Re y(t)':'y(t)'}</span>`+(cplxY?`<span><span class="solid" style="--c:${COL.yi}"></span>Im y(t)</span>`:'');
+ $('timeSub').textContent=`Showing ${r2(lo)} ≤ t ≤ ${r2(hi)}`.replace(/-/g,'−')+(cplxY?' · y(t) is complex, so its real and imaginary parts are drawn separately.':'.')}
+
+function cleanPhase(Z){const m=Math.max(...Z.map(z=>Math.hypot(z[0],z[1])),1e-300);return Z.map(z=>{const a=Math.hypot(z[0],z[1]);if(a<2e-2*m)return null;const im=Math.abs(z[1])<1e-6*m?0:z[1],re=Math.abs(z[0])<1e-6*m?0:z[0];return Math.atan2(im,re)/Math.PI})}
+function plotSpec(){const ws=state.ws,R=state.range,xt=niceTicks(-R,R,8),mp=state.view==='mp';
+ const panels=mp?[
+  {id:'cA',vals:[state.X.map(z=>Math.hypot(...z)),state.Y.map(z=>Math.hypot(...z))],pos:true,title:'Magnitude |X(ω)| and |Y(ω)|',sub:'Even in ω whenever the signal is real.',l:['|X|','|Y|']},
+  {id:'cB',vals:[cleanPhase(state.X),cleanPhase(state.Y)],phase:true,title:'Phase ∠X(ω) and ∠Y(ω)',sub:'Drawn only where the magnitude is at least 2% of its peak.',l:['∠X','∠Y']}]:[
+  {id:'cA',vals:[state.X.map(z=>z[0]),state.Y.map(z=>z[0])],title:'Real part Re X(ω) and Re Y(ω)',sub:'Even in ω whenever the signal is real.',l:['Re X','Re Y']},
+  {id:'cB',vals:[state.X.map(z=>z[1]),state.Y.map(z=>z[1])],title:'Imaginary part Im X(ω) and Im Y(ω)',sub:'Odd in ω whenever the signal is real; zero for real even signals.',l:['Im X','Im Y']}];
+ panels.forEach((P,k)=>{const{p,w,h}=prep(P.id);let ymin,ymax,yt;
+  if(P.phase){ymin=-1.15;ymax=1.15;yt=[-1,-.5,0,.5,1].map(v=>[v,piLabel(v)])}
+  else{const all=P.vals.flat().filter(v=>v!==null),m=Math.max(...all.map(Math.abs),1e-9);ymin=P.pos?0:-1.1*m;ymax=1.1*m;yt=niceTicks(ymin,ymax)}
+  const{X,Y,pad}=frame(p,w,h,{xmin:-R,xmax:R,ymin,ymax,xticks:xt,yticks:yt});
+  curve(p,X,Y,ws,P.vals[1],{color:COL.y,width:2.6,jump:P.phase?.9:0});
+  curve(p,X,Y,ws,P.vals[0],{color:COL.x,width:1.7,dash:[6,4],jump:P.phase?.9:0});
+  if(state.hover!==null){p.save();p.strokeStyle='#64748b';p.setLineDash([3,3]);p.lineWidth=1;p.beginPath();p.moveTo(X(state.hover),pad.t);p.lineTo(X(state.hover),h-pad.b);p.stroke();p.restore()}
+    $(k?'t2':'t1').innerHTML=P.title;$(k?'s2':'s1').textContent=P.sub+' ω in rad/s.';
+  $(k?'legB':'legA').innerHTML=`<span><span class="dash" style="--c:${COL.x}"></span>${P.l[0]} (of x)</span><span><span class="solid" style="--c:${COL.y}"></span>${P.l[1]} (of y)</span>`});}
+
+function readout(){if(state.hover===null){$('readout').innerHTML='Hover over (or tap) a spectrum plot to read X(ω) and Y(ω) at that frequency.';return}
+ const w=state.hover,a=ctftAt(state.xs,w),b=ctftAt(state.ys,w);
+ $('readout').innerHTML=`ω = ${fmt(w,3).replace('-','−')} rad/s &nbsp;·&nbsp; <span style="color:${COL.x}">X(ω) = ${cfmt(a)} = ${pfmt(a)}</span> &nbsp;·&nbsp; <span style="color:${COL.y}">Y(ω) = ${cfmt(b)} = ${pfmt(b)}</span>`}
+
+function stats(){const line=(S,nm,lab)=>`<b style="color:${nm==='x'?COL.x:COL.y}">${nm}(t):</b> ${lab}(0) = ∫ ${nm}(t) dt = ${cfmt(ctftAt(S,0))} &nbsp;·&nbsp; energy ∫|${nm}(t)|² dt = ${fmt(energy(S),4)}`;
+ let html=line(state.xs,'x','X')+'<br>'+line(state.ys,'y','Y');
+ if(state.preset!=='sinc'&&tail(state.xs)>1e-3*state.xs.big)html+=`<br><span class="warn">⚠ x(t) has not died out by t = ±${TX}; the spectrum is that of the truncated signal.</span>`;
+ if(tail(state.ys)>1e-3*state.ys.big&&state.preset!=='sinc')html+=`<br><span class="warn">⚠ y(t) has not died out by t = ±${TY}; the spectrum is that of the truncated signal.</span>`;
+ $('stats').innerHTML=html}
+
+// ---------- UI ----------
+function syncControls(){
+ document.querySelectorAll('#presets .pill').forEach(b=>b.classList.toggle('selected',b.dataset.p===state.preset));
+ const P=presets[state.preset];$('paramWrap').classList.toggle('hidden',!P.param);$('customWrap').classList.toggle('hidden',!P.custom);
+ if(P.param){const q=P.param,el=$('param');el.min=q.min;el.max=q.max;el.step=q.step;el.value=state.pv[state.preset];$('paramLabel').textContent=q.label;$('paramVal').textContent=q.show(state.pv[state.preset])}
+ $('xexpr').value=state.custom;$('yexpr').value=state.yexpr;
+ document.querySelectorAll('[data-range]').forEach(b=>b.classList.toggle('selected',+b.dataset.range===state.range));
+ document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('selected',b.dataset.view===state.view));
+ const key=state.yexpr.replace(/\s+/g,''),hit=EX.find(e=>e[0].replace(/\s+/g,'')===key);
+ document.querySelectorAll('#examples .chip').forEach(b=>b.classList.toggle('selected',b.dataset.ex.replace(/\s+/g,'')===key));
+ setTex($('prop'),hit?`<b>Property:</b> \\(${hit[1]}\\)<br>${sup(hit[2])}`:'<b>Your operation:</b> Y(ω) is computed directly from y(t). Can you write it in terms of X(ω) using the properties?');
+ setTex($('closed'),`\\(${P.tex(state.pv[state.preset])}\\)`)}
+function render(){syncControls();if(!compute())return;plotTime();plotSpec();readout();stats()}
+
+$('presets').innerHTML=Object.entries(presets).map(([k,P])=>`<button class="pill" data-p="${k}">${P.name}</button>`).join('');
+$('examples').innerHTML=EX.map(([e])=>`<button class="chip" data-ex="${e}">${e}</button>`).join('');
+$('questions').innerHTML=QS.map(([L,q,a],i)=>`<div class="question"><strong>Predict first · Question ${i+1}</strong><button class="load" data-q="${i}">Load this setup</button><p>${sup(q)}</p><details><summary>Show answer</summary><p>${sup(a)}</p></details></div>`).join('');
+document.querySelectorAll('#presets .pill').forEach(b=>b.addEventListener('click',()=>{state.preset=b.dataset.p;render()}));
+$('param').addEventListener('input',e=>{state.pv[state.preset]=+e.target.value;render()});
+$('applyx').addEventListener('click',()=>{state.custom=$('xexpr').value;render()});$('xexpr').addEventListener('keydown',e=>{if(e.key==='Enter'){state.custom=e.target.value;render()}});
+$('apply').addEventListener('click',()=>{state.yexpr=$('yexpr').value;render()});$('yexpr').addEventListener('keydown',e=>{if(e.key==='Enter'){state.yexpr=e.target.value;render()}});
+document.querySelectorAll('#examples .chip').forEach(b=>b.addEventListener('click',()=>{state.yexpr=b.dataset.ex;render()}));
+document.querySelectorAll('[data-range]').forEach(b=>b.addEventListener('click',()=>{state.range=+b.dataset.range;state.hover=null;render()}));
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{state.view=b.dataset.view;plotSpec();syncControls()}));
+document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>{const L=QS[+b.dataset.q][0];state.preset=L.preset;state.pv[L.preset]=L.v;state.yexpr=L.y;state.range=L.range;state.view=L.view;state.hover=null;render();$('cTime').scrollIntoView({behavior:'smooth',block:'center'})}));
+['cA','cB'].forEach(id=>{const c=$(id),move=e=>{const r=c.getBoundingClientRect(),pt=e.touches?e.touches[0]:e,frac=(pt.clientX-r.left-46)/(r.width-58);if(frac<0||frac>1)return;state.hover=-state.range+2*state.range*frac;plotSpec();readout()};
+ c.addEventListener('mousemove',move);c.addEventListener('touchstart',move,{passive:true});c.addEventListener('mouseleave',()=>{state.hover=null;plotSpec();readout()})});
+window.addEventListener('resize',()=>{if(state.xs){plotTime();plotSpec()}});
+render();
+</script>
+</body></html>
