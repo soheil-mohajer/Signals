@@ -1,0 +1,671 @@
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-46J5242489"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-46J5242489');
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice Problems · EE3015</title>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#1b2939;background:#f4f7fb}*{box-sizing:border-box}body{margin:0}header{background:#13283f;color:white;padding:29px max(20px,calc((100vw - 1100px)/2)) 24px}header h1{font-size:clamp(25px,3.2vw,36px);letter-spacing:-.8px;margin:4px 0 8px}header p{color:#c5d4e3;margin:0;font-size:15px}.kicker{font-size:12px;color:#80d3ff;letter-spacing:2px;font-weight:800}main{max-width:1100px;margin:0 auto;padding:24px 20px 50px}button{font:inherit;cursor:pointer}.panel{background:#fff;border:1px solid #e0e8f0;border-radius:16px;box-shadow:0 4px 18px #223c5710;padding:24px;margin-bottom:18px}h2{font-size:23px;letter-spacing:-.4px;margin:0 0 8px}h3{font-size:16px;margin:0 0 12px}.subtitle{color:#52677c;font-size:14px;line-height:1.6;margin:0 0 20px}.equation{text-align:center;font-size:clamp(15px,2vw,19px);background:#f2f7fc;border-radius:10px;padding:14px 8px;margin-bottom:12px;overflow-x:auto}.layout{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}.sectionlabel{font-size:12px;font-weight:800;letter-spacing:1.5px;color:#6a7c8c;margin:4px 0 8px}.pillrow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}.pill{padding:8px 12px;border:1px solid #cddceb;background:#fff;border-radius:8px;color:#365069;font-size:14px}.pill:hover{background:#f5faff}.pill.selected{background:#e7f3ff;border-color:#1474af;color:#085e99;font-weight:750}.chip{padding:5px 9px;border:1px solid #b7d6e8;background:#f5fbff;border-radius:7px;color:#1a5276;font:12.5px ui-monospace,SFMono-Regular,Consolas,monospace}.chip:hover{background:#e3f1fb}.chip.selected{background:#dff3ee;border-color:#13836f;color:#0f6b5a}.sigbox{border:1px solid #e0e7ef;border-left:4px solid var(--c);border-radius:11px;padding:15px 16px 8px;min-width:0}.sigbox h3{color:var(--c)}.field{margin-bottom:12px}.field label{display:block;font-size:13px;font-weight:650;color:#344a60;margin-bottom:6px}.field input{width:100%;border:1px solid #cdd6e4;border-radius:8px;padding:10px;font:15px ui-monospace,SFMono-Regular,Consolas,monospace}.field input[type=range]{border:0;padding:0;accent-color:#1467a8}.value{float:right;font-variant-numeric:tabular-nums;color:#09649f}.ybox{display:flex;gap:8px;align-items:stretch}.ybox .lhs{display:flex;align-items:center;font:600 17px Georgia,serif;font-style:italic;color:#13836f;white-space:nowrap}.ybox input{flex:1;min-width:0;border:2px solid #9fd3c7;border-radius:9px;padding:11px;font:16px ui-monospace,SFMono-Regular,Consolas,monospace}.ybox input:focus{outline:none;border-color:#13836f}.apply{border:0;color:white;background:#13836f;font-weight:750;border-radius:9px;padding:0 16px}.apply:hover{background:#0f6b5a}.apply.blue{background:#1467a8}.apply.blue:hover{background:#0f5487}.hint{font-size:12px;color:#6a7c8c;line-height:1.5;margin:6px 0 10px}.prop{font-size:13.5px;color:#24564b;background:#f0faf7;border:1px solid #c6e9df;border-radius:9px;padding:9px 12px;margin:2px 0 12px;line-height:1.6}.error{display:none;color:#b91c1c;background:#fff1f2;border-radius:8px;font-size:13px;padding:9px 11px;margin:4px 0 10px}.status{background:#f4f8fd;border:1px solid #dbe6f2;border-radius:9px;padding:9px 12px;font-size:13px;color:#29445f;line-height:1.7;margin-top:14px;font-variant-numeric:tabular-nums}.status .warn{color:#795311}.toolbar{display:flex;gap:6px 18px;flex-wrap:wrap;align-items:center;margin-top:14px}.toolbar .pillrow{margin:0}.toolbar .sectionlabel{margin:0}.vizbox{border:1px solid #e0e7ef;border-radius:11px;padding:13px;background:white;min-width:0;margin-top:14px}.vizbox h3{margin-bottom:4px}.vizbox .small{font-size:12px;color:#6a7c8c;line-height:1.5;margin-bottom:8px}canvas{display:block;width:100%;height:220px}.spec canvas{cursor:crosshair}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:14px}.legend{font-size:12px;color:#597085;margin:7px 0 0;display:flex;gap:14px;flex-wrap:wrap}.dot{display:inline-block;width:9px;height:9px;background:var(--c);border-radius:9px;margin-right:4px}.dot.hollow{background:#fff;border:2px solid var(--c);width:10px;height:10px}.dash{display:inline-block;width:18px;height:0;border-top:2px dashed var(--c);vertical-align:middle;margin-right:4px}.solid{display:inline-block;width:18px;height:0;border-top:3px solid var(--c);vertical-align:middle;margin-right:4px}.readout{font-size:12.5px;color:#36506a;background:#f7f9fc;border-radius:8px;padding:8px 11px;margin-top:10px;min-height:34px;font-variant-numeric:tabular-nums}.question{background:#fff9e9;border:1px solid #f4e3ba;border-radius:12px;padding:17px 19px;margin-top:14px}.question strong{font-size:14px;color:#795311}.question p{margin:7px 0 11px;font-size:14px;line-height:1.55}.question .load{border:1px solid #e3c98a;background:#fff;border-radius:7px;padding:4px 9px;font-size:12px;color:#795311;margin-left:6px}details{font-size:14px;color:#4b5f71}details summary{color:#0e689c;font-weight:700;cursor:pointer}details p{line-height:1.6;margin-bottom:0}footer{text-align:center;color:#6a7d8b;font-size:12px;margin-top:25px}.hidden{display:none!important}@media(max-width:780px){.layout,.twocol{grid-template-columns:1fr}.panel{padding:17px}main{padding:18px 12px 40px}canvas{height:200px}}
+</style>
+<style>.site-nav{box-sizing:border-box;display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:12px max(20px,calc((100vw - 1160px)/2));background:#13283f;color:white;font:14px Inter,system-ui,sans-serif}.site-nav a{color:#dbeafe!important;text-decoration:none!important;margin-right:17px}.site-nav a:hover{text-decoration:underline!important}.site-nav .site-brand{font-weight:750;color:white!important;font-size:16px}.site-nav div{display:flex;flex-wrap:wrap;gap:0}</style>
+<style>
+select{width:100%;border:1px solid #cdd6e4;border-radius:8px;padding:9px 10px;font:14px Inter,system-ui,sans-serif;background:#fff;color:#1b2939}
+.pmeta{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:12.5px;color:#6a7c8c;margin-bottom:10px}.pmeta .tag{background:#e7f3ff;color:#085e99;border-radius:6px;padding:3px 8px;font-weight:700}.pmeta .code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}.pmeta a{color:#0e689c}
+.pstate{font-size:15.5px;line-height:1.7;color:#1b2939;margin-bottom:6px}.pstate .MathJax{font-size:105%}
+.part{border-top:1px solid #eef2f6;padding:12px 0 10px}.plabel{font-size:15px;line-height:1.6;margin-bottom:7px}.plabel b{color:#13283f;margin-right:4px}
+.prow{display:flex;gap:8px;align-items:stretch;max-width:620px}.prow input{flex:1;min-width:0;border:2px solid #cfdcea;border-radius:9px;padding:10px 11px;font:15px ui-monospace,SFMono-Regular,Consolas,monospace}.prow input:focus{outline:none;border-color:#1467a8}.prow input.good{border-color:#13836f;background:#f3fbf8}.prow input.wrong{border-color:#e08a8a}
+.prow .apply{padding:0 18px}.preview{font-size:12.5px;color:#6a7c8c;margin:5px 2px 0;min-height:18px;font-variant-numeric:tabular-nums}.preview.err{color:#b45309}
+.fb{font-size:14px;line-height:1.55;margin-top:6px;border-radius:8px;padding:0}.fb.ok,.fb.bad,.fb.info{padding:8px 11px}.fb.ok{background:#eefaf5;color:#0f6b4a;border:1px solid #bfe6d6}.fb.bad{background:#fff4f4;color:#9b1c1c;border:1px solid #f4cccc}.fb.info{background:#f4f8fd;color:#29445f;border:1px solid #dbe6f2}
+.choices{display:flex;gap:8px;flex-wrap:wrap}.choices button{padding:8px 18px;border:1px solid #cddceb;background:#fff;border-radius:8px;color:#365069;font-size:14px}.choices button:hover{background:#f5faff}.choices button.good{background:#e9f8f2;border-color:#13836f;color:#0f6b5a;font-weight:750}.choices button.wrong{background:#fff1f1;border-color:#e08a8a;color:#9b1c1c}
+.hintbox{background:#fff9e9;border:1px solid #f4e3ba;border-radius:11px;padding:11px 15px;margin-top:10px;font-size:14.5px;line-height:1.65;color:#4b3b12}.hintbox b{color:#795311}
+.solbox{background:#f0faf7;border:1px solid #c6e9df;border-radius:11px;padding:13px 16px;margin-top:12px;font-size:14.5px;line-height:1.7;color:#173f36}.solbox h3{color:#0f6b5a;margin-bottom:6px}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:14px}.btnrow .apply{padding:9px 18px}
+.statline{font-size:13px;color:#29445f;font-variant-numeric:tabular-nums}.statline a{color:#0e689c;cursor:pointer}
+.help{font-size:13.5px;line-height:1.7;color:#344a60}.help code{background:#f1f5f9;border-radius:5px;padding:1px 6px;font-size:13px}
+.done{background:#eefaf5;border:1px solid #bfe6d6;color:#0f6b4a;border-radius:10px;padding:10px 14px;margin-top:12px;font-weight:650}
+</style></head>
+<body><nav class="site-nav" aria-label="Site navigation"><a class="site-brand" href="index.html">∿ Fourier Learning Lab</a><div><a href="index.html">Home</a><a href="explorer.html">Series Explorer</a><a href="sound-lab.html">Sound Lab</a><a href="convolution.html">Convolution</a><a href="filtering.html">Filter Lab</a><a href="draw.html">Draw a Signal</a><a href="properties.html">FS Properties</a><a href="ctft.html">CTFT</a><a href="dtft.html">DTFT</a><a href="sampling.html">Sampling</a><a href="practice.html" aria-current="page">Practice</a></div></nav>
+<header><div class="kicker">EE3015 · SIGNALS &amp; SYSTEMS</div><h1>Practice Problems</h1><p>Pick a topic and get a short analytical problem with new numbers every time. Type your answers to have them checked, and ask for a hint when you are stuck.</p></header>
+<main>
+
+<section class="panel" id="pick">
+<h2>Choose a topic</h2>
+<p class="subtitle">Every problem is generated with random numbers, so you can practice the same idea as many times as you like. Work it out on paper first, then enter your answers. Each problem has a code; share the link with your TA or classmates to show them exactly the same problem.</p>
+<div class="pillrow" id="topics"></div>
+<div class="layout">
+<div class="field"><label for="ptype">Problem type</label><select id="ptype"></select></div>
+<div class="field"><label>&nbsp;</label><div class="btnrow" style="margin:0"><button class="apply blue" id="newBtn">New problem</button><span class="statline" id="stats"></span></div></div>
+</div>
+</section>
+
+<section class="panel" id="prob">
+<div class="pmeta" id="pmeta"></div>
+<div class="pstate" id="pstate"></div>
+<div id="parts"></div>
+<div id="donebox"></div>
+<div class="btnrow"><button class="pill" id="hintBtn">💡 Show a hint</button><button class="pill" id="solBtn">Show the solution</button><button class="apply blue" id="nextBtn">Next problem →</button></div>
+<div id="hints"></div>
+<div id="sol"></div>
+</section>
+
+<section class="panel">
+<h2>How to enter answers</h2>
+<div class="help">
+<p>You can type a number (<code>0.25</code>, <code>-3</code>) or an exact expression. Exact expressions are best. Decimals are accepted when they are within about 0.5% of the answer, so give at least three significant digits.</p>
+<ul>
+<li>Imaginary unit: <code>j</code> (or <code>i</code>), e.g. <code>2-3j</code>, <code>-j/2</code>, <code>(1+j)/4</code></li>
+<li>Constants and functions: <code>pi</code>, <code>e</code>, <code>sqrt(2)</code>, <code>exp(-j*pi/4)</code>, <code>e^(-2)</code>, <code>sin(pi/3)</code>, <code>cos</code>, <code>abs</code>, <code>angle</code>, <code>atan</code>, <code>ln</code></li>
+<li>Multiplication can be implicit: <code>2pi</code>, <code>3j</code>, <code>2(1-j)</code></li>
+<li>Phases are in radians. Any equivalent angle (adding a multiple of 2π) is accepted.</li>
+</ul>
+<p>The line under each box shows how your input was read, so check it before you press <b>Check</b> (or Enter).</p>
+</div>
+</section>
+<footer>Standalone interactive teaching demo · Problems are generated in your browser; nothing you type is sent anywhere.</footer>
+</main>
+
+<script>
+'use strict';
+const PI=Math.PI,TAU=2*PI,tx=String.raw,$=id=>document.getElementById(id);
+// ---------------------------------------------------------------- random numbers (seeded, so a problem code reproduces the problem)
+function mulberry(seed){let a=seed>>>0;return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+let R=Math.random;
+const ri=(a,b)=>a+Math.floor(R()*(b-a+1)),pick=a=>a[Math.floor(R()*a.length)],nz=(a,b)=>{let v;do v=ri(a,b);while(v===0);return v};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const k=Math.floor(R()*(i+1));[a[i],a[k]]=[a[k],a[i]]}return a}
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b)[a,b]=[b,a%b];return a}
+const lcm=(a,b)=>a/gcd(a,b)*b;
+// ---------------------------------------------------------------- complex arithmetic, z = [re, im]
+const cadd=(a,b)=>[a[0]+b[0],a[1]+b[1]],csub=(a,b)=>[a[0]-b[0],a[1]-b[1]],cmul=(a,b)=>[a[0]*b[0]-a[1]*b[1],a[0]*b[1]+a[1]*b[0]];
+const cdiv=(a,b)=>{const d=b[0]*b[0]+b[1]*b[1];return[(a[0]*b[0]+a[1]*b[1])/d,(a[1]*b[0]-a[0]*b[1])/d]};
+const cs=(a,s)=>[a[0]*s,a[1]*s],cneg=a=>[-a[0],-a[1]],conj=a=>[a[0],-a[1]],cabs=a=>Math.hypot(a[0],a[1]),carg=a=>Math.atan2(a[1],a[0]);
+const ej=t=>[Math.cos(t),Math.sin(t)],cexp=a=>cs(ej(a[1]),Math.exp(a[0])),clog=a=>[Math.log(cabs(a)),carg(a)];
+const J=[0,1],ONE=[1,0],re=x=>[x,0];
+function cpow(a,b){if(b[1]===0&&Number.isInteger(b[0])&&Math.abs(b[0])<=64){let r=ONE;for(let i=0;i<Math.abs(b[0]);i++)r=cmul(r,a);return b[0]<0?cdiv(ONE,r):r}if(a[0]===0&&a[1]===0)return[0,0];return cexp(cmul(b,clog(a)))}
+const csin=a=>cdiv(csub(cexp(cmul(J,a)),cexp(cmul(cneg(J),a))),[0,2]),ccos=a=>cs(cadd(cexp(cmul(J,a)),cexp(cmul(cneg(J),a))),.5);
+const csum=arr=>arr.reduce(cadd,[0,0]);
+// ---------------------------------------------------------------- answer parser (no eval)
+const FN={sqrt:a=>cpow(a,[.5,0]),exp:cexp,sin:csin,cos:ccos,tan:a=>cdiv(csin(a),ccos(a)),abs:a=>[cabs(a),0],angle:a=>[carg(a),0],arg:a=>[carg(a),0],conj,
+ re:a=>[a[0],0],im:a=>[a[1],0],ln:clog,log:clog,atan:a=>[Math.atan(a[0]),0],arctan:a=>[Math.atan(a[0]),0],asin:a=>[Math.asin(a[0]),0],acos:a=>[Math.acos(a[0]),0],sinc:a=>Math.abs(a[0])<1e-12?ONE:cdiv(csin(cs(a,PI)),cs(a,PI))};
+const CONST={pi:[PI,0],'π':[PI,0],e:[Math.E,0],j:J,i:J};
+function splitId(id){if(id in FN||id in CONST)return[id];const out=[];let s=id;while(s.length){const m=['sqrt','pi','e','j','i'].find(k=>s.startsWith(k));if(!m)throw Error(`Unknown name "${id}"`);out.push(m);s=s.slice(m.length)}return out}
+function tokenize(s){s=s.replace(/√/g,'sqrt').replace(/π/g,'pi').replace(/−/g,'-').replace(/×|·/g,'*').replace(/\*\*/g,'^');const t=[],re=/\s*(?:(\d+\.?\d*(?:[eE][+-]?\d+)?|\.\d+)|([A-Za-z_]+)|([-+*/^(),]))/y;
+ while(re.lastIndex<s.length){const at=re.lastIndex,m=re.exec(s);if(!m){if(/^\s*$/.test(s.slice(at)))break;throw Error(`Unexpected character "${s.slice(at).trim()[0]}"`)}
+  if(m[1]!==undefined)t.push({k:'n',v:parseFloat(m[1])});else if(m[2]!==undefined){for(const p of splitId(m[2].toLowerCase()))t.push({k:'id',v:p})}else t.push({k:'op',v:m[3]})}return t}
+function parseAnswer(src){const t=tokenize(String(src));if(!t.length)throw Error('Empty');let p=0;const pk=()=>t[p],op=(x,...v)=>x&&x.k==='op'&&v.includes(x.v);
+ const expect=v=>{const x=t[p++];if(!x||x.v!==v)throw Error(`Expected "${v}"`)};
+ function add(){let a=mul();for(;;){const x=pk();if(!op(x,'+','-'))return a;p++;const b=mul();a=x.v==='+'?cadd(a,b):csub(a,b)}}
+ function mul(){let a=una();for(;;){const x=pk();if(op(x,'*','/')){p++;const b=una();a=x.v==='*'?cmul(a,b):cdiv(a,b)}else if(x&&(x.k!=='op'||x.v==='('))a=cmul(a,pow());else return a}}
+ function una(){const x=pk();if(op(x,'-','+')){p++;const a=una();return x.v==='-'?cneg(a):a}return pow()}
+ function pow(){const b=prim();if(op(pk(),'^')){p++;return cpow(b,una())}return b}
+ function prim(){const x=t[p++];if(!x)throw Error('Incomplete expression');if(x.k==='n')return[x.v,0];if(op(x,'(')){const a=add();expect(')');return a}
+  if(x.k==='id'){if(x.v in FN){if(!op(pk(),'('))return FN[x.v](pow());p++;const a=add();expect(')');return FN[x.v](a)}return CONST[x.v]}throw Error(`Unexpected "${x.v}"`)}
+ const v=add();if(p<t.length)throw Error(`Unexpected "${t[p].v}"`);if(!isFinite(v[0])||!isFinite(v[1]))throw Error('Not a finite number');return v}
+// ---------------------------------------------------------------- formatting
+function fmtN(x,d=4){if(Math.abs(x)<5e-13)return'0';const r=+x.toFixed(d);return String(Object.is(r,-0)?0:r)}
+function cfmt(z,d=4){const a=fmtN(z[0],d),b=fmtN(Math.abs(z[1]),d);if(b==='0')return a;if(a==='0')return(z[1]<0?'−':'')+b+'j';return a+(z[1]<0?' − ':' + ')+b+'j'}
+function red(p,q){if(q<0){p=-p;q=-q}const g=gcd(p,q)||1;return[p/g,q/g]}
+function fr(p,q=1){[p,q]=red(p,q);if(q===1)return''+p;return(p<0?'-':'')+tx`\frac{${Math.abs(p)}}{${q}}`}
+function pif(p,q=1){[p,q]=red(p,q);if(p===0)return'0';const s=p<0?'-':'',n=(Math.abs(p)===1?'':Math.abs(p))+tx`\pi`;return q===1?s+n:s+tx`\frac{${n}}{${q}}`}
+function rat(x){for(let q=1;q<=48;q++){const p=Math.round(x*q);if(Math.abs(x*q-p)<1e-9*Math.max(1,Math.abs(x*q)))return[p,q]}return null}
+function ratPi(x){for(let q=1;q<=24;q++){const p=Math.round(x/PI*q);if(p!==0&&Math.abs(x/PI*q-p)<1e-9*Math.max(1,Math.abs(x/PI*q)))return[p,q]}return null}
+function rtex(x){const r=rat(x);if(r)return fr(r[0],r[1]);const rp=ratPi(x);return rp?pif(rp[0],rp[1]):fmtN(x)}
+function ctex(z){const eps=1e-12,a=z[0],b=z[1];if(Math.abs(b)<eps)return rtex(Math.abs(a)<eps?0:a);
+ const ib=Math.abs(b),r=rat(ib),rp=r?null:ratPi(ib);const im=r?(r[1]===1?(r[0]===1?'j':r[0]+'j'):tx`\frac{${r[0]}}{${r[1]}}j`):rp?'j'+pif(rp[0],rp[1]):fmtN(ib)+'j';
+ if(Math.abs(a)<eps)return(b<0?'-':'')+im;return rtex(a)+(b<0?' - ':' + ')+im}
+const isEx=x=>!!(rat(x)||ratPi(x)),exact=z=>isEx(z[0])&&isEx(z[1]);
+const eqv=z=>(exact(z)?'= ':tx`\approx `)+ctex(z);
+const W=(p,q,pi)=>({v:p/q*(pi?PI:1),tex:pi?pif(p,q):fr(p,q)});
+const wt=(w,v='t')=>w.tex==='1'?v:w.tex+' '+v;
+function sum(terms){let s='';for(const[c,b]of terms){if(c===0||c==='0')continue;let neg,str;
+  if(typeof c==='number'){neg=c<0;const a=Math.abs(c);str=(a===1&&b)?'':fmtN(a)}else{neg=c.startsWith('-');str=neg?c.slice(1):c}
+  s+=s?(neg?' - ':' + '):(neg?'-':'');s+=str+b}return s||'0'}
+const sh=(v,k)=>k===0?v:(k>0?`${v}-${k}`:`${v}+${-k}`);   // n-k
+const dl=(k,v='n')=>tx`\delta[${sh(v,k)}]`;
+const RATS=[[1,2],[-1,2],[1,3],[-1,3],[2,3],[3,4],[-2,3]];
+const rT=r=>r[1]===1?''+r[0]:(r[0]<0?tx`\left(-\frac{${-r[0]}}{${r[1]}}\right)`:tx`\left(\frac{${r[0]}}{${r[1]}}\right)`);
+const rv=r=>r[0]/r[1];
+// numeric helpers used by the self-checks (brute force from the definitions)
+function integ(f,a,b,n=20000){const h=(b-a)/n;let s=[0,0];for(let i=0;i<n;i++){const v=f(a+(i+.5)*h);s=cadd(s,Array.isArray(v)?v:[v,0])}return cs(s,h)}
+function fsCoef(x,T,k,n=4096){return cs(integ(t=>cmul(re1(x(t)),ej(-k*TAU/T*t)),0,T,n),1/T)}
+const re1=v=>Array.isArray(v)?v:[v,0];
+function dtft(x,n0,n1,w){let s=[0,0];for(let n=n0;n<=n1;n++)s=cadd(s,cmul(re1(x(n)),ej(-w*n)));return s}
+// ---------------------------------------------------------------- part constructors
+const num=(label,v,o={})=>({type:'num',label,v:re1(v),...o});
+const ang=(label,v,o={})=>({type:'angle',label,v,...o});
+const yn=(label,yes,why)=>({type:'choice',label,opts:['Yes','No'],ans:yes?0:1,why});
+const wrap=a=>{a=((a+PI)%TAU+TAU)%TAU-PI;return Math.abs(a+PI)<1e-12?PI:a};
+
+// ================================================================ PROBLEM GENERATORS
+const TOPICS=[
+ {id:'all',name:'All topics'},
+ {id:'basics',name:'Signals & system properties',link:''},
+ {id:'lti',name:'LTI systems & convolution',link:'convolution.html'},
+ {id:'ctfs',name:'CT Fourier series',link:'explorer.html'},
+ {id:'dtfs',name:'DT Fourier series',link:'explorer.html#discrete'},
+ {id:'ctft',name:'CT Fourier transform',link:'ctft.html'},
+ {id:'dtft',name:'DT Fourier transform',link:'dtft.html'},
+ {id:'samp',name:'Sampling',link:'sampling.html'}];
+const G=[];const def=o=>G.push(o);
+
+// ---------- basics
+def({id:'ct-period',topic:'basics',name:'Fundamental period of a sum (CT)',gen(){
+ const d=pick([1,2,3,4]);let k1,k2;do{k1=ri(1,6);k2=ri(1,6)}while(k1===k2);
+ const A=nz(-3,3),B=nz(-3,3),w1=W(k1,d,true),w2=W(k2,d,true),g=gcd(k1,k2);
+ const x=t=>A*Math.cos(w1.v*t)+B*Math.sin(w2.v*t);
+ return{statement:tx`Find the fundamental period \(T\) of \[x(t)=${sum([[A,tx`\cos\left(${wt(w1)}\right)`],[B,tx`\sin\left(${wt(w2)}\right)`]])}.\]`,
+ parts:[num(tx`\(T=\)`,2*d/g,{mistakes:[[2*d/k1*2*d/k2,'That is the product of the two periods. It is a common period, but not the smallest one.']]})],
+ hints:[tx`Find the period of each term separately: \(\cos(\omega t)\) and \(\sin(\omega t)\) have period \(2\pi/\omega\).`,
+  tx`The sum repeats only when both terms repeat, so \(T\) is the smallest number that is an integer multiple of both periods (their least common multiple).`,
+  tx`Equivalently, the fundamental frequency \(\omega_0\) is the largest frequency of which both \(${w1.tex}\) and \(${w2.tex}\) are integer multiples, and \(T=2\pi/\omega_0\).`],
+ solution:tx`The periods of the two terms are \(T_1=2\pi/\left(${w1.tex}\right)=${fr(2*d,k1)}\) and \(T_2=2\pi/\left(${w2.tex}\right)=${fr(2*d,k2)}\). The smallest common multiple is \(T=${fr(2*d,g)}\): it contains \(${k1/g}\) periods of the first term and \(${k2/g}\) periods of the second. Equivalently, \(\omega_0=${pif(g,d)}\), with \(${w1.tex}=${k1/g}\omega_0\) and \(${w2.tex}=${k2/g}\omega_0\).`,
+ brute:()=>{for(let c=1;c<=60*12;c++){const T=c/60;let ok=true;for(let i=0;i<25&&ok;i++){const t=i*.731-3.1;if(Math.abs(x(t+T)-x(t))>1e-7)ok=false}if(ok)return[T]}}}}});
+
+def({id:'dt-period',topic:'basics',name:'Fundamental period of a sum (DT)',gen(){
+ let N1,N2;do{N1=ri(3,12);N2=ri(3,12)}while(N1===N2||lcm(N1,N2)>60);
+ const cp=N=>{let a;do a=ri(1,N-1);while(gcd(a,N)!==1);return a},a1=cp(N1),a2=cp(N2),A=nz(-3,3),B=nz(-3,3);
+ const O1=pif(2*a1,N1),O2=pif(2*a2,N2),x=n=>A*Math.cos(TAU*a1*n/N1)+B*Math.sin(TAU*a2*n/N2);
+ return{statement:tx`Find the fundamental period \(N\) of \[x[n]=${sum([[A,tx`\cos\left(${O1}n\right)`],[B,tx`\sin\left(${O2}n\right)`]])}.\]`,
+ parts:[num(tx`\(N=\)`,lcm(N1,N2),{mistakes:[[N1*N2,'That is the product of the two periods. It is a common period, but not the smallest one.']]})],
+ hints:[tx`Write each frequency as \(\Omega=2\pi\frac{m}{N}\) with \(\frac{m}{N}\) in lowest terms. Then that term has fundamental period \(N\). (In discrete time the period must be an integer, so it is not simply \(2\pi/\Omega\).)`,
+  tx`The sum repeats when both terms repeat, so take the least common multiple of the two periods.`],
+ solution:tx`\(${O1}=2\pi\cdot${fr(a1,N1)}\), so the first term has period \(N_1=${N1}\). \(${O2}=2\pi\cdot${fr(a2,N2)}\), so the second has period \(N_2=${N2}\). Hence \(N=\mathrm{lcm}(${N1},${N2})=${lcm(N1,N2)}\).`,
+ brute:()=>{for(let N=1;N<=200;N++){let ok=true;for(let n=0;n<80&&ok;n++)if(Math.abs(x(n+N)-x(n))>1e-9)ok=false;if(ok)return[N]}}}}});
+
+def({id:'energy',topic:'basics',name:'Energy and power of a decaying signal',gen(){
+ const v=ri(0,3),A=ri(1,4);let st,E,sol,br,h1;
+ if(v<2){const a=ri(1,5);
+  if(v===0){st=tx`x(t)=${A===1?'':A}e^{-${a===1?'':a}t}u(t)`;E=A*A/(2*a);sol=tx`E=\int_0^\infty ${A*A}e^{-${2*a}t}\,dt=\frac{${A*A}}{${2*a}}=${fr(A*A,2*a)}.`;br=()=>integ(t=>(A*Math.exp(-a*t))**2,0,60/a,200000)[0]}
+  else{st=tx`x(t)=${A===1?'':A}e^{-${a===1?'':a}|t|}`;E=A*A/a;sol=tx`E=\int_{-\infty}^{\infty} ${A*A}e^{-${2*a}|t|}\,dt=2\int_0^\infty ${A*A}e^{-${2*a}t}\,dt=\frac{${2*A*A}}{${2*a}}=${fr(A*A,a)}.`;br=()=>2*integ(t=>(A*Math.exp(-a*t))**2,0,60/a,200000)[0]}
+  h1=tx`\(E=\int_{-\infty}^{\infty}|x(t)|^2dt\). Square the signal first: \(\left(e^{-at}\right)^2=e^{-2at}\).`}
+ else{const r=pick(RATS),p=r[0],q=r[1];
+  if(v===2){st=tx`x[n]=${A===1?'':A}${rT(r)}^n u[n]`;E=A*A*q*q/(q*q-p*p);sol=tx`E=\sum_{n=0}^{\infty}${A*A}\left(${fr(p*p,q*q)}\right)^n=\frac{${A*A}}{1-${fr(p*p,q*q)}}=${rtex(E)}.`;br=()=>{let s=0;for(let n=0;n<400;n++)s+=(A*rv(r)**n)**2;return s}}
+  else{st=tx`x[n]=${A===1?'':A}${rT([Math.abs(p),q])}^{|n|}`;E=A*A*(q*q+p*p)/(q*q-p*p);sol=tx`E=\sum_{n=-\infty}^{\infty}${A*A}\left(${fr(p*p,q*q)}\right)^{|n|}=${A*A}\left(\frac{2}{1-${fr(p*p,q*q)}}-1\right)=${rtex(E)}.`;br=()=>{let s=0;for(let n=-400;n<400;n++)s+=(A*Math.abs(rv(r))**Math.abs(n))**2;return s}}
+  h1=tx`\(E=\sum_{n}|x[n]|^2\). Squaring \(r^n\) gives \((r^2)^n\), a geometric series: \(\sum_{n=0}^\infty \rho^n=\frac{1}{1-\rho}\) for \(|\rho|<1\).`+(v===3?tx` Split the sum into \(n\ge0\) and \(n<0\) and do not count \(n=0\) twice.`:'')}
+ return{statement:tx`Consider \[${st}.\] Find its total energy \(E_\infty\) and its average power \(P_\infty\).`,
+ parts:[num(tx`\(E_\infty=\)`,E),num(tx`\(P_\infty=\)`,0)],
+ hints:[h1,tx`A signal with finite energy has zero average power: \(P_\infty=\lim_{T\to\infty}\frac{E_T}{2T}\), and \(E_T\) stays bounded.`],
+ solution:tx`\(${sol}\) Since \(E_\infty\) is finite, \(P_\infty=0\).`,brute:()=>[br(),0]}}});
+
+def({id:'power',topic:'basics',name:'Average power of a sum of sinusoids',gen(){
+ const v=ri(0,2);let st,P,sol,x,mis=[],hints;
+ if(v===0){let k1,k2;do{k1=ri(1,5);k2=ri(1,5)}while(k1===k2);const C=ri(-3,3),A=nz(-4,4),B=nz(-4,4),ph=pick([[0,1],[1,3],[1,4],[-1,2]]);
+  const phT=ph[0]===0?'':(ph[0]<0?' - ':' + ')+pif(Math.abs(ph[0]),ph[1]);
+  st=sum([[C,''],[A,tx`\cos\left(${k1===1?'':k1}t${phT}\right)`],[B,tx`\sin(${k2===1?'':k2}t)`]]);P=C*C+A*A/2+B*B/2;
+  x=t=>C+A*Math.cos(k1*t+PI*ph[0]/ph[1])+B*Math.sin(k2*t);mis=[[C*C+A*A+B*B,'The power of \\(A\\cos(\\omega t+\\phi)\\) is \\(A^2/2\\), not \\(A^2\\).'],[Math.abs(C)+A*A/2+B*B/2,'The power of a constant \\(C\\) is \\(C^2\\).']];
+  sol=tx`The terms have different frequencies, so the cross terms average to zero and the powers add: \(P_\infty=${C}^2+\frac{${A*A}}{2}+\frac{${B*B}}{2}=${rtex(P)}\). (The phase does not affect the power.)`}
+ else if(v===1){const k=ri(1,5),A=nz(-3,3),B=nz(-3,3),ph=pick([[1,2],[1,1],[1,3],[2,3]]),phv=PI*ph[0]/ph[1];
+  st=sum([[A,tx`\cos(${k===1?'':k}t)`],[B,tx`\cos\left(${k===1?'':k}t+${pif(ph[0],ph[1])}\right)`]]);const Z=cadd([A,0],cs(ej(phv),B));P=cabs(Z)**2/2;
+  x=t=>A*Math.cos(k*t)+B*Math.cos(k*t+phv);mis=[[A*A/2+B*B/2,'Both terms have the <b>same</b> frequency, so their powers do not simply add. Combine them into one sinusoid first.']];
+  sol=tx`Both terms have frequency \(${k}\), so they combine into one sinusoid with phasor \(${sum([[A,''],[B,tx`e^{j${pif(ph[0],ph[1])}}`]])}\), whose magnitude squared is \(${A*A}+${B*B}+2(${A})(${B})\cos\left(${pif(ph[0],ph[1])}\right)=${rtex(2*P)}\). Hence \(P_\infty=\frac{${rtex(2*P)}}{2}=${rtex(P)}\).`}
+ else{let k1,k2;do{k1=nz(-4,4);k2=nz(-4,4)}while(k1===k2);const A=nz(-3,3),B=nz(-3,3);
+  st=sum([[A,tx`e^{${k1<0?'-':''}j${Math.abs(k1)===1?'':Math.abs(k1)}t}`],[B,tx`e^{${k2<0?'-':''}j${Math.abs(k2)===1?'':Math.abs(k2)}t}`]]);P=A*A+B*B;
+  x=t=>cadd(cs(ej(k1*t),A),cs(ej(k2*t),B));mis=[[A*A/2+B*B/2,'A complex exponential \\(Ae^{j\\omega t}\\) has constant magnitude \\(|A|\\), so its power is \\(|A|^2\\) (no factor 1/2).']];
+  sol=tx`\(|Ae^{j\omega t}|^2=|A|^2\) for all \(t\). The two exponentials have different frequencies, so the cross terms average to zero and \(P_\infty=${A*A}+${B*B}=${P}\).`}
+ hints=[tx`\(P_\infty=\lim_{T\to\infty}\frac{1}{2T}\int_{-T}^{T}|x(t)|^2dt\). For a periodic signal, average \(|x(t)|^2\) over one period.`,
+  tx`Average power of \(A\cos(\omega t+\phi)\) with \(\omega\neq0\) is \(\frac{A^2}{2}\); of a constant \(C\) it is \(C^2\); of \(Ae^{j\omega t}\) it is \(|A|^2\). Products of terms with <b>different</b> frequencies average to zero.`,
+  tx`Terms with the <b>same</b> frequency must be combined first, for example with phasors.`];
+ return{statement:tx`Find the average power \(P_\infty\) of \[x(t)=${st}.\]`,parts:[num(tx`\(P_\infty=\)`,P,{mistakes:mis})],hints,solution:sol,
+ brute:()=>[integ(t=>cabs(re1(x(t)))**2,0,TAU,8000)[0]/TAU]}}});
+
+const SYS=[
+ [tx`y(t)=x(t-2)`,[1,1,1,0,1],['Delays and sums of delays are linear.','A delay commutes with a shift.','y(t) uses x at t−2, a past time.','y(t) needs x(t−2), not x(t).','|y(t)| ≤ B whenever |x(t)| ≤ B.']],
+ [tx`y(t)=t\,x(t)`,[1,0,1,1,0],['Multiplying by a fixed function t is linear.','Shifting the input gives t·x(t−t₀), but shifting the output gives (t−t₀)x(t−t₀).','y(t) uses only x(t).','y(t) uses only x(t).','x(t)=1 is bounded, but y(t)=t is not.']],
+ [tx`y(t)=x(2t)`,[1,0,0,0,1],['Time scaling is linear.','Shifting the input by t₀ gives x(2t−t₀), but shifting the output gives x(2t−2t₀).','y(1)=x(2) depends on a future value.','y(1)=x(2) is not the input at t=1.','Same values, just faster, so bounded in gives bounded out.']],
+ [tx`y(t)=x^2(t)`,[0,1,1,1,1],['Doubling the input multiplies the output by 4.','Squaring commutes with a shift.','y(t) uses only x(t).','y(t) uses only x(t).','|x| ≤ B gives |y| ≤ B².']],
+ [tx`y(t)=x(t)+3`,[0,1,1,1,1],['x = 0 gives y = 3 ≠ 0, so the system is not linear (it is affine).','Adding a constant commutes with a shift.','y(t) uses only x(t).','y(t) uses only x(t).','|y| ≤ B+3.']],
+ [tx`y(t)=\int_{-\infty}^{t}x(\tau)\,d\tau`,[1,1,1,0,0],['Integration is linear.','The running integral commutes with a shift.','Only τ ≤ t is used.','y(t) depends on all past values.','x(t)=u(t) gives y(t)=t·u(t), which is unbounded.']],
+ [tx`y(t)=x(-t)`,[1,0,0,0,1],['Time reversal is linear.','Shifting the input by t₀ gives x(−t−t₀), but shifting the output gives x(−t+t₀).','y(−1)=x(1) depends on a future value.','y(1)=x(−1).','Same values, reversed, so bounded in gives bounded out.']],
+ [tx`y[n]=x[n]+x[n+1]`,[1,1,0,0,1],['A sum of shifts is linear.','A sum of shifts commutes with a shift.','x[n+1] is a future value.','It needs x[n+1].','|y| ≤ 2B.']],
+ [tx`y[n]=\cos\left(\frac{\pi n}{3}\right)x[n]`,[1,0,1,1,1],['Multiplying by a fixed sequence is linear.','The multiplier depends on n, so shifting the input does not shift the output.','y[n] uses only x[n].','y[n] uses only x[n].','|cos| ≤ 1, so |y| ≤ B.']],
+ [tx`y[n]=\sum_{k=n-2}^{n}x[k]`,[1,1,1,0,1],['A sum of shifts is linear.','It is a moving sum, which commutes with a shift.','Only x[n−2], x[n−1], x[n] are used.','It needs past values.','|y| ≤ 3B.']],
+ [tx`y[n]=x[2n]`,[1,0,0,0,1],['Downsampling is linear.','Shifting the input by n₀ gives x[2n−n₀], but shifting the output gives x[2n−2n₀].','y[1]=x[2] is a future value.','y[1]=x[2].','The output values are input values, so they are bounded.']],
+ [tx`y(t)=e^{x(t)}`,[0,1,1,1,1],['x = 0 gives y = 1 ≠ 0.','The exponential commutes with a shift.','y(t) uses only x(t).','y(t) uses only x(t).','|x| ≤ B gives y ≤ e^B.']],
+ [tx`y[n]=n\,x[n-1]`,[1,0,1,0,0],['Multiplying by n is linear.','The factor n depends on time.','Only x[n−1] is used.','It needs x[n−1].','x[n]=1 gives y[n]=n, which is unbounded.']],
+ [tx`y(t)=x(t/2)`,[1,0,0,0,1],['Time scaling is linear.','Shifting the input by t₀ gives x(t/2−t₀), but shifting the output gives x((t−t₀)/2).','y(−2)=x(−1) depends on a future value.','y(2)=x(1).','The output values are input values, so they are bounded.']],
+ [tx`y[n]=x[n]\,x[n-1]`,[0,1,1,0,1],['Doubling the input multiplies the output by 4.','A product of shifts commutes with a shift.','Only x[n] and x[n−1] are used.','It needs x[n−1].','|y| ≤ B².']]];
+const PROPN=['linear','time-invariant','causal','memoryless','stable (BIBO)'];
+def({id:'sysprops',topic:'basics',name:'System properties',gen(){
+ const s=pick(SYS),idx=shuffle([0,1,2,3,4]).slice(0,3).sort();
+ return{statement:tx`Consider the system \[${s[0]}.\] Answer each question.`,
+ parts:idx.map(i=>yn(`Is the system ${PROPN[i]}?`,!!s[1][i],s[2][i])),
+ hints:[tx`<b>Linear</b>: \(a x_1+b x_2\mapsto a y_1+b y_2\). A quick test: zero input must give zero output. <b>Time-invariant</b>: compare the output for the shifted input with the shifted output. Watch out for anything that depends on \(t\) or \(n\) explicitly, or for scaled or reversed time.`,
+  tx`<b>Causal</b>: the output at time \(t\) never needs inputs at times later than \(t\) (check negative times too). <b>Memoryless</b>: the output at time \(t\) needs only the input at the same time \(t\). <b>Stable</b>: every bounded input gives a bounded output. Look for a bounded input, such as a constant or a unit step, that makes the output grow without bound.`],
+ solution:'<ul>'+[0,1,2,3,4].map(i=>`<li><b>${s[1][i]?'':'Not '}${PROPN[i]}</b>: ${s[2][i]}</li>`).join('')+'</ul>'}}});
+
+// ---------- LTI
+def({id:'dt-conv',topic:'lti',name:'Discrete-time convolution',gen(){
+ let x,h;do{x=[nz(-3,3),ri(-3,3),nz(-3,3)];h=[nz(-2,3),ri(-2,2),nz(-2,3)]}while(false);
+ const n0=ri(-1,2),y=[0,0,0,0,0];for(let i=0;i<3;i++)for(let k=0;k<3;k++)y[i+k]+=x[i]*h[k];
+ const ns=shuffle([1,2,3]).slice(0,2).sort().map(i=>i+n0);
+ const xT=sum(x.map((v,i)=>[v,dl(i)])),hT=sum(h.map((v,i)=>[v,dl(i+n0)]));
+ const terms=n=>{const out=[];for(let i=0;i<3;i++){const k=n-n0-i;if(k>=0&&k<3)out.push([i,n-i])}return out};
+ const line=n=>tx`y[${n}]=`+terms(n).map(([k,m])=>tx`x[${k}]h[${m}]`).join('+')+'='+terms(n).map(([k,m])=>tx`(${x[k]})(${h[m-n0]})`).join('+')+`=${y[n-n0]}`;
+ return{statement:tx`An LTI system has impulse response \(h[n]=${hT}\). Find the output \(y[n]=x[n]*h[n]\) for the input \(x[n]=${xT}\) at the two times below.`,
+ parts:ns.map(n=>num(tx`\(y[${n}]=\)`,y[n-n0])),
+ hints:[tx`\(y[n]=\sum_k x[k]\,h[n-k]\). Only \(x[0],x[1],x[2]\) are nonzero, so \(y[n]=x[0]h[n]+x[1]h[n-1]+x[2]h[n-2]\).`,
+  tx`\(h[n]\) is nonzero only for \(n=${n0},${n0+1},${n0+2}\). For each requested \(n\), keep only the terms where the index of \(h\) falls in that range.`,
+  tx`Alternatively, write \(y[n]\) as a sum of shifted and scaled copies of \(h[n]\): \(x[k]\delta[n-k]\mapsto x[k]h[n-k]\). The output is nonzero for \(n=${n0},\dots,${n0+4}\).`],
+ solution:tx`The full output is \(y[n]=${sum(y.map((v,i)=>[v,dl(i+n0)]))}\). In particular, \[`+ns.map(line).join(tx`,\qquad `)+tx`.\]`,
+ brute:()=>ns.map(n=>{let s=0;for(let k=-10;k<=10;k++){const xv=k>=0&&k<3?x[k]:0,m=n-k-n0,hv=m>=0&&m<3?h[m]:0;s+=xv*hv}return s})}}});
+
+def({id:'dt-step',topic:'lti',name:'Step input to a first-order system',gen(){
+ const r=pick(RATS),a=rv(r),n0=ri(0,2),N=n0+ri(1,3),L=N-n0;
+ const yN=(1-a**(L+1))/(1-a);
+ return{statement:tx`An LTI system has impulse response \(h[n]=${rT(r)}^n u[n]\). The input is \(x[n]=u[${sh('n',n0)}]\). Find \(y[${N}]\) and \(\lim_{n\to\infty}y[n]\).`,
+ parts:[num(tx`\(y[${N}]=\)`,yN),num(tx`\(\lim_{n\to\infty}y[n]=\)`,1/(1-a))],
+ hints:[tx`\(y[n]=\sum_k x[k]h[n-k]\). Here \(x[k]=1\) for \(k\ge${n0}\) and \(h[n-k]\neq0\) only for \(k\le n\).`,
+  tx`So \(y[n]=\sum_{k=${n0}}^{n}${rT(r)}^{n-k}=\sum_{m=0}^{n-${n0}}${rT(r)}^{m}\) for \(n\ge${n0}\). Use \(\sum_{m=0}^{M}a^m=\frac{1-a^{M+1}}{1-a}\).`],
+ solution:tx`For \(n\ge${n0}\), \(y[n]=\sum_{m=0}^{n-${n0}}a^m=\frac{1-a^{${sh('n',n0-1)}}}{1-a}\) with \(a=${fr(r[0],r[1])}\). Hence \(y[${N}]=\sum_{m=0}^{${L}}a^m ${eqv([yN,0])}\), and as \(n\to\infty\), \(y[n]\to\frac{1}{1-a}=${rtex(1/(1-a))}\).`,
+ brute:()=>{const y=n=>{let s=0;for(let k=-5;k<=n;k++)if(k>=n0)s+=a**(n-k);return s};return[y(N),y(400)]}}}});
+
+def({id:'ct-rect',topic:'lti',name:'Convolution of two pulses (CT)',gen(){
+ let T1,T2;do{T1=ri(1,4);T2=ri(1,4)}while(T1===T2&&R()<.6);const A=ri(1,3),B=ri(1,3);
+ const yv=t=>A*B*Math.max(0,Math.min(T1,t)-Math.max(0,t-T2));
+ let ts;do{ts=[ri(1,2*(T1+T2)-1)/2,ri(1,2*(T1+T2)-1)/2]}while(ts[0]===ts[1]);ts.sort((p,q)=>p-q);
+ return{statement:tx`Let \(x(t)=${A===1?'':A}\left[u(t)-u(t-${T1})\right]\) and \(h(t)=${B===1?'':B}\left[u(t)-u(t-${T2})\right]\). Find \(y(t)=x(t)*h(t)\) at the two times below, and the maximum value of \(y(t)\).`,
+ parts:[...ts.map(t=>num(tx`\(y(${fmtN(t)})=\)`,yv(t))),num(tx`\(\max_t\,y(t)=\)`,A*B*Math.min(T1,T2))],
+ hints:[tx`\(y(t)=\int_{-\infty}^{\infty}x(\tau)h(t-\tau)\,d\tau\). Flip \(h\) and slide it: \(h(t-\tau)\) is nonzero for \(t-${T2}<\tau<t\).`,
+  tx`The integrand is the constant \(${A*B}\) wherever the two pulses overlap, so \(y(t)=${A*B}\times\) (length of the overlap of \([0,${T1}]\) and \([t-${T2},t]\)).`,
+  tx`The result is a trapezoid (a triangle if \(T_1=T_2\)). It rises from \(t=0\), is flat at its maximum while the shorter pulse is completely inside the longer one, and returns to zero at \(t=${T1+T2}\).`],
+ solution:tx`\(y(t)=${A*B}\cdot\big|[0,${T1}]\cap[t-${T2},t]\big|\). `+ts.map(t=>tx`At \(t=${fmtN(t)}\) the overlap is \([${fmtN(Math.max(0,t-T2))},${fmtN(Math.min(T1,t))}]\), so \(y(${fmtN(t)})=${fmtN(yv(t))}\). `).join('')+tx`The longest overlap is \(\min(${T1},${T2})=${Math.min(T1,T2)}\), so the maximum is \(${A*B*Math.min(T1,T2)}\).`,
+ brute:()=>{const f=t=>integ(tau=>(tau>=0&&tau<T1?A:0)*((t-tau)>=0&&(t-tau)<T2?B:0),-1,10,44000)[0];let mx=0;for(let t=0;t<=T1+T2;t+=.25)mx=Math.max(mx,f(t));return[...ts.map(f),mx]}}}});
+
+def({id:'ct-exp',topic:'lti',name:'First-order system: step or pulse input',gen(){
+ const a=ri(1,4),v=ri(0,1),h=tx`h(t)=e^{-${a===1?'':a}t}u(t)`;
+ if(v===0){const t1=ri(1,3);return{statement:tx`An LTI system has \(${h}\). Find the output \(y(t)\) for the input \(x(t)=u(t)\) at \(t=${t1}\) and \(t=-1\), and find \(\lim_{t\to\infty}y(t)\).`,
+  parts:[num(tx`\(y(${t1})=\)`,(1-Math.exp(-a*t1))/a),num(tx`\(y(-1)=\)`,0),num(tx`\(\lim_{t\to\infty}y(t)=\)`,1/a)],
+  hints:[tx`\(y(t)=\int_{-\infty}^{\infty}x(\tau)h(t-\tau)\,d\tau=\int_{-\infty}^{\infty}u(\tau)e^{-${a}(t-\tau)}u(t-\tau)\,d\tau\).`,tx`The integrand is nonzero only for \(0<\tau<t\), so \(y(t)=0\) for \(t<0\) and \(y(t)=\int_0^t e^{-${a}(t-\tau)}d\tau\) for \(t\ge0\).`],
+  solution:tx`For \(t\ge0\), \(y(t)=\int_0^t e^{-${a}(t-\tau)}d\tau=\frac{1-e^{-${a}t}}{${a}}\), and \(y(t)=0\) for \(t<0\) (the system is causal and the input starts at 0). So \(y(${t1})=\frac{1-e^{-${a*t1}}}{${a}}\approx${fmtN((1-Math.exp(-a*t1))/a)}\), \(y(-1)=0\), and \(y(t)\to\frac{1}{${a}}\).`,
+  brute:()=>{const f=t=>integ(tau=>(tau>=0?1:0)*(t-tau>=0?Math.exp(-a*(t-tau)):0),-2,Math.max(t,0)+.0001,40000)[0];return[f(t1),f(-1),integ(s=>Math.exp(-a*s),0,60,100000)[0]]}}}
+ const T=ri(1,2),ta=T/2,tb=T+ri(1,2);const y=t=>t<0?0:t<=T?(1-Math.exp(-a*t))/a:Math.exp(-a*t)*(Math.exp(a*T)-1)/a;
+ return{statement:tx`An LTI system has \(${h}\). The input is the pulse \(x(t)=u(t)-u(t-${T})\). Find \(y(${fmtN(ta)})\) and \(y(${tb})\).`,
+  parts:[num(tx`\(y(${fmtN(ta)})=\)`,y(ta)),num(tx`\(y(${tb})=\)`,y(tb))],
+  hints:[tx`\(y(t)=\int_0^{${T}}e^{-${a}(t-\tau)}u(t-\tau)\,d\tau\): the input is 1 on \(0<\tau<${T}\), and \(h(t-\tau)\) needs \(\tau<t\).`,tx`For \(0\le t\le${T}\) integrate over \(0<\tau<t\). For \(t>${T}\) integrate over \(0<\tau<${T}\). Or use linearity: \(x(t)=u(t)-u(t-${T})\), so \(y(t)=s(t)-s(t-${T})\) with the step response \(s(t)=\frac{1-e^{-${a}t}}{${a}}u(t)\).`],
+  solution:tx`With the step response \(s(t)=\frac{1-e^{-${a}t}}{${a}}u(t)\), \(y(t)=s(t)-s(t-${T})\). So \(y(${fmtN(ta)})=s(${fmtN(ta)})=\frac{1-e^{-${fmtN(a*ta)}}}{${a}}\approx${fmtN(y(ta))}\), and \(y(${tb})=\frac{e^{-${a*(tb-T)}}-e^{-${a*tb}}}{${a}}\approx${fmtN(y(tb))}\).`,
+  brute:()=>[ta,tb].map(t=>integ(tau=>Math.exp(-a*(t-tau)),0,Math.min(t,T),40000)[0])}}});
+
+def({id:'stability',topic:'lti',name:'Causality and stability from h',gen(){
+ const v=ri(0,2);
+ if(v<2){const right=v===0,r=right?pick([[1,2],[-1,2],[1,3],[2,1],[-3,1],[3,2]]):pick([[2,1],[-2,1],[3,1],[1,2],[-1,3],[3,2]]),a=rv(r),n0=ri(-2,2);
+  const causal=right&&n0>=0,stable=right?Math.abs(a)<1:Math.abs(a)>1;
+  const hT=right?tx`h[n]=${rT(r)}^n\,u[${sh('n',n0)}]`:tx`h[n]=${rT(r)}^n\,u[${n0===0?'-n':(n0>0?`-n-${n0}`:`-n+${-n0}`)}]`;
+  const S=right?a**n0/(1-a):(1/a)**n0/(1-1/a);
+  const parts=[yn('Is the system causal?',causal,''),yn('Is the system stable?',stable,'')];if(stable)parts.push(num(tx`\(\sum_{n}h[n]=\)`,S));
+  return{statement:tx`An LTI system has impulse response \[${hT}.\]`+(stable?' Answer the questions, and if the system is stable, find the sum of its impulse response.':''),parts,
+  hints:[tx`An LTI system is <b>causal</b> if and only if \(h[n]=0\) for all \(n<0\). It is <b>stable</b> if and only if \(\sum_n|h[n]|<\infty\).`,
+   tx`First find the set of \(n\) where \(h[n]\neq0\): ${right?tx`\(u[${sh('n',n0)}]\) is 1 for \(n\ge${n0}\)`:tx`the step is 1 for \(n\le${-n0}\)`}. Then check whether the geometric series converges in that direction.`,
+   tx`For a sum over \(n\to-\infty\), substitute \(m=-n\): \(a^{n}=(1/a)^{m}\).`],
+  solution:tx`\(h[n]\neq0\) for \(${right?tx`n\ge${n0}`:tx`n\le${-n0}`}\). `+(causal?'This set has no negative n, so the system is causal. ':right?tx`This includes \(n=${n0}<0\), so the system is not causal. `:'This set extends to n → −∞, so the system is not causal. ')+
+   (right?(stable?tx`Since \(|a|=${rtex(Math.abs(a))}<1\), \(\sum_{n\ge${n0}}|a|^n\) converges: stable. `:tx`Since \(|a|=${rtex(Math.abs(a))}\ge1\), \(|h[n]|\) does not decay as \(n\to\infty\): unstable. `)
+   :(stable?tx`With \(m=-n\), \(|h[n]|=|1/a|^m\) with \(|1/a|=${rtex(1/Math.abs(a))}<1\), so the sum converges: stable. `:tx`With \(m=-n\), \(|h[n]|=|1/a|^m\) with \(|1/a|=${rtex(1/Math.abs(a))}\ge1\), so the sum diverges: unstable. `))+
+   (stable?tx`The sum is \(${right?tx`\sum_{n=${n0}}^{\infty}a^n=\frac{a^{${n0}}}{1-a}`:tx`\sum_{m=${n0}}^{\infty}a^{-m}=\frac{a^{-(${n0})}}{1-1/a}`}${eqv([S,0])}\).`:''),
+  brute:()=>stable?[null,null,(()=>{let s=0;for(let n=-300;n<=300;n++){const on=right?n>=n0:(-n-n0)>=0;if(on)s+=a**n}return s})()]:[null,null]}}
+ const b=pick([-3,-2,-1,1,2]),t0=ri(-1,1),causal=t0>=0,stable=b<0,S=Math.exp(b*t0)/(-b);
+ const parts=[yn('Is the system causal?',causal,''),yn('Is the system stable?',stable,'')];if(stable)parts.push(num(tx`\(\int_{-\infty}^{\infty}h(t)\,dt=\)`,S));
+ return{statement:tx`An LTI system has impulse response \[h(t)=e^{${b===1?'':b===-1?'-':b}t}\,u(${sh('t',t0)}).\]`+(stable?' Answer the questions, and find the area under h(t).':''),parts,
+ hints:[tx`Causal \(\iff h(t)=0\) for \(t<0\). Stable \(\iff\int|h(t)|\,dt<\infty\).`,tx`\(h(t)\) is nonzero for \(t\ge${t0}\). Does \(e^{${b}t}\) decay as \(t\to\infty\)?`],
+ solution:tx`\(h(t)\neq0\) for \(t\ge${t0}\), so the system is ${causal?'causal':'not causal (h is nonzero for some t < 0)'}. `+(stable?tx`Since \(${b}<0\), \(h\) decays and \(\int_{${t0}}^{\infty}e^{${b}t}dt=\frac{e^{${b*t0}}}{${-b}}\approx${fmtN(S)}\): stable.`:tx`Since \(${b}>0\), \(h(t)\) grows without bound: unstable.`),
+ brute:()=>stable?[null,null,integ(t=>Math.exp(b*t),t0,t0+60,200000)[0]]:[null,null]}}});
+
+// ---------- CT Fourier series
+const W0S=[[1,1,true],[2,1,true],[1,2,true],[1,1,false],[2,1,false],[3,1,false]];
+def({id:'ctfs-coef',topic:'ctfs',name:'Fourier series coefficients by inspection',gen(){
+ const w=pick(W0S),w0=W(...w),kw=k=>W(k*w[0],w[1],w[2]);let k1,k2;do{k1=ri(1,3);k2=ri(1,4)}while(k1===k2||gcd(k1,k2)!==1);
+ const C=ri(-3,3),A=nz(-4,4),B=nz(-4,4),ph=pick([[0,1],[1,4],[1,2],[1,3],[-1,4]]),phv=PI*ph[0]/ph[1],sgn=pick([1,-1]);
+ const phT=ph[0]===0?'':(ph[0]<0?' - ':' + ')+pif(Math.abs(ph[0]),ph[1]);
+ const x=t=>C+A*Math.cos(kw(k1).v*t)+B*Math.sin(kw(k2).v*t+phv);const T=TAU/w0.v;
+ const ak2=sgn>0?cdiv(cs(ej(phv),B),[0,2]):cneg(cdiv(cs(ej(-phv),B),[0,2]));
+ return{statement:tx`The signal \[x(t)=${sum([[C,''],[A,tx`\cos\left(${wt(kw(k1))}\right)`],[B,tx`\sin\left(${wt(kw(k2))}${phT}\right)`]])}\] is periodic with fundamental frequency \(\omega_0=${w0.tex}\) rad/s. Find the Fourier series coefficients below.`,
+ parts:[num(tx`\(a_0=\)`,C),num(tx`\(a_{${k1}}=\)`,A/2,{mistakes:[[A,'Remember \\(\\cos\\theta=\\frac12(e^{j\\theta}+e^{-j\\theta})\\): each exponential gets half of the amplitude.']]}),num(tx`\(a_{${sgn*k2}}=\)`,ak2)],
+ hints:[tx`Use Euler's formulas: \(\cos\theta=\frac{e^{j\theta}+e^{-j\theta}}{2}\), \(\sin\theta=\frac{e^{j\theta}-e^{-j\theta}}{2j}\). Then match each term with \(a_k e^{jk\omega_0t}\).`,
+  tx`\(${wt(kw(k1))}=${k1}\omega_0t\) and \(${wt(kw(k2))}=${k2}\omega_0t\). So the cosine contributes to \(k=\pm${k1}\) and the sine to \(k=\pm${k2}\).`,
+  tx`For the sine: \(B\sin(\theta+\phi)=\frac{B}{2j}e^{j\phi}e^{j\theta}-\frac{B}{2j}e^{-j\phi}e^{-j\theta}\). Keep the phase factor with the right sign, and recall \(\frac{1}{j}=-j\).`],
+ solution:tx`\(a_0=${C}\) (the constant). \(A\cos(${k1}\omega_0t)=\frac{${A}}{2}e^{j${k1}\omega_0t}+\frac{${A}}{2}e^{-j${k1}\omega_0t}\), so \(a_{\pm${k1}}=${fr(A,2)}\). \(B\sin(${k2}\omega_0t+\phi)=\frac{B}{2j}e^{j\phi}e^{j${k2}\omega_0t}-\frac{B}{2j}e^{-j\phi}e^{-j${k2}\omega_0t}\) with \(B=${B}\), \(\phi=${ph[0]===0?'0':pif(ph[0],ph[1])}\). So \(a_{${sgn*k2}}=${sgn>0?tx`\frac{${B}}{2j}e^{j\phi}`:tx`-\frac{${B}}{2j}e^{-j\phi}`}${eqv(ak2)}\).`,
+ brute:()=>[fsCoef(x,T,0),fsCoef(x,T,k1),fsCoef(x,T,sgn*k2)]}}});
+
+def({id:'ctfs-table',topic:'ctfs',name:'From coefficients: power, values, realness',gen(){
+ const p=nz(-2,2),q=nz(-2,2),r=nz(-2,2),c0=ri(-2,3),k=pick([2,3]),realX=R()<.55;
+ const a={0:[c0,0],1:[p,q],[-1]:[p,-q],[k]:[0,r],[-k]:[0,-r]};
+ if(!realX){if(R()<.5)a[-1]=[p,q];else a[-k]=[0,r]}
+ const ks=[-k,-1,0,1,k],P=ks.reduce((s,kk)=>s+cabs(a[kk])**2,0),x0=csum(ks.map(kk=>a[kk])),xq=csum(ks.map(kk=>cmul(a[kk],ej(kk*PI/2))));
+ const list=ks.map(kk=>tx`a_{${kk}}=${ctex(a[kk])}`).join(tx`,\quad `);
+ return{statement:tx`A periodic signal \(x(t)\) with period \(T\) has only these nonzero Fourier series coefficients: \[${list}.\]`,
+ parts:[num(tx`Average power \(P=\frac1T\int_T|x(t)|^2dt=\)`,P),num(tx`\(x(0)=\)`,x0),num(tx`\(x(T/4)=\)`,xq),yn('Is x(t) real-valued?',realX,'')],
+ hints:[tx`Parseval's relation: \(\frac1T\int_T|x(t)|^2dt=\sum_k|a_k|^2\).`,tx`\(x(t)=\sum_k a_k e^{jk\omega_0t}\). At \(t=0\) every exponential is 1. At \(t=T/4\), \(e^{jk\omega_0T/4}=e^{jk\pi/2}=j^k\).`,tx`\(x(t)\) is real if and only if \(a_{-k}=a_k^*\) for every \(k\).`],
+ solution:tx`\(P=\sum|a_k|^2=${P}\). \(x(0)=\sum a_k${eqv(x0)}\). \(x(T/4)=\sum_k a_k j^k${eqv(xq)}\). `+(realX?tx`Every pair satisfies \(a_{-k}=a_k^*\), so \(x(t)\) is real.`:tx`\(a_{-1}=${ctex(a[-1])}\) and \(a_1^*=${ctex(conj(a[1]))}\), \(a_{-${k}}=${ctex(a[-k])}\) and \(a_{${k}}^*=${ctex(conj(a[k]))}\): the condition \(a_{-k}=a_k^*\) fails, so \(x(t)\) is not real.`),
+ brute:()=>{const x=t=>csum(ks.map(kk=>cmul(a[kk],ej(kk*t))));return[integ(t=>cabs(x(t))**2,0,TAU,4000)[0]/TAU,x(0),x(TAU/4),null]}}}});
+
+def({id:'ctfs-lti',topic:'ctfs',name:'Periodic input to an LTI system',gen(){
+ const a=ri(1,4),m=pick([1,2,3]),w0=a*m,A=ri(1,3),B=nz(-3,3),hp=R()<.4;
+ const H=w=>hp?cdiv([0,w],[a,w]):cdiv([a,0],[a,w]);const b0=cs(H(0),A),b1=cs(H(w0),B),E=2*Math.abs(B)*cabs(H(w0)),th=wrap(carg(H(w0))+(B<0?PI:0));
+ const HT=hp?tx`\frac{j\omega}{${a}+j\omega}`:tx`\frac{${a}}{${a}+j\omega}`;
+ return{statement:tx`The periodic signal \(x(t)=${sum([[A,''],[2*B,tx`\cos(${w0}t)`]])}\) is the input to an LTI system with frequency response \[H(j\omega)=${HT}.\] The output is \(y(t)=\sum_k b_k e^{jk\omega_0t}\) with \(\omega_0=${w0}\). Write it as \(y(t)=D+E\cos(${w0}t+\theta)\) with \(E>0\).`,
+ parts:[num(tx`\(b_0=D=\)`,b0),num(tx`\(b_1=\)`,b1),num(tx`\(E=\)`,E),ang(tx`\(\theta=\)`,th)],
+ hints:[tx`For a periodic input, \(b_k=H(jk\omega_0)\,a_k\). Here \(a_0=${A}\) and \(a_{\pm1}=${B}\) (because \(2B\cos\theta=Be^{j\theta}+Be^{-j\theta}\)).`,
+  tx`Compute \(H(j${w0})=${hp?tx`\frac{j${w0}}{${a}+j${w0}}`:tx`\frac{${a}}{${a}+j${w0}}`}\) in polar form. Then \(b_1=H(j${w0})\cdot${B<0?`(${B})`:B}\), and \(b_{-1}=b_1^*\) because \(h(t)\) is real.`,
+  tx`\(b_1e^{j\omega_0t}+b_1^*e^{-j\omega_0t}=2|b_1|\cos(\omega_0t+\angle b_1)\), so \(E=2|b_1|\) and \(\theta=\angle b_1\).`],
+ solution:tx`\(b_0=H(0)a_0=${ctex(H(0))}\cdot${A}=${ctex(b0)}\). \(H(j${w0})${eqv(H(w0))}\), with \(|H|=${fmtN(cabs(H(w0)))}\) and \(\angle H=${fmtN(carg(H(w0)))}\) rad. Then \(b_1=${B}\,H(j${w0})${eqv(b1)}\), so \(E=2|b_1|${eqv([E,0])}\) and \(\theta=\angle b_1\approx${fmtN(th)}\) rad.`+(B<0?' (The negative amplitude adds π to the phase.)':''),
+ brute:()=>{const Hn=w=>{const hh=hp?null:t=>a*Math.exp(-a*t);if(hp)return csub(ONE,integ(t=>cs(ej(-w*t),a*Math.exp(-a*t)),0,40/a,200000));return integ(t=>cs(ej(-w*t),hh(t)),0,40/a,200000)};
+  const H0=Hn(0),H1=Hn(w0),b1n=cs(H1,B);return[cs(H0,A),b1n,2*cabs(b1n),carg(b1n)]}}}});
+
+def({id:'ctfs-pulse',topic:'ctfs',name:'Rectangular pulse train',gen(){
+ const T=pick([4,6,8,12]),T1=ri(1,Math.floor((T-1)/2)),A=ri(1,3),shift=R()<.4,k2=pick([2,3]);
+ const w0=TAU/T,ak=k=>{const base=k===0?2*A*T1/T:A*Math.sin(k*w0*T1)/(k*PI);return shift?cs(ej(-k*w0*T1),base):[base,0]};
+ const xd=shift?tx`x(t)=\begin{cases}${A},&0<t<${2*T1}\\0,&${2*T1}<t<${T}\end{cases}`:tx`x(t)=\begin{cases}${A},&|t|<${T1}\\0,&${T1}<|t|<${T/2}\end{cases}`;
+ return{statement:tx`One period of a periodic signal with period \(T=${T}\) is \[${xd}.\] Find the Fourier series coefficients below.`,
+ parts:[num(tx`\(a_0=\)`,ak(0)),num(tx`\(a_1=\)`,ak(1)),num(tx`\(a_{${k2}}=\)`,ak(k2))],
+ hints:[tx`\(a_k=\frac1T\int_T x(t)e^{-jk\omega_0t}dt\) with \(\omega_0=\frac{2\pi}{${T}}=${pif(2,T)}\). \(a_0\) is simply the average value of \(x(t)\).`,
+  shift?tx`The pulse is the centered pulse of half-width \(${T1}\) delayed by \(${T1}\). Find the coefficients of the centered pulse, then multiply by \(e^{-jk\omega_0\cdot${T1}}\) (time-shift property).`:tx`For the centered pulse, \(\int_{-${T1}}^{${T1}}e^{-jk\omega_0t}dt=\frac{2\sin(k\omega_0${T1})}{k\omega_0}\).`,
+  tx`For a pulse of height \(A\) and half-width \(T_1\) centered at 0, \(a_k=\frac{A\sin(k\omega_0T_1)}{k\pi}\) for \(k\neq0\).`],
+ solution:tx`\(\omega_0=${pif(2,T)}\), so \(a_0=\frac{${A}\cdot${2*T1}}{${T}}=${fr(2*A*T1,T)}\). For the centered pulse \(c_k=\frac{${A}\sin(k\omega_0\cdot${T1})}{k\pi}=\frac{${A}\sin\left(${pif(2*T1,T)}k\right)}{k\pi}\).`+(shift?tx` Delaying by \(${T1}\) multiplies by \(e^{-jk${pif(2*T1,T)}}\).`:'')+tx` Hence \(a_1${eqv(ak(1))}\) and \(a_{${k2}}${eqv(ak(k2))}\).`,
+ brute:()=>{const x=t=>{t=((t%T)+T)%T;return shift?(t<2*T1?A:0):((t<T1||t>T-T1)?A:0)};return[0,1,k2].map(k=>fsCoef(x,T,k,48000))}}}});
+
+def({id:'ctfs-prop',topic:'ctfs',name:'Fourier series properties',gen(){
+ const m=ri(1,2),A=ri(1,3),a=k=>[A/(m*m+k*k)*m,-A*k/(m*m+k*k)];   // a_k = A/(m+jk)
+ const TR=[
+  {T:tx`x(t-\tfrac{1}{2})`,b:k=>cmul(a(k),ej(-k*PI/2)),r:tx`b_k=a_ke^{-jk\omega_0/2}=a_ke^{-jk\pi/2}`,y:x=>t=>x(t-.5)},
+  {T:tx`x(-t)`,b:k=>a(-k),r:tx`b_k=a_{-k}`,y:x=>t=>x(-t)},
+  {T:tx`\frac{dx(t)}{dt}`,b:k=>cmul([0,k*PI],a(k)),r:tx`b_k=jk\omega_0a_k=jk\pi a_k`,y:x=>t=>cs(csub(x(t+1e-5),x(t-1e-5)),1/2e-5)},
+  {T:tx`x(t)\,e^{j2\pi t}`,b:k=>a(k-2),r:tx`b_k=a_{k-2}\ \ (e^{j2\pi t}=e^{j2\omega_0t})`,y:x=>t=>cmul(x(t),ej(TAU*t))},
+  {T:tx`x(t)+x(-t)`,b:k=>cadd(a(k),a(-k)),r:tx`b_k=a_k+a_{-k}`,y:x=>t=>cadd(x(t),x(-t))},
+  {T:tx`x(t)-x(t-1)`,b:k=>cs(a(k),1-(-1)**k),r:tx`b_k=a_k\left(1-e^{-jk\omega_0}\right)=a_k\left(1-(-1)^k\right)`,y:x=>t=>csub(x(t),x(t-1))}];
+ const [t1,t2]=shuffle(TR),k1=pick([1,-1,2]),k2=pick([1,2,-1]);
+ return{statement:tx`A periodic signal \(x(t)\) with period \(T=2\) (so \(\omega_0=\pi\)) has Fourier series coefficients \[a_k=\frac{${A}}{${m}+jk}.\] Let \(b_k\) be the coefficients of \(y_1(t)=${t1.T}\) and \(c_k\) those of \(y_2(t)=${t2.T}\).`,
+ parts:[num(tx`\(b_{${k1}}=\)`,t1.b(k1)),num(tx`\(c_{${k2}}=\)`,t2.b(k2))],
+ hints:[tx`Use the Fourier series property table: time shift \(x(t-t_0)\to a_ke^{-jk\omega_0t_0}\), time reversal \(x(-t)\to a_{-k}\), differentiation \(\to jk\omega_0a_k\), multiplication by \(e^{jM\omega_0t}\to a_{k-M}\), and linearity.`,
+  tx`Write the new coefficient in terms of \(a\), then substitute \(a_k=\frac{${A}}{${m}+jk}\). Careful: \(a_{-1}=\frac{${A}}{${m}-j}\), not \(a_1\).`],
+ solution:tx`\(y_1\): \(${t1.r}\), so \(b_{${k1}}${eqv(t1.b(k1))}\).<br>\(y_2\): \(${t2.r}\), so \(c_{${k2}}${eqv(t2.b(k2))}\).`,
+ brute:()=>{const K=400,x=t=>{let s=a(0);for(let k=1;k<=K;k++)s=cadd(s,cadd(cmul(a(k),ej(k*PI*t)),cmul(a(-k),ej(-k*PI*t))));return s};
+  const coef=(y,k)=>{const n=2048;let s=[0,0];for(let i=0;i<n;i++){const t=2*i/n;s=cadd(s,cmul(y(t),ej(-k*PI*t)))}return cs(s,1/n)};return[coef(t1.y(x),k1),coef(t2.y(x),k2)]}}}});
+
+// ---------- DT Fourier series
+def({id:'dtfs-cos',topic:'dtfs',name:'DTFS coefficients by inspection',gen(){
+ const N=pick([6,8,10,12]);let m,p;do{m=ri(1,N/2-1);p=ri(1,N/2-1)}while(m===p);const A=ri(-2,3),B=nz(-3,3),C=nz(-3,3);
+ const x=n=>A+B*Math.cos(TAU*m*n/N)+C*Math.sin(TAU*p*n/N),ak=k=>{let s=[0,0];for(let n=0;n<N;n++)s=cadd(s,cs(ej(-TAU*k*n/N),x(n)));return cs(s,1/N)};
+ return{statement:tx`The signal \[x[n]=${sum([[A,''],[B,tx`\cos\left(${pif(2*m,N)}n\right)`],[C,tx`\sin\left(${pif(2*p,N)}n\right)`]])}\] is periodic with period \(N=${N}\). Find its Fourier series coefficients below (\(x[n]=\sum_{k=\langle N\rangle}a_ke^{jk\frac{2\pi}{N}n}\)).`,
+ parts:[num(tx`\(a_0=\)`,A),num(tx`\(a_{${N-p}}=\)`,[0,C/2]),num(tx`\(a_{${m+N}}=\)`,B/2)],
+ hints:[tx`Write each frequency as \(k\frac{2\pi}{${N}}\): \(${pif(2*m,N)}=${m}\cdot\frac{2\pi}{${N}}\) and \(${pif(2*p,N)}=${p}\cdot\frac{2\pi}{${N}}\). Then expand with Euler's formulas.`,
+  tx`The DTFS coefficients are periodic: \(a_{k+${N}}=a_k\). So \(a_{${N-p}}=a_{-${p}}\) and \(a_{${m+N}}=a_{${m}}\).`,
+  tx`\(\sin\theta=\frac{e^{j\theta}-e^{-j\theta}}{2j}\), so the coefficient of \(e^{-j\theta}\) is \(-\frac{1}{2j}=\frac{j}{2}\).`],
+ solution:tx`\(a_0=${A}\). \(${B}\cos(${m}\cdot\tfrac{2\pi}{${N}}n)\) gives \(a_{\pm${m}}=${fr(B,2)}\), and \(${C}\sin(${p}\cdot\tfrac{2\pi}{${N}}n)\) gives \(a_{${p}}=\frac{${C}}{2j}\), \(a_{-${p}}=-\frac{${C}}{2j}=${ctex([0,C/2])}\). By periodicity, \(a_{${N-p}}=a_{-${p}}=${ctex([0,C/2])}\) and \(a_{${m+N}}=a_{${m}}=${fr(B,2)}\).`,
+ brute:()=>[ak(0),ak(N-p),ak(m+N)]}}});
+
+def({id:'dtfs-seq',topic:'dtfs',name:'DTFS of a short periodic sequence',gen(){
+ let x;do x=[ri(-3,3),ri(-3,3),ri(-3,3),ri(-3,3)];while(x.filter(v=>v).length<3);
+ const ak=k=>cs(csum(x.map((v,n)=>cs(cpow([0,-1],[k*n,0]),v))),1/4);
+ return{statement:tx`A periodic signal with period \(N=4\) has one period \[x[0]=${x[0]},\quad x[1]=${x[1]},\quad x[2]=${x[2]},\quad x[3]=${x[3]}.\] Find its Fourier series coefficients \(a_0,a_1,a_2\).`,
+ parts:[num(tx`\(a_0=\)`,ak(0)),num(tx`\(a_1=\)`,ak(1),{mistakes:[[conj(ak(1)),'This is the conjugate. The analysis equation uses \\(e^{-jk\\frac{2\\pi}{N}n}\\) (minus sign).']]}),num(tx`\(a_2=\)`,ak(2))],
+ hints:[tx`\(a_k=\frac1N\sum_{n=0}^{N-1}x[n]e^{-jk\frac{2\pi}{N}n}\). With \(N=4\), \(e^{-j\frac{2\pi}{4}kn}=(-j)^{kn}\).`,
+  tx`So \(a_0\) is the average, \(a_1=\frac14\left(x[0]-jx[1]-x[2]+jx[3]\right)\), and \(a_2=\frac14\left(x[0]-x[1]+x[2]-x[3]\right)\).`],
+ solution:tx`\(a_0=\frac14(${x.join('+')})${eqv(ak(0))}\), \(a_1=\frac14\left(${x[0]}-j(${x[1]})-(${x[2]})+j(${x[3]})\right)${eqv(ak(1))}\), \(a_2=\frac14\left(${x[0]}-(${x[1]})+(${x[2]})-(${x[3]})\right)${eqv(ak(2))}\).`,
+ brute:()=>[0,1,2].map(k=>{let s=[0,0];for(let n=0;n<4;n++)s=cadd(s,cs(ej(-TAU*k*n/4),x[n]));return cs(s,.25)})}}});
+
+def({id:'dtfs-synth',topic:'dtfs',name:'From DTFS coefficients to x[n]',gen(){
+ const VALS=[[1,0],[2,0],[-1,0],[0,1],[0,-1],[1,1],[0,2],[-2,0],[1,-1]];const ks=shuffle([0,1,2,3,4,5,6,7]).slice(0,ri(2,3)).sort((a,b)=>a-b);
+ const a={};ks.forEach(k=>a[k]=pick(VALS));const n1=pick([2,4]),x=n=>csum(ks.map(k=>cmul(a[k],ej(TAU*k*n/8)))),P=ks.reduce((s,k)=>s+cabs(a[k])**2,0);
+ return{statement:tx`A periodic signal with period \(N=8\) has DTFS coefficients (over one period \(0\le k\le7\)) \[${ks.map(k=>tx`a_{${k}}=${ctex(a[k])}`).join(tx`,\quad `)},\] and \(a_k=0\) for the other \(k\). Find the following without computing all of \(x[n]\).`,
+ parts:[num(tx`\(x[0]=\)`,x(0)),num(tx`\(x[${n1}]=\)`,x(n1)),num(tx`Average power \(\frac18\sum_{n=0}^{7}|x[n]|^2=\)`,P)],
+ hints:[tx`Synthesis: \(x[n]=\sum_{k=0}^{7}a_ke^{jk\frac{2\pi}{8}n}\). At \(n=0\), all exponentials equal 1.`,
+  tx`At \(n=${n1}\), \(e^{jk\frac{2\pi}{8}\cdot${n1}}=${n1===2?tx`e^{jk\pi/2}=j^k`:tx`e^{jk\pi}=(-1)^k`}\).`,tx`Parseval: \(\frac1N\sum_{n=\langle N\rangle}|x[n]|^2=\sum_{k=\langle N\rangle}|a_k|^2\).`],
+ solution:tx`\(x[0]=\sum a_k${eqv(x(0))}\). \(x[${n1}]=\sum_k a_k\,${n1===2?'j^k':'(-1)^k'}=`+ks.map(k=>tx`(${ctex(a[k])})${n1===2?tx`(${ctex(cpow(J,[k,0]))})`:tx`(${(-1)**k})`}`).join('+')+tx`${eqv(x(n1))}\). Power \(=\sum|a_k|^2=${P}\).`,
+ brute:()=>{const xs=[...Array(8)].map((_,n)=>x(n));return[xs[0],xs[n1],xs.reduce((s,v)=>s+cabs(v)**2,0)/8]}}}});
+
+def({id:'dtfs-lti',topic:'dtfs',name:'Periodic input to a DT LTI system',gen(){
+ const N=pick([4,6,8]),m=ri(1,N/2-1),A=ri(1,3),B=nz(-3,3),sys=pick([
+  {T:tx`y[n]=x[n]-x[n-1]`,H:w=>csub(ONE,ej(-w)),HT:tx`1-e^{-j\omega}`,h:[1,-1]},
+  {T:tx`y[n]=\tfrac12\left(x[n]+x[n-1]\right)`,H:w=>cs(cadd(ONE,ej(-w)),.5),HT:tx`\tfrac12\left(1+e^{-j\omega}\right)`,h:[.5,.5]},
+  {T:tx`y[n]=x[n]+x[n-2]`,H:w=>cadd(ONE,ej(-2*w)),HT:tx`1+e^{-j2\omega}`,h:[1,0,1]}]);
+ const W1=TAU*m/N,H1=sys.H(W1),b0=cs(sys.H(0),A),bm=cs(H1,B);
+ return{statement:tx`The periodic signal \(x[n]=${sum([[A,''],[2*B,tx`\cos\left(${pif(2*m,N)}n\right)`]])}\) (period \(N=${N}\)) is the input to the LTI system \(${sys.T}\). Find the DTFS coefficients \(b_k\) of the output, and the amplitude of the sinusoid in \(y[n]\).`,
+ parts:[num(tx`\(b_0=\)`,b0),num(tx`\(b_{${m}}=\)`,bm),num(tx`Amplitude \(E\) in \(y[n]=b_0+E\cos\left(${pif(2*m,N)}n+\theta\right)\), \(E=\)`,2*cabs(bm))],
+ hints:[tx`Find the frequency response: \(H(e^{j\omega})=\sum_n h[n]e^{-j\omega n}=${sys.HT}\).`,tx`\(b_k=H\left(e^{jk\frac{2\pi}{N}}\right)a_k\), with \(a_0=${A}\) and \(a_{\pm${m}}=${B}\).`,tx`\(E=2|b_{${m}}|\).`],
+ solution:tx`\(H(e^{j\omega})=${sys.HT}\). \(b_0=H(e^{j0})\cdot${A}=${ctex(b0)}\). \(H\left(e^{j${pif(2*m,N)}}\right)${eqv(H1)}\), so \(b_{${m}}=${B}\cdot H${eqv(bm)}\) and \(E=2|b_{${m}}|${eqv([2*cabs(bm),0])}\).`,
+ brute:()=>{const x=n=>A+2*B*Math.cos(TAU*m*n/N),y=n=>sys.h.reduce((s,hv,k)=>s+hv*x(n-k),0),c=k=>{let s=[0,0];for(let n=0;n<N;n++)s=cadd(s,cs(ej(-TAU*k*n/N),y(n)));return cs(s,1/N)};return[c(0),c(m),2*cabs(c(m))]}}}});
+
+// ---------- CT Fourier transform
+def({id:'ctft-exp',topic:'ctft',name:'Transform of a shifted exponential',gen(){
+ const A=ri(1,3),a=ri(1,4),t0=ri(0,2),v=t0>0&&R()<.5?1:0;
+ const g=v?A*Math.exp(-a*t0):A,X=w=>cs(cdiv(ej(-w*t0),[a,w]),g);
+ const xT=v?tx`x(t)=${A===1?'':A}e^{-${a===1?'':a}t}\,u(${sh('t',t0)})`:tx`x(t)=${A===1?'':A}e^{-${a===1?'':a}(${sh('t',t0)})}\,u(${sh('t',t0)})`;
+ return{statement:tx`Let \[${xT}.\] Find its Fourier transform at \(\omega=0\), and the magnitude and phase of \(X(j\omega)\) at \(\omega=${a}\).`,
+ parts:[num(tx`\(X(j0)=\)`,X(0)),num(tx`\(|X(j${a})|=\)`,cabs(X(a))),ang(tx`\(\angle X(j${a})=\)`,carg(X(a)))],
+ hints:[tx`\(e^{-at}u(t)\longleftrightarrow\frac{1}{a+j\omega}\), and the time shift \(x(t-t_0)\longleftrightarrow e^{-j\omega t_0}X(j\omega)\).`,
+  v?tx`Rewrite \(e^{-${a}t}=e^{-${a*t0}}\,e^{-${a}(t-${t0})}\) so that the signal is a constant times a shifted copy of \(e^{-${a}t}u(t)\).`:tx`The signal is a copy of \(${A}e^{-${a}t}u(t)\) shifted by \(${t0}\).`,
+  tx`\(|e^{-j\omega t_0}|=1\) and \(\angle e^{-j\omega t_0}=-\omega t_0\). \(\angle\frac{1}{a+j\omega}=-\arctan\frac{\omega}{a}\).`],
+ solution:tx`\(X(j\omega)=${v?tx`${A}e^{-${a*t0}}`:A}\,\frac{e^{-j${t0}\omega}}{${a}+j\omega}\). So \(X(j0)=${v?tx`\frac{${A}e^{-${a*t0}}}{${a}}\approx${fmtN(X(0)[0])}`:fr(A,a)}\), \(|X(j${a})|=\frac{${v?tx`${A}e^{-${a*t0}}`:A}}{${a}\sqrt2}\approx${fmtN(cabs(X(a)))}\), and \(\angle X(j${a})=-\frac{\pi}{4}-${a*t0}\approx${fmtN(-PI/4-a*t0)}\) rad \(\equiv${fmtN(wrap(-PI/4-a*t0))}\) rad.`,
+ brute:()=>{const x=t=>t<t0?0:(v?A*Math.exp(-a*t):A*Math.exp(-a*(t-t0)));const F=w=>integ(t=>cs(ej(-w*t),x(t)),t0,t0+40/a,200000);return[F(0),cabs(F(a)),carg(F(a))]}}}});
+
+def({id:'ctft-rect',topic:'ctft',name:'Transform of a rectangular pulse',gen(){
+ const A=ri(1,3),T1=ri(1,3),t0=pick([0,0,T1,-1,2]);const X=w=>cs(ej(-w*t0),w===0?2*A*T1:2*A*Math.sin(w*T1)/w);const w1=PI/(2*T1);
+ return{statement:tx`Let \(x(t)=${A}\) for \(|t${t0===0?'':(t0>0?'-'+t0:'+'+(-t0))}|<${T1}\) and \(x(t)=0\) otherwise. Find \(X(j0)\), the smallest \(\omega>0\) with \(X(j\omega)=0\), and \(X(j\omega)\) at \(\omega=${pif(1,2*T1)}\).`,
+ parts:[num(tx`\(X(j0)=\)`,X(0)),num(tx`smallest zero \(\omega=\)`,PI/T1),num(tx`\(X\left(j${pif(1,2*T1)}\right)=\)`,X(w1))],
+ hints:[tx`For a pulse of height \(A\) on \(|t|<T_1\): \(X(j\omega)=\frac{2A\sin(\omega T_1)}{\omega}\), and \(X(j0)=\int x(t)\,dt\) (the area).`,
+  t0===0?tx`The pulse is centered at 0, so no shift factor is needed.`:tx`The pulse is centered at \(t_0=${t0}\): multiply by \(e^{-j\omega t_0}\). The shift does not move the zeros.`,
+  tx`\(\sin(\omega T_1)=0\) first at \(\omega T_1=\pi\).`],
+ solution:tx`\(X(j\omega)=\frac{${2*A}\sin(${T1}\omega)}{\omega}${t0===0?'':tx`e^{${t0>0?'-':''}j${Math.abs(t0)===1?'':Math.abs(t0)}\omega}`}\). \(X(j0)=${2*A*T1}\) (the area). The first zero is at \(\omega=\frac{\pi}{${T1}}\). At \(\omega=${pif(1,2*T1)}\): \(\frac{${2*A}\cdot1}{\pi/${2*T1}}=\frac{${4*A*T1}}{\pi}\)${t0===0?'':tx` times \(e^{${t0>0?'-':''}j${pif(Math.abs(t0),2*T1)}}\)`}, so \(X${eqv(X(w1))}\).`,
+ brute:()=>{const F=w=>integ(t=>cs(ej(-w*t),A),t0-T1,t0+T1,40000);let z=PI/T1;if(cabs(F(z))>1e-6)z=NaN;for(let i=1;i<60;i++)if(cabs(F(i/60*PI/T1))<1e-3)z=NaN;return[F(0),z,F(w1)]}}}});
+
+def({id:'ctft-inv',topic:'ctft',name:'Inverse transform of an ideal band',gen(){
+ const A=ri(1,3),Wc=pick([[1,1,false],[2,1,false],[1,1,true],[2,1,true],[4,1,false]]),Wv=W(...Wc).v,WT=W(...Wc).tex,t0=ri(0,2);
+ const x=t=>Math.abs(t-t0)<1e-12?A*Wv/PI:A*Math.sin(Wv*(t-t0))/(PI*(t-t0));
+ return{statement:tx`\(X(j\omega)=${A}${t0?tx`e^{-j${t0===1?'':t0}\omega}`:''}\) for \(|\omega|<${WT}\), and \(X(j\omega)=0\) otherwise. Find the peak value \(x(${t0})\), the first time \(t>${t0}\) at which \(x(t)=0\), and \(\int_{-\infty}^{\infty}x(t)\,dt\).`,
+ parts:[num(tx`\(x(${t0})=\)`,A*Wv/PI),num(tx`first zero after \(t=${t0}\): \(t=\)`,t0+PI/Wv),num(tx`\(\int x(t)\,dt=\)`,A)],
+ hints:[tx`\(\frac{\sin(Wt)}{\pi t}\longleftrightarrow\) the ideal band of height 1 on \(|\omega|<W\). ${t0?tx`The factor \(e^{-j${t0}\omega}\) is a delay by \(${t0}\).`:''}`,
+  tx`At the center, \(\frac{\sin(Wt)}{\pi t}\to\frac{W}{\pi}\). Equivalently \(x(t_0)=\frac{1}{2\pi}\int|X|\,d\omega\) = (area of the band)/(2π).`,tx`\(\int x(t)\,dt=X(j0)\).`],
+ solution:tx`\(x(t)=${A}\frac{\sin\left(${WT}(t${t0?'-'+t0:''})\right)}{\pi(t${t0?'-'+t0:''})}\). Peak: \(x(${t0})=\frac{${A}\cdot${WT}}{\pi}${eqv([A*Wv/PI,0])}\). First zero when \(${WT}(t-${t0})=\pi\), i.e. \(t=${t0}+\frac{\pi}{${WT}}${eqv([t0+PI/Wv,0])}\). Area \(=X(j0)=${A}\).`,
+ brute:()=>{const xi=t=>cs(integ(w=>cs(ej(w*(t-t0)),A),-Wv,Wv,20000),1/TAU);let z=t0+PI/Wv;if(Math.abs(xi(z)[0])>1e-6)z=NaN;for(let i=1;i<40;i++)if(xi(t0+i/40*PI/Wv)[0]<=1e-6)z=NaN;return[xi(t0),z,A]}}}});
+
+def({id:'ctft-periodic',topic:'ctft',name:'Transform of a periodic signal',gen(){
+ let w1,w2;do{w1=ri(1,6);w2=ri(1,6)}while(w1===w2);const C=nz(-3,3),A=nz(-3,3),B=nz(-3,3),s=pick([1,-1]);
+ return{statement:tx`The Fourier transform of \(x(t)=${sum([[C,''],[A,tx`\cos(${w1===1?'':w1}t)`],[B,tx`\sin(${w2===1?'':w2}t)`]])}\) is a sum of impulses. Find the area (the weight) of the impulse at each frequency below.`,
+ parts:[num(tx`weight at \(\omega=0\):`,TAU*C),num(tx`weight at \(\omega=${w1}\):`,PI*A),num(tx`weight at \(\omega=${s*w2}\):`,s>0?[0,-PI*B]:[0,PI*B],{mistakes:[[s>0?[0,-B/2]:[0,B/2],'That is the Fourier series coefficient. The Fourier transform impulse has weight \\(2\\pi a_k\\).']]})],
+ hints:[tx`\(e^{j\omega_0t}\longleftrightarrow2\pi\delta(\omega-\omega_0)\) and \(1\longleftrightarrow2\pi\delta(\omega)\).`,
+  tx`\(\cos(\omega_0t)\longleftrightarrow\pi\delta(\omega-\omega_0)+\pi\delta(\omega+\omega_0)\) and \(\sin(\omega_0t)\longleftrightarrow\frac{\pi}{j}\delta(\omega-\omega_0)-\frac{\pi}{j}\delta(\omega+\omega_0)\).`],
+ solution:tx`\(X(j\omega)=${sum([[2*C,tx`\pi\,\delta(\omega)`],[A,tx`\pi\left[\delta(\omega-${w1})+\delta(\omega+${w1})\right]`],[B,tx`\frac{\pi}{j}\left[\delta(\omega-${w2})-\delta(\omega+${w2})\right]`]])}\). The weights are \(${pif(2*C)}\), \(${pif(A)}\), and at \(\omega=${s*w2}\): \(${s>0?'':'-'}\frac{${B}\pi}{j}=${ctex([0,s>0?-B:B])}\pi\).`,
+ brute:()=>{const T=TAU,x=t=>C+A*Math.cos(w1*t)+B*Math.sin(w2*t);return[cs(fsCoef(x,T,0),TAU),cs(fsCoef(x,T,w1),TAU),cs(fsCoef(x,T,s*w2),TAU)]}}}});
+
+def({id:'ctft-prop',topic:'ctft',name:'Fourier transform properties',gen(){
+ const a=ri(1,3),X=w=>cdiv(ONE,[a,w]),t0=ri(1,2),w1=ri(1,3);
+ const TR=[
+  {T:tx`x(t-${t0})`,Y:w=>cmul(ej(-w*t0),X(w)),r:tx`Y(j\omega)=e^{-j${t0}\omega}X(j\omega)`,y:t=>t<t0?0:Math.exp(-a*(t-t0))},
+  {T:tx`x(-t)`,Y:w=>X(-w),r:tx`Y(j\omega)=X(-j\omega)=\frac{1}{${a}-j\omega}`,y:t=>t>0?0:Math.exp(a*t)},
+  {T:tx`x(t)e^{j${w1}t}`,Y:w=>X(w-w1),r:tx`Y(j\omega)=X\left(j(\omega-${w1})\right)`,y:t=>t<0?0:cs(ej(w1*t),Math.exp(-a*t))},
+  {T:tx`x(t)+x(-t)`,Y:w=>cadd(X(w),X(-w)),r:tx`Y(j\omega)=\frac{1}{${a}+j\omega}+\frac{1}{${a}-j\omega}=\frac{${2*a}}{${a*a}+\omega^2}`,y:t=>Math.exp(-a*Math.abs(t))},
+  {T:tx`x(t)-x(-t)`,Y:w=>csub(X(w),X(-w)),r:tx`Y(j\omega)=\frac{1}{${a}+j\omega}-\frac{1}{${a}-j\omega}=\frac{-2j\omega}{${a*a}+\omega^2}`,y:t=>Math.sign(t)*Math.exp(-a*Math.abs(t))},
+  {T:tx`x(t)\cos(${w1}t)`,Y:w=>cs(cadd(X(w-w1),X(w+w1)),.5),r:tx`Y(j\omega)=\tfrac12X\left(j(\omega-${w1})\right)+\tfrac12X\left(j(\omega+${w1})\right)`,y:t=>t<0?0:Math.exp(-a*t)*Math.cos(w1*t)}];
+ const[A1,A2]=shuffle(TR),om1=pick([0,a,w1]),om2=pick([a,2*a,1]);
+ return{statement:tx`Let \(x(t)=e^{-${a===1?'':a}t}u(t)\), so \(X(j\omega)=\frac{1}{${a}+j\omega}\). Let \(y_1(t)=${A1.T}\) and \(y_2(t)=${A2.T}\). Use properties (not integrals) to find the values below.`,
+ parts:[num(tx`\(Y_1(j${om1})=\)`,A1.Y(om1)),num(tx`\(Y_2(j${om2})=\)`,A2.Y(om2))],
+ hints:[tx`Properties: \(x(t-t_0)\to e^{-j\omega t_0}X(j\omega)\); \(x(-t)\to X(-j\omega)\); \(e^{j\omega_1t}x(t)\to X(j(\omega-\omega_1))\); \(\cos(\omega_1t)=\frac12(e^{j\omega_1t}+e^{-j\omega_1t})\); linearity.`,
+  tx`Write \(Y\) as a formula in \(\omega\) first, then substitute the number. For example \(X(-j\omega)=\frac{1}{${a}-j\omega}\).`],
+ solution:tx`\(y_1\): \(${A1.r}\), so \(Y_1(j${om1})${eqv(A1.Y(om1))}\).<br>\(y_2\): \(${A2.r}\), so \(Y_2(j${om2})${eqv(A2.Y(om2))}\).`,
+ brute:()=>[[A1,om1],[A2,om2]].map(([A,w])=>integ(t=>cmul(re1(A.y(t)),ej(-w*t)),-40/a,40/a,400000))}}});
+
+def({id:'ctft-freqresp',topic:'ctft',name:'Frequency response of a differential equation',gen(){
+ const a=ri(1,4),b=ri(1,4),hp=R()<.35,w0=pick([a,2*a,3*a]);
+ const H=w=>hp?cdiv([0,b*w],[a,w]):cdiv([b,0],[a,w]),DE=hp?tx`\frac{dy(t)}{dt}+${a}y(t)=${b===1?'':b}\frac{dx(t)}{dt}`:tx`\frac{dy(t)}{dt}+${a}y(t)=${b===1?'':b}x(t)`;
+ return{statement:tx`A causal LTI system is described by \[${DE}.\] The input is \(x(t)=\cos(${w0}t)\). The output is \(y(t)=E\cos(${w0}t+\theta)\). Find \(H(j0)\), \(E\), and \(\theta\).`,
+ parts:[num(tx`\(H(j0)=\)`,H(0)),num(tx`\(E=\)`,cabs(H(w0))),ang(tx`\(\theta=\)`,carg(H(w0)))],
+ hints:[tx`Take the Fourier transform of both sides: \(\frac{d}{dt}\to j\omega\). Then \(H(j\omega)=\frac{Y(j\omega)}{X(j\omega)}\).`,tx`\(H(j\omega)=${hp?tx`\frac{${b}j\omega}{${a}+j\omega}`:tx`\frac{${b}}{${a}+j\omega}`}\). A sinusoid at \(\omega_0\) comes out scaled by \(|H(j\omega_0)|\) and shifted by \(\angle H(j\omega_0)\).`],
+ solution:tx`\((j\omega+${a})Y=${hp?`${b}j\\omega`:b}X\), so \(H(j\omega)=${hp?tx`\frac{${b}j\omega}{${a}+j\omega}`:tx`\frac{${b}}{${a}+j\omega}`}\) and \(H(j0)=${ctex(H(0))}\). At \(\omega=${w0}\): \(H${eqv(H(w0))}\), so \(E=|H|\approx${fmtN(cabs(H(w0)))}\) and \(\theta=\angle H=${hp?tx`\frac{\pi}{2}-\arctan${fr(w0,a)}`:tx`-\arctan${fr(w0,a)}`}\approx${fmtN(carg(H(w0)))}\) rad.`,
+ brute:()=>{// simulate the ODE with RK4 and fit the steady state
+  const dt=1e-3,x=t=>Math.cos(w0*t),dx=t=>-w0*Math.sin(w0*t);let y=0,t=0;const f=(t,y)=>-a*y+b*(hp?dx(t):x(t));
+  const Tend=40/a+20;while(t<Tend){const k1=f(t,y),k2=f(t+dt/2,y+dt/2*k1),k3=f(t+dt/2,y+dt/2*k2),k4=f(t+dt,y+dt*k3);y+=dt/6*(k1+2*k2+2*k3+k4);t+=dt}
+  // y(t) ≈ E cos(w0 t + θ) at t; one more sample a quarter period later
+  const y1=y,t1=t;let tt=t,yy=y;const h2=(PI/2/w0)/1000;for(let i=0;i<1000;i++){const k1=f(tt,yy),k2=f(tt+h2/2,yy+h2/2*k1),k3=f(tt+h2/2,yy+h2/2*k2),k4=f(tt+h2,yy+h2*k3);yy+=h2/6*(k1+2*k2+2*k3+k4);tt+=h2}
+  // y1 = E cos(φ1), yy = E cos(φ1+π/2) = -E sin(φ1)
+  const E=Math.hypot(y1,yy),phi1=Math.atan2(-yy,y1),th=wrap(phi1-w0*t1);return[H(0),E,th]}}}});
+
+// ---------- DT Fourier transform
+def({id:'dtft-finite',topic:'dtft',name:'DTFT of a finite sequence',gen(){
+ const L=ri(3,4),n0=ri(-1,1);let x;do x=[...Array(L)].map(()=>ri(-3,3));while(!x[0]||!x[L-1]);
+ const X=w=>csum(x.map((v,i)=>cs(ej(-w*(i+n0)),v)));
+ return{statement:tx`Let \(x[n]=${sum(x.map((v,i)=>[v,dl(i+n0)]))}\). Find its DTFT \(X(e^{j\omega})\) at the frequencies below.`,
+ parts:[num(tx`\(X(e^{j0})=\)`,X(0)),num(tx`\(X(e^{j\pi})=\)`,X(PI)),num(tx`\(X(e^{j\pi/2})=\)`,X(PI/2),{mistakes:[[X(-PI/2),'This is \\(X(e^{-j\\pi/2})\\). The DTFT uses \\(e^{-j\\omega n}\\), so at \\(\\omega=\\pi/2\\) the factor is \\((-j)^n\\).']]})],
+ hints:[tx`\(X(e^{j\omega})=\sum_n x[n]e^{-j\omega n}\). Each \(\delta[n-k]\) contributes \(e^{-j\omega k}\).`,tx`At \(\omega=0\) every exponential is 1 (sum of the values). At \(\omega=\pi\), \(e^{-j\pi n}=(-1)^n\). At \(\omega=\pi/2\), \(e^{-j\pi n/2}=(-j)^n\).`],
+ solution:tx`\(X(e^{j\omega})=${sum(x.map((v,i)=>[v,(i+n0)===0?'':tx`e^{${(i+n0)>0?'-':''}j${Math.abs(i+n0)===1?'':Math.abs(i+n0)}\omega}`]))}\). So \(X(e^{j0})=${ctex(X(0))}\), \(X(e^{j\pi})=${ctex(X(PI))}\), and \(X(e^{j\pi/2})=${ctex(X(PI/2))}\).`,
+ brute:()=>[0,PI,PI/2].map(w=>dtft(n=>{const i=n-n0;return i>=0&&i<L?x[i]:0},-5,8,w))}}});
+
+def({id:'dtft-exp',topic:'dtft',name:'DTFT of a geometric sequence',gen(){
+ const r=pick(RATS),a=rv(r),n0=ri(0,2),v=n0>0&&R()<.5?1:0;
+ const g=v?a**n0:1,X=w=>cs(cdiv(ej(-w*n0),csub(ONE,cs(ej(-w),a))),g);
+ const xT=v?tx`x[n]=${rT(r)}^n\,u[${sh('n',n0)}]`:tx`x[n]=${rT(r)}^{${sh('n',n0)}}\,u[${sh('n',n0)}]`;
+ return{statement:tx`Let \[${xT}.\] Find its DTFT at the frequencies below.`,
+ parts:[num(tx`\(X(e^{j0})=\)`,X(0)),num(tx`\(X(e^{j\pi})=\)`,X(PI)),num(tx`\(X(e^{j\pi/2})=\)`,X(PI/2))],
+ hints:[tx`\(a^nu[n]\longleftrightarrow\frac{1}{1-ae^{-j\omega}}\) for \(|a|<1\), and \(x[n-n_0]\longleftrightarrow e^{-j\omega n_0}X(e^{j\omega})\).`,
+  v?tx`Write \(a^n=a^{${n0}}\,a^{n-${n0}}\) so the signal is a constant times a shifted copy of \(a^nu[n]\).`:tx`The signal is \(a^nu[n]\) delayed by \(${n0}\).`,tx`At \(\omega=\pi\), \(e^{-j\pi}=-1\). At \(\omega=\pi/2\), \(e^{-j\pi/2}=-j\).`],
+ solution:tx`\(X(e^{j\omega})=${v?tx`a^{${n0}}`:''}\frac{e^{-j${n0}\omega}}{1-ae^{-j\omega}}\) with \(a=${fr(r[0],r[1])}\). So \(X(e^{j0})${eqv(X(0))}\), \(X(e^{j\pi})${eqv(X(PI))}\), and \(X(e^{j\pi/2})${eqv(X(PI/2))}\).`,
+ brute:()=>[0,PI,PI/2].map(w=>dtft(n=>n<n0?0:(v?a**n:a**(n-n0)),0,600,w))}}});
+
+def({id:'dtft-inv',topic:'dtft',name:'Inverse DTFT by inspection',gen(){
+ const A=ri(-3,3),B=nz(-4,4),C=nz(-4,4),s1=pick([1,-1]),s2=pick([2,-2]);
+ const x=n=>n===0?[A,0]:Math.abs(n)===1?[B/2,0]:n===2?[0,C/2]:n===-2?[0,-C/2]:[0,0];
+ return{statement:tx`A sequence \(x[n]\) has DTFT \[X(e^{j\omega})=${sum([[A,''],[B,tx`\cos\omega`],[C,tx`\sin(2\omega)`]])}.\] Find the values below.`,
+ parts:[num(tx`\(x[0]=\)`,x(0)),num(tx`\(x[${s1}]=\)`,x(s1)),num(tx`\(x[${s2}]=\)`,x(s2),{mistakes:[[x(-s2),'Check the sign: the DTFT uses \\(e^{-j\\omega n}\\), so the coefficient of \\(e^{-j2\\omega}\\) is \\(x[2]\\) and that of \\(e^{+j2\\omega}\\) is \\(x[-2]\\).']]})],
+ hints:[tx`Expand with Euler's formulas: \(\cos\omega=\frac{e^{j\omega}+e^{-j\omega}}{2}\), \(\sin2\omega=\frac{e^{j2\omega}-e^{-j2\omega}}{2j}\).`,
+  tx`Compare with \(X(e^{j\omega})=\sum_n x[n]e^{-j\omega n}\): the coefficient of \(e^{-j\omega n}\) is \(x[n]\). So the coefficient of \(e^{+j2\omega}\) is \(x[-2]\).`],
+ solution:tx`\(X=${A}+\frac{${B}}{2}e^{j\omega}+\frac{${B}}{2}e^{-j\omega}+\frac{${C}}{2j}e^{j2\omega}-\frac{${C}}{2j}e^{-j2\omega}\). Hence \(x[0]=${A}\), \(x[\pm1]=${fr(B,2)}\), \(x[2]=-\frac{${C}}{2j}=${ctex([0,C/2])}\), and \(x[-2]=\frac{${C}}{2j}=${ctex([0,-C/2])}\).`,
+ brute:()=>[0,s1,s2].map(n=>cs(integ(w=>cmul([A+B*Math.cos(w)+C*Math.sin(2*w),0],ej(w*n)),-PI,PI,4000),1/TAU))}}});
+
+def({id:'dtft-lpf',topic:'dtft',name:'Ideal lowpass filter (DT)',gen(){
+ const A=ri(1,3),m=pick([2,3,4,6]),Wv=PI/m,n0=ri(0,2);
+ const h=n=>n===n0?A*Wv/PI:A*Math.sin(Wv*(n-n0))/(PI*(n-n0));
+ return{statement:tx`A DT filter has \(H(e^{j\omega})=${A}${n0?tx`e^{-j${n0===1?'':n0}\omega}`:''}\) for \(|\omega|<${pif(1,m)}\) and \(H(e^{j\omega})=0\) for \(${pif(1,m)}<|\omega|\le\pi\). Find the impulse response values below and the sum of all \(h[n]\).`,
+ parts:[num(tx`\(h[${n0}]=\)`,h(n0)),num(tx`\(h[${n0+1}]=\)`,h(n0+1)),num(tx`\(\sum_n h[n]=\)`,A)],
+ hints:[tx`\(h[n]=\frac{1}{2\pi}\int_{-\pi}^{\pi}H(e^{j\omega})e^{j\omega n}d\omega\). For the ideal band of height 1 and cutoff \(W\), this gives \(\frac{\sin(Wn)}{\pi n}\) (and \(\frac{W}{\pi}\) at \(n=0\)).`,
+  n0?tx`The factor \(e^{-j${n0}\omega}\) delays \(h[n]\) by \(${n0}\).`:tx`\(h[0]=\frac{1}{2\pi}\int H\,d\omega\) is the area of the band divided by \(2\pi\).`,tx`\(\sum_nh[n]=H(e^{j0})\).`],
+ solution:tx`\(h[n]=${A}\frac{\sin\left(${pif(1,m)}(n${n0?'-'+n0:''})\right)}{\pi(n${n0?'-'+n0:''})}\). So \(h[${n0}]=\frac{${A}}{${m}}=${fr(A,m)}\), \(h[${n0+1}]=\frac{${A}\sin(${pif(1,m)})}{\pi}\approx${fmtN(h(n0+1))}\), and \(\sum h[n]=H(e^{j0})=${A}\).`,
+ brute:()=>{const hi=n=>cs(integ(w=>cs(ej(w*(n-n0)),A),-Wv,Wv,20000),1/TAU);return[hi(n0),hi(n0+1),A]}}}});
+
+def({id:'dtft-prop',topic:'dtft',name:'DTFT properties',gen(){
+ const r=pick([[1,2],[-1,2],[1,3],[2,3]]),a=rv(r),X=w=>cdiv(ONE,csub(ONE,cs(ej(-w),a))),n0=ri(1,3);
+ const TR=[
+  {T:tx`x[n-${n0}]`,Y:w=>cmul(ej(-w*n0),X(w)),r:tx`Y(e^{j\omega})=e^{-j${n0}\omega}X(e^{j\omega})`,y:n=>n>=n0?a**(n-n0):0},
+  {T:tx`x[-n]`,Y:w=>X(-w),r:tx`Y(e^{j\omega})=X(e^{-j\omega})`,y:n=>n<=0?a**(-n):0},
+  {T:tx`(-1)^n x[n]`,Y:w=>X(w-PI),r:tx`Y(e^{j\omega})=X(e^{j(\omega-\pi)})`,y:n=>n>=0?(-a)**n:0},
+  {T:tx`x[n]-x[n-1]`,Y:w=>cmul(csub(ONE,ej(-w)),X(w)),r:tx`Y(e^{j\omega})=(1-e^{-j\omega})X(e^{j\omega})`,y:n=>n<0?0:(a**n-(n>=1?a**(n-1):0))},
+  {T:tx`e^{j\pi n/2}x[n]`,Y:w=>X(w-PI/2),r:tx`Y(e^{j\omega})=X(e^{j(\omega-\pi/2)})`,y:n=>n>=0?cs(ej(PI*n/2),a**n):0},
+  {T:tx`x[n]+x[-n]`,Y:w=>cadd(X(w),X(-w)),r:tx`Y(e^{j\omega})=X(e^{j\omega})+X(e^{-j\omega})`,y:n=>(n>=0?a**n:0)+(n<=0?a**(-n):0)}];
+ const[A1,A2]=shuffle(TR),om=[0,PI,PI/2],omT=['0','\\pi','\\pi/2'],i1=ri(0,2),i2=ri(0,2);
+ return{statement:tx`Let \(x[n]=${rT(r)}^nu[n]\), so \(X(e^{j\omega})=\frac{1}{1-${rT(r)}e^{-j\omega}}\). Let \(y_1[n]=${A1.T}\) and \(y_2[n]=${A2.T}\). Use DTFT properties to find the values below.`,
+ parts:[num(tx`\(Y_1(e^{j${omT[i1]}})=\)`,A1.Y(om[i1])),num(tx`\(Y_2(e^{j${omT[i2]}})=\)`,A2.Y(om[i2]))],
+ hints:[tx`Properties: \(x[n-n_0]\to e^{-j\omega n_0}X\); \(x[-n]\to X(e^{-j\omega})\); \(e^{j\omega_1n}x[n]\to X(e^{j(\omega-\omega_1)})\), and \((-1)^n=e^{j\pi n}\); linearity.`,
+  tx`Write \(Y\) as a formula first, then substitute. Remember \(e^{-j\pi}=-1\), \(e^{\mp j\pi/2}=\mp j\), and \(X\) is \(2\pi\)-periodic.`],
+ solution:tx`\(y_1\): \(${A1.r}\), so \(Y_1(e^{j${omT[i1]}})${eqv(A1.Y(om[i1]))}\).<br>\(y_2\): \(${A2.r}\), so \(Y_2(e^{j${omT[i2]}})${eqv(A2.Y(om[i2]))}\).`,
+ brute:()=>[[A1,om[i1]],[A2,om[i2]]].map(([A,w])=>dtft(A.y,-400,400,w))}}});
+
+// ---------- Sampling
+const foldf=(f,fs)=>{const g=f%fs;return g>fs/2?fs-g:g};
+def({id:'samp-nyq',topic:'samp',name:'Nyquist rate',gen(){
+ const v=ri(0,3),f1=pick([10,20,25,40,50]),f2=pick([15,30,60,75,100]),Wf=pick([20,40,50,100]);let st,wM,sol,hint;
+ if(v===0){st=tx`x(t)=${ri(1,3)}\cos(${2*f1}\pi t)+${ri(1,3)}\sin(${2*f2}\pi t)`;wM=TAU*Math.max(f1,f2);sol=tx`The two frequencies are \(${2*f1}\pi\) and \(${2*f2}\pi\) rad/s, so \(\omega_M=${2*Math.max(f1,f2)}\pi\).`;hint=tx`A sinusoid \(\cos(\omega_0t)\) has spectral lines at \(\pm\omega_0\) only.`}
+ else if(v===1){st=tx`x(t)=\frac{\sin(${Wf}\pi t)}{\pi t}+\cos(${2*f1}\pi t)`;wM=PI*Math.max(Wf,2*f1);sol=tx`\(\frac{\sin(Wt)}{\pi t}\) is bandlimited to \(|\omega|<W=${Wf}\pi\), and the cosine has lines at \(\pm${2*f1}\pi\). So \(\omega_M=${Math.max(Wf,2*f1)}\pi\).`;hint=tx`\(\frac{\sin(Wt)}{\pi t}\) has a rectangular spectrum on \(|\omega|<W\).`}
+ else if(v===2){st=tx`x(t)=\left(\frac{\sin(${Wf}\pi t)}{\pi t}\right)^2`;wM=2*Wf*PI;sol=tx`Multiplication in time is convolution in frequency (divided by \(2\pi\)). The rectangle on \(|\omega|<${Wf}\pi\) convolved with itself is a triangle on \(|\omega|<${2*Wf}\pi\). So \(\omega_M=${2*Wf}\pi\).`;hint=tx`Squaring in time means convolving the spectrum with itself, and the widths add.`}
+ else{st=tx`x(t)=\frac{\sin(${Wf}\pi t)}{\pi t}\cos(${2*f2}\pi t)`;wM=PI*(Wf+2*f2);sol=tx`Multiplying by \(\cos(${2*f2}\pi t)\) shifts the rectangle \(|\omega|<${Wf}\pi\) to \(\pm${2*f2}\pi\). The highest frequency is \(${2*f2}\pi+${Wf}\pi=${Wf+2*f2}\pi\).`;hint=tx`Multiplying by \(\cos(\omega_0t)\) shifts the spectrum to \(\pm\omega_0\) (modulation).`}
+ return{statement:tx`The signal \[${st}\] is sampled with period \(T_s\). Find the Nyquist rate (the sampling frequency \(\omega_s\) must be larger than it) and the largest \(T_s\) that allows perfect reconstruction.`,
+ parts:[num(tx`Nyquist rate \(2\omega_M=\)`,2*wM,{unit:'rad/s',mistakes:[[wM,'That is the bandwidth \\(\\omega_M\\). The Nyquist rate is \\(2\\omega_M\\).'],[2*wM/TAU,'That is in Hz. Give the answer in rad/s.']]}),num(tx`largest \(T_s=\)`,PI/wM,{unit:'s'})],
+ hints:[hint,tx`Find the highest frequency \(\omega_M\) with \(X(j\omega)\neq0\). The sampling theorem needs \(\omega_s=\frac{2\pi}{T_s}>2\omega_M\).`,tx`\(\frac{2\pi}{T_s}>2\omega_M\iff T_s<\frac{\pi}{\omega_M}\).`],
+ solution:sol+tx` Nyquist rate \(2\omega_M=${fmtN(2*wM/PI)}\pi\) rad/s, and \(T_s<\frac{\pi}{\omega_M}=${rtex(PI/wM)}\) s.`}}});
+
+def({id:'samp-alias',topic:'samp',name:'Aliasing of a sinusoid',gen(){
+ const fs=pick([8,10,12,16,20]);let f0;do f0=ri(Math.floor(fs/2)+1,2*fs-1);while(f0%fs===0||(2*f0)%fs===0);
+ const k=Math.round(f0/fs),d=f0-k*fs,fa=Math.abs(d),c=Math.sign(d);
+ return{statement:tx`The signal \(x(t)=\sin(${2*f0}\pi t)\) is sampled with \(T_s=${fr(1,fs)}\) s, and the impulse-train samples are passed through an ideal lowpass filter with gain \(T_s\) and cutoff \(\omega_s/2\). The output is \(y(t)=c\,\sin(\omega_at)\) with \(0<\omega_a<\omega_s/2\). Find \(\omega_a\), \(c\), and the DT frequency \(\Omega\in[0,\pi]\) of the samples \(x[n]=x(nT_s)\).`,
+ parts:[num(tx`\(\omega_a=\)`,TAU*fa,{unit:'rad/s',mistakes:[[TAU*f0,'That is the original frequency. It is above \\(\\omega_s/2\\), so it cannot pass the filter: find the copy that lands in the passband.']]}),num(tx`\(c=\)`,c,{mistakes:[[-c,'The frequency is right, but check the sign: \\(\\sin(-\\theta)=-\\sin\\theta\\).']]}),num(tx`\(\Omega=\)`,TAU*fa/fs)],
+ hints:[tx`\(\omega_s=\frac{2\pi}{T_s}=${2*fs}\pi\). The sampled spectrum has copies of the lines \(\pm${2*f0}\pi\) shifted by every multiple of \(${2*fs}\pi\).`,
+  tx`Find the integer \(k\) that brings \(${2*f0}\pi-k\cdot${2*fs}\pi\) into \((-${fs}\pi,${fs}\pi)\). The samples satisfy \(\sin(${2*f0}\pi nT_s)=\sin\left((${2*f0}\pi-k\omega_s)nT_s\right)\).`,
+  tx`If the shifted frequency is negative, use \(\sin(-\theta)=-\sin\theta\): the output sine has a flipped sign. And \(\Omega=\omega_aT_s\).`],
+ solution:tx`\(\omega_s=${2*fs}\pi\). With \(k=${k}\): \(${2*f0}\pi-${k}\cdot${2*fs}\pi=${2*d}\pi\), which lies in \((-${fs}\pi,${fs}\pi)\). So the samples equal those of \(\sin(${2*d}\pi t)=${c<0?'-':''}\sin(${2*fa}\pi t)\), and \(y(t)=${c<0?'-':''}\sin(${2*fa}\pi t)\): \(\omega_a=${2*fa}\pi\), \(c=${c}\). The DT frequency is \(\Omega=\omega_aT_s=${pif(2*fa,fs)}\).`,
+ brute:()=>{let ok=true;for(let n=0;n<60;n++)if(Math.abs(Math.sin(TAU*f0*n/fs)-c*Math.sin(TAU*fa*n/fs))>1e-9)ok=false;return ok&&fa<fs/2?[TAU*fa,c,TAU*fa/fs]:[NaN,NaN,NaN]}}}});
+
+def({id:'samp-dt',topic:'samp',name:'From CT sinusoids to DT frequencies',gen(){
+ const fs=pick([8,10,12,20]);let f1,f2;do{f1=ri(1,2*fs-1);f2=ri(1,2*fs-1)}while(f1===f2||f1%fs===0||f2%fs===0||foldf(f1,fs)===foldf(f2,fs));
+ const fold=f=>{let g=f%fs;return g>fs/2?fs-g:g},O1=TAU*fold(f1)/fs,O2=TAU*fold(f2)/fs,N=lcm(fs/gcd(f1,fs),fs/gcd(f2,fs));
+ return{statement:tx`The signal \(x(t)=\cos(${2*f1}\pi t)+\cos(${2*f2}\pi t)\) is sampled with \(T_s=${fr(1,fs)}\) s. Write \(x[n]=x(nT_s)=\cos(\Omega_1n)+\cos(\Omega_2n)\) with \(\Omega_1,\Omega_2\in[0,\pi]\), and find the fundamental period \(N\) of \(x[n]\).`,
+ parts:[num(tx`\(\Omega_1=\)`,O1),num(tx`\(\Omega_2=\)`,O2),num(tx`\(N=\)`,N)],
+ hints:[tx`\(x[n]=\cos(\omega_0nT_s)\), so \(\Omega=\omega_0T_s\). Then use \(\cos\) is \(2\pi\)-periodic and even: subtract multiples of \(2\pi\) and flip the sign if needed to land in \([0,\pi]\).`,
+  tx`\(\Omega=2\pi\frac{m}{N}\) in lowest terms means period \(N\). The sum repeats with the least common multiple of the two periods.`],
+ solution:tx`\(\Omega_1=${2*f1}\pi\cdot${fr(1,fs)}=${pif(2*f1,fs)}\equiv${pif(2*fold(f1),fs)}\) and \(\Omega_2=${pif(2*f2,fs)}\equiv${pif(2*fold(f2),fs)}\) (after removing multiples of \(2\pi\) and using \(\cos(-\theta)=\cos\theta\)). The periods are \(${fs/gcd(f1,fs)}\) and \(${fs/gcd(f2,fs)}\), so \(N=${N}\).`,
+ brute:()=>{const x=n=>Math.cos(TAU*f1*n/fs)+Math.cos(TAU*f2*n/fs);let Nb=0;for(let M=1;M<200&&!Nb;M++){let ok=true;for(let n=0;n<60;n++)if(Math.abs(x(n+M)-x(n))>1e-9)ok=false;if(ok)Nb=M}
+  const chk=O=>{for(let n=0;n<40;n++)if(Math.abs(Math.cos(O*n)-Math.cos(TAU*f1*n/fs))>1e-9&&Math.abs(Math.cos(O*n)-Math.cos(TAU*f2*n/fs))>1e-9)return NaN;return O};return[chk(O1),chk(O2),Nb]}}}});
+
+def({id:'samp-filter',topic:'samp',name:'Designing the reconstruction filter',gen(){
+ const fM=pick([10,20,25,40,50]),fs=fM*pick([3,4,5]),Ts=1/fs;
+ return{statement:tx`A signal \(x(t)\) with \(X(j\omega)=0\) for \(|\omega|>${2*fM}\pi\) is sampled by an impulse train with period \(T_s=${fr(1,fs)}\) s. The impulse train \(x_p(t)\) goes through an ideal lowpass filter with gain \(G\) on \(|\omega|<\omega_c\). For which \(\omega_c\) is the output exactly \(x(t)\)? Find the range and the gain.`,
+ parts:[num(tx`smallest allowed \(\omega_c\) (rad/s):`,TAU*fM),num(tx`largest allowed \(\omega_c\) (rad/s):`,TAU*(fs-fM),{mistakes:[[PI*fs,'\\(\\omega_s/2\\) works, but it is not the largest cutoff. How far can \\(\\omega_c\\) go before it reaches the first copy?']]}),num(tx`\(G=\)`,Ts,{mistakes:[[1,'\\(X_p(j\\omega)=\\frac{1}{T_s}\\sum_kX(j(\\omega-k\\omega_s))\\): the copy at 0 is scaled by \\(1/T_s\\).']]})],
+ hints:[tx`\(X_p(j\omega)=\frac{1}{T_s}\sum_kX\left(j(\omega-k\omega_s)\right)\) with \(\omega_s=\frac{2\pi}{T_s}=${2*fs}\pi\).`,tx`The copy at \(0\) occupies \(|\omega|<\omega_M\). The next copy starts at \(\omega_s-\omega_M\). The filter must pass the first and block the second.`],
+ solution:tx`\(\omega_M=${2*fM}\pi\), \(\omega_s=${2*fs}\pi\). The filter needs \(\omega_M<\omega_c<\omega_s-\omega_M\), i.e. \(${2*fM}\pi<\omega_c<${2*(fs-fM)}\pi\) rad/s, and gain \(G=T_s=${fr(1,fs)}\) to cancel the \(1/T_s\).`}}});
+
+// ================================================================ ENGINE
+const state={topic:'all',type:'any',cur:null};
+let stats={tried:0,solved:0,parts:0,partsOK:0};
+try{const s=JSON.parse(localStorage.getItem('ee3015-practice')||'null');if(s)stats=Object.assign(stats,s)}catch(e){}
+const saveStats=()=>{try{localStorage.setItem('ee3015-practice',JSON.stringify(stats))}catch(e){}};
+function showStats(){$('stats').innerHTML=`Problems solved: <b>${stats.solved}</b> of ${stats.tried} · parts correct: ${stats.partsOK} · <a id="resetS">reset</a>`;$('resetS').onclick=()=>{stats={tried:0,solved:0,parts:0,partsOK:0};saveStats();showStats()}}
+function typeset(el){if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetClear&&MathJax.typesetClear([el]);MathJax.typesetPromise([el]).catch(()=>{})}else setTimeout(()=>typeset(el),150)}
+function makeProblem(id,seed){const g=G.find(q=>q.id===id);R=mulberry(seed);const P=g.gen();R=Math.random;P.g=g;P.seed=seed;return P}
+function closeTo(u,v,tol=5e-3){return cabs(csub(u,v))<=tol*Math.max(1,cabs(v))}
+function angClose(u,v){return Math.abs(wrap(u-v))<.01}
+function diagnose(u,p){
+ for(const[m,msg]of(p.mistakes||[]))if(closeTo(u,re1(m)))return msg;
+ const v=p.v;if(cabs(v)<1e-12)return 'Not correct yet.';
+ if(closeTo(u,cneg(v)))return 'Very close: the sign is flipped.';
+ if(Math.abs(v[1])>1e-9&&closeTo(u,conj(v)))return 'You have the complex conjugate of the answer. Check the sign of j (for example e<sup>−jωt</sup> versus e<sup>+jωt</sup>).';
+ for(const[f,t]of[[2,'a factor of 2'],[.5,'a factor of 2'],[TAU,'a factor of 2π'],[1/TAU,'a factor of 2π'],[PI,'a factor of π'],[1/PI,'a factor of π']])if(closeTo(u,cs(v,f)))return `Off by ${t}.`;
+ if(Math.abs(cabs(u)-cabs(v))<=5e-3*Math.max(1,cabs(v)))return 'The magnitude is right, but the phase is not.';
+ if(Math.abs(v[1])>1e-9||Math.abs(u[1])>1e-9){if(Math.abs(u[0]-v[0])<5e-3*Math.max(1,cabs(v)))return 'The real part is right; check the imaginary part.';if(Math.abs(u[1]-v[1])<5e-3*Math.max(1,cabs(v)))return 'The imaginary part is right; check the real part.'}
+ return 'Not correct yet.'}
+function render(P){state.cur=P;P.hintN=0;P.showSol=false;P.ok=P.parts.map(()=>false);P.tries=P.parts.map(()=>0);P.counted=false;
+ const tp=TOPICS.find(t=>t.id===P.g.topic);
+ $('pmeta').innerHTML=`<span class="tag">${tp.name}</span><span>${P.g.name}</span><span class="code">code ${P.g.id}/${P.seed}</span><a href="#${P.g.id}/${P.seed}" id="permalink">link to this problem</a>`+(tp.link?`<a href="${tp.link}" target="_blank">open the related explorer ↗</a>`:'');
+ $('pstate').innerHTML=P.statement;
+ $('parts').innerHTML=P.parts.map((p,i)=>{const L=String.fromCharCode(97+i);
+  if(p.type==='choice')return`<div class="part"><div class="plabel"><b>(${L})</b> ${p.label}</div><div class="choices">${p.opts.map((o,k)=>`<button data-i="${i}" data-k="${k}">${o}</button>`).join('')}</div><div class="fb" id="fb${i}"></div></div>`;
+  return`<div class="part"><div class="plabel"><b>(${L})</b> ${p.label}${p.unit?` <span style="color:#6a7c8c;font-size:13px">(${p.unit})</span>`:''}${p.type==='angle'?' <span style="color:#6a7c8c;font-size:13px">(radians)</span>':''}</div><div class="prow"><input id="in${i}" autocomplete="off" spellcheck="false" placeholder="your answer"><button class="apply" data-c="${i}">Check</button></div><div class="preview" id="pv${i}"></div><div class="fb" id="fb${i}"></div></div>`}).join('');
+ $('hints').innerHTML='';$('sol').innerHTML='';$('donebox').innerHTML='';updHintBtn();
+ P.parts.forEach((p,i)=>{if(p.type==='choice')return;const inp=$('in'+i);inp.addEventListener('input',()=>preview(i));inp.addEventListener('keydown',e=>{if(e.key==='Enter')check(i)})});
+ document.querySelectorAll('#parts [data-c]').forEach(b=>b.onclick=()=>check(+b.dataset.c));
+ document.querySelectorAll('#parts .choices button').forEach(b=>b.onclick=()=>choose(+b.dataset.i,+b.dataset.k,b));
+ history.replaceState(null,'',`#${P.g.id}/${P.seed}`);
+ typeset($('prob'))}
+function preview(i){const s=$('in'+i).value,el=$('pv'+i);if(!s.trim()){el.textContent='';el.className='preview';return}
+ try{const v=parseAnswer(s);el.textContent='read as  '+cfmt(v,5);el.className='preview'}catch(e){el.textContent=e.message;el.className='preview err'}}
+function countPart(i,ok){const P=state.cur;if(!P.counted){P.counted=true;stats.tried++}if(ok&&!P.showSol){stats.partsOK++}stats.parts++;
+ if(P.ok.every(Boolean)&&!P.showSol){stats.solved++;$('donebox').innerHTML='<div class="done">✓ All parts correct. Well done! Try another one with “Next problem”.</div>'}saveStats();showStats()}
+function check(i){const P=state.cur,p=P.parts[i],fb=$('fb'+i),inp=$('in'+i);let u;
+ try{u=parseAnswer(inp.value)}catch(e){fb.className='fb bad';fb.innerHTML='I could not read that: '+e.message;return}
+ P.tries[i]++;const ok=p.type==='angle'?angClose(u[0],p.v)&&Math.abs(u[1])<1e-9:closeTo(u,p.v);
+ if(ok){const first=!P.ok[i];P.ok[i]=true;inp.className='good';fb.className='fb ok';fb.innerHTML='✓ Correct'+(exact(p.type==='angle'?[p.v,0]:p.v)?'':` (≈ ${p.type==='angle'?fmtN(p.v):cfmt(p.v)})`)+'.';if(first)countPart(i,true)}
+ else{inp.className='wrong';fb.className='fb bad';let msg=p.type==='angle'?(Math.abs(wrap(u[0]-p.v-PI))<.01?'Off by π: check the sign of the amplitude.':Math.abs(wrap(u[0]+p.v))<.01&&Math.abs(p.v)>.01?'The sign of the phase is flipped.':'Not correct yet.'):diagnose(u,p);
+  if(P.tries[i]>=2&&P.hintN<P.hints.length)msg+=' Stuck? Try a hint below.';fb.innerHTML='✗ '+msg;if(!P.counted){P.counted=true;stats.tried++;saveStats();showStats()}}
+ typeset(fb)}
+function choose(i,k,btn){const P=state.cur,p=P.parts[i],fb=$('fb'+i);P.tries[i]++;
+ const ok=k===p.ans;btn.parentNode.querySelectorAll('button').forEach(b=>b.className='');btn.className=ok?'good':'wrong';
+ fb.className=ok?'fb ok':'fb bad';fb.innerHTML=ok?('✓ Correct.'+(p.why?' '+p.why:'')):'✗ Not correct. Check the definition in the hints.';
+ if(ok&&!P.ok[i]){P.ok[i]=true;countPart(i,P.tries[i]===1)}else if(!ok&&!P.counted){P.counted=true;stats.tried++;saveStats();showStats()}typeset(fb)}
+function updHintBtn(){const P=state.cur;$('hintBtn').textContent=P.hintN<P.hints.length?`💡 Show a hint (${P.hintN+1} of ${P.hints.length})`:'No more hints';$('hintBtn').disabled=P.hintN>=P.hints.length}
+$('hintBtn').onclick=()=>{const P=state.cur;if(P.hintN>=P.hints.length)return;const d=document.createElement('div');d.className='hintbox';d.innerHTML=`<b>Hint ${P.hintN+1}.</b> `+P.hints[P.hintN];$('hints').appendChild(d);P.hintN++;updHintBtn();typeset(d)};
+$('solBtn').onclick=()=>{const P=state.cur;if(P.showSol)return;if(!P.ok.every(Boolean)&&!confirm('Show the full solution? Try the hints first if you have not yet.'))return;P.showSol=true;
+ const ansList=P.parts.map((p,i)=>`<li>(${String.fromCharCode(97+i)}) ${p.type==='choice'?p.opts[p.ans]:p.type==='angle'?(isEx(p.v)?`\\(${rtex(p.v)}\\) rad`:`≈ ${fmtN(p.v)} rad`):(exact(p.v)?`\\(${ctex(p.v)}\\)`:`≈ ${cfmt(p.v)}`)}</li>`).join('');
+ $('sol').innerHTML=`<div class="solbox"><h3>Solution</h3>${P.solution}<p style="margin:8px 0 0"><b>Answers:</b></p><ul style="margin:4px 0 0">${ansList}</ul></div>`;typeset($('sol'))};
+function pool(){return G.filter(g=>(state.topic==='all'||g.topic===state.topic)&&(state.type==='any'||g.id===state.type))}
+function newProblem(){const pl=pool();let g=pick(pl);if(pl.length>1&&state.cur)for(let t=0;t<5&&g.id===state.cur.g.id;t++)g=pick(pl);render(makeProblem(g.id,1+Math.floor(Math.random()*99999)));}
+function buildTopics(){$('topics').innerHTML=TOPICS.map(t=>`<button class="pill${t.id===state.topic?' selected':''}" data-t="${t.id}">${t.name}${t.id==='all'?'':` <span style="opacity:.6">(${G.filter(g=>g.topic===t.id).length})</span>`}</button>`).join('');
+ document.querySelectorAll('#topics .pill').forEach(b=>b.onclick=()=>{state.topic=b.dataset.t;state.type='any';buildTopics();newProblem()});
+ const opts=G.filter(g=>state.topic==='all'||g.topic===state.topic);$('ptype').innerHTML=`<option value="any">Any type (random)</option>`+opts.map(g=>`<option value="${g.id}"${g.id===state.type?' selected':''}>${state.topic==='all'?TOPICS.find(t=>t.id===g.topic).name+': ':''}${g.name}</option>`).join('')}
+$('ptype').onchange=e=>{state.type=e.target.value;newProblem()};
+$('newBtn').onclick=newProblem;$('nextBtn').onclick=newProblem;
+function fromHash(){const m=location.hash.match(/^#([\w-]+)\/(\d+)$/);if(m&&G.find(g=>g.id===m[1])){const g=G.find(q=>q.id===m[1]);state.topic=g.topic;state.type='any';buildTopics();render(makeProblem(m[1],+m[2]));return true}return false}
+window.addEventListener('hashchange',()=>{if(!state.cur||location.hash!==`#${state.cur.g.id}/${state.cur.seed}`)fromHash()});
+buildTopics();showStats();if(!fromHash())newProblem();
+</script>
+</body></html>
