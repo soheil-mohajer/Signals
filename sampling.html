@@ -1,0 +1,352 @@
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-46J5242489"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-46J5242489');
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sampling and Reconstruction · EE3015</title>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#1b2939;background:#f4f7fb}*{box-sizing:border-box}body{margin:0}header{background:#13283f;color:white;padding:29px max(20px,calc((100vw - 1100px)/2)) 24px}header h1{font-size:clamp(25px,3.2vw,36px);letter-spacing:-.8px;margin:4px 0 8px}header p{color:#c5d4e3;margin:0;font-size:15px}.kicker{font-size:12px;color:#80d3ff;letter-spacing:2px;font-weight:800}main{max-width:1100px;margin:0 auto;padding:24px 20px 50px}button{font:inherit;cursor:pointer}.panel{background:#fff;border:1px solid #e0e8f0;border-radius:16px;box-shadow:0 4px 18px #223c5710;padding:24px;margin-bottom:18px}h2{font-size:23px;letter-spacing:-.4px;margin:0 0 8px}h3{font-size:16px;margin:0 0 12px}.subtitle{color:#52677c;font-size:14px;line-height:1.6;margin:0 0 20px}.equation{text-align:center;font-size:clamp(15px,2vw,19px);background:#f2f7fc;border-radius:10px;padding:14px 8px;margin-bottom:12px;overflow-x:auto}.layout{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}.sectionlabel{font-size:12px;font-weight:800;letter-spacing:1.5px;color:#6a7c8c;margin:4px 0 8px}.pillrow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}.pill{padding:8px 12px;border:1px solid #cddceb;background:#fff;border-radius:8px;color:#365069;font-size:14px}.pill:hover{background:#f5faff}.pill.selected{background:#e7f3ff;border-color:#1474af;color:#085e99;font-weight:750}.chip{padding:5px 9px;border:1px solid #b7d6e8;background:#f5fbff;border-radius:7px;color:#1a5276;font:12.5px ui-monospace,SFMono-Regular,Consolas,monospace}.chip:hover{background:#e3f1fb}.chip.selected{background:#dff3ee;border-color:#13836f;color:#0f6b5a}.sigbox{border:1px solid #e0e7ef;border-left:4px solid var(--c);border-radius:11px;padding:15px 16px 8px;min-width:0}.sigbox h3{color:var(--c)}.field{margin-bottom:12px}.field label{display:block;font-size:13px;font-weight:650;color:#344a60;margin-bottom:6px}.field input{width:100%;border:1px solid #cdd6e4;border-radius:8px;padding:10px;font:15px ui-monospace,SFMono-Regular,Consolas,monospace}.field input[type=range]{border:0;padding:0;accent-color:#1467a8}.value{float:right;font-variant-numeric:tabular-nums;color:#09649f}.ybox{display:flex;gap:8px;align-items:stretch}.ybox .lhs{display:flex;align-items:center;font:600 17px Georgia,serif;font-style:italic;color:#13836f;white-space:nowrap}.ybox input{flex:1;min-width:0;border:2px solid #9fd3c7;border-radius:9px;padding:11px;font:16px ui-monospace,SFMono-Regular,Consolas,monospace}.ybox input:focus{outline:none;border-color:#13836f}.apply{border:0;color:white;background:#13836f;font-weight:750;border-radius:9px;padding:0 16px}.apply:hover{background:#0f6b5a}.apply.blue{background:#1467a8}.apply.blue:hover{background:#0f5487}.hint{font-size:12px;color:#6a7c8c;line-height:1.5;margin:6px 0 10px}.prop{font-size:13.5px;color:#24564b;background:#f0faf7;border:1px solid #c6e9df;border-radius:9px;padding:9px 12px;margin:2px 0 12px;line-height:1.6}.error{display:none;color:#b91c1c;background:#fff1f2;border-radius:8px;font-size:13px;padding:9px 11px;margin:4px 0 10px}.status{background:#f4f8fd;border:1px solid #dbe6f2;border-radius:9px;padding:9px 12px;font-size:13px;color:#29445f;line-height:1.7;margin-top:14px;font-variant-numeric:tabular-nums}.status .warn{color:#795311}.toolbar{display:flex;gap:6px 18px;flex-wrap:wrap;align-items:center;margin-top:14px}.toolbar .pillrow{margin:0}.toolbar .sectionlabel{margin:0}.vizbox{border:1px solid #e0e7ef;border-radius:11px;padding:13px;background:white;min-width:0;margin-top:14px}.vizbox h3{margin-bottom:4px}.vizbox .small{font-size:12px;color:#6a7c8c;line-height:1.5;margin-bottom:8px}canvas{display:block;width:100%;height:220px}.spec canvas{cursor:crosshair}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:14px}.legend{font-size:12px;color:#597085;margin:7px 0 0;display:flex;gap:14px;flex-wrap:wrap}.dot{display:inline-block;width:9px;height:9px;background:var(--c);border-radius:9px;margin-right:4px}.dot.hollow{background:#fff;border:2px solid var(--c);width:10px;height:10px}.dash{display:inline-block;width:18px;height:0;border-top:2px dashed var(--c);vertical-align:middle;margin-right:4px}.solid{display:inline-block;width:18px;height:0;border-top:3px solid var(--c);vertical-align:middle;margin-right:4px}.readout{font-size:12.5px;color:#36506a;background:#f7f9fc;border-radius:8px;padding:8px 11px;margin-top:10px;min-height:34px;font-variant-numeric:tabular-nums}.question{background:#fff9e9;border:1px solid #f4e3ba;border-radius:12px;padding:17px 19px;margin-top:14px}.question strong{font-size:14px;color:#795311}.question p{margin:7px 0 11px;font-size:14px;line-height:1.55}.question .load{border:1px solid #e3c98a;background:#fff;border-radius:7px;padding:4px 9px;font-size:12px;color:#795311;margin-left:6px}details{font-size:14px;color:#4b5f71}details summary{color:#0e689c;font-weight:700;cursor:pointer}details p{line-height:1.6;margin-bottom:0}footer{text-align:center;color:#6a7d8b;font-size:12px;margin-top:25px}.hidden{display:none!important}@media(max-width:780px){.layout,.twocol{grid-template-columns:1fr}.panel{padding:17px}main{padding:18px 12px 40px}canvas{height:200px}}
+</style>
+<style>.site-nav{box-sizing:border-box;display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:12px max(20px,calc((100vw - 1160px)/2));background:#13283f;color:white;font:14px Inter,system-ui,sans-serif}.site-nav a{color:#dbeafe!important;text-decoration:none!important;margin-right:17px}.site-nav a:hover{text-decoration:underline!important}.site-nav .site-brand{font-weight:750;color:white!important;font-size:16px}.site-nav div{display:flex;flex-wrap:wrap;gap:0}</style>
+<style>
+.ctrlbar{position:sticky;top:0;z-index:20;background:#fffffff2;backdrop-filter:blur(6px);border:1px solid #dbe6f2;border-radius:14px;box-shadow:0 6px 18px #223c5718;padding:12px 16px 6px;margin-bottom:18px;display:grid;grid-template-columns:auto 1fr 1fr;gap:4px 22px;align-items:center}
+.ctrlbar .pillrow{margin:0}.ctrlbar .field{margin:0}.ctrlbar .nyq{grid-column:1/-1;font-size:13px;padding:6px 0 4px;color:#29445f;font-variant-numeric:tabular-nums}
+.ok{color:#0f7a4f;font-weight:750}.bad{color:#b91c1c;font-weight:750}
+.diagram{background:#f7fafd;border:1px solid #e0e8f0;border-radius:11px;padding:8px;margin:6px 0 14px;overflow-x:auto}.diagram svg{display:block;min-width:760px;width:100%;height:auto}
+.stage{display:grid;grid-template-columns:150px 1fr 1fr;gap:12px;align-items:stretch;border-top:1px solid #eef2f6;padding:12px 0}
+.stage .lab{font-size:13px;color:#29445f;line-height:1.5}.stage .lab b{display:block;font-size:14px;color:#13283f;margin-bottom:3px}.stage .lab .f{font:12.5px ui-monospace,SFMono-Regular,Consolas,monospace;color:#52677c}
+.stage canvas{height:165px}.cap{font-size:11.5px;color:#6a7c8c;margin:2px 0 4px}
+.toggles{display:flex;gap:6px;flex-wrap:wrap}.tog{padding:7px 11px;border:1px solid #cddceb;background:#fff;border-radius:8px;font-size:13.5px;color:#365069}.tog.on{background:var(--bg);border-color:var(--c);color:var(--c);font-weight:750}
+table.err{border-collapse:collapse;font-size:13px;margin-top:10px;font-variant-numeric:tabular-nums}table.err td,table.err th{border:1px solid #e0e8f0;padding:5px 11px;text-align:right}table.err th{background:#f4f8fd;color:#29445f}table.err td:first-child,table.err th:first-child{text-align:left}
+.panel{scroll-margin-top:150px}.chk{font-size:13.5px;color:#344a60;display:inline-flex;gap:6px;align-items:center}
+@media(max-width:780px){.ctrlbar{grid-template-columns:1fr;position:static}.stage{grid-template-columns:1fr}}
+</style></head>
+<body><nav class="site-nav" aria-label="Site navigation"><a class="site-brand" href="index.html">∿ Fourier Learning Lab</a><div><a href="index.html">Home</a><a href="explorer.html">Series Explorer</a><a href="sound-lab.html">Sound Lab</a><a href="convolution.html">Convolution</a><a href="filtering.html">Filter Lab</a><a href="draw.html">Draw a Signal</a><a href="properties.html">FS Properties</a><a href="ctft.html">CTFT</a><a href="dtft.html">DTFT</a><a href="sampling.html" aria-current="page">Sampling</a></div></nav>
+<header><div class="kicker">EE3015 · SIGNALS &amp; SYSTEMS</div><h1>Sampling and Reconstruction</h1><p>Follow a signal through C/D and D/C conversion in time and in frequency, rebuild it from its samples, and see what goes wrong when the sampling rate is too low.</p></header>
+<main>
+
+<div class="ctrlbar" id="ctrlbar">
+ <div><div class="sectionlabel">SIGNAL x(t)</div><div class="pillrow" id="presets"></div></div>
+ <div class="field"><label for="wM"><span id="wMlab">Bandwidth ω<sub>M</sub> (rad/s)</span><span class="value" id="wMval"></span></label><input id="wM" type="range" min="2" max="20" step="1"></div>
+ <div class="field"><label for="Ts">Sampling period T<sub>s</sub> (s)<span class="value" id="Tsval"></span></label><input id="Ts" type="range" min="0.02" max="0.8" step="0.01"></div>
+ <div class="nyq" id="nyq"></div>
+</div>
+
+<!-- ============================================================ 1. chain -->
+<section class="panel" id="chain">
+<h2>1 · The sampling chain, in time and in frequency</h2>
+<p class="subtitle">Sampling is modeled as multiplication by an impulse train p(t). In frequency, this makes copies of X(jω) every ω<sub>s</sub> = 2π/T<sub>s</sub>. The C/D converter turns the impulse weights into the sequence x[n] = x(nT<sub>s</sub>), whose DTFT is the same picture with Ω = ωT<sub>s</sub>. The D/C converter turns x[n] back into impulses, and a lowpass filter keeps one copy. If the copies do not overlap (ω<sub>s</sub> &gt; 2ω<sub>M</sub>), the original comes back exactly.</p>
+<div class="equation">\( x_p(t)=x(t)\displaystyle\sum_{n}\delta(t-nT_s)=\sum_n x(nT_s)\,\delta(t-nT_s)\quad\Longleftrightarrow\quad X_p(j\omega)=\frac{1}{T_s}\sum_{k}X\big(j(\omega-k\omega_s)\big) \)</div>
+<div class="diagram"><svg viewBox="0 0 1000 150" aria-label="Block diagram of sampling and reconstruction" font-family="Inter,system-ui,sans-serif" font-size="14">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#13283f"/></marker></defs>
+<g stroke="#13283f" stroke-width="1.8" fill="none">
+<path d="M18 52H82" marker-end="url(#ar)"/><circle cx="100" cy="52" r="17" fill="#fff"/><path d="M89 41L111 63M111 41L89 63"/>
+<path d="M100 122V72" marker-end="url(#ar)"/>
+<path d="M117 52H200" marker-end="url(#ar)"/>
+<rect x="202" y="28" width="118" height="48" rx="8" fill="#eef5ff"/>
+<path d="M320 52H405" marker-end="url(#ar)"/>
+<rect x="407" y="28" width="140" height="48" rx="8" fill="#f1f5f9" stroke-dasharray="5 4"/>
+<path d="M547 52H600" marker-end="url(#ar)"/>
+<rect x="602" y="28" width="118" height="48" rx="8" fill="#eef5ff"/>
+<path d="M720 52H790" marker-end="url(#ar)"/>
+<rect x="792" y="28" width="104" height="48" rx="8" fill="#fdf3e4"/>
+<path d="M896 52H985" marker-end="url(#ar)"/>
+<rect x="190" y="12" width="542" height="78" rx="10" stroke="#9fb4c8" stroke-dasharray="3 5"/>
+</g>
+<g fill="#13283f" text-anchor="middle">
+<text x="40" y="40" font-style="italic">x(t)</text><text x="100" y="140" font-style="italic">p(t) = Σ δ(t − nT<tspan baseline-shift="sub" font-size="10">s</tspan>)</text>
+<text x="160" y="40" font-style="italic">x<tspan baseline-shift="sub" font-size="10">p</tspan>(t)</text>
+<text x="261" y="49" font-weight="700">C/D</text><text x="261" y="67" font-size="10.5" fill="#52677c">impulses → sequence</text>
+<text x="362" y="40" font-style="italic">x[n]</text>
+<text x="477" y="49">DT processing</text><text x="477" y="67" font-size="11.5" fill="#52677c">(none here: y[n] = x[n])</text>
+<text x="661" y="49" font-weight="700">D/C</text><text x="661" y="67" font-size="10.5" fill="#52677c">sequence → impulses</text>
+<text x="755" y="40" font-style="italic">x<tspan baseline-shift="sub" font-size="10">p</tspan>(t)</text>
+<text x="844" y="49" font-weight="700">H(jω)</text><text x="844" y="67" font-size="11.5" fill="#52677c">gain T<tspan baseline-shift="sub" font-size="10">s</tspan>, cutoff ω<tspan baseline-shift="sub" font-size="10">c</tspan></text>
+<text x="940" y="40" font-style="italic">x<tspan baseline-shift="sub" font-size="10">r</tspan>(t)</text>
+<text x="461" y="108" font-size="12" fill="#52677c">the dashed box is a "sampling and reconstruction" system: it should behave like a wire</text>
+</g></svg></div>
+<div class="field" style="max-width:520px"><label for="wc">Reconstruction cutoff ω<sub>c</sub> (as a fraction of ω<sub>s</sub>)<span class="value" id="wcval"></span></label><input id="wc" type="range" min="0.1" max="1" step="0.01"><div class="hint">The ideal choice is ω<sub>c</sub> = ω<sub>s</sub>/2. Any ω<sub>M</sub> &lt; ω<sub>c</sub> &lt; ω<sub>s</sub> − ω<sub>M</sub> also works when there is no aliasing. <button class="load" id="wcHalf" style="border:1px solid #cddceb;background:#fff;border-radius:7px;padding:3px 9px;font-size:12px">set ω<sub>c</sub> = ω<sub>s</sub>/2</button></div></div>
+<div id="stages"></div>
+<div class="status" id="chainStat"></div>
+</section>
+
+<!-- ============================================================ 2. sincs -->
+<section class="panel" id="sincs">
+<h2>2 · Reconstruction as a sum of sinc functions</h2>
+<p class="subtitle">With ω<sub>c</sub> = ω<sub>s</sub>/2, the impulse response of the reconstruction filter is h(t) = sinc(t/T<sub>s</sub>) = sin(πt/T<sub>s</sub>)/(πt/T<sub>s</sub>). It equals 1 at t = 0 and 0 at every other sampling instant. Filtering the impulse train places one sinc at every sample, scaled by the sample value, and adds them up. Between samples, all the sincs contribute.</p>
+<div class="equation">\( x_r(t)=\displaystyle\sum_{n=-\infty}^{\infty} x[n]\,\mathrm{sinc}\!\left(\frac{t-nT_s}{T_s}\right),\qquad \mathrm{sinc}(u)=\frac{\sin(\pi u)}{\pi u} \)</div>
+<div class="layout">
+<div class="field"><label for="K">Include the samples −K ≤ n ≤ K<span class="value" id="Kval"></span></label><input id="K" type="range" min="0" max="60" step="1"></div>
+<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><label class="chk"><input type="checkbox" id="showS" checked> show the individual sincs</label><button class="pill" id="playK">▶ Add them one by one</button></div>
+</div>
+<div class="vizbox"><h3>Partial sum of sincs</h3><div class="small" id="sincSub"></div><canvas id="cSinc" style="height:300px"></canvas><div class="legend"><span><span class="dash" style="--c:#2563eb"></span>x(t)</span><span><span class="dot" style="--c:#2563eb"></span>samples x[n]</span><span><span class="solid" style="--c:#008b75"></span>sum of the sincs included</span><span><span class="solid" style="--c:#c4b5fd"></span>individual terms x[n] sinc((t − nTₛ)/Tₛ)</span></div></div>
+<div class="status" id="sincStat"></div>
+</section>
+
+<!-- ============================================================ 3. practical -->
+<section class="panel" id="practical">
+<h2>3 · Practical reconstruction: 2N sincs, zero-order hold, linear interpolation</h2>
+<p class="subtitle">An infinite sum is not practical. For a time t between mT<sub>s</sub> and (m+1)T<sub>s</sub>, the truncated sinc interpolator uses only the 2N nearest samples, N at or before t and N after it. The zero-order hold keeps the last sample until the next one arrives, and linear interpolation joins consecutive samples with straight lines. Each method is a filter with its own impulse response h(t), shown below with its frequency response. Hover over the top plot to see which samples are used at that t.</p>
+<div class="equation">\( \hat{x}_N(t)=\displaystyle\sum_{n=m-N+1}^{m+N} x[n]\,\mathrm{sinc}\!\left(\frac{t-nT_s}{T_s}\right)\qquad\text{for } mT_s\le t<(m+1)T_s \)</div>
+<div class="equation">\( \hat{x}_{\text{ZOH}}(t)=x[m],\qquad \hat{x}_{\text{lin}}(t)=x[m]+\dfrac{t-mT_s}{T_s}\big(x[m+1]-x[m]\big)\qquad\text{for } mT_s\le t<(m+1)T_s \)</div>
+<div class="layout">
+<div><div class="sectionlabel">METHODS</div><div class="toggles" id="methods"></div></div>
+<div class="field"><label for="N">Truncated sinc: N samples on each side (2N in total)<span class="value" id="Nval"></span></label><input id="N" type="range" min="1" max="20" step="1"></div>
+</div>
+<div class="vizbox"><h3>Reconstruction</h3><div class="small">Dashed: the original x(t). Dots: the samples.</div><canvas id="cPt" style="height:280px"></canvas><div class="readout" id="ptRead"></div></div>
+<div class="vizbox"><h3>Error x̂(t) − x(t)</h3><canvas id="cPe" style="height:170px"></canvas></div>
+<table class="err" id="errTab"></table>
+<div class="twocol">
+<div class="vizbox"><h3>Interpolation kernel h(t)</h3><div class="small">Each method is x̂(t) = Σ x[n] h(t − nT<sub>s</sub>): the D/C impulse train filtered by h(t).</div><canvas id="cPk"></canvas></div>
+<div class="vizbox"><h3>Frequency response |H(jω)| / T<sub>s</sub></h3><div class="small">Grey: the spectrum of the impulse train, T<sub>s</sub>X<sub>p</sub>(jω), normalized. The ideal filter keeps only the copy at ω = 0.</div><canvas id="cPh"></canvas></div>
+</div>
+</section>
+
+<!-- ============================================================ 4. aliasing -->
+<section class="panel" id="aliasing">
+<h2>4 · Aliasing</h2>
+<p class="subtitle">Sample a single sinusoid x(t) = cos(ω<sub>0</sub>t + φ) with the period T<sub>s</sub> chosen above, and reconstruct it with the ideal filter (ω<sub>c</sub> = ω<sub>s</sub>/2). If ω<sub>0</sub> &gt; ω<sub>s</sub>/2, a copy of the spectrum lands in the passband at a lower frequency, and a different sinusoid, the alias, comes out. It passes through exactly the same samples.</p>
+<div class="layout">
+<div class="field"><label for="a0">Frequency ω<sub>0</sub> (as a fraction of ω<sub>s</sub>)<span class="value" id="a0val"></span></label><input id="a0" type="range" min="0" max="2" step="0.005"></div>
+<div class="field"><label for="phi">Phase φ<span class="value" id="phival"></span></label><input id="phi" type="range" min="-1" max="1" step="0.05"></div>
+</div>
+<div class="sectionlabel">TRY</div><div class="pillrow" id="aliasEx"></div>
+<div class="vizbox"><h3>Time domain</h3><canvas id="cAt" style="height:250px"></canvas><div class="legend"><span><span class="solid" style="--c:#2563eb"></span>x(t) = cos(ω₀t + φ)</span><span><span class="dot" style="--c:#13283f"></span>samples</span><span><span class="solid" style="--c:#e07a30"></span>reconstruction x<sub>r</sub>(t)</span></div></div>
+<div class="twocol">
+<div class="vizbox"><h3>Spectrum of the impulse train X<sub>p</sub>(jω)</h3><div class="small">Blue: the impulses of X(jω) at ±ω<sub>0</sub>. Grey: their copies at ±ω<sub>0</sub> + kω<sub>s</sub>. Shaded: the passband of the reconstruction filter; the impulses inside it (orange) form x<sub>r</sub>(t).</div><canvas id="cAf"></canvas></div>
+<div class="vizbox"><h3>Apparent frequency vs. true frequency</h3><div class="small">The frequency that comes out folds back and forth between 0 and ω<sub>s</sub>/2.</div><canvas id="cAg"></canvas></div>
+</div>
+<div class="status" id="aliasStat"></div>
+<div id="questions"></div>
+</section>
+<footer>Standalone interactive teaching demo · Frequencies ω are in rad/s; ω<sub>s</sub> = 2π/T<sub>s</sub>. Ideal reconstructions are computed in the frequency domain; all other curves are computed directly from the samples.</footer>
+</main>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const TAU=2*Math.PI,PI=Math.PI;
+const C={x:'#2563eb',p:'#7c3aed',xp:'#e07a30',xn:'#1467a8',h:'#b45309',xr:'#008b75',grey:'#a8b6c4',dark:'#13283f'};
+const fmt=(v,d=3)=>{if(!isFinite(v))return '—';if(Math.abs(v)<5e-5)return '0';const r=+v.toPrecision(d);return (Object.is(r,-0)?0:r).toString().replace('-','−')};
+const sinc=u=>Math.abs(u)<1e-12?1:Math.sin(PI*u)/(PI*u);
+
+// ---------------------------------------------------------------- state & signals
+const state={preset:'tri',wM:10,Ts:.2,wcf:.5,K:6,showS:true,N:3,meth:{ideal:true,trunc:true,zoh:true,lin:true},hoverT:null,a0:.3,phi:0};
+const PRESETS={
+ tri:{name:'Triangular spectrum',desc:wM=>`x(t) = [sin(${fmt(wM/2)}t) / (${fmt(wM/2)}t)]², X(jω) a triangle on |ω| &lt; ω<sub>M</sub> = ${fmt(wM)}`},
+ cos2:{name:'Two cosines',desc:wM=>`x(t) = cos(${fmt(.4*wM)}t) + 0.5 cos(${fmt(wM)}t): impulses at ±${fmt(.4*wM)} and ±ω<sub>M</sub> = ±${fmt(wM)}`},
+ gauss:{name:'Gaussian (not bandlimited)',desc:wM=>`x(t) = exp(−t²/(2σ²)) with σ = 3/ω<sub>M</sub>: X(jω) is a Gaussian that never ends; it is below 1.2% of its peak for |ω| &gt; ω<sub>M</sub>`}};
+function sig(){const wM=state.wM;
+ if(state.preset==='tri'){const a=wM/2;return{kind:'cont',B:wM,x:t=>{const u=a*t;return Math.abs(u)<1e-9?1:(Math.sin(u)/u)**2},X:w=>Math.abs(w)>=wM?0:TAU/wM*(1-Math.abs(w)/wM)}}
+ if(state.preset==='gauss'){const s=3/wM;return{kind:'cont',B:2.6*wM,x:t=>Math.exp(-t*t/(2*s*s)),X:w=>s*Math.sqrt(TAU)*Math.exp(-s*s*w*w/2)}}
+ const L=[{w:.4*wM,A:1,phi:0},{w:wM,A:.5,phi:0}];return{kind:'lines',B:wM,lines:L,x:t=>L.reduce((s,c)=>s+c.A*Math.cos(c.w*t+c.phi),0)}}
+const ws=()=>TAU/state.Ts, wc=()=>state.wcf*ws();
+const Tw=()=>25/state.wM;
+function Xp(S,w){const T=state.Ts,W=ws();let s=0;for(let k=Math.ceil((w-S.B)/W);k<=Math.floor((w+S.B)/W);k++)s+=S.X(w-k*W);return s/T}
+// impulses of X_p: list of {nu, re, im} (area of 1/Ts * pi*A e^{±j phi}), for |nu|<=R
+function lineImpulses(L,R){const W=ws(),out=[];for(const c of L){for(const sg of [1,-1]){const w=sg*c.w;for(let k=Math.ceil((-R-w)/W);k<=Math.floor((R-w)/W);k++){out.push({nu:w+k*W,k,re:PI*c.A*Math.cos(sg*c.phi)/state.Ts,im:PI*c.A*Math.sin(sg*c.phi)/state.Ts})}}}return out}
+// ideal reconstruction with cutoff Wc and gain Ts (exact for lines, numerical integral for cont)
+function idealRecon(S,ts,Wc){
+ if(S.kind==='lines'){const imp=lineImpulses(S.lines,Wc+1e-9);return ts.map(t=>{let s=0;for(const q of imp){const a=Math.abs(q.nu);const wt=a<Wc-1e-9?1:a<=Wc+1e-9?.5:0;if(!wt)continue;s+=wt*state.Ts/(TAU)*(q.re*Math.cos(q.nu*t)-q.im*Math.sin(q.nu*t))}return s})}
+ const M=1600,dw=Wc/M,G=new Float64Array(M+1);for(let i=0;i<=M;i++)G[i]=state.Ts*Xp(S,i*dw)*((i===0||i===M)?.5:1);
+ return ts.map(t=>{let s=0,c=1,sn=0;const cr=Math.cos(t*dw),sr=Math.sin(t*dw);for(let i=0;i<=M;i++){s+=G[i]*c;const nc=c*cr-sn*sr;sn=sn*cr+c*sr;c=nc}return s*dw/PI})}
+const lin=(a,b,n)=>Array.from({length:n},(_,i)=>a+(b-a)*i/(n-1));
+
+// ---------------------------------------------------------------- drawing helpers
+function prep(id){const c=$(id),r=c.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);c.width=Math.round(r.width*d);c.height=Math.round(r.height*d);const p=c.getContext('2d');p.setTransform(d,0,0,d,0,0);p.clearRect(0,0,r.width,r.height);p.font='11px Inter,system-ui,sans-serif';return{p,w:r.width,h:r.height}}
+function niceTicks(lo,hi,k=5){const span=hi-lo||1,raw=span/k,mag=10**Math.floor(Math.log10(raw)),st=[1,2,2.5,5,10].map(s=>s*mag).find(s=>s>=raw*.999);const out=[];for(let v=Math.ceil(lo/st-1e-9)*st;v<=hi+1e-9;v+=st)out.push([v,fmt(Math.abs(v)<1e-12?0:v,3)]);return out}
+function piTicks(R){const out=[];for(let k=-Math.floor(R/PI);k<=Math.floor(R/PI);k++)out.push([k*PI,k===0?'0':(k<0?'−':'')+(Math.abs(k)===1?'':Math.abs(k))+'π']);return out}
+const PAD={l:44,r:10,t:10,b:24};
+function frame(p,w,h,o){const X=v=>PAD.l+(v-o.xmin)/(o.xmax-o.xmin)*(w-PAD.l-PAD.r),Y=v=>h-PAD.b-(v-o.ymin)/(o.ymax-o.ymin)*(h-PAD.t-PAD.b);
+ p.lineWidth=1;for(const [v,l] of o.yticks||niceTicks(o.ymin,o.ymax,4)){p.strokeStyle=Math.abs(v)<1e-12?'#aebeca':'#e8eef3';p.beginPath();p.moveTo(PAD.l,Y(v));p.lineTo(w-PAD.r,Y(v));p.stroke();p.fillStyle='#607687';p.textAlign='right';p.fillText(l,PAD.l-5,Y(v)+4)}
+ for(const [v,l] of o.xticks||niceTicks(o.xmin,o.xmax,8)){p.strokeStyle=Math.abs(v)<1e-12?'#c9d5df':'#f0f3f7';p.beginPath();p.moveTo(X(v),PAD.t);p.lineTo(X(v),h-PAD.b);p.stroke();p.fillStyle='#607687';p.textAlign='center';p.fillText(l,X(v),h-PAD.b+15)}
+ if(o.ymin<0&&o.ymax>0){p.strokeStyle='#aebeca';p.beginPath();p.moveTo(PAD.l,Y(0));p.lineTo(w-PAD.r,Y(0));p.stroke()}
+ return{X,Y}}
+function curve(p,X,Y,xs,vs,{color,width=2,dash=[],alpha=1}){p.save();p.globalAlpha=alpha;p.strokeStyle=color;p.lineWidth=width;p.setLineDash(dash);p.beginPath();let pen=false;for(let i=0;i<xs.length;i++){const v=vs[i];if(v===null||!isFinite(v)){pen=false;continue}const px=X(xs[i]),py=Y(v);if(pen)p.lineTo(px,py);else p.moveTo(px,py);pen=true}p.stroke();p.restore()}
+function fillc(p,X,Y,xs,vs,color,alpha=.18){p.save();p.globalAlpha=alpha;p.fillStyle=color;p.beginPath();p.moveTo(X(xs[0]),Y(0));for(let i=0;i<xs.length;i++)p.lineTo(X(xs[i]),Y(vs[i]));p.lineTo(X(xs[xs.length-1]),Y(0));p.closePath();p.fill();p.restore()}
+function arrow(p,X,Y,x,v,color,width=2,head=true){const x0=X(x),y0=Y(0),y1=Y(v);p.save();p.strokeStyle=color;p.fillStyle=color;p.lineWidth=width;p.beginPath();p.moveTo(x0,y0);p.lineTo(x0,y1);p.stroke();
+ if(head&&Math.abs(y1-y0)>4){const s=v>=0?1:-1;p.beginPath();p.moveTo(x0,y1);p.lineTo(x0-4,y1+7*s);p.lineTo(x0+4,y1+7*s);p.closePath();p.fill()}p.restore()}
+function stem(p,X,Y,x,v,color,r=3.2,hollow=false){p.save();p.strokeStyle=color;p.fillStyle=hollow?'#fff':color;p.lineWidth=1.6;p.beginPath();p.moveTo(X(x),Y(0));p.lineTo(X(x),Y(v));p.stroke();p.beginPath();p.arc(X(x),Y(v),r,0,TAU);p.fill();if(hollow)p.stroke();p.restore()}
+function dot(p,X,Y,x,v,color,r=3.4){p.save();p.fillStyle=color;p.beginPath();p.arc(X(x),Y(v),r,0,TAU);p.fill();p.restore()}
+function vline(p,X,h,x,label,color='#94a3b8'){p.save();p.strokeStyle=color;p.setLineDash([3,4]);p.lineWidth=1;p.beginPath();p.moveTo(X(x),PAD.t);p.lineTo(X(x),h-PAD.b);p.stroke();if(label){p.setLineDash([]);p.fillStyle=color;p.textAlign='center';p.fillText(label,X(x),PAD.t+9)}p.restore()}
+function shade(p,X,h,a,b,color,alpha=.1){p.save();p.globalAlpha=alpha;p.fillStyle=color;p.fillRect(X(a),PAD.t,X(b)-X(a),h-PAD.t-PAD.b);p.restore()}
+const range=vs=>{let a=Infinity,b=-Infinity;for(const v of vs)if(v!==null&&isFinite(v)){if(v<a)a=v;if(v>b)b=v}return[a,b]};
+function yr(lo,hi,pos){const m=Math.max(Math.abs(lo),Math.abs(hi),1e-9);return pos&&lo>=-1e-9?[0,1.15*hi||1]:[Math.min(lo,0)-.12*m,Math.max(hi,0)+.12*m]}
+const sampleIdx=(a,b)=>{const T=state.Ts;const n0=Math.ceil(a/T-1e-9),n1=Math.floor(b/T+1e-9),o=[];for(let n=n0;n<=n1;n++)o.push(n);return o};
+
+// ---------------------------------------------------------------- 1. chain
+const STAGES=[
+ ['x','Input','x(t)','X(jω)'],
+ ['p','Impulse train','p(t) = Σ δ(t − nTₛ)','P(jω) = (2π/Tₛ) Σ δ(ω − kωₛ)'],
+ ['xp','Multiply','xₚ(t) = x(t) p(t)','Xₚ(jω) = (1/Tₛ) Σ X(j(ω − kωₛ))'],
+ ['xn','C/D','x[n] = x(nTₛ)','X(e^{jΩ}) = Xₚ(jΩ/Tₛ)'],
+ ['h','Lowpass filter','h(t) = Tₛ sin(ω꜀t)/(πt)','H(jω) = Tₛ for |ω| < ω꜀'],
+ ['xr','Output','xᵣ(t) vs. x(t)','Xᵣ(jω) = H(jω) Xₚ(jω)']];
+$('stages').innerHTML=STAGES.map(([k,t,a,b],i)=>`<div class="stage"><div class="lab"><b>${i+1}. ${t}</b><span class="f">${a}</span><br><span class="f">${b.replace('^{jΩ}','<sup>jΩ</sup>')}</span></div><div><div class="cap">time</div><canvas id="t_${k}"></canvas></div><div><div class="cap">${k==='h'?'frequency (normalized: H(jω)/Tₛ, and Tₛ·Xₚ(jω) in grey)':'frequency'}</div><canvas id="f_${k}"></canvas></div></div>`).join('');
+function freqMarks(p,X,h,R,withC){const W=ws();for(let k=-3;k<=3;k++){if(!k)continue;const v=k*W;if(Math.abs(v)<=R)vline(p,X,h,v,(k<0?'−':'')+(Math.abs(k)===1?'':Math.abs(k))+'ωₛ','#a3b3c3')}
+ if(withC){vline(p,X,h,wc(),'ω꜀','#b45309');vline(p,X,h,-wc(),'−ω꜀','#b45309')}}
+function plotChain(){const S=sig(),T=state.Ts,W=ws(),tw=Tw(),R=Math.max(1.15*(W+S.B),2.5*state.wM),tsx=lin(-tw,tw,900),wsx=lin(-R,R,1100),idx=sampleIdx(-tw,tw),many=idx.length>160;
+ const xv=tsx.map(S.x),[xl,xh]=range(xv),xy=yr(xl,xh);
+ // 1. x
+ {let{p,w,h}=prep('t_x'),F=frame(p,w,h,{xmin:-tw,xmax:tw,ymin:xy[0],ymax:xy[1]});curve(p,F.X,F.Y,tsx,xv,{color:C.x});
+  ({p,w,h}=prep('f_x'));freqSpec(p,w,h,S,R,wsx,'x')}
+ // 2. p
+ {let{p,w,h}=prep('t_p'),F=frame(p,w,h,{xmin:-tw,xmax:tw,ymin:0,ymax:1.3,yticks:[[0,'0'],[1,'1']]});for(const n of idx)arrow(p,F.X,F.Y,n*T,1,C.p,1.5,!many);
+  ({p,w,h}=prep('f_p'));const A=TAU/T;F=frame(p,w,h,{xmin:-R,xmax:R,ymin:0,ymax:1.3*A});for(let k=Math.ceil(-R/W);k<=Math.floor(R/W);k++)arrow(p,F.X,F.Y,k*W,A,C.p,2);freqMarks(p,F.X,h,R)}
+ // 3. xp
+ {let{p,w,h}=prep('t_xp'),F=frame(p,w,h,{xmin:-tw,xmax:tw,ymin:xy[0],ymax:xy[1]});curve(p,F.X,F.Y,tsx,xv,{color:C.x,dash:[4,4],width:1.2,alpha:.6});for(const n of idx)arrow(p,F.X,F.Y,n*T,S.x(n*T),C.xp,1.6,!many);
+  ({p,w,h}=prep('f_xp'));freqSpec(p,w,h,S,R,wsx,'xp')}
+ // 4. x[n]
+ {const n0=idx[0],n1=idx[idx.length-1];let{p,w,h}=prep('t_xn'),F=frame(p,w,h,{xmin:n0-.5,xmax:n1+.5,ymin:xy[0],ymax:xy[1]});for(const n of idx)stem(p,F.X,F.Y,n,S.x(n*T),C.xn,many?1.5:3);
+  ({p,w,h}=prep('f_xn'));const RO=3*PI,Om=lin(-RO,RO,1100);
+  if(S.kind==='cont'){const v=Om.map(o=>Xp(S,o/T)),[,b]=range(v);F=frame(p,w,h,{xmin:-RO,xmax:RO,ymin:0,ymax:1.15*b,xticks:piTicks(RO)});fillc(p,F.X,F.Y,Om,v,C.xn,.12);curve(p,F.X,F.Y,Om,v,{color:C.xn})}
+  else{const imp=lineImpulses(S.lines,RO/T);const top=Math.max(...imp.map(q=>Math.hypot(q.re,q.im)*T));F=frame(p,w,h,{xmin:-RO,xmax:RO,ymin:0,ymax:1.3*top,xticks:piTicks(RO)});for(const q of imp)arrow(p,F.X,F.Y,q.nu*T,Math.hypot(q.re,q.im)*T,C.xn,2)}
+  for(const s of [-1,1])vline(p,F.X,h,s*PI,s<0?'−π':'π','#a3b3c3')}
+ // 5. h
+ {const Wc=wc();let{p,w,h}=prep('t_h');const hv=tsx.map(t=>Math.abs(t)<1e-9?T*Wc/PI:T*Math.sin(Wc*t)/(PI*t)),[a,b]=range(hv),F=frame(p,w,h,{xmin:-tw,xmax:tw,ymin:Math.min(a*1.15,-.05*b),ymax:1.15*b});curve(p,F.X,F.Y,tsx,hv,{color:C.h});
+  ({p,w,h}=prep('f_h'));const G=frame(p,w,h,{xmin:-R,xmax:R,ymin:0,ymax:1.3,yticks:[[0,'0'],[1,'1']]});
+  if(S.kind==='cont'){const v=wsx.map(o=>T*Xp(S,o)),[,m]=range(v);fillc(p,G.X,G.Y,wsx,v.map(z=>z/m),'#64748b',.18)}else{const imp=lineImpulses(S.lines,R),m=Math.max(...imp.map(q=>Math.hypot(q.re,q.im)));for(const q of imp)arrow(p,G.X,G.Y,q.nu,Math.hypot(q.re,q.im)/m,'#94a3b8',1.5)}
+  curve(p,G.X,G.Y,[-R,-Wc,-Wc,Wc,Wc,R],[0,0,1,1,0,0],{color:C.h,width:2.5});freqMarks(p,G.X,h,R,true)}
+ // 6. xr
+ {const xr=idealRecon(S,tsx,wc());let{p,w,h}=prep('t_xr');const[a,b]=range(xr.concat(xv)),y2=yr(a,b),F=frame(p,w,h,{xmin:-tw,xmax:tw,ymin:y2[0],ymax:y2[1]});curve(p,F.X,F.Y,tsx,xv,{color:C.x,dash:[5,4],width:1.6});curve(p,F.X,F.Y,tsx,xr,{color:C.xr,width:2.2});
+  let e=0;for(let i=0;i<xr.length;i++)e=Math.max(e,Math.abs(xr[i]-xv[i]));
+  ({p,w,h}=prep('f_xr'));freqSpec(p,w,h,S,R,wsx,'xr');
+  const W2=2*S.B,ok=W>W2+1e-9,cond=state.preset==='gauss'?'X(jω) is never exactly zero, so some aliasing is unavoidable; it is small when ωₛ − ω<sub>M</sub> is well above ω<sub>M</sub>.':ok?(wc()>S.B&&wc()<W-S.B?'The copies do not overlap and ω<sub>M</sub> &lt; ω<sub>c</sub> &lt; ω<sub>s</sub> − ω<sub>M</sub>: perfect reconstruction.':'The copies do not overlap, but the cutoff ω<sub>c</sub> is outside (ω<sub>M</sub>, ω<sub>s</sub> − ω<sub>M</sub>): the filter cuts part of X or lets part of a copy through.'):'The copies overlap (aliasing): no lowpass filter can separate them.';
+  $('chainStat').innerHTML=`Largest error on the plot: max |x<sub>r</sub>(t) − x(t)| = <b>${fmt(e,3)}</b> (peak |x| = ${fmt(Math.max(Math.abs(xl),Math.abs(xh)))}). ${cond}`}}
+function freqSpec(p,w,h,S,R,wsx,which){const T=state.Ts,W=ws(),Wc=wc();
+ if(S.kind==='cont'){
+  if(which==='x'){const v=wsx.map(S.X),F=frame(p,w,h,{xmin:-R,xmax:R,ymin:0,ymax:1.15*Math.max(...v)});fillc(p,F.X,F.Y,wsx,v,C.x,.14);curve(p,F.X,F.Y,wsx,v,{color:C.x});freqMarks(p,F.X,h,R);return}
+  const tot=wsx.map(o=>Xp(S,o));
+  if(which==='xp'){const F=frame(p,w,h,{xmin:-R,xmax:R,ymin:0,ymax:1.15*Math.max(...tot)});for(let k=Math.ceil((-R-S.B)/W);k<=Math.floor((R+S.B)/W);k++){curve(p,F.X,F.Y,wsx,wsx.map(o=>Math.abs(o-k*W)<=S.B?S.X(o-k*W)/T:null),{color:k?'#94a3b8':C.x,dash:[4,3],width:1.3})}
+   curve(p,F.X,F.Y,wsx,tot,{color:C.xp,width:2.2});freqMarks(p,F.X,h,R);return}
+  const xr=wsx.map((o,i)=>Math.abs(o)<Wc?T*tot[i]:0),xv=wsx.map(S.X),F=frame(p,w,h,{xmin:-R,xmax:R,ymin:0,ymax:1.15*Math.max(...xr,...xv)});fillc(p,F.X,F.Y,wsx,xr,C.xr,.15);curve(p,F.X,F.Y,wsx,xv,{color:C.x,dash:[5,4],width:1.5});curve(p,F.X,F.Y,wsx,xr,{color:C.xr,width:2.2});freqMarks(p,F.X,h,R,true);return}
+ // line spectra: arrow heights = impulse areas
+ if(which==='x'){const top=PI*Math.max(...S.lines.map(c=>c.A)),F=frame(p,w,h,{xmin:-R,xmax:R,ymin:0,ymax:1.3*top});for(const c of S.lines)for(const s of [-1,1])arrow(p,F.X,F.Y,s*c.w,PI*c.A,C.x,2.2);freqMarks(p,F.X,h,R);return}
+ const imp=lineImpulses(S.lines,R),top=Math.max(...imp.map(q=>Math.hypot(q.re,q.im)));
+ if(which==='xp'){const F=frame(p,w,h,{xmin:-R,xmax:R,ymin:0,ymax:1.3*top});for(const q of imp)arrow(p,F.X,F.Y,q.nu,Math.hypot(q.re,q.im),q.k?C.xp:C.x,2);freqMarks(p,F.X,h,R);return}
+ const F=frame(p,w,h,{xmin:-R,xmax:R,ymin:0,ymax:1.3*PI*Math.max(...S.lines.map(c=>c.A))});
+ for(const c of S.lines)for(const s of [-1,1])arrow(p,F.X,F.Y,s*c.w+(s*.004*R),PI*c.A,'#93c5fd',4,false);
+ const acc=new Map();for(const q of imp){const a=Math.abs(q.nu),wt=a<Wc-1e-9?1:a<=Wc+1e-9?.5:0;if(!wt)continue;const key=q.nu.toFixed(6);acc.set(key,(acc.get(key)||0)+wt*T*Math.hypot(q.re,q.im))}
+ for(const [k,v] of acc)arrow(p,F.X,F.Y,+k,v,C.xr,2.2);freqMarks(p,F.X,h,R,true)}
+
+// ---------------------------------------------------------------- 2. sincs
+function plotSincs(){const S=sig(),T=state.Ts,tw=Tw(),ts=lin(-tw,tw,1000),K=state.K,xv=ts.map(S.x);
+ const terms=[];for(let n=-K;n<=K;n++)terms.push([n,S.x(n*T)]);const sum=ts.map(t=>terms.reduce((s,[n,v])=>s+v*sinc(t/T-n),0));
+ const[a,b]=range(xv.concat(sum)),y=yr(a,b);const{p,w,h}=prep('cSinc'),F=frame(p,w,h,{xmin:-tw,xmax:tw,ymin:y[0],ymax:y[1]});
+ if(-K*T>-tw)shade(p,F.X,h,-tw,Math.max(-tw,-K*T),'#94a3b8',.07);if(K*T<tw)shade(p,F.X,h,Math.min(tw,K*T),tw,'#94a3b8',.07);
+ if(state.showS&&terms.length<=121)terms.forEach(([n,v],i)=>curve(p,F.X,F.Y,ts,ts.map(t=>v*sinc(t/T-n)),{color:`hsl(${(260+n*37)%360} 70% 62%)`,width:1.1,alpha:.75}));
+ curve(p,F.X,F.Y,ts,xv,{color:C.x,dash:[5,4],width:1.6});curve(p,F.X,F.Y,ts,sum,{color:C.xr,width:2.6});
+ for(const n of sampleIdx(-tw,tw))dot(p,F.X,F.Y,n*T,S.x(n*T),Math.abs(n)<=K?C.x:'#b8c4d0',3.2);
+ let e=0,ei=0;const inner=Math.max(0,(K-1)*T);for(let i=0;i<ts.length;i++){const d=Math.abs(sum[i]-xv[i]);if(d>e)e=d;if(Math.abs(ts[i])<=inner&&d>ei)ei=d}
+ $('sincSub').innerHTML=`${2*K+1} sinc${K?'s':''} (n = ${-K}, …, ${K}); T<sub>s</sub> = ${fmt(T)} s. The grey region has samples that are not included yet.`;
+ $('sincStat').innerHTML=`At every included sample t = nT<sub>s</sub>, only one sinc is nonzero, so the sum equals x[n] exactly. Max error for |t| ≤ ${fmt(inner)} s (well inside the included samples): <b>${fmt(ei,3)}</b>; on the whole plot: ${fmt(e,3)}.`+(state.preset==='cos2'?' A sum of cosines never decays, so the sinc sum converges slowly: far samples still matter.':'')+(ws()<=2*S.B+1e-9&&state.preset!=='gauss'?' <span class="bad">The sampling rate is below the Nyquist rate here, so even the full sum converges to the aliased signal, not to x(t).</span>':'')}
+let playT=null;$('playK').addEventListener('click',()=>{if(playT){clearInterval(playT);playT=null;$('playK').textContent='▶ Add them one by one';return}state.K=0;$('playK').textContent='■ Stop';const max=+$('K').max;playT=setInterval(()=>{state.K++;syncCtl();plotSincs();if(state.K>=Math.min(max,Math.ceil(Tw()/state.Ts)+2)){clearInterval(playT);playT=null;$('playK').textContent='▶ Add them one by one'}},350);syncCtl();plotSincs()});
+
+// ---------------------------------------------------------------- 3. practical
+const METH={ideal:{name:'Ideal (all sincs)',c:'#008b75',bg:'#e6f6f2'},trunc:{name:'Truncated sinc (2N)',c:'#7c3aed',bg:'#f1ecfe'},zoh:{name:'Zero-order hold',c:'#d97706',bg:'#fff4e2'},lin:{name:'Linear interpolation',c:'#db2777',bg:'#fdeef5'}};
+$('methods').innerHTML=Object.entries(METH).map(([k,m])=>`<button class="tog" data-m="${k}" style="--c:${m.c};--bg:${m.bg}">${m.name}</button>`).join('');
+function recon(S,meth,ts){const T=state.Ts,N=state.N,xs=n=>S.x(n*T);
+ if(meth==='ideal')return idealRecon(S,ts,ws()/2);
+ return ts.map(t=>{const m=Math.floor(t/T+1e-9),u=t/T-m;if(meth==='zoh')return xs(m);if(meth==='lin')return xs(m)+u*(xs(m+1)-xs(m));let s=0;for(let n=m-N+1;n<=m+N;n++)s+=xs(n)*sinc(t/T-n);return s})}
+function kernel(meth,tau){const T=state.Ts,u=tau/T;if(meth==='ideal')return sinc(u);if(meth==='trunc')return(u>=-state.N&&u<state.N)?sinc(u):0;if(meth==='zoh')return(u>=0&&u<1)?1:0;return Math.max(0,1-Math.abs(u))}
+function Hmag(meth,w){const T=state.Ts,v=w*T/TAU;if(meth==='ideal')return Math.abs(w)<PI/T?1:0;if(meth==='zoh')return Math.abs(sinc(v));if(meth==='lin')return sinc(v)**2;
+ const N=state.N,M=N*120,dv=N/M;let s=0;for(let i=0;i<=M;i++){const x=i*dv;s+=(i===0||i===M?.5:1)*sinc(x)*Math.cos(w*T*x)}return Math.abs(2*s*dv)}
+let P3=null;
+function plotPractical(){const S=sig(),T=state.Ts,tw=.6*Tw(),ts=lin(-tw,tw,1000),xv=ts.map(S.x),on=Object.keys(METH).filter(k=>state.meth[k]);
+ const R={};for(const k of on)R[k]=recon(S,k,ts);
+ const all=xv.concat(...on.map(k=>R[k])),[a,b]=range(all),y=yr(a,b);let{p,w,h}=prep('cPt'),F=frame(p,w,h,{xmin:-tw,xmax:tw,ymin:y[0],ymax:y[1]});P3={F,tw,w};
+ const ht=state.hoverT;let m=null;if(ht!==null&&Math.abs(ht)<=tw){m=Math.floor(ht/T+1e-9);if(state.meth.trunc)shade(p,F.X,h,Math.max(-tw,(m-state.N+1)*T),Math.min(tw,(m+state.N)*T),METH.trunc.c,.08)}
+ curve(p,F.X,F.Y,ts,xv,{color:'#334155',dash:[5,4],width:1.5});for(const k of on)curve(p,F.X,F.Y,ts,R[k],{color:METH[k].c,width:2});
+ for(const n of sampleIdx(-tw,tw)){const used=m!==null&&state.meth.trunc&&n>=m-state.N+1&&n<=m+state.N;dot(p,F.X,F.Y,n*T,S.x(n*T),used?METH.trunc.c:C.x,used?4.5:3.2)}
+ if(m!==null){vline(p,F.X,h,ht,'t','#13283f');const vals=on.map(k=>`<span style="color:${METH[k].c}">${METH[k].name}: ${fmt(recon(S,k,[ht])[0],4)}</span>`).join(' · ');$('ptRead').innerHTML=`t = ${fmt(ht,4)} s lies between m T<sub>s</sub> and (m+1)T<sub>s</sub> with m = ${m}. The truncated sinc uses n = ${m-state.N+1}, …, ${m+state.N} (shaded). x(t) = ${fmt(S.x(ht),4)} · ${vals}`}
+ else $('ptRead').innerHTML='Hover over (or tap) the plot to pick a time t and see which samples the truncated sinc uses.';
+ // error
+ ({p,w,h}=prep('cPe'));const errs={};for(const k of on)errs[k]=R[k].map((v,i)=>v-xv[i]);const[ea,eb]=range([].concat(...on.map(k=>errs[k]),[0])),ey=yr(ea,eb);F=frame(p,w,h,{xmin:-tw,xmax:tw,ymin:ey[0],ymax:ey[1]});for(const k of on)curve(p,F.X,F.Y,ts,errs[k],{color:METH[k].c,width:1.6});
+ // table (all methods, inner region to avoid edge effects of the plot window)
+ const ti=lin(-.5*tw,.5*tw,500),xi=ti.map(S.x);let rows='';for(const k of Object.keys(METH)){const r=recon(S,k,ti);let mx=0,sq=0;r.forEach((v,i)=>{const d=v-xi[i];mx=Math.max(mx,Math.abs(d));sq+=d*d});rows+=`<tr><td style="color:${METH[k].c};font-weight:700">${METH[k].name}${k==='trunc'?` (N = ${state.N})`:''}</td><td>${fmt(mx,3)}</td><td>${fmt(Math.sqrt(sq/ti.length),3)}</td></tr>`}
+ $('errTab').innerHTML=`<tr><th>Method</th><th>max |x̂ − x|</th><th>RMS error</th></tr>${rows}<tr><td colspan="3" style="text-align:left;color:#6a7c8c">over |t| ≤ ${fmt(.5*tw)} s</td></tr>`;
+ // kernels
+ const kt=lin(-Math.max(4,state.N+1)*T,Math.max(4,state.N+1)*T,1200);({p,w,h}=prep('cPk'));F=frame(p,w,h,{xmin:kt[0],xmax:kt[kt.length-1],ymin:-.3,ymax:1.15});
+ for(const n of sampleIdx(kt[0],kt[kt.length-1]))vline(p,F.X,h,n*T,'','#e2e8f0');for(const k of on)curve(p,F.X,F.Y,kt,kt.map(t=>kernel(k,t)),{color:METH[k].c,width:2});
+ // frequency responses
+ const W=ws(),RW=2.3*W,wv=lin(-RW,RW,900);({p,w,h}=prep('cPh'));F=frame(p,w,h,{xmin:-RW,xmax:RW,ymin:0,ymax:1.25,yticks:[[0,'0'],[.5,'0.5'],[1,'1']]});
+ if(S.kind==='cont'){const v=wv.map(o=>Xp(S,o)),mx=Math.max(...v);fillc(p,F.X,F.Y,wv,v.map(z=>z/mx),'#64748b',.16)}else{const imp=lineImpulses(S.lines,RW),mx=Math.max(...imp.map(q=>Math.hypot(q.re,q.im)));for(const q of imp)arrow(p,F.X,F.Y,q.nu,Math.hypot(q.re,q.im)/mx,'#a3b3c3',1.5)}
+ for(const k of on)curve(p,F.X,F.Y,wv,wv.map(o=>Hmag(k,o)),{color:METH[k].c,width:2});
+ for(const [v,l] of [[W/2,'ωₛ/2'],[-W/2,'−ωₛ/2'],[W,'ωₛ'],[-W,'−ωₛ'],[2*W,'2ωₛ'],[-2*W,'−2ωₛ']])vline(p,F.X,h,v,l,'#a3b3c3')}
+$('cPt').addEventListener('mousemove',e=>{if(!P3)return;const r=$('cPt').getBoundingClientRect(),fr=(e.clientX-r.left-PAD.l)/(r.width-PAD.l-PAD.r);if(fr<0||fr>1)return;state.hoverT=-P3.tw+2*P3.tw*fr;plotPractical()});
+$('cPt').addEventListener('touchstart',e=>{if(!P3)return;const r=$('cPt').getBoundingClientRect(),fr=(e.touches[0].clientX-r.left-PAD.l)/(r.width-PAD.l-PAD.r);if(fr<0||fr>1)return;state.hoverT=-P3.tw+2*P3.tw*fr;plotPractical()},{passive:true});
+$('cPt').addEventListener('mouseleave',()=>{state.hoverT=null;plotPractical()});
+
+// ---------------------------------------------------------------- 4. aliasing
+const AEX=[['ω₀ = 0.2ωₛ (fine)',.2,0],['0.45ωₛ (just below ωₛ/2)',.45,0],['0.55ωₛ (just above)',.55,.25],['ω₀ = ωₛ/2, φ = π/2',.5,.5],['ω₀ = ωₛ (looks constant)',1,0],['1.05ωₛ (wagon wheel)',1.05,0],['1.3ωₛ',1.3,.25]];
+$('aliasEx').innerHTML=AEX.map(([l],i)=>`<button class="pill" data-a="${i}">${l}</button>`).join('');
+function aliasInfo(){const W=ws(),w0=state.a0*W,phi=state.phi*PI,T=state.Ts;let Om=((w0*T)%TAU+TAU)%TAU;if(Om>PI+1e-9)Om-=TAU;return{W,w0,phi,Om}}
+function plotAlias(){const T=state.Ts,{W,w0,phi,Om}=aliasInfo(),t1=16*T,ts=lin(0,t1,1400);const comp={kind:'lines',lines:[{w:w0,A:1,phi}],B:w0};
+ const xv=ts.map(t=>Math.cos(w0*t+phi)),xr=idealRecon(comp,ts,W/2);let{p,w,h}=prep('cAt'),F=frame(p,w,h,{xmin:0,xmax:t1,ymin:-1.3,ymax:1.3});
+ curve(p,F.X,F.Y,ts,xv,{color:C.x,width:1.6,alpha:.85});curve(p,F.X,F.Y,ts,xr,{color:'#e07a30',width:2.6});for(const n of sampleIdx(0,t1))stem(p,F.X,F.Y,n*T,Math.cos(w0*n*T+phi),C.dark,3.6);
+ // spectrum
+ const RW=Math.max(1.25*(w0+W),1.6*W);({p,w,h}=prep('cAf'));F=frame(p,w,h,{xmin:-RW,xmax:RW,ymin:0,ymax:1.45,yticks:[[0,'0'],[1,'π/Tₛ']]});shade(p,F.X,h,-W/2,W/2,'#e07a30',.1);
+ const imp=lineImpulses(comp.lines,RW);for(const q of imp){const a=Math.abs(q.nu),inside=a<W/2+1e-9;arrow(p,F.X,F.Y,q.nu,1,q.k===0?C.x:inside?'#e07a30':'#a3b3c3',q.k===0||inside?2.4:1.6);if(q.k!==0&&inside){p.save();p.strokeStyle='#e07a30';p.lineWidth=1;p.beginPath();p.arc(F.X(q.nu),F.Y(1)-6,7,0,TAU);p.stroke();p.restore()}}
+ for(const [v,l] of [[W/2,'ωₛ/2'],[-W/2,'−ωₛ/2'],[W,'ωₛ'],[-W,'−ωₛ'],[2*W,'2ωₛ'],[-2*W,'−2ωₛ']])if(Math.abs(v)<=RW)vline(p,F.X,h,v,l,'#a3b3c3');
+ // folding plot
+ ({p,w,h}=prep('cAg'));const fx=lin(0,2,801);F=frame(p,w,h,{xmin:0,xmax:2,ymin:0,ymax:.62,xticks:[[0,'0'],[.5,'ωₛ/2'],[1,'ωₛ'],[1.5,'3ωₛ/2'],[2,'2ωₛ']],yticks:[[0,'0'],[.25,'ωₛ/4'],[.5,'ωₛ/2']]});
+ curve(p,F.X,F.Y,fx,fx.map(v=>{const r=v%1;return r<=.5?r:1-r}),{color:'#e07a30',width:2.2});curve(p,F.X,F.Y,[0,.5],[0,.5],{color:C.x,dash:[4,4],width:1.2});
+ const ap=Math.abs(Om)/TAU;dot(p,F.X,F.Y,state.a0,ap,C.dark,5);p.fillStyle='#607687';p.textAlign='left';p.fillText('true ω₀ →',w-PAD.r-64,h-PAD.b-6);
+ // status
+ const wa=Math.abs(Om)/T,edge=Math.abs(Math.abs(Om)-PI)<1e-9,sg=Om<0?-1:1,ph=sg*phi;
+ const phs=v=>{const r=v/PI;return Math.abs(r)<1e-9?'0':fmt(r,3)+'π'};
+ let txt=`ω<sub>0</sub> = ${fmt(w0,4)} rad/s, ω<sub>s</sub> = ${fmt(W,4)} rad/s (ω<sub>s</sub>/2 = ${fmt(W/2,4)}). The samples are x[n] = cos(Ω<sub>0</sub>n + φ) with Ω<sub>0</sub> = ω<sub>0</sub>T<sub>s</sub> = ${fmt(w0*T,4)}, which is the same as ${fmt(Om,4)} (mod 2π). `;
+ if(edge)txt+=`Ω<sub>0</sub> = π: x[n] = cos(φ)(−1)<sup>n</sup>, so x<sub>r</sub>(t) = ${Math.abs(Math.cos(phi))<1e-9?'0 for all t':`${fmt(Math.cos(phi),3)} cos(${fmt(W/2,4)}t)`}. The amplitude depends on the phase; for φ = ±π/2 every sample is 0.`;
+ else if(state.a0<.5-1e-9)txt+=`<span class="ok">ω<sub>0</sub> &lt; ω<sub>s</sub>/2: no aliasing</span>, x<sub>r</sub>(t) = x(t).`;
+ else txt+=`<span class="bad">Aliasing:</span> x<sub>r</sub>(t) = cos(${fmt(wa,4)}t ${ph<0?'−':'+'} ${phs(Math.abs(ph))}), a sinusoid at ω<sub>a</sub> = ${fmt(wa,4)} rad/s = ${fmt(wa/W,3)}ω<sub>s</sub>${sg<0?', with the sign of the phase flipped (the copy comes from the negative-frequency impulse)':''}.`;
+ $('aliasStat').innerHTML=txt}
+
+// ---------------------------------------------------------------- questions
+const QS=[
+ [{preset:'tri',wM:10,Ts:.2,wcf:.5},'Triangular spectrum with ω<sub>M</sub> = 10 rad/s and T<sub>s</sub> = 0.2 s. Is the Nyquist condition satisfied? What is the largest T<sub>s</sub> that still allows perfect reconstruction? Then move ω<sub>c</sub>: for which range of cutoffs is x<sub>r</sub>(t) still equal to x(t)?','ω<sub>s</sub> = 2π/0.2 ≈ 31.4 &gt; 2ω<sub>M</sub> = 20, so yes. We need 2π/T<sub>s</sub> &gt; 20, i.e., T<sub>s</sub> &lt; π/10 ≈ 0.314 s. Any cutoff with ω<sub>M</sub> &lt; ω<sub>c</sub> &lt; ω<sub>s</sub> − ω<sub>M</sub>, i.e., 10 &lt; ω<sub>c</sub> &lt; 21.4 rad/s (0.32ω<sub>s</sub> to 0.68ω<sub>s</sub>), keeps the copy at 0 entirely and removes the others entirely.'],
+ [{preset:'tri',wM:10,Ts:.4,wcf:.5},'Now T<sub>s</sub> = 0.4 s. Where do the copies overlap? Can any choice of ω<sub>c</sub> recover x(t)? Does x<sub>r</sub>(t) still pass through the samples?','ω<sub>s</sub> ≈ 15.7 &lt; 20. The copy centered at ω<sub>s</sub> reaches down to ω<sub>s</sub> − ω<sub>M</sub> ≈ 5.7, so the spectrum is corrupted for 5.7 &lt; |ω| &lt; 10, and no lowpass filter can undo the sum. With ω<sub>c</sub> = ω<sub>s</sub>/2, x<sub>r</sub>(t) is the sinc interpolation of the samples, so it still passes through every sample: it is a different bandlimited signal with the same samples.'],
+ [{preset:'cos2',wM:10,Ts:.4,wcf:.5},'Two cosines, cos(4t) + 0.5 cos(10t), sampled with T<sub>s</sub> = 0.4 s. Predict x<sub>r</sub>(t) before looking at the output plot.','ω<sub>s</sub> = 5π ≈ 15.71, so ω<sub>s</sub>/2 ≈ 7.85. The component at 4 is fine. The one at 10 aliases to ω<sub>s</sub> − 10 ≈ 5.71: x<sub>r</sub>(t) = cos(4t) + 0.5 cos(5.71t).'],
+ [{preset:'tri',wM:10,Ts:.2,wcf:.5,N:1},'Section 3 with N = 1: the truncated sinc uses only the two samples x[m] and x[m+1], like linear interpolation. Which has the smaller error? Increase N: how large must N be before the truncated sinc beats linear interpolation clearly? Why does the zero-order hold look delayed?','With N = 1, the kernel is a sinc chopped to −T<sub>s</sub> ≤ t &lt; T<sub>s</sub>; its frequency response has large ripples, and here its error (max ≈ 0.17) is larger than that of linear interpolation (≈ 0.066). The error drops quickly as N grows: N = 3 already beats linear interpolation (≈ 0.053), and N = 5 gives ≈ 0.012. The zero-order hold kernel is a pulse on 0 ≤ t &lt; T<sub>s</sub>, centered at T<sub>s</sub>/2: its frequency response T<sub>s</sub>e<sup>−jωT<sub>s</sub>/2</sup>sinc(ωT<sub>s</sub>/2π) has linear phase, i.e., a delay of T<sub>s</sub>/2, and its slowly decaying sidelobes let parts of the copies at ±ω<sub>s</sub> through (the staircase).'],
+ [{preset:'tri',wM:10,Ts:.2,a0:.6,phi:.25},'Aliasing with T<sub>s</sub> = 0.2 s: x(t) = cos(0.6ω<sub>s</sub>t + π/4). Predict the frequency and the phase of x<sub>r</sub>(t). Then try ω<sub>0</sub> = ω<sub>s</sub>/2 with φ = π/2.','The copy of the impulse at −ω<sub>0</sub>, shifted by ω<sub>s</sub>, lands at ω<sub>s</sub> − ω<sub>0</sub> = 0.4ω<sub>s</sub> ≈ 12.6 rad/s, and it carries the phase of the negative-frequency impulse: x<sub>r</sub>(t) = cos(0.4ω<sub>s</sub>t − π/4). At ω<sub>0</sub> = ω<sub>s</sub>/2 the samples are cos(πn + π/2) = 0 for every n: the signal disappears completely, which is why the sampling theorem needs ω<sub>s</sub> &gt; 2ω<sub>M</sub> strictly.']];
+$('questions').innerHTML=QS.map(([L,q,a],i)=>`<div class="question"><strong>Predict first · Question ${i+1}</strong><button class="load" data-q="${i}">Load this setup</button><p>${q}</p><details><summary>Show answer</summary><p>${a}</p></details></div>`).join('');
+document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>{const L=QS[+b.dataset.q][0];Object.assign(state,L);renderAll();const tgt=b.dataset.q==='3'?'practical':b.dataset.q==='4'?'aliasing':'chain';$(tgt).scrollIntoView({behavior:'smooth',block:'start'})}));
+
+// ---------------------------------------------------------------- controls
+$('presets').innerHTML=Object.entries(PRESETS).map(([k,v])=>`<button class="pill" data-p="${k}">${v.name}</button>`).join('');
+document.querySelectorAll('[data-p]').forEach(b=>b.addEventListener('click',()=>{state.preset=b.dataset.p;renderAll()}));
+document.querySelectorAll('[data-m]').forEach(b=>b.addEventListener('click',()=>{state.meth[b.dataset.m]=!state.meth[b.dataset.m];syncCtl();plotPractical()}));
+document.querySelectorAll('[data-a]').forEach(b=>b.addEventListener('click',()=>{const e=AEX[+b.dataset.a];state.a0=e[1];state.phi=e[2];syncCtl();plotAlias()}));
+$('wM').addEventListener('input',e=>{state.wM=+e.target.value;renderAll()});
+$('Ts').addEventListener('input',e=>{state.Ts=+e.target.value;renderAll()});
+$('wc').addEventListener('input',e=>{state.wcf=+e.target.value;syncCtl();plotChain()});
+$('wcHalf').addEventListener('click',()=>{state.wcf=.5;syncCtl();plotChain()});
+$('K').addEventListener('input',e=>{state.K=+e.target.value;syncCtl();plotSincs()});
+$('showS').addEventListener('change',e=>{state.showS=e.target.checked;plotSincs()});
+$('N').addEventListener('input',e=>{state.N=+e.target.value;syncCtl();plotPractical()});
+$('a0').addEventListener('input',e=>{state.a0=+e.target.value;syncCtl();plotAlias()});
+$('phi').addEventListener('input',e=>{state.phi=+e.target.value;syncCtl();plotAlias()});
+function syncCtl(){const W=ws(),S=sig();
+ document.querySelectorAll('[data-p]').forEach(b=>b.classList.toggle('selected',b.dataset.p===state.preset));
+ $('wM').value=state.wM;$('wMval').textContent=state.wM;$('Ts').value=state.Ts;$('Tsval').textContent=state.Ts.toFixed(2);
+ const ok=W>2*state.wM+1e-9;
+ $('nyq').innerHTML=`${PRESETS[state.preset].desc(state.wM)} &nbsp;·&nbsp; ω<sub>s</sub> = 2π/T<sub>s</sub> = <b>${fmt(W,4)}</b> rad/s, Nyquist rate 2ω<sub>M</sub> = <b>${fmt(2*state.wM)}</b> rad/s: `+(ok?`<span class="ok">ω<sub>s</sub> &gt; 2ω<sub>M</sub>${state.preset==='gauss'?' (aliasing is small, not zero)':' — no aliasing'}</span>`:`<span class="bad">ω<sub>s</sub> ≤ 2ω<sub>M</sub> — aliasing</span>`)+` &nbsp;(T<sub>s</sub> must be below π/ω<sub>M</sub> = ${fmt(PI/state.wM)} s)`;
+ $('wc').value=state.wcf;$('wcval').innerHTML=`${state.wcf.toFixed(2)} ω<sub>s</sub> = ${fmt(wc(),4)} rad/s`;
+ const kmax=Math.min(60,Math.ceil(Tw()/state.Ts)+4);$('K').max=kmax;if(state.K>kmax)state.K=kmax;$('K').value=state.K;$('Kval').textContent='K = '+state.K;$('showS').checked=state.showS;
+ $('N').value=state.N;$('Nval').textContent=`N = ${state.N} (${2*state.N} samples)`;
+ document.querySelectorAll('[data-m]').forEach(b=>b.classList.toggle('on',!!state.meth[b.dataset.m]));
+ $('a0').value=state.a0;$('a0val').innerHTML=`${state.a0.toFixed(3)} ω<sub>s</sub> = ${fmt(state.a0*W,4)} rad/s`;$('phi').value=state.phi;$('phival').textContent=Math.abs(state.phi)<1e-9?'0':`${fmt(state.phi,3)}π`;
+ document.querySelectorAll('[data-a]').forEach(b=>{const e=AEX[+b.dataset.a];b.classList.toggle('selected',Math.abs(e[1]-state.a0)<1e-9&&Math.abs(e[2]-state.phi)<1e-9)})}
+function renderAll(){syncCtl();plotChain();plotSincs();plotPractical();plotAlias()}
+let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(renderAll,150)});
+renderAll();
+</script>
+</body>
+</html>
