@@ -94,15 +94,16 @@ table.err{border-collapse:collapse;font-size:13px;margin-top:10px;font-variant-n
 
 <!-- ============================================================ 3. practical -->
 <section class="panel" id="practical">
-<h2>3 · Practical reconstruction: 2N sincs, zero-order hold, linear interpolation</h2>
-<p class="subtitle">An infinite sum is not practical. For a time t between mT<sub>s</sub> and (m+1)T<sub>s</sub>, the truncated sinc interpolator uses only the 2N nearest samples, N at or before t and N after it. The zero-order hold keeps the last sample until the next one arrives, and linear interpolation joins consecutive samples with straight lines. Each method is a filter with its own impulse response h(t), shown below with its frequency response. Hover over the top plot to see which samples are used at that t.</p>
-<div class="equation">\( \hat{x}_N(t)=\displaystyle\sum_{n=m-N+1}^{m+N} x[n]\,\mathrm{sinc}\!\left(\frac{t-nT_s}{T_s}\right)\qquad\text{for } mT_s\le t<(m+1)T_s \)</div>
+<h2>3 · Practical reconstruction: time-limited sinc, zero-order hold, linear interpolation</h2>
+<p class="subtitle">The ideal sinc lasts forever, so it cannot be built. Replace it with a sinc of limited duration, h<sub>N</sub>(t), which equals sinc(t/T<sub>s</sub>) for |t| &lt; NT<sub>s</sub> and is zero outside. Every sample still gets its own (now time-limited) sinc. Because h<sub>N</sub>(kT<sub>s</sub>) is 1 for k = 0 and 0 for every other integer k, the reconstruction passes through <b>every</b> sample, for any N. Between the samples it differs from x(t). For a time t between mT<sub>s</sub> and (m+1)T<sub>s</sub>, only the 2N sincs centered at n = m−N+1, …, m+N are nonzero, N at or before t and N after it. The zero-order hold keeps the last sample until the next one arrives, and linear interpolation joins consecutive samples with straight lines. Each method is a filter with its own impulse response h(t), shown below with its frequency response. Hover over the top plot to see which samples are used at that t.</p>
+<div class="equation">\( h_N(t)=\begin{cases}\mathrm{sinc}\!\left(\dfrac{t}{T_s}\right), & |t|\lt NT_s\\[4pt] 0, & |t|\ge NT_s\end{cases}\qquad\qquad \hat{x}_N(t)=\displaystyle\sum_{n=-\infty}^{\infty} x[n]\,h_N(t-nT_s) \)</div>
+<div class="equation">\( \text{For } mT_s\le t<(m+1)T_s:\qquad \hat{x}_N(t)=\displaystyle\sum_{n=m-N+1}^{m+N} x[n]\,\mathrm{sinc}\!\left(\frac{t-nT_s}{T_s}\right) \)</div>
 <div class="equation">\( \hat{x}_{\text{ZOH}}(t)=x[m],\qquad \hat{x}_{\text{lin}}(t)=x[m]+\dfrac{t-mT_s}{T_s}\big(x[m+1]-x[m]\big)\qquad\text{for } mT_s\le t<(m+1)T_s \)</div>
 <div class="layout">
 <div><div class="sectionlabel">METHODS</div><div class="toggles" id="methods"></div></div>
-<div class="field"><label for="N">Truncated sinc: N samples on each side (2N in total)<span class="value" id="Nval"></span></label><input id="N" type="range" min="1" max="20" step="1"></div>
+<div class="field"><label for="N">Time-limited sinc: h<sub>N</sub>(t) is nonzero for |t| &lt; NT<sub>s</sub><span class="value" id="Nval"></span></label><input id="N" type="range" min="1" max="20" step="1"></div>
 </div>
-<div class="vizbox"><h3>Reconstruction</h3><div class="small">Dashed: the original x(t). Dots: the samples.</div><canvas id="cPt" style="height:280px"></canvas><div class="readout" id="ptRead"></div></div>
+<div class="vizbox"><h3>Reconstruction</h3><div class="small">Dashed: the original x(t). Dots: the samples.</div><label class="chk" style="margin:6px 0 2px;display:inline-flex"><input type="checkbox" id="showK"><span>show the shifted time-limited sincs x[n]&thinsp;h<sub>N</sub>(t − nT<sub>s</sub>)</span></label><canvas id="cPt" style="height:280px"></canvas><div class="readout" id="ptRead"></div></div>
 <div class="vizbox"><h3>Error x̂(t) − x(t)</h3><canvas id="cPe" style="height:170px"></canvas></div>
 <table class="err" id="errTab"></table>
 <div class="twocol">
@@ -139,7 +140,7 @@ const fmt=(v,d=3)=>{if(!isFinite(v))return '—';if(Math.abs(v)<5e-5)return '0';
 const sinc=u=>Math.abs(u)<1e-12?1:Math.sin(PI*u)/(PI*u);
 
 // ---------------------------------------------------------------- state & signals
-const state={preset:'tri',wM:10,Ts:.2,wcf:.5,K:6,showS:true,N:3,meth:{ideal:true,trunc:true,zoh:true,lin:true},hoverT:null,a0:.3,phi:0};
+const state={preset:'tri',wM:10,Ts:.2,wcf:.5,K:6,showS:true,showK:false,N:3,meth:{ideal:true,trunc:true,zoh:true,lin:true},hoverT:null,a0:.3,phi:0};
 const PRESETS={
  tri:{name:'Triangular spectrum',desc:wM=>`x(t) = [sin(${fmt(wM/2)}t) / (${fmt(wM/2)}t)]², X(jω) a triangle on |ω| &lt; ω<sub>M</sub> = ${fmt(wM)}`},
  cos2:{name:'Two cosines',desc:wM=>`x(t) = cos(${fmt(.4*wM)}t) + 0.5 cos(${fmt(wM)}t): impulses at ±${fmt(.4*wM)} and ±ω<sub>M</sub> = ±${fmt(wM)}`},
@@ -251,12 +252,12 @@ function plotSincs(){const S=sig(),T=state.Ts,tw=Tw(),ts=lin(-tw,tw,1000),K=stat
 let playT=null;$('playK').addEventListener('click',()=>{if(playT){clearInterval(playT);playT=null;$('playK').textContent='▶ Add them one by one';return}state.K=0;$('playK').textContent='■ Stop';const max=+$('K').max;playT=setInterval(()=>{state.K++;syncCtl();plotSincs();if(state.K>=Math.min(max,Math.ceil(Tw()/state.Ts)+2)){clearInterval(playT);playT=null;$('playK').textContent='▶ Add them one by one'}},350);syncCtl();plotSincs()});
 
 // ---------------------------------------------------------------- 3. practical
-const METH={ideal:{name:'Ideal (all sincs)',c:'#008b75',bg:'#e6f6f2'},trunc:{name:'Truncated sinc (2N)',c:'#7c3aed',bg:'#f1ecfe'},zoh:{name:'Zero-order hold',c:'#d97706',bg:'#fff4e2'},lin:{name:'Linear interpolation',c:'#db2777',bg:'#fdeef5'}};
+const METH={ideal:{name:'Ideal (all sincs)',c:'#008b75',bg:'#e6f6f2'},trunc:{name:'Time-limited sinc',c:'#7c3aed',bg:'#f1ecfe'},zoh:{name:'Zero-order hold',c:'#d97706',bg:'#fff4e2'},lin:{name:'Linear interpolation',c:'#db2777',bg:'#fdeef5'}};
 $('methods').innerHTML=Object.entries(METH).map(([k,m])=>`<button class="tog" data-m="${k}" style="--c:${m.c};--bg:${m.bg}">${m.name}</button>`).join('');
 function recon(S,meth,ts){const T=state.Ts,N=state.N,xs=n=>S.x(n*T);
  if(meth==='ideal')return idealRecon(S,ts,ws()/2);
- return ts.map(t=>{const m=Math.floor(t/T+1e-9),u=t/T-m;if(meth==='zoh')return xs(m);if(meth==='lin')return xs(m)+u*(xs(m+1)-xs(m));let s=0;for(let n=m-N+1;n<=m+N;n++)s+=xs(n)*sinc(t/T-n);return s})}
-function kernel(meth,tau){const T=state.Ts,u=tau/T;if(meth==='ideal')return sinc(u);if(meth==='trunc')return(u>=-state.N&&u<state.N)?sinc(u):0;if(meth==='zoh')return(u>=0&&u<1)?1:0;return Math.max(0,1-Math.abs(u))}
+ return ts.map(t=>{const m=Math.floor(t/T+1e-9),u=t/T-m;if(meth==='zoh')return xs(m);if(meth==='lin')return xs(m)+u*(xs(m+1)-xs(m));let s=0;for(let n=m-N-1;n<=m+N+1;n++)s+=xs(n)*kernel('trunc',t-n*T);return s})}
+function kernel(meth,tau){const T=state.Ts,u=tau/T;if(meth==='ideal')return sinc(u);if(meth==='trunc')return Math.abs(u)<state.N?sinc(u):0;if(meth==='zoh')return(u>=0&&u<1)?1:0;return Math.max(0,1-Math.abs(u))}
 function Hmag(meth,w){const T=state.Ts,v=w*T/TAU;if(meth==='ideal')return Math.abs(w)<PI/T?1:0;if(meth==='zoh')return Math.abs(sinc(v));if(meth==='lin')return sinc(v)**2;
  const N=state.N,M=N*120,dv=N/M;let s=0;for(let i=0;i<=M;i++){const x=i*dv;s+=(i===0||i===M?.5:1)*sinc(x)*Math.cos(w*T*x)}return Math.abs(2*s*dv)}
 let P3=null;
@@ -264,10 +265,11 @@ function plotPractical(){const S=sig(),T=state.Ts,tw=.6*Tw(),ts=lin(-tw,tw,1000)
  const R={};for(const k of on)R[k]=recon(S,k,ts);
  const all=xv.concat(...on.map(k=>R[k])),[a,b]=range(all),y=yr(a,b);let{p,w,h}=prep('cPt'),F=frame(p,w,h,{xmin:-tw,xmax:tw,ymin:y[0],ymax:y[1]});P3={F,tw,w};
  const ht=state.hoverT;let m=null;if(ht!==null&&Math.abs(ht)<=tw){m=Math.floor(ht/T+1e-9);if(state.meth.trunc)shade(p,F.X,h,Math.max(-tw,(m-state.N+1)*T),Math.min(tw,(m+state.N)*T),METH.trunc.c,.08)}
+ if(state.showK&&state.meth.trunc)for(const n of sampleIdx(-tw-state.N*T,tw+state.N*T)){const v=S.x(n*T),a=Math.max(-tw,(n-state.N)*T),b=Math.min(tw,(n+state.N)*T);if(b<=a)continue;const tk=lin(a,b,Math.max(20,Math.round(400*(b-a)/tw))),used=m!==null&&n>=m-state.N+1&&n<=m+state.N;curve(p,F.X,F.Y,tk,tk.map(t=>v*kernel('trunc',t-n*T)),{color:`hsl(${(260+n*37)%360} 70% 62%)`,width:used?1.8:1,alpha:used?.95:(m===null?.7:.3)})}
  curve(p,F.X,F.Y,ts,xv,{color:'#334155',dash:[5,4],width:1.5});for(const k of on)curve(p,F.X,F.Y,ts,R[k],{color:METH[k].c,width:2});
  for(const n of sampleIdx(-tw,tw)){const used=m!==null&&state.meth.trunc&&n>=m-state.N+1&&n<=m+state.N;dot(p,F.X,F.Y,n*T,S.x(n*T),used?METH.trunc.c:C.x,used?4.5:3.2)}
- if(m!==null){vline(p,F.X,h,ht,'t','#13283f');const vals=on.map(k=>`<span style="color:${METH[k].c}">${METH[k].name}: ${fmt(recon(S,k,[ht])[0],4)}</span>`).join(' · ');$('ptRead').innerHTML=`t = ${fmt(ht,4)} s lies between m T<sub>s</sub> and (m+1)T<sub>s</sub> with m = ${m}. The truncated sinc uses n = ${m-state.N+1}, …, ${m+state.N} (shaded). x(t) = ${fmt(S.x(ht),4)} · ${vals}`}
- else $('ptRead').innerHTML='Hover over (or tap) the plot to pick a time t and see which samples the truncated sinc uses.';
+ if(m!==null){vline(p,F.X,h,ht,'t','#13283f');const vals=on.map(k=>`<span style="color:${METH[k].c}">${METH[k].name}: ${fmt(recon(S,k,[ht])[0],4)}</span>`).join(' · ');$('ptRead').innerHTML=`t = ${fmt(ht,4)} s lies between m T<sub>s</sub> and (m+1)T<sub>s</sub> with m = ${m}. Only the time-limited sincs centered at n = ${m-state.N+1}, …, ${m+state.N} are nonzero here (shaded). x(t) = ${fmt(S.x(ht),4)} · ${vals}`}
+ else $('ptRead').innerHTML='Hover over (or tap) the plot to pick a time t and see which time-limited sincs are nonzero there.';
  // error
  ({p,w,h}=prep('cPe'));const errs={};for(const k of on)errs[k]=R[k].map((v,i)=>v-xv[i]);const[ea,eb]=range([].concat(...on.map(k=>errs[k]),[0])),ey=yr(ea,eb);F=frame(p,w,h,{xmin:-tw,xmax:tw,ymin:ey[0],ymax:ey[1]});for(const k of on)curve(p,F.X,F.Y,ts,errs[k],{color:METH[k].c,width:1.6});
  // table (all methods, inner region to avoid edge effects of the plot window)
@@ -314,7 +316,7 @@ const QS=[
  [{preset:'tri',wM:10,Ts:.2,wcf:.5},'Triangular spectrum with ω<sub>M</sub> = 10 rad/s and T<sub>s</sub> = 0.2 s. Is the Nyquist condition satisfied? What is the largest T<sub>s</sub> that still allows perfect reconstruction? Then move ω<sub>c</sub>: for which range of cutoffs is x<sub>r</sub>(t) still equal to x(t)?','ω<sub>s</sub> = 2π/0.2 ≈ 31.4 &gt; 2ω<sub>M</sub> = 20, so yes. We need 2π/T<sub>s</sub> &gt; 20, i.e., T<sub>s</sub> &lt; π/10 ≈ 0.314 s. Any cutoff with ω<sub>M</sub> &lt; ω<sub>c</sub> &lt; ω<sub>s</sub> − ω<sub>M</sub>, i.e., 10 &lt; ω<sub>c</sub> &lt; 21.4 rad/s (0.32ω<sub>s</sub> to 0.68ω<sub>s</sub>), keeps the copy at 0 entirely and removes the others entirely.'],
  [{preset:'tri',wM:10,Ts:.4,wcf:.5},'Now T<sub>s</sub> = 0.4 s. Where do the copies overlap? Can any choice of ω<sub>c</sub> recover x(t)? Does x<sub>r</sub>(t) still pass through the samples?','ω<sub>s</sub> ≈ 15.7 &lt; 20. The copy centered at ω<sub>s</sub> reaches down to ω<sub>s</sub> − ω<sub>M</sub> ≈ 5.7, so the spectrum is corrupted for 5.7 &lt; |ω| &lt; 10, and no lowpass filter can undo the sum. With ω<sub>c</sub> = ω<sub>s</sub>/2, x<sub>r</sub>(t) is the sinc interpolation of the samples, so it still passes through every sample: it is a different bandlimited signal with the same samples.'],
  [{preset:'cos2',wM:10,Ts:.4,wcf:.5},'Two cosines, cos(4t) + 0.5 cos(10t), sampled with T<sub>s</sub> = 0.4 s. Predict x<sub>r</sub>(t) before looking at the output plot.','ω<sub>s</sub> = 5π ≈ 15.71, so ω<sub>s</sub>/2 ≈ 7.85. The component at 4 is fine. The one at 10 aliases to ω<sub>s</sub> − 10 ≈ 5.71: x<sub>r</sub>(t) = cos(4t) + 0.5 cos(5.71t).'],
- [{preset:'tri',wM:10,Ts:.2,wcf:.5,N:1},'Section 3 with N = 1: the truncated sinc uses only the two samples x[m] and x[m+1], like linear interpolation. Which has the smaller error? Increase N: how large must N be before the truncated sinc beats linear interpolation clearly? Why does the zero-order hold look delayed?','With N = 1, the kernel is a sinc chopped to −T<sub>s</sub> ≤ t &lt; T<sub>s</sub>; its frequency response has large ripples, and here its error (max ≈ 0.17) is larger than that of linear interpolation (≈ 0.066). The error drops quickly as N grows: N = 3 already beats linear interpolation (≈ 0.053), and N = 5 gives ≈ 0.012. The zero-order hold kernel is a pulse on 0 ≤ t &lt; T<sub>s</sub>, centered at T<sub>s</sub>/2: its frequency response T<sub>s</sub>e<sup>−jωT<sub>s</sub>/2</sup>sinc(ωT<sub>s</sub>/2π) has linear phase, i.e., a delay of T<sub>s</sub>/2, and its slowly decaying sidelobes let parts of the copies at ±ω<sub>s</sub> through (the staircase).'],
+ [{preset:'tri',wM:10,Ts:.2,wcf:.5,N:1},'Section 3 with N = 1: the time-limited sinc h<sub>1</sub>(t) is nonzero only for |t| &lt; T<sub>s</sub>, so between x[m] and x[m+1] it uses only those two samples, like linear interpolation. Which has the smaller error? Increase N: how large must N be before the time-limited sinc beats linear interpolation clearly? Why does the zero-order hold look delayed?','With N = 1, the kernel is a sinc chopped to |t| &lt; T<sub>s</sub>; its frequency response has large ripples, and here its error (max ≈ 0.17) is larger than that of linear interpolation (≈ 0.066). The error drops quickly as N grows: N = 3 already beats linear interpolation (≈ 0.053), and N = 5 gives ≈ 0.012. The zero-order hold kernel is a pulse on 0 ≤ t &lt; T<sub>s</sub>, centered at T<sub>s</sub>/2: its frequency response T<sub>s</sub>e<sup>−jωT<sub>s</sub>/2</sup>sinc(ωT<sub>s</sub>/2π) has linear phase, i.e., a delay of T<sub>s</sub>/2, and its slowly decaying sidelobes let parts of the copies at ±ω<sub>s</sub> through (the staircase).'],
  [{preset:'tri',wM:10,Ts:.2,a0:.6,phi:.25},'Aliasing with T<sub>s</sub> = 0.2 s: x(t) = cos(0.6ω<sub>s</sub>t + π/4). Predict the frequency and the phase of x<sub>r</sub>(t). Then try ω<sub>0</sub> = ω<sub>s</sub>/2 with φ = π/2.','The copy of the impulse at −ω<sub>0</sub>, shifted by ω<sub>s</sub>, lands at ω<sub>s</sub> − ω<sub>0</sub> = 0.4ω<sub>s</sub> ≈ 12.6 rad/s, and it carries the phase of the negative-frequency impulse: x<sub>r</sub>(t) = cos(0.4ω<sub>s</sub>t − π/4). At ω<sub>0</sub> = ω<sub>s</sub>/2 the samples are cos(πn + π/2) = 0 for every n: the signal disappears completely, which is why the sampling theorem needs ω<sub>s</sub> &gt; 2ω<sub>M</sub> strictly.']];
 $('questions').innerHTML=QS.map(([L,q,a],i)=>`<div class="question"><strong>Predict first · Question ${i+1}</strong><button class="load" data-q="${i}">Load this setup</button><p>${q}</p><details><summary>Show answer</summary><p>${a}</p></details></div>`).join('');
 document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>{const L=QS[+b.dataset.q][0];Object.assign(state,L);renderAll();const tgt=b.dataset.q==='3'?'practical':b.dataset.q==='4'?'aliasing':'chain';$(tgt).scrollIntoView({behavior:'smooth',block:'start'})}));
@@ -330,6 +332,7 @@ $('wc').addEventListener('input',e=>{state.wcf=+e.target.value;syncCtl();plotCha
 $('wcHalf').addEventListener('click',()=>{state.wcf=.5;syncCtl();plotChain()});
 $('K').addEventListener('input',e=>{state.K=+e.target.value;syncCtl();plotSincs()});
 $('showS').addEventListener('change',e=>{state.showS=e.target.checked;plotSincs()});
+$('showK').addEventListener('change',e=>{state.showK=e.target.checked;plotPractical()});
 $('N').addEventListener('input',e=>{state.N=+e.target.value;syncCtl();plotPractical()});
 $('a0').addEventListener('input',e=>{state.a0=+e.target.value;syncCtl();plotAlias()});
 $('phi').addEventListener('input',e=>{state.phi=+e.target.value;syncCtl();plotAlias()});
@@ -340,7 +343,7 @@ function syncCtl(){const W=ws(),S=sig();
  $('nyq').innerHTML=`${PRESETS[state.preset].desc(state.wM)} &nbsp;·&nbsp; ω<sub>s</sub> = 2π/T<sub>s</sub> = <b>${fmt(W,4)}</b> rad/s, Nyquist rate 2ω<sub>M</sub> = <b>${fmt(2*state.wM)}</b> rad/s: `+(ok?`<span class="ok">ω<sub>s</sub> &gt; 2ω<sub>M</sub>${state.preset==='gauss'?' (aliasing is small, not zero)':' — no aliasing'}</span>`:`<span class="bad">ω<sub>s</sub> ≤ 2ω<sub>M</sub> — aliasing</span>`)+` &nbsp;(T<sub>s</sub> must be below π/ω<sub>M</sub> = ${fmt(PI/state.wM)} s)`;
  $('wc').value=state.wcf;$('wcval').innerHTML=`${state.wcf.toFixed(2)} ω<sub>s</sub> = ${fmt(wc(),4)} rad/s`;
  const kmax=Math.min(60,Math.ceil(Tw()/state.Ts)+4);$('K').max=kmax;if(state.K>kmax)state.K=kmax;$('K').value=state.K;$('Kval').textContent='K = '+state.K;$('showS').checked=state.showS;
- $('N').value=state.N;$('Nval').textContent=`N = ${state.N} (${2*state.N} samples)`;
+ $('N').value=state.N;$('Nval').innerHTML=`N = ${state.N} (|t| &lt; ${state.N}T<sub>s</sub>)`;
  document.querySelectorAll('[data-m]').forEach(b=>b.classList.toggle('on',!!state.meth[b.dataset.m]));
  $('a0').value=state.a0;$('a0val').innerHTML=`${state.a0.toFixed(3)} ω<sub>s</sub> = ${fmt(state.a0*W,4)} rad/s`;$('phi').value=state.phi;$('phival').textContent=Math.abs(state.phi)<1e-9?'0':`${fmt(state.phi,3)}π`;
  document.querySelectorAll('[data-a]').forEach(b=>{const e=AEX[+b.dataset.a];b.classList.toggle('selected',Math.abs(e[1]-state.a0)<1e-9&&Math.abs(e[2]-state.phi)<1e-9)})}
